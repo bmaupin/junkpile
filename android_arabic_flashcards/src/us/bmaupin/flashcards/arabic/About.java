@@ -1,3 +1,5 @@
+// $Id$
+
 package us.bmaupin.flashcards.arabic;
 
 import android.app.Activity;
