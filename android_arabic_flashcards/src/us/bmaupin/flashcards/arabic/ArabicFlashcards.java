@@ -1,8 +1,6 @@
 package us.bmaupin.flashcards.arabic;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.amr.arabic.ArabicReshaper;
@@ -38,7 +36,6 @@ public class ArabicFlashcards extends Activity {
 	private static final String TAG = "ArabicFlashcards";
 	public static final String PREFS_NAME = "FlashcardPrefsFile";
 	private DatabaseHelper helper;
-	private SQLiteDatabase db;
 	private int cursorPosition;
 	private Cursor cursor;
 	private String currentLang;
@@ -88,7 +85,6 @@ public class ArabicFlashcards extends Activity {
         };
         
         helper = new DatabaseHelper(this);
-        db = helper.getReadableDatabase();
         
 		// Restore preferences
         settings = getSharedPreferences(PREFS_NAME, 0);
@@ -146,9 +142,6 @@ public class ArabicFlashcards extends Activity {
 		defaultLang = Settings.getDefaultLang(this);
 		// show the first card (do it here in case default card language changed)
 		loadCards();
-		
-		TextView centerView = (TextView)vf.findViewById(R.id.centerView);
-		showChapters(centerView);
 	}
     
     @Override
@@ -236,38 +229,12 @@ public class ArabicFlashcards extends Activity {
 	private void createCursor() {
 		// Perform a managed query. The Activity will handle closing
 		// and re-querying the cursor when needed.
-//		SQLiteDatabase db = helper.getReadableDatabase();
+		SQLiteDatabase db = helper.getReadableDatabase();
 		String[] FROM = { "english", "arabic" };
 		cursor = db.query("words", FROM, null, null, null, null, null);
 		startManagingCursor(cursor);
 	}
 
-	private List<String> getChapters() {
-		Log.d(TAG, "getChapters called");
-	    List<String> chapters = new ArrayList<String>();
-	    
-	    String[] FROM = { "type" };
-	    
-	    //Cursor mCursor = db.query(false)
-	    Cursor mCursor = db.query(true, "words", FROM, null, null, null, null, null, null);
-	    startManagingCursor(mCursor);
-	    
-	    while (mCursor.moveToNext()) {
-	    	chapters.add(mCursor.getString(0));
-	    }
-	    
-	    return chapters;
-	}
-	
-	private void showChapters(TextView thisView) {
-		Log.d(TAG, "showChapters called");
-		List<String> chapters = getChapters();
-		
-		Log.d(TAG, "showChapters, chapters: " + chapters);
-		
-		thisView.setText(chapters.toString());
-	}
-	
 	private Map<String, String> getWord(int thisPosition, boolean updatePosition) {
 		Log.d(TAG, "getWord(position), cursorPosition: " + cursorPosition);
 
