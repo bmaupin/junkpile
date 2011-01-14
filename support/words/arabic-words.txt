@@ -327,7 +327,7 @@ sorry (m, f)
 سَكَنَ (يَسْكُنُ) سَكَن
 ساوى (يُساوي) مُساواة
 now
-women (women)
+woman (women)
 card(s)
 (f)
 or (used with statements)
@@ -355,13 +355,13 @@ to equal
 ماذا
 مُتَزَوَّج
 (مُتَزَوَّجون)
-(student) living, residence, dormitory
-(m)
 street(s)
 (m)
-to want, will
+(student) living, residence, dormitory
+(m)
 apartment(s)
 (f)
+to want, will
 address(es)
 (m)
 to know
@@ -1012,14 +1012,12 @@ Tuesday
 دَرْس
 (دُروس)
 ذو الحِجّة
-Islamic month
-(jumAdi al-Aghira)
+Islamic month (jumAdi al-Aghira)
 (f)
 sitting
 Friday
 (m)
-Islamic month
-(jumAdi al-‘Ula)
+Islamic month (jumAdi al-‘Ula)
 (f)
 June
 (m)
@@ -1027,8 +1025,7 @@ till, until
 Thursday
 (m)
 when
-Islamic month
-(thu al-Hijja)
+Islamic month (thu al-Hijja)
 (m)
 lesson(s)
 (m)
@@ -1044,21 +1041,15 @@ lesson(s)
 سَنة
 (سَنَوات/سُنون)
 wonderful, awesome
-Islamic month
-(thu al-qi’da)
+Islamic month (thu al-qi’da)
 (m)
-Islamic month
-(rabi al-‘Awwal)
+Islamic month (rabi al-‘Awwal)
 (m)
-Islamic month
-(rabi al-
-Aghira)
+Islamic month (rabi al-Aghira)
 (m)
-Islamic month
-(ramaDAn)
+Islamic month (ramaDAn)
 (m)
-Islamic month
-(rajab)
+Islamic month (rajab)
 (m)
 shall, will (future particle)
 to visit
@@ -1082,20 +1073,17 @@ Saturday
 February
 (m)
 shall, will (future particle)
-Islamic month
-(sha’bAn)
+Islamic month (sha’bAn)
 (m)
 bed sheet(s)
 (m)
-Islamic month
-(shawwAl)
+Islamic month (shawwAl)
 (m)
 month(s)
 (m)
 guest(s)
 (m)
-Islamic month
-(Safar)
+Islamic month (Safar)
 (m)
 to think, to believe
 airplane(s)
@@ -1141,8 +1129,7 @@ December
 enthusiastic
 objection
 to walk
-Islamic month
-(muHarram)
+Islamic month (muHarram)
 (m)
 to sleep
 airport(s)
@@ -1310,4 +1297,3 @@ in need of
 then, and again
 tabouleh salad
 (f)
-
