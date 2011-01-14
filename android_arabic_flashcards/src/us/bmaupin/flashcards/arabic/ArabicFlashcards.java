@@ -1,6 +1,6 @@
-// $Id$
-
 package us.bmaupin.flashcards.arabic;
+
+//$Id$
 
 import java.util.ArrayList;
 import java.util.HashMap;

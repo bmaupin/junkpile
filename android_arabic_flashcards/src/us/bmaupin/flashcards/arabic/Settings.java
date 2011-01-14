@@ -1,6 +1,6 @@
-// $Id$
-
 package us.bmaupin.flashcards.arabic;
+
+//$Id$
 
 import android.content.Context;
 import android.os.Bundle;
