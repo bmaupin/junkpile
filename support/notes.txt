@@ -1,0 +1,101 @@
+$Id$
+
+DO:
+we'll need to store favorites and noshow in a separate db so they don't get overwritten...
+    we can create this db from within android
+should everything be global (class) variables, or should we pass them back and forth?
+handle swiping left/right to change cards
+    can we steal this from Google's homescreen code?  :P
+    http://www.anddev.org/view-layout-resource-problems-f27/swipe-fling-to-switch-between-activities-t15602.html
+
+post on 2 authors sites: why doesn't reshaper work with other fonts?
+using this library: http://github.com/AhmedEssam/Better-Arabic-Reshaper
+
+
+DONE?
+memory leak
+    db needs to be closed during onpause, onstop, or somewhere
+do we need to close the database helper?
+    what's the standard way to handle the database?
+every time phone orientation is changed, onpause, onstop, oncreate, onstart, onresume is called
+    change it so it doesn't kill activity every time orientation is changed
+store plurals separately in db?
+make it so changing the settings takes effect immediately, instead of the next time the app is closed/reopened
+make english text smaller and/or arabic bigger
+
+
+cards:
+separate arabic plurals in db
+for english strings, remove (s), (es), (ies), (pl), (women), (men), (and pl), (& pl.), (ren), (& pl)
+(make sure to remove initial space too, if exists)
+handle english2 for arabic months
+
+
+cards fix:
+improper spelling of good evening
+add missing arabic plurals
+handle these:
+ENGLISH2: (weak version)
+ENGLISH2: (f pl)
+ENGLISH2: (m/f)
+ENGLISH2: (m sg)
+ENGLISH2: (m/f)
+ENGLISH2: (m/f)
+ENGLISH2: (polite)
+ENGLISH2: (adj)
+ENGLISH2: (m and f)
+
+
+Arabic shaping fix:
+cworking:
+6th of May 2010
+reshaper, no vowels: good
+reshaper, vowels: vowels good, disconnected btw 1 and 2
+
+utilities, no vowels: good
+utilities, vowels: fatha faa damma raa sukkun space siin
+
+cnot:
+Sunday 7th of February 2010 (reshaper)
+reshaper, no vowels: 1 and 2 disconnected in first word
+reshaper, vowels: 1 and 2 disconnected in first word
+
+utilities, no vowels: 1 and 2 disconnected in both
+utilities, vowels: fatha faa damma raa sukkun space siin
+
+
+
+CREATE TABLE words (
+    "_ID" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "english" TEXT NOT NULL,
+    "arabic" TEXT NOT NULL,
+    "tags" TEXT NOT NULL
+);
+
+CREATE TABLE words (
+    "_ID" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "english" TEXT NOT NULL,
+    "arabic" TEXT NOT NULL,
+    "plural" TEXT,
+    "type" TEXT,
+    "gender" TEXT
+);
+
+CREATE TABLE temp (
+    "english" TEXT NOT NULL,
+    "arabic" TEXT NOT NULL,
+    "plural" TEXT,
+    "type" TEXT,
+    "gender" TEXT
+);
+
+insert into words (english, arabic, plural, type, gender) select english, arabic, plural, type, gender from temp;
+
+type: adj, adv, conj, interj, noun, prep, pronoun, verb
+gender: m, f
+proper: 0/1/null (integer)
+
+
+later:
+favorite: true/false
+noshow: true/false
