@@ -8,6 +8,7 @@ import sys
 infile_name = 'arabic-words.txt'
 #infile_name = 'aw2.txt'
 debug = True
+should_strip_arabic_vowels = False
 
 diacritics = [u'\u064e',  # fatha, short a
               u'\u064b',  # double fatha
@@ -245,12 +246,18 @@ for line in infile:
     if this_lang == 'arabic':
         if line == '' or ord(line[0]) > 127:
             words[index] = {}
-            words[index]['arabic'] = strip_arabic_vowels(line)
+            if should_strip_arabic_vowels:
+                words[index]['arabic'] = strip_arabic_vowels(line)
+            else:
+                words[index]['arabic'] = line
             count += 1
             index += 1
         elif line[0] == '(':
             if count != 0:
-                words[index - 1]['arabic2'] = strip_arabic_vowels(line)
+                if should_strip_arabic_vowels:
+                    words[index - 1]['arabic2'] = strip_arabic_vowels(line)
+                else:
+                    words[index - 1]['arabic2'] = line
         else:
             sys.exit('Error: supposed to be Arabic. line: %s' % (line))
 
