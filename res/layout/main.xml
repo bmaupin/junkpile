@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/flipper"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <RelativeLayout 
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        >
+        <TextView
+            android:id="@+id/leftView"
+            android:background="@layout/card"
+            android:gravity="center"
+            android:layout_width="fill_parent" 
+            android:layout_height="fill_parent"
+            android:layout_margin="30dp"
+            android:textColor="#000000"
+            />
+    </RelativeLayout>
+    <RelativeLayout 
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        >
+        <TextView
+            android:id="@+id/centerView"
+            android:background="@layout/card"
+            android:gravity="center"
+            android:layout_width="fill_parent" 
+            android:layout_height="fill_parent"
+            android:layout_margin="30dp"
+            android:textColor="#000000"
+            />
+    </RelativeLayout>
+    <RelativeLayout 
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        >
+        <TextView
+            android:id="@+id/rightView"
+            android:background="@layout/card"
+            android:gravity="center"
+            android:layout_width="fill_parent" 
+            android:layout_height="fill_parent"
+            android:layout_margin="30dp"
+            android:textColor="#000000"
+            />
+    </RelativeLayout>
+</ViewFlipper>
+<!--
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <TextView
+        android:id="@+id/myTextView"
+        android:background="@layout/card"
+        android:gravity="center"
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent"
+        android:layout_margin="30dp"
+        android:textColor="#000000"
+        />
+-->
+    <!-- for testing -->
+    <!--
+        android:textSize="42sp"
+        android:background="#FFFFFF"
+        android:background="@layout/card"
+    -->
+    <!-- <TextView
+        android:id="@+id/myTextView"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:textSize="42sp"
+        /> -->
+    <!-- <TextView
+        android:id="@+id/myTextView2"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent"
+        android:layout_margin="30dp"
+        android:textColor="#000000"
+        />-->
+    <!-- <TextView
+        android:gravity="center"
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent" 
+        android:text="page2"
+        android:codes="@string/hello_michelle"
+        />-->
+<!--
+</RelativeLayout>
+-->
