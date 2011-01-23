@@ -149,8 +149,15 @@ public class ArabicFlashcards extends Activity {
 		// show the first card (do it here in case default card language changed)
 		loadCards();
 		
-		TextView centerView = (TextView)vf.findViewById(R.id.centerView);
-		showChapters(centerView);
+//		DEBUGGING: show chapters instead of front of first card		
+		ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();
+//		int currentLayoutId = currentLayout.getId();
+		currentView = (TextView) currentLayout.getChildAt(0);
+//		currentWord = getCurrentWord();
+//		showWord(currentView, currentWord);
+		
+//		TextView centerView = (TextView)vf.findViewById(R.id.centerView);
+		showChapters(currentView);
 	}
     
     @Override
@@ -248,14 +255,18 @@ public class ArabicFlashcards extends Activity {
 		Log.d(TAG, "getChapters called");
 	    List<String> chapters = new ArrayList<String>();
 	    
-	    String[] FROM = { "type" };
+	    String[] FROM = { "aws_chapter" };
 	    
 	    //Cursor mCursor = db.query(false)
 	    Cursor mCursor = db.query(true, "words", FROM, null, null, null, null, null, null);
 	    startManagingCursor(mCursor);
 	    
 	    while (mCursor.moveToNext()) {
-	    	chapters.add(mCursor.getString(0));
+	    	String thisChapter = mCursor.getString(0);
+	    	// as much fun as it'd be, let's not add a null chapter
+	    	if (thisChapter != null) {
+	    		chapters.add(thisChapter);
+	    	}
 	    }
 	    
 	    return chapters;
