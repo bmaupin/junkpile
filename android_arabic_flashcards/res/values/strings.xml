@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- $Id$ -->
 <resources>
     <string name="hello">Hello World, ArabicFlashcards!</string>
     <string name="app_name">Arabic flashcards</string>
