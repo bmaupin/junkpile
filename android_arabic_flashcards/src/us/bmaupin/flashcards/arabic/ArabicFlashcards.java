@@ -1,6 +1,6 @@
 package us.bmaupin.flashcards.arabic;
 
-//$Id$
+// $Id$
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -207,6 +207,9 @@ public class ArabicFlashcards extends Activity {
     	switch (item.getItemId()) {
     	case R.id.menu_about:
     		startActivity(new Intent(this, About.class));
+    		return true;
+    	case R.id.menu_categories:
+    		startActivity(new Intent(this, Categories.class));
     		return true;
     	case R.id.menu_exit:
     		finish();

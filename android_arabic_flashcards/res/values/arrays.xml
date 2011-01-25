@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Id$ -->
 <resources>
+    <string-array name="categories_main_items">
+        <item>All</item>
+        <item>Ahlan wa sahlan</item>
+        <item>Phrases</item>
+        <item>Nouns</item>
+        <item>Verbs</item>
+        <item>Adjectives</item>
+        <item>Adverbs</item>
+        <item>Prepositions</item>
+        <item>Pronouns</item>
+        <item>Conjunctions</item>
+        <item>Interjections</item>
+    </string-array>
     <string-array name="default_lang_entries">
         <item>Arabic</item>
         <item>English</item>
