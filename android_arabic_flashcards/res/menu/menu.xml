@@ -9,6 +9,9 @@
 		android:title="@string/menu_about_label"
 		android:alphabeticShortcut="@string/menu_about_shortcut"
 		android:icon="@android:drawable/ic_menu_info_details" />
+    <item android:id="@+id/menu_categories"
+        android:title="categories"
+        android:alphabeticShortcut="c" />
 	<item android:id="@+id/menu_settings"
 		android:title="@string/menu_settings_label"
 		android:alphabeticShortcut="@string/menu_settings_shortcut"

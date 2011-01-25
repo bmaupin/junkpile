@@ -1,6 +1,6 @@
 package us.bmaupin.flashcards.arabic;
 
-//$Id$
+// $Id$
 
 import java.io.FileOutputStream;
 import java.io.IOException;

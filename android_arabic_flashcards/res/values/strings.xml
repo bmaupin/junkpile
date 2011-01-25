@@ -5,6 +5,8 @@
     <string name="app_name">Arabic flashcards</string>
     <string name="about_title">About</string>
     <string name="about_text">Written by bmaupin</string>
+    <string name="categories_title">Categories</string>
+    <string name="choose_aws_chapter_title">Please select a chapter:</string>
     <string name="hello_michelle">مرحباً، يا ميشيل</string>
     <string name="hello_michelle2">\\u0645\\u0631\\u062d\\u0628\\u0627\\u064b\\u060c \\u064a\\u0627 \\u0645\\u064a\\u0634\\u064a\\u0644</string>
     <string name="menu_about_label">About</string>
