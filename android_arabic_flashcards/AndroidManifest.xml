@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- $Id$ -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="us.bmaupin.flashcards.arabic"
       android:versionCode="5"
