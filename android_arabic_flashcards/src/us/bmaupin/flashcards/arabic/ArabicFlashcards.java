@@ -258,18 +258,22 @@ public class ArabicFlashcards extends Activity {
 		Log.d(TAG, "getChapters called");
 	    List<String> chapters = new ArrayList<String>();
 	    
-	    String[] FROM = { "aws_chapter" };
+	    String[] FROM = {"aws_chapter"};
+	    // as much fun as it'd be, let's not get null values
+	    String WHERE = "aws_chapter not NULL";
 	    
-	    //Cursor mCursor = db.query(false)
-	    Cursor mCursor = db.query(true, "words", FROM, null, null, null, null, null, null);
+	    Cursor mCursor = db.query(true, "words", FROM, WHERE, null, null, null, null, null);
 	    startManagingCursor(mCursor);
+	    
+	    int chapterCount = mCursor.getCount();
+	    Log.d(TAG, "getChapters, chapterCount: " + chapterCount);
 	    
 	    while (mCursor.moveToNext()) {
 	    	String thisChapter = mCursor.getString(0);
-	    	// as much fun as it'd be, let's not add a null chapter
-	    	if (thisChapter != null) {
+	    	
+//	    	if (thisChapter != null) {
 	    		chapters.add(thisChapter);
-	    	}
+//	    	}
 	    }
 	    
 	    return chapters;
