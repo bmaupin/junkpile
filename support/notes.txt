@@ -1,6 +1,7 @@
 $Id$
 
 DO:
+see wrox p. 175ish for calling an activity and getting results
 we'll need to store favorites and noshow in a separate db so they don't get overwritten...
     we can create this db from within android
 should everything be global (class) variables, or should we pass them back and forth?
@@ -23,6 +24,10 @@ store plurals separately in db?
 make it so changing the settings takes effect immediately, instead of the next time the app is closed/reopened
 make english text smaller and/or arabic bigger
 
+
+QUESTIONS
+how do we handle database queries spread throughout the app?  should they all be in the database class?  or all in the main class (since it has to be open anyway)?  if they're spread out, should we create a public cursor that all classes can access?
+    I'd like to use one cursor, created elsewhere, but if that activity gets closed, it'll kill my cursor, right?
 
 cards:
 separate arabic plurals in db
