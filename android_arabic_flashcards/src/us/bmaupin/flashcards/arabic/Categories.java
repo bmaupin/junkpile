@@ -10,6 +10,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,8 +26,11 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class Categories extends Activity {
 	private static final String TAG = "Categories";
+	protected static final String EXTRA_CATEGORY = null;
+	protected static final String EXTRA_AWS_CHAPTER = null;
+	String selectedChapter;
 	private DatabaseHelper helper;
-	private SQLiteDatabase db;
+	private SQLiteDatabase db; 
 	
 	Context context = Categories.this;
 	
@@ -64,6 +68,17 @@ public class Categories extends Activity {
 				if (itemText.equals("Ahlan wa sahlan")) {
 					Log.d(TAG, "chose AWS");
 					chooseAWSChapter();
+					if (selectedChapter != null) {
+						Intent result = new Intent();
+						result.putExtra(EXTRA_CATEGORY, "Ahlan wa sahlan");
+						result.putExtra(EXTRA_AWS_CHAPTER, selectedChapter);
+						
+						setResult(RESULT_OK, result);
+						finish();
+					} else {
+						setResult(RESULT_CANCELED, null);
+						finish();
+					}
 				}
 			}
 			});
@@ -76,16 +91,15 @@ public class Categories extends Activity {
 		AlertDialog.Builder ad = new AlertDialog.Builder(context);
 		ad.setTitle(R.string.choose_aws_chapter_title);
 		
-
+		final String[] chapters = getChapters();
 		
-		
-		ad.setItems(getChapters(),
-				new OnClickListener() {
-
+		ad.setItems(chapters, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialoginterface, int i) {
 						// TODO Auto-generated method stub
 						Log.d(TAG, "chooseAWSChapter: int=" + i);
+						Log.d(TAG, "chooseAWSChapter: chapter=" + chapters[i]);
+						selectedChapter = chapters[i];
 					}
 				});
 
@@ -171,8 +185,6 @@ public class Categories extends Activity {
 
 	private String[] getChapters() {
 		Log.d(TAG, "getChapters called");
-//	    List<String> chapters = new ArrayList<String>();
-//	    StringBuilder chapters = new StringBuilder();
 		String[] chapters;
 	    
 	    String[] FROM = {"aws_chapter"};
@@ -185,67 +197,20 @@ public class Categories extends Activity {
 	    Cursor mCursor = db.query(true, "words", FROM, WHERE, null, null, null, null, null);
 	    startManagingCursor(mCursor);
 	    
+	    // get the number of chapters since we're using an immutable array
 	    int chapterCount = mCursor.getCount();
-	    Log.d(TAG, "getChapters, chapterCount: " + chapterCount);
+	    Log.d(TAG, "getChapters: chapterCount=" + chapterCount);
 	    
 	    chapters = new String[chapterCount];
 	    int chapterIndex = 0;
 	    while (mCursor.moveToNext()) {
 	    	chapters[chapterIndex] = mCursor.getString(0);
 	    	chapterIndex ++;   	
-	    	
-//	    	String thisChapter = mCursor.getString(0);
-//	    	chapters.add(thisChapter);
 	    }
 	    
+	    // close the database connection
+	    helper.close();
+	    Log.d(TAG, "getChapters: returning");
 	    return chapters;
-	    
-	    
-	    /*
-	    String[] FROM = { "aws_chapter" };
-	    
-	    //Cursor mCursor = db.query(false)
-	    
-	    helper = new DatabaseHelper(this);
-	    db = helper.getReadableDatabase();
-	    Cursor mCursor = db.query(true, "words", FROM, null, null, null, null, null, null);
-	    startManagingCursor(mCursor);
-	    
-
-	    
-	    while (mCursor.moveToNext()) {
-	    	String thisChapter = mCursor.getString(0);
-	    	// as much fun as it'd be, let's not add a null chapter
-	    	if (thisChapter != null) {
-	    		chapters.append(thisChapter);
-	    	}
-	    }
-	    
-	    return chapters;
-	    /*
-	    while (mCursor.moveToNext()) {
-	    	String thisChapter = mCursor.getString(0);
-	    	// as much fun as it'd be, let's not add a null chapter
-	    	if (thisChapter != null) {
-	    		chapters.add(thisChapter);
-	    	}
-	    }
-	    
-	    return chapters;
-	    
-	    
-	    StringBuilder builder = new StringBuilder(
-	    "Saved events:\n" );
-	    while (cursor.moveToNext()) {
-	    // Could use getColumnIndexOrThrow() to get indexes
-	    long id = cursor.getLong(0);
-	    long time = cursor.getLong(1);
-	    String title = cursor.getString(2);
-	    builder.append(id).append(": " );
-	    builder.append(time).append(": " );
-	    builder.append(title).append("\n" );
-	    }
-		*/
 	}
-	
 }
