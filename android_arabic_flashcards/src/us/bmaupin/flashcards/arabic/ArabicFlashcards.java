@@ -38,7 +38,9 @@ import android.widget.ViewFlipper;
 
 public class ArabicFlashcards extends Activity {
 	private static final String TAG = "ArabicFlashcards";
+	String selectedChapter;
 	public static final String PREFS_NAME = "FlashcardPrefsFile";
+	private static final int SHOW_SUBACTIVITY = 1;
 	private DatabaseHelper helper;
 	private SQLiteDatabase db;
 	private int cursorPosition;
@@ -51,6 +53,8 @@ public class ArabicFlashcards extends Activity {
     private static final int SWIPE_MIN_DISTANCE = 120;
     private static final int SWIPE_MAX_OFF_PATH = 250;
 	private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+	private static final String EXTRA_CATEGORY = null;
+	private static final String EXTRA_AWS_CHAPTER = null;
 	private GestureDetector gestureDetector;
 	View.OnTouchListener gestureListener;
 	private Animation slideLeftIn;
@@ -209,7 +213,11 @@ public class ArabicFlashcards extends Activity {
     		startActivity(new Intent(this, About.class));
     		return true;
     	case R.id.menu_categories:
-    		startActivity(new Intent(this, Categories.class));
+//    		startActivityForResult(intent, requestCode);
+    		Intent intent = new Intent(this, Categories.class);
+    		startActivityForResult(intent, SHOW_SUBACTIVITY);
+
+//    		startActivity(new Intent(this, Categories.class));
     		return true;
     	case R.id.menu_exit:
     		finish();
@@ -221,6 +229,37 @@ public class ArabicFlashcards extends Activity {
     	return false;
     }
     
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		switch(requestCode) {
+			case (SHOW_SUBACTIVITY) : {
+				if (resultCode == Activity.RESULT_OK) {
+					String category = data.getStringExtra(EXTRA_CATEGORY);
+					Log.d(TAG, "onActivityResult: category=" + category);
+					if (category.equals("Ahlan wa sahlan")) {
+						String chapter = data.getStringExtra(EXTRA_AWS_CHAPTER);
+						Log.d(TAG, "onActivityResult: chapter=" + chapter);
+					}
+					
+					
+//					Uri horse = data.getData();
+//					boolean inputCorrect = data.getBooleanExtra(IS_INPUT_CORRECT, false);
+//					String selectedPistol = data.getStringExtra(SELECTED_PISTOL);
+				}
+				break;
+			}
+//			case (SHOW_SUB_ACTIVITY_TWO) : {
+//				if (resultCode == Activity.RESULT_OK) {
+//					// TODO: Handle OK click.
+//				}
+//				break;
+//			}
+		}
+	}
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		Log.d(TAG, "onKeyDown: keycode=" + keyCode + ", event="
