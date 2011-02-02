@@ -11,7 +11,11 @@ handle swiping left/right to change cards
 
 post on 2 authors sites: why doesn't reshaper work with other fonts?
 using this library: http://github.com/AhmedEssam/Better-Arabic-Reshaper
-
+once nouns are labeled, remove "other" label (to make db smaller).  we can handle this in code.
+to fix in words
+    hamza
+    baa + dash
+    lam-alef
 
 DONE?
 memory leak
@@ -108,7 +112,7 @@ CREATE TABLE words (
 
 insert into words (english, arabic, plural, type, gender, aws_chapter) select english, arabic, plural, type, gender, aws_chapter from temp;
 
-type: adj, adv, conj, interj, noun, prep, pronoun, verb
+type: adj, adv, conj, interj, noun, prep, pronoun, verb, particle, phrase
 gender: m, f
 proper: 0/1/null (integer)
 
