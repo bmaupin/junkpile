@@ -169,7 +169,7 @@ chemistry|كيمياء||||f|
 nice|لَطيف|||||
 who|مَنْ|||||
 sole, only|وَحيد|وَحيدون|||m|
-boy|وَلَد|أَوْلاد||||
+boy|وَلَد|أَوْلاد|||m|
 to be able|اِسْتَطاعَ (يَسْتَطِيعُ) اِسْتِطاعة||verb|||
 sorry (m & f)|آسِف/آسِفة|||||
 God knows|الله أعْلَم|||||
@@ -443,7 +443,7 @@ program|بَرنامَج|بَرامِج|noun|other|m|13
 tabouleh salad|تَبّولة||noun|food|f|13
 then, and again|ثُمَّ||conj|||13
 to prepare|جَهَّزَ (يُجَهِّزُ) تَجْهيز||verb|||13
-bus, tram|حافِلة|حافِﻻت|noun|transportation|f|13
+bus, tram|حافِلة|حافِلات|noun|transportation|f|13
 to prepare, to make|حَضَّرَ (يُحَضِّرُ) تَحْضير||verb|||13
 to shave|حَلَقَ (يَحْلِقُ) حَلْق||verb|||13
 bathroom|حَمّام|حمّامات|noun|household|f|13
@@ -459,7 +459,7 @@ soap|صابون||noun|other|m|13
 plate|صَحْن|صُحون|noun|dishes|m|13
 to return|عادَ (يَعودُ) عَوْدة||verb|||13
 world|عالَم|عَوالِم|noun|other|m|13
-break; vacation|عُطْلة|عُطْﻻت/عُطَل|noun|other|f|13
+break; vacation|عُطْلة|عُطْلات/عُطَل|noun|other|f|13
 dinner|عَشاء|أعْشِية|noun|food|m|13
 lunch|غَداء|أغْدِية|noun|food|m|13
 to wash|غَسَلَ (يَغْسِلُ) غَسْل||verb|||13
@@ -467,7 +467,7 @@ to change something|غَيَّرَ (يُغَيِّرُ) تَغيير||verb|||13
 brush|فُرْشاة|فَراشٍ|noun|other|f|13
 breakfast|فَطور||noun|food|m|13
 to spend time|قَضى (يَقضي) قَضاء||verb|||13
-writing|كِتابة||noun|other||13
+writing|كِتابة||noun|subjects||13
 much, a great deal|كَثير|كَثيرون/كِثار|noun|common|m|13
 because|ﻷَنَّ||particle|||13
 yogurt|لَبَن||noun|food|m|13
@@ -476,7 +476,7 @@ one coming early|مُبَكِّر|مُبَكِّرون|noun|other|m|13
 one coming late|مُتَأخِّر|مُتَأخِّرهن|noun|other|m|13
 stewed|مٌدَمَّس||adj|||13
 once, one occurrence|مَرّة|مَرّات|noun|common|f|13
-show, (television) series|مُسَلسَل|مُسَلسَﻻت|noun|entertainment|m|13
+show, (television) series|مُسَلسَل|مُسَلسَلات|noun|entertainment|m|13
 watching|مٌشاهَدة||noun|||13
 busy|مَشْغول|مَشْغولون|noun|other|m|13
 together|مَعاً||adv|||13
@@ -492,38 +492,38 @@ rice|أرُزّ||noun|food|m|14
 extended family|أُسْرة|أُسَر|noun|family|f|14
 to wait|اِنتَظَرَ (يَنْتَظِرُ) اِنتِظار||verb|||14
 onion|بَصَل||noun|food|m|14
-neighborhood, borough|حَيّ|أحْياء|noun|places|m|14
+neighborhood, borough|حَيّ|أحْياء|noun|locations|m|14
 to visit|زارَ (يَزورُ) زِيارة||verb|||14
 to do (Syrian colloquial)|سلوى (يساوي)||verb|||14
 what (Syrian colloquial)|شو||particle|||14
-journalism|صِحافة||noun|other|f|14
+journalism|صِحافة||noun|subjects|f|14
 worker, laborer|عامِل|عُمّال|noun|occupations|m|14
 colloquial|عاميّة||participle|||14
 lentils|عَدَس||noun|food|m|14
-break, vacation|عُطلة|عُطَل/عُطﻻت|noun|other|f|14
+break, vacation|عُطلة|عُطَل/عُطلات|noun|other|f|14
 weekend|عُطْلَةُ نِهايَةِ اﻷُسْبوعِ||noun|times|f|14
 mayor|عُمْدَة|عُمَد|noun|titles|m|14
 celebration, festivity, feast day, holiday|عيد|أعْياد|noun|times|m|14
 Labor Day|عيدُ العُمّال||noun|holidays||14
-Classical Arabic (lit., "most eloquent")|فُصْحى||superlative|||14
+Classical Arabic (lit., "most eloquent")|فُصْحى||noun|languages||14
 to prefer|فَضَّلَ (يُفَضِّل) تَفْضيل||verb|||14
 train|قِطار|قِطارات|noun|transportation|m|14
 arch|قَوْس|أقْواس|noun|other|m|14
 lightly salted, partially dehydrated yogurt with olive oil|لَبَنة||noun|food|f|14
 for this reason, therefore|لِذلِكَ||demonstrative|||14
-station|مَحَطّة|مَحَطّات|noun|places|f|14
+station|مَحَطّة|مَحَطّات|noun|locations|f|14
 crowded|مُزْدَحِم||adj|other||14
-famous, well-known|مَشْهور|(ون), مَشاهير|participle|||14
+famous, well-known|مَشْهور|(ون), مَشاهير|adj|other||14
 pasta, macaroni|مَعْكَرونة||noun|food|f|14
-place of entertainment|مَلْهىً|مَﻻهٍ|noun|entertainment|m|14
+place of entertainment|مَلْهىً|مَلاهٍ|noun|entertainment|m|14
 engineer|مُهَنْدِس|مُهَندِسون|noun|occupations|m|14
 clean|نَظيف||adj|other|m|14
 end|نِهاية|نِهايات|noun|common|f|14
-to celebrate|اِحْتَفَلَ (يَحْتَفِلُ) اِحْتِفال بِ||verb|||15
-independence|اِسْتِقﻻل||noun|abstract|m|15
-Islam|إسﻻم||noun|Islam|m|15
+to celebrate|اِحْتَفَلَ (يَحْتَفِلُ) اِحْتِفال بِـ||verb|||15
+independence|اِسْتِقلال||noun|abstract|m|15
+Islam|إسلام||noun|Islam|m|15
 to move, to relocate|اِنتَقَلَ (يَنتَقِلُ) اِنْتِقال||verb|||15
-country|بَلَد|بِﻻد|noun|places|m|15
+country|بَلَد|بِلاد|noun|places|m|15
 to graduate|تَخَرَّجَ (يتخرَّجُ) تَخَرُّج||verb|||15
 education, upbringing|تَرْبِية||noun|other|f|15
 instruction, education|تَعليم||noun|other|m|15
@@ -537,7 +537,7 @@ with, of, owner of|ذو|ذَوو|noun|other|m|15
 head|رأس|رُؤوس|noun|body|m|15
 Ramadan, the month of fasting|رَمَضان||noun|Islam|m|15
 to adorn, to decorate|زَيَّنَ (يُزَيِّنُ) تزيين||verb|||15
-square, courtyard|ساحة|ساحات|noun|places|f|15
+square, courtyard|ساحة|ساحات|noun|locations|f|15
 to save, to protect|سَلَّمَ (يُسَلِّمُ) تَسْليم||verb|||15
 age of a person|سِنّ||noun|common|m|15
 to become|صارَ (يَصيرُ) صَيْر، صَيْرورة، مَصير||verb|||15
@@ -551,7 +551,7 @@ Feast of Immolation/sacrifice|عيدُ اﻷضْحى||noun|holidays|m|15
 Thanksgiving|عيدُ الشُكْرِ||noun|holidays|m|15
 Easter|عيدُ الفِصْحِ||noun|holidays|m|15
 feast of breaking the Ramadan fast|عيدُ الفِطْرِ||noun|holidays|m|15
-Christmas|عيدُ الميﻻد||noun|holidays|m|15
+Christmas|عيدُ الميلاد||noun|holidays|m|15
 dawn, daybreak|فَجْر||noun|times|m|15
 pie|فَطيرة|فَطائِر|noun|food|f|15
 pumpkin|قَرْع||noun|food|m|15
@@ -566,7 +566,73 @@ sunset|مَغْرِب||noun|times|m|15
 occasion|مُناسَبة|مُناسَبات|noun|other|f|15
 region|مِنْطَقة|مَناطِق|noun|places|f|15
 birthday, birthplace|مَوْلِد||noun|other|m|15
-birth, birthday|ميﻻد|مَواليد|noun|other|m|15
+birth, birthday|ميلاد|مَواليد|noun|other|m|15
 prophet|نَبيّ|أنْبياء|noun|religious|m|15
 to congratulate, to felicitate|هَنَّأ (يُهَنِّئُ) تَهنئة||verb|||15
 to be born (passive)|وُلِدَ (يولَدُ) وِﻻدة/مَوْلِد||verb|||15
+social gathering|اِجْتِماع|اِجْتِماعات|noun|other|m|16
+to use, to utilize, to employ|اِستَخدَمَ (يَستَخدِمُ) اِستِخدام||verb|||16
+to become a martyr|اُسْتُشْهِدَ (يُستَشْهَدُ) اِسْتِشهاد||verb|||16
+to establish, to found|أسَّسَ (يُؤَسِّسُ) تأسيس||verb|||16
+black|أسْوَد|سود|noun|colors|m|16
+to be assassinated|اُغْتيلَ (يُغتالُ) اِغتِيال||verb|||16
+prince|أمير|أُمَراء|noun|titles|m|16
+to elect|اِنْتَخَبَ (يَنتَخِبُ) اِنتِخاب||verb|||16
+Andalusia, Muslim Spain|اﻷنْدَلُس||noun|places|f|16
+history|تاريخ|تَواريخ|noun|subjects|m|16
+discrimination|تَمييز||noun|other|m|16
+to pass away|تُوُفِيَ (يُتَوَفّى) وَفاة||verb|||16
+mosque|جامِع|جَوامِع|noun|Islam|m|16
+prize, award|جائِزة|جَوائِز|noun|other|m|16
+algebra|جَبْر||noun|subjects|m|16
+to be wounded, to be hurt|جُرِحَ (يُجرَحُ) جَرح||verb|||16
+republic|جُمهوريّة|جُمهوريّات|noun|other|f|16
+army|جَيْش|جُيوش|noun|other|m|16
+to fight|حارَبَ (يُحارِبُ) حَرْب/مُحارَبة||verb|||16
+war|حَرْب|حُروب|noun|other|f|16
+account|حِساب|حِسابات|noun|other|m|16
+to acquire, to obtain, to get|حَصَلَ (يَحصُلُ) حُصول||verb|||16
+to tell a story; to talk|حَكَى (يَحْكي) حِكاية||verb|||16
+to go out; to exit|خَرَجَ (يَخرُجُ) خُروج||verb|||16
+orator, preacher, speaker|خَطيب|خُطَباء|noun|occupations|m|16
+to enter|دَخَلَ (يَدخُلُ) دُخول||verb|||16
+to pay|دَفَعَ (يَدْفَعُ) دَفْع||verb|||16
+defense|دِفاع|دِفاعات|noun|other|m|16
+head|رأس|رُؤوس|noun|body|m|16
+to reject|رَفَضَ (يَرفُضُ/يَرفِضُ) رَفْض||verb|||16
+leader, president|رَئيس|رُؤَساء|noun|occupations|m|16
+leader (popular)|زَعيم|زُعَماء|noun|occupations|m|16
+young man|شابّ|شَباب|noun|people|m|16
+poet|شاعِر|شُعَراء|noun|occupations|m|16
+personality, character|شَخصِيّة|شَخصِيّات|noun|abstract|f|16
+ranking officer|ضابِط|ضُبّاط|noun|other|m|16
+to request, to order (e.g. in a restaurant)|طَلَبَ (يَطْلُب) طَلَب||verb|||16
+Toulon (a town in southern France)|طولون||noun|places|f|16
+scholar, scientist|عالِم|عُلَماء|noun|occupations|m|16
+sociologist|عالِم اجْتِماع||noun|occupations|m|16
+sociology|عِلْم اجْتِماع||noun|subjects|m|16
+to introduce someone to someone else|عَرَّفَ (يُعَرِّف) تَعريف (على)||verb|||16
+race, element|عُنصٌر|عَناصِر|noun|other|m|16
+racial|عُنصُريّ||adj|other||16
+philosophy|فَلْسَفة|فَلسَفات|noun|subjects|f|16
+philosopher|فَيْلَسوف|فَلاسِفة|noun|occupations|m|16
+to do, to perform|قامَ (يَقومُ) قِيام||verb|||16
+law|قانون|قَوانين|noun|subjects|m|16
+leader (military)|قائد|قادة|noun|occupations|m|16
+nearby, close|قُرْب||adv|||16
+village|قَرية|قُرى|noun|places|f|16
+priest|قِسّيس|قِسّاوِسة|noun|religious|m|16
+writer, scribe|كاتِب|كُتّاب/كَتَبة|noun|occupations|m|16
+for the sake of (Syrian colloquial)|كرمال||phrase|||16
+generous|كَريم|كُرَماء|adj|other||16
+necessary|ﻻزِم||adj|common||16
+lawyer, attorney, counsel|مُحامٍ|مُحامون|noun|occupations|m|16
+mixed|مُشَكَّل||adj|other||16
+introduction|مُقَدِّمة||noun|other|f|16
+place, location|مَكان|أمْكِنة|noun|other|m|16
+king|مَلِك|مُلوك|noun|occupations|m|16
+good (Syrian colloquial)|مْنيح|امْناح|adj|common||16
+historian|مُؤَرِّخ|مُؤَرِّخون|noun|occupations|m|16
+to be sent into exile, to be expelled|نُفِيَ (يُنْفى) نَفْيٌ||verb|||16
+now (Syrian colloquial)|هَللأ/هَلَّق|||common||16
+minister|وَزير|وُزَراء|noun|occupations|m|16
