@@ -142,7 +142,15 @@ favorite: true/false
 noshow: true/false
 
 
-card chooser (select cards?):
+CATEGORIES
+new:
+education
+
+maybe:
+business
+
+
+CARD CHOOSER (select cards?):
 all
 AWS chapters
     get these from db
