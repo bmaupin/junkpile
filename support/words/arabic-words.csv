@@ -1,60 +1,60 @@
-professor, teacher|أسْتاذ|أساتِذَة|noun||m|1
-too, also|أيْضاً||adv|||1
-on, in, by, with, for|بِ||prep|||1
+professor, teacher|أسْتاذ|أساتِذَة|noun|occupations|m|1
+too, also|أيْضاً||adv|common||1
+on, in, by, with, for|بِـ||prep|common||1
 to learn|تَعَلَّمَ||verb|||1
-university|جامِعَة|جامِعات|noun||f|1
-side|جانِب||noun||m|1
-wall|جَدار|جُدْران|noun||m|1
+university|جامِعَة|جامِعات|noun|education|f|1
+side|جانِب||noun|other|m|1
+wall|جَدار|جُدْران|noun|other|m|1
 Aleppo|حَلَب||noun|places|f|1
-mathematics, calculus|رياضِيّات||noun||f|1
-of the sun, solar|شّمْسِيّ||adj|||1
-thing|شَيء|أشْياء|noun||m|1
-class|صَفّ|صُفوف|noun||m|1
-male student|طالِب|طُلاّب|noun||m|1
-female student|طالِبة|طالِبات|noun||f|1
-on|عَلى||prep|||1
-room|غُرْفَة|غُرَف|noun||f|1
-you’re welcome/excuse me|عَفْواً||phrase|||1
-of the moon, lunar|قَمَريّ||adj|||1
-but (weak version)|لكِنْ||conj|||1
-but (strong version)|لكِنَّ|||||1
-if you would; please|لَوسَمَحْت|||||1
-not|لَيْسَ|||||1
-place; store|مَحَلّ||noun||m|1
-with|مَعَ||conj|||1
-found|مَوْجود||noun||m|1
-there, there is/are|هُناكَ|||||1
+mathematics, calculus|رياضِيّات||noun|subjects|f|1
+of the sun, solar|شّمْسِيّ||adj|other||1
+thing|شَيء|أشْياء|noun|common|m|1
+class|صَفّ|صُفوف|noun|education|m|1
+male student|طالِب|طُلاّب|noun|education|m|1
+female student|طالِبة|طالِبات|noun|education|f|1
+on|عَلى||prep|common||1
+room|غُرْفَة|غُرَف|noun|household|f|1
+you’re welcome/excuse me|عَفْواً||phrase|common||1
+of the moon, lunar|قَمَريّ||adj|other||1
+but (weak version)|لكِنْ||conj|common||1
+but (strong version)|لكِنَّ||conj|common||1
+if you would; please|لَوسَمَحْت||phrase|||1
+not|لَيْسَ||particle|common||1
+place; store|مَحَلّ||noun|locations|m|1
+with|مَعَ||conj|common||1
+found|مَوْجود||noun|other|m|1
+there, there is/are|هُناكَ||pronoun|||1
 and|وَ||conj|||1
-literature|أدَب|آداب|||m|2
-ground|أرْض|أراضٍ|||f|2
-those (pl, dem)|أولائِكَ|||||2
-house, home|بَيْت|بُيوت|||m|2
-those (dual, nom)|تانِكَ|||||2
-trade, business, commerce|تحِبارة||||f|2
-that (sing, nom)|تِلكَ||||f|2
-those (dual, acc/gen)|تَيْنِكَ|||||2
-right, law|حَقّ|حُقوق|||m|2
-that|ذلِكَ||||m|2
-sport|رِياضَة|رِياضات|||f|2
-of sports|رياضِيّ|||||2
-medicine|طِبّ||||m|2
-a number of, several|عِدَّةُ|||||2
-science, discipline|عِلْم|عَلوم|||m|2
-of science, scientific|عِلميّ|||||2
-college|كُلّيَّة|كُلّيات|||f|2
-language|لُغَة|لُغات|||f|2
-of language, linguistic|لُغَويّ|||||2
-laboratory|مُخْتبر|مُخْتبرات|||m|2
-swimming pool|مَسْبَح|مَسابِح|||f|2
-office|مَكْتَب|مَكاتِب|||m|2
-library; bookstore; bookcase|مَكْتَبة|مَكْتَبات|||f|2
-playground, sports field|مَلْعَب|مَلاعِب|||m|2
-these (dual, nom)|هاتانِ||||f|2
-these (dual, acc/gen)|هاتَيْنِ||||f|2
-these (dual, nom)|هذانِ||||m|2
-these (dual, acc/gen)|هذَيْنِ||||m|2
-engineering|هَنْدَسَة||||f|2
-these (pl)|هؤُلاءِ||||m|2
+literature|أدَب|آداب|noun|subjects|m|2
+ground|أرْض|أراضٍ|noun|other|f|2
+those (pl, dem)|أولائِكَ||pronoun|||2
+house, home|بَيْت|بُيوت|noun|household|m|2
+those (dual, nom)|تانِكَ||pronoun|||2
+trade, business, commerce|تحِبارة||noun|other|f|2
+that (sing, nom)|تِلكَ||pronoun|common|f|2
+those (dual, acc/gen)|تَيْنِكَ||pronoun|||2
+right, law|حَقّ|حُقوق|noun|other|m|2
+that|ذلِكَ||pronoun|common|m|2
+sport|رِياضَة|رِياضات|noun|sports|f|2
+of sports|رياضِيّ||adj|sports||2
+medicine|طِبّ||noun|medical|m|2
+a number of, several|عِدَّةُ||noun|common|f|2
+science, discipline|عِلْم|عَلوم|noun|subjects|m|2
+of science, scientific|عِلميّ||adj|subjects||2
+college|كُلّيَّة|كُلّيات|noun|education|f|2
+language|لُغَة|لُغات|noun|subjects|f|2
+of language, linguistic|لُغَويّ||adj|subjects||2
+laboratory|مُخْتبر|مُخْتبرات|noun|education|m|2
+swimming pool|مَسْبَح|مَسابِح|noun|locations|f|2
+office|مَكْتَب|مَكاتِب|noun|locations|m|2
+library; bookstore; bookcase|مَكْتَبة|مَكْتَبات|noun|locations|f|2
+playground, sports field|مَلْعَب|مَلاعِب|noun|sports|m|2
+these (dual, nom)|هاتانِ||pronoun||f|2
+these (dual, acc/gen)|هاتَيْنِ||pronoun||f|2
+these (dual, nom)|هذانِ||pronoun||m|2
+these (dual, acc/gen)|هذَيْنِ||pronoun||m|2
+engineering|هَنْدَسَة||noun|subjects|f|2
+these (pl)|هؤُلاءِ||pronoun||m|2
 sorry (m, f)|آسِف، آسِفة|||||3
 or (particle used in questions)|أَمْ|||||3
 woman|اِمرأة|نِساء|noun||f|3
