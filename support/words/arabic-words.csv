@@ -47,29 +47,47 @@ ruler|مِسْطَرة|مَساطِر|||f|
 eraser|مِمْحاة|مَماحٍ/مِمْحَيات|||f|
 window|نافِذة|نَوافِذ|||f|
 sheet of paper|وَرَقة|وَرَقات|||f|
+in front of|أمامَ|||||
+behind|خَلْفَ|||||
+beside|بِجانِب|||||
+under|تَحْتَ|||||
+over|فَوْقَ|||||
+between|بَيْنَ|||||
+in|في|||||
+a little bit; slightly|قَليلاً|||||
 professor, teacher|أسْتاذ|أساتِذَة|noun||m|1
-university|جامِعَة|جامِعات|noun||f|1
-side|جانِب||noun||m|1
-wall|جَدار|جُدْران|noun||m|1
-mathematics, calculus|رياضِيّات||noun||f|1
-thing|شَيء|أشْياء|noun||m|1
-class|صَفّ|صُفوف|noun||m|1
 too, also|أيْضاً||adv|||1
 on, in, by, with, for|بِ||prep|||1
 to learn|تَعَلَّمَ||verb|||1
+university|جامِعَة|جامِعات|noun||f|1
+side|جانِب||noun||m|1
+wall|جَدار|جُدْران|noun||m|1
+Aleppo|حَلَب||noun|places|f|1
+mathematics, calculus|رياضِيّات||noun||f|1
 of the sun, solar|شّمْسِيّ||adj|||1
-on|عَلى||prep|||1
-you’re welcome/excuse me|عَفْواً||phrase|||1
-of the moon, lunar|قَمَريّ||adj|||1
-but|لكِنْ||conj|||1
-if you would; please|لَوسَمَحْت|||||1
-with|مَعَ||conj|||1
+thing|شَيء|أشْياء|noun||m|1
+class|صَفّ|صُفوف|noun||m|1
 male student|طالِب|طُلاّب|noun||m|1
 female student|طالِبة|طالِبات|noun||f|1
+on|عَلى||prep|||1
 room|غُرْفَة|غُرَف|noun||f|1
+you’re welcome/excuse me|عَفْواً||phrase|||1
+of the moon, lunar|قَمَريّ||adj|||1
+but (weak version)|لكِنْ||conj|||1
+but (strong version)|لكِنَّ|||||1
+if you would; please|لَوسَمَحْت|||||1
+not|لَيْسَ|||||1
 place; store|مَحَلّ||noun||m|1
+with|مَعَ||conj|||1
 found|مَوْجود||noun||m|1
 there, there is/are|هُناكَ|||||1
+and|وَ||conj|||1
+||||||
+||||||
+||||||
+||||||
+||||||
+||||||
 ground|أرْض|أراضٍ|||f|2
 house, home|بَيْت|بُيوت|||m|2
 trade, business, commerce|تحِبارة||||f|2
@@ -82,13 +100,6 @@ of science, scientific|عِلميّ|||||2
 college|كُلّيَّة|كُلّيات|||f|2
 language|لُغَة|لُغات|||f|2
 laboratory|مُخْتبر|مُخْتبرات|||m|2
-in front of|أمامَ|||||
-behind|خَلْفَ|||||
-beside|بِجانِب|||||
-under|تَحْتَ|||||
-over|فَوْقَ|||||
-between|بَيْنَ|||||
-in|في|||||
 a number of, several|عِدَّةُ|||||2
 that|ذلِكَ||||f|2
 that|ذلِكَ||||m|2
@@ -99,7 +110,6 @@ playground, sports field|مَلْعَب|مَلاعِب|||m|2
 engineering|هَنْدَسَة||||f|2
 of language, linguistic|لُغَويّ|||||2
 literature|أدَب|آداب|||m|2
-a little bit; slightly|قَليلاً|||||
 sorry (m, f)|آسِف، آسِفة|||||3
 or (particle used in questions)|أَمْ|||||3
 woman|اِمرأة|نِساء|noun||f|3
