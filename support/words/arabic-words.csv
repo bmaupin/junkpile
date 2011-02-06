@@ -229,7 +229,7 @@ hummus|حِمَّص||||m|
 minute|دَقيقَة|دَقائِق|||f|
 international|دَوْلِيّ||||m|
 quarter|رُبْع|أرْباع|||m|
-o’clock, hour|ساعَة|ساعات|||f|
+o’clock, hour, watch, clock|ساعَة|ساعات|||f|
 relation|عَلاقة|عَلاقات|||f|
 to mean|عَنى (يَعْني)||verb|||
 kebab|كَباب||||m|
@@ -658,7 +658,7 @@ to rent, to hire|استأجَرَ (يَستأجِرُ) استِئجار||verb|||
 to use, to utilize, to employ|اِستَخدَمَ (يَستَخدِمُ) اِستِخدام||verb|||18
 to please|أَعْجَبَ (يُعْجِبُ) إعْجاب||verb|||18
 advertisement|إعْلان|إعْلانات|noun|other|m|18
-in front of|أمامَ||prep|||18
+in front of|أمامَ||prep|common||18
 to (infinitive)|أنْ||particle|||18
 Europe|أوروبا||noun|places|f|18
 rent|إيجار|إيجارات|noun|other|m|18
@@ -682,7 +682,7 @@ baker|خَبّاز|خَبّازون|noun|occupations|m|18
 closet, cupboard|خِزانة|خَزائِن/خِزانات|noun|household|f|18
 wood, lumber, timber|خَشَب|أخْشاب|noun|other|m|18
 greengrocer|خُضَريّ|خُضَريّون|noun|occupations|m|18
-behind|خَلفَ||prep|||18
+behind|خَلفَ||prep|common||18
 shop, store|دُكّان|دَكاكين|noun|locations|f|18
 dinar (Algeria, Bahrain, Iraq, Kuwait)|دينار|دَنانير|noun|other|m|18
 water heater|سَخّان لِلماء||noun|other||18
@@ -1114,19 +1114,15 @@ same|نَفْس|أنْفَس (...الــ)|noun|other|f|24
 ministry, department in an administration|وِزارة|وِزارات|noun|other|f|24
 good evening|مَساع الخَيْر||phrase|||
 pleased to meet you|فُرْصة سَعيدة|||||
-excuse me/you’re welcome|عَفْواً|||||
 fine, well|بِخَيْر|||||
 tired|تَعْبان|||||
 perfect, great|تَمام|||||
-news|خَبَر|أخْبار||||
-left|شِمَال|||||
-right|يَمِين|||||
+left (alternate)|شِمَال||noun|directions||
 what’s new? what’s going on?|ما أخْبلرُك؟|||||
 how are you?|كَيفَ الحال؟|||||
 where?|أَيْنَ|||||
-capital|عاصِمة|عواصِم||||
 television|تِلفاز|تِلفازات||||
-newspaper|جَريدَة|جَراءِد||||
+newspaper (alternate)|جَريدَة|جَراءِد|noun|entertainment||
 computer|حاسوب|حَواسين||||
 you (m/f dual)|أنْتُما|||||
 you (m pl)|أنْتُمْ|||||
@@ -1140,7 +1136,6 @@ relative adjective|نِسْبَة|||||
 state|وِلايَة|وِلايات||||
 bicycle|دَرّاجَة|دَرّاجات||||
 notebook|دَفتَر|دَفاتِر||||
-watch, clock|ساعَة|ساعات||||
 car|سَيّارَة|سَيّارات||||
 pen, pencil|قَلَم|أقلام||||
 book|كِتاب|كُتُب||||
@@ -1161,11 +1156,8 @@ ruler|مِسْطَرة|مَساطِر|||f|
 eraser|مِمْحاة|مَماحٍ/مِمْحَيات|||f|
 window|نافِذة|نَوافِذ|||f|
 sheet of paper|وَرَقة|وَرَقات|||f|
-in front of|أمامَ|||||
-behind|خَلْفَ|||||
 beside|بِجانِب|||||
 under|تَحْتَ|||||
 over|فَوْقَ|||||
 between|بَيْنَ|||||
 in|في|||||
-a little bit; slightly|قَليلاً|||||
