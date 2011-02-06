@@ -1,6 +1,7 @@
 $Id$
 
 DO:
+card chooser: see below
 see wrox p. 175ish for calling an activity and getting results
 we'll need to store favorites and noshow in a separate db so they don't get overwritten...
     we can create this db from within android
@@ -16,6 +17,16 @@ to fix in words
     hamza
     baa + dash
     lam-alef
+    colors - either all noun or adjectives
+if English > certain length: decrease font size (so it fits on the card)
+same for Arabic?
+fix right-to-leftness in cards?
+    is there a left vs. right space?
+    parenthesis seems to be messed up before letter with vowel (without vowel seems fine)
+        and at the end of words
+    or do i need to add codes so entire word is rtl, including parentheses?
+    same problems with slashes!
+
 
 DONE?
 memory leak
@@ -53,6 +64,15 @@ ENGLISH2: (m/f)
 ENGLISH2: (polite)
 ENGLISH2: (adj)
 ENGLISH2: (m and f)
+
+
+APP MARKET NOTES:
+make note that it's fousHa/MSA (unless otherwise marked)
+just flashcards, won't help you lose weight, do your dishes
+no pronunciation, assumes you already know the alphabet (Alif Baa?)
+word-a-day widget?
+mention ahlan wa sahlan 2nd edition vocab, 1st book?
+mention al kitaab (edition) vocab
 
 
 Arabic shaping fix:
@@ -120,3 +140,22 @@ proper: 0/1/null (integer)
 later:
 favorite: true/false
 noshow: true/false
+
+
+card chooser (select cards?):
+all
+AWS chapters
+    get these from db
+parts of speech (noun, verb, phrases, ...)
+    have "other" category which comprises participles, particles, untagged?
+    statically defined in an array
+categories (food, places, etc.)
+    get from db, optionally captitalize first letter?
+
+after you choose cards to show, you're given option of in order or random
+    perhaps the first time you run the program, it can:
+        ask you whether or not you want to show plurals
+        which lanugage to show on the front of cards
+        ask you whether or not you want to show vowels?
+        show the help screen (left, right, up, down)
+
