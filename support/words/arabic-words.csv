@@ -240,35 +240,36 @@ jam, preserve|مُرَبّى|مُرَبَّيات|noun|food|m|8
 boiled|مَسْلوق||particle|||8
 evening|مَساء||noun|times|m|8
 kitchen|مَطْبَخ|مَطابِخ|noun|household|m|8
-restaurant|مَطْعَم|مَطاعِم|noun|places|m|8
-cafeteria|مَقْصَف|مَقاصِف|noun|places|m|8
+restaurant|مَطْعَم|مَطاعِم|noun|locations|m|8
+cafeteria|مَقْصَف|مَقاصِف|noun|locations|m|8
 agree|مُوافِق||participle|||8
-one|أحَد|آحاد|||m|
-to wake up|اِسْتَيْقَظَ (يَسْتَيْقِظُ) اِسْتَيقاظ||verb|||
-statistics|إحْصاء||||m|
-to end|انْتَهى (يَنْتَهي) اِنْتِهاء (مِن)||verb|||
-except, minus|إلاّ|||||
-thousand|ألْف|آلاف|||m|
-to begin|بَدَأ (يَبْدأُ) بِداية||verb|||
-after|بَعْدَ|||||
-a third|ثُلْث|أثْلاث|||m|
-conversation|حَديث|أحاديث|||m|
-hummus|حِمَّص||||m|
-minute|دَقيقَة|دَقائِق|||f|
-international|دَوْلِيّ||||m|
-quarter|رُبْع|أرْباع|||m|
-o’clock, hour, watch, clock|ساعَة|ساعات|||f|
-relation|عَلاقة|عَلاقات|||f|
-to mean|عَنى (يَعْني)||verb|||
-kebab|كَباب||||m|
-united|مُتَّحِد||||m|
-accounting|مُحاسَبة||||f|
-time, appointment|مَوْعِد|مَواعيد|||m|
-to fall asleep, to sleep|نامَ (يَنامُ) نَوْم||verb|||
-half|نِصْف|أنْصاف|||m|
-here|هُنا|||||
-alone, by himself|وَحْدَهُ|||||
-The United States of America|الوِلاياتُ المُتَّحِدةُ الأمريكيّة|||||
+one|أحَد|آحاد|noun|other|m|9
+to wake up|اِسْتَيْقَظَ (يَسْتَيْقِظُ) اِسْتَيقاظ||verb|||9
+statistics|إحْصاء||noun|subjects|m|9
+to end|انْتَهى (يَنْتَهي) اِنْتِهاء (مِن)||verb|||9
+except, minus|إلاّ||particle|||9
+thousand|ألْف|آلاف|noun|numbers|m|9
+to begin|بَدَأ (يَبْدأُ) بِداية||verb|||9
+after|بَعْدَ||prep|||9
+a third|ثُلْث|أثْلاث|noun|numbers|m|9
+conversation|حَديث|أحاديث|noun|other|m|9
+hummus|حِمَّص||noun|food|m|9
+minute|دَقيقَة|دَقائِق|noun|times|f|9
+international|دَوْلِيّ||noun|other|m|9
+quarter|رُبْع|أرْباع|noun|numbers|m|9
+o’clock, hour, watch, clock|ساعَة|ساعات|noun|times|f|9
+relation|عَلاقة|عَلاقات|noun|other|f|9
+to mean|عَنى (يَعْني)||verb|||9
+pleased to meet you (lit. "a happy opportunity")|فُرْصَة سَعيدة||phrase|common||9
+kebab|كَباب||noun|food|m|9
+united|مُتَّحِد||adj||m|9
+accounting|مُحاسَبة||noun|subjects|f|9
+time, appointment|مَوْعِد|مَواعيد|noun|times|m|9
+to fall asleep, to sleep|نامَ (يَنامُ) نَوْم||verb|||9
+half|نِصْف|أنْصاف|noun|numbers|m|9
+here|هُنا||demonstrative|||9
+alone, by himself|وَحْدَهُ||adv|||9
+The United States of America|الوِلاياتُ المُتَّحِدةُ الأمريكيّة||noun|places|f|9
 immediate (parents, siblings) and extended family|أسْرة|أسَر||||
 Germany|ألمانيا||||f|
 German|ألمانيّ|||||
@@ -1141,7 +1142,6 @@ consisting of, comprising|مُؤَلَّف (مِن)||participle|||24
 same|نَفْس|أنْفَس (...الــ)|noun|other|f|24
 ministry, department in an administration|وِزارة|وِزارات|noun|other|f|24
 good evening|مَساع الخَيْر||phrase|||
-pleased to meet you|فُرْصة سَعيدة|||||
 fine, well|بِخَيْر|||||
 tired|تَعْبان|||||
 perfect, great|تَمام|||||
