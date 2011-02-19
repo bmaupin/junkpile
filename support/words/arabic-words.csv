@@ -159,7 +159,7 @@ God knows|الله أعْلَم||phrase|common||6
 librarian|أمينُ/أمينةُ مَكتَبةٍ||noun|occupations|m/f|6
 program|بَرنامَج|بَرامِج|noun|other|m|6
 to speak|تَكَلَّمَ (يَتَكَلَّمُ) تَكَلُّم||verb|common||6
-abundant|جَزيلاً|||||6
+abundant|جَزيلاً||adj|||6
 good|جَيِّد||adj|common||6
 well|جَيِّداً||adv|common||6
 where, when|حَيْثُ||adv|common||6
@@ -318,7 +318,7 @@ that (after the verb for “say”)|إنَّ||particle|||11
 God willing, hopefully|إنْ شاءَ الله||phrase|common||11
 May|أيّار||noun|months|m|11
 September|أَيْلول||noun|months|m|11
-some|بَعْض|||||11
+some|بَعْض||adj|||11
 October|تِشرين الأوَّل||noun|months|m|11
 November|تِشرين الثاني||noun|months|m|11
 to be acquainted with|تَعَرَّفَ (بَتَعَرَّفُ) تَعَرُّف|على|verb|||11
@@ -618,7 +618,7 @@ king|مَلِك|مُلوك|noun|occupations|m|16
 good (Syrian colloquial)|مْنيح|امْناح|adj|common||16
 historian|مُؤَرِّخ|مُؤَرِّخون|noun|occupations|m|16
 to be sent into exile, to be expelled|نُفِيَ (يُنْفى) نَفْيٌ||verb|||16
-now (Syrian colloquial)|هَللأ/هَلَّق|||common||16
+now (Syrian colloquial)|هَللأ/هَلَّق||adv|common||16
 minister|وَزير|وُزَراء|noun|occupations|m|16
 foreigner|أَجْنَبيّ|أَجانِب|noun|other|m|17
 foreign|أجْنَبيّ/أجْنَبيَّة||adj|other||17
@@ -633,7 +633,7 @@ as for, but, yet, however|أمّا||particle|||17
 to finish, to come to an end|اِنْتَهى (يَنْتَهي) اِنتِهاء||verb|||17
 to begin|بَدَأَ (يَبدَأُ) بَدْء||verb|||17
 beginning|بِداية|بِدايات|noun|other|f|17
-only (Syrian colloquial)|بَسّ|||||17
+only (Syrian colloquial)|بَسّ||adv|||17
 gate|بَوّابة|بَوّابات|noun|other|f|17
 sitting|جالِس|جالِسون|noun|other|m|17
 pill|حَبّة|حَبّات|noun|medical|m|17
@@ -641,7 +641,7 @@ government|حُكومة|حُكومات|noun|other|f|17
 to carry|حَمَلَ (يَحْمِلُ) حَمْل||verb|||17
 to see|رَأى (يَرى) رُؤية||verb|||17
 housewife|رَبّةُ بَيْت|رِبّات بُيوت|noun|occupations|f|17
-future marker (=will in Syrian colloquial)|رَح|||||17
+future marker (=will in Syrian colloquial)|رَح||particle|||17
 colleague, coworker|زَميل|زُمَلاء|noun|people|m|17
 mail carrier|ساعٍ|سُعاة (ساعي بَريد)|noun|occupations|m|17
 to help, to assist|ساعَدَ (يُساعِدُ) مُساعَدة||verb|||17
@@ -719,7 +719,7 @@ truck|شاحِنة|شاحِنات|noun|transportation|f|18
 company|شَرِكة|شَرِكات|noun|other|f|18
 health|صِحّة||noun|other||18
 floor, storey, flat|طابَق|طَوابِق|noun|other|m|18
-in general, generally|على العُموم|||||18
+in general, generally|على العُموم||adv|||18
 to hang|عَلَّقَ (يُعَلِّقُ) تَعْليق||verb|||18
 doctor's practice, clinic|عِيادة|عِيادات|noun|locations|f|18
 bread (Egypt)|عَيش||noun|food|m|18
@@ -753,10 +753,10 @@ to return|آبَ (يَؤوبُ) إياب||verb|||19
 white|أبيَض|بيض|noun|colors|m|19
 ruin, antiquity, artifact, relic|أثَر|آثار|noun|other|m|19
 to respond, to answer|أجابَ (يُجيبُ) إجابة||verb|||19
-then, therefore|إذاً|||||19
+then, therefore|إذاً||adv|||19
 to be able, can|استَطاعَ (يَستَطيعُ) استِطاعة||verb|||19
 to enjoy|استَمتَعَ (يَستَمتِعُ) استِمتاع||verb|||19
-until|إلى أنْ|||||19
+until|إلى أنْ||conj|||19
 apparatus, device, gadget, machine|آلة|آلات|noun|other|f|19
 to meet, converge, encounter|التَقى (يَلتَقي) التِقاء||verb|||19
 to take, make (a picture)|التَقَطَ (يَلتَقِطُ) التِقاط||verb|||19
@@ -804,7 +804,7 @@ band, company, troupe|فِرقة|فِرَق، أفْرِقة|noun|other|f|19
 boat|قارِب|قَوارِب|noun|transportation|m|19
 to gamble|قامَرَ (يُقامِرُ) مُقامَر، قِمار||verb|||19
 to serve, to provide|قَدَّمَ (يُقَدِّمُ) تَقديم||verb|||19
-also, as well|كَذلِكَ|||||19
+also, as well|كَذلِكَ||adv|||19
 kilometer|كيلومِتر|كيلومِترات|noun|measurements|m|19
 at (expressing possession)|لَدى||prep|||19
 game, play, ride|لُعبة|لُعبات، ألعاب|noun|entertainment|f|19
@@ -818,7 +818,7 @@ mosque|مَسجِد|مَساجِد|noun|Islam|m|19
 theater, stage|مَسرَح|مَسارِح|noun|entertainment|m|19
 one who is longing, yearning|مُشْتاق|مُشْتاقون|noun|other||19
 elevator, lift|مِصعَد|مَصاعِد|noun|other|m|19
-though, although|مَعَأنَّ|||||19
+though, although|مَعَأنَّ||conj|||19
 coming, next, following|مُقبِل|مُقبِلون|noun|common|m|19
 place, location|مَكان|أمْكِنة|noun|other|m|19
 million|مِليون||noun|numbers|m|19
@@ -893,7 +893,7 @@ zucchini|كوسا||noun|food|m|20
 kernel, seed|لُبّ|لُبوب|noun|plants|m|20
 delicious, delightful, tasty|لَذيذ||adj|other|m|20
 to play|لَعِبَ (يَلعَبُ) لُعْب||verb|||20
-no longer|لَمْ يَعُدْ|||||20
+no longer|لَمْ يَعُدْ||phrase|||20
 soda|ماء غازيّ|مِياه غازيّة|noun|food|f|20
 match, game|مُباراة|مُبارَيات|noun|sports|f|20
 spectator|مُتَفَرِّج|ون|noun|sports|m|20
@@ -904,7 +904,7 @@ preferred, favorite|مُفَضَّل||adj|other|m|20
 banana|مَوْز||noun|food|m|20
 small, spicy mutton sausage|نَقانِق (أو مَقانِق)||noun|food||20
 time|وَقْت|أوْقات|noun|other|m|20
-during|أثْناء|||||21
+during|أثْناء||prep|||21
 Asia|آسيا||noun|places|f|21
 to overlook|أطَلَّ (يُطِلُّ) إطْلال||verb|||21
 Atlantic|أطلَسيّ||adj|places||21
@@ -955,7 +955,7 @@ narrow, tight|ضَيِّق||adj|other||21
 capital city|عاصِمة|عَواصِم|noun|places|f|21
 high, elevated|عالٍ (العالي)||adj|other||21
 several, multiple|عَديد||adj|common||21
-throughout, all the way|على طُول|||||21
+throughout, all the way|على طُول||prep|||21
 flag, banner|عَلَم|أعْلام|noun|other|m|21
 pistachio|فُسْتُق||noun|food|m|21
 continent|قارّة|قارّات|noun|geography|f|21
@@ -978,7 +978,7 @@ textile, tissue, fabric|نِسيج||noun|other|m|21
 petroleum, crude oil|نِفْط||noun|other|m|21
 Pacific|الهادي||adj|places||21
 middle, central|وَسَط|أوساط|noun|common|m|21
-for the sake of, because of|أجْل (مِن أجْلِ)|||||22
+for the sake of, because of|أجْل (مِن أجْلِ)||conj|||22
 broadcasting station|إذاعَة|ات|noun|entertainment|f|22
 to listen|اِسْتَمَعَ (يَسْتَمِعُ) اِسْتِماع||verb|||22
 to enroll in, to subscribe to|اِشْتَرَكَ (يَشْتَرِكُ)اِشْتِراك||verb|||22
@@ -1009,7 +1009,7 @@ space|فَضاء||noun|other|m|22
 moon, satellite|قَمَر|أقْمار|noun|other|m|22
 channel|قَناة|قَنَوات|noun|entertainment|f|22
 cable|كيبِل||noun|other|m|22
-what|ما|||||22
+what|ما||pronoun|||22
 to die|ماتَ (يموتُ) مَوْت||verb|||22
 married man|مُتَزَوِّج|ون|noun|people|m|22
 free of charge|مَجّانيّ||adj|other||22
@@ -1020,7 +1020,7 @@ singer|مُغَنٍّ|ون|noun|occupations|m|22
 interview|مُقابَلة|ات|noun|other|f|22
 excellent|مُمْتاز|ون|adj|common||22
 actor, representative|مُمَثِّل|ون|noun|occupations|m|22
-by means of, via|مِن خِلالِ|||||22
+by means of, via|مِن خِلالِ||prep|||22
 wave|مَوْجة|ات|noun|other|f|22
 bulletin, report|نَشْرة|نَشَرات|noun|other|f|22
 system|نِظام|أنْظِمة|noun|other|f|22
