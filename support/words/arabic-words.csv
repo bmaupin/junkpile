@@ -114,7 +114,7 @@ to study|دَرَسَ (يَدرُسُ) دِراسة/دَرْس||verb|||4
 bed|سَرير|أسِرّة|noun|household|m|4
 small; young|صَغير||adj|common|f|4
 school subject, course|مادّة|مَوادّ|noun|education|f|4
-with (someone; not thing)|مَعَ||preposition|||4
+with (someone; not thing)|مَعَ||prep|common||4
 middle|وُسْطى||adj|common|f|4
 father|أب|آباء|noun|family|m|5
 elementary|ابْتِداءيّ||adj|education||5
@@ -148,7 +148,7 @@ physics|فيزياء||noun|subjects|f|5
 big|كَبير||adj|common||5
 chemistry|كيمياء||noun|subjects|f|5
 nice|لَطيف||adj|||5
-who|مَنْ||pronoun|||5
+who|مَنْ||pronoun|common||5
 sole, only|وَحيد|وَحيدون|noun|other|m|5
 middle|وُسْطى||adj|common|f|5
 boy|وَلَد|أَوْلاد|noun|people|m|5
@@ -267,7 +267,7 @@ accounting|مُحاسَبة||noun|subjects|f|9
 time, appointment|مَوْعِد|مَواعيد|noun|times|m|9
 to fall asleep, to sleep|نامَ (يَنامُ) نَوْم||verb|||9
 half|نِصْف|أنْصاف|noun|numbers|m|9
-here|هُنا||demonstrative|||9
+here|هُنا||adv|common||9
 alone, by himself|وَحْدَهُ||adv|||9
 The United States of America|الوِلاياتُ المُتَّحِدةُ الأمريكيّة||noun|places|f|9
 immediate (parents, siblings) and extended family|أسْرة|أسَر|noun|family|f|10
@@ -311,7 +311,7 @@ March|آذار||noun|months|m|11
 Wednesday|الأرْبِعاء||noun|days|m|11
 week|أُسْبوع|أَسابيع|noun|times|m|11
 to buy|اِشتَرى (يَشتري) شِراء||verb|||11
-certainly, surely|أكيد||exclamation|||11
+certainly, surely|أكيد||adv|||11
 yesterday|أَمْسِ||adv|||11
 that (after verbs similar to “think”)|أَنَّ||particle|||11
 that (after the verb for “say”)|إنَّ||particle|||11
@@ -494,7 +494,7 @@ to prefer|فَضَّلَ (يُفَضِّل) تَفْضيل||verb|||14
 train|قِطار|قِطارات|noun|transportation|m|14
 arch|قَوْس|أقْواس|noun|other|m|14
 lightly salted, partially dehydrated yogurt with olive oil|لَبَنة||noun|food|f|14
-for this reason, therefore|لِذلِكَ||demonstrative|||14
+for this reason, therefore|لِذلِكَ||adv|||14
 station|مَحَطّة|مَحَطّات|noun|locations|f|14
 crowded|مُزْدَحِم||adj|other||14
 famous, well-known|مَشْهور|(ون), مَشاهير|adj|other||14
@@ -1142,49 +1142,49 @@ consisting of, comprising|مُؤَلَّف (مِن)||participle|||24
 same|نَفْس|أنْفَس (...الــ)|noun|other|f|24
 ministry, department in an administration|وِزارة|وِزارات|noun|other|f|24
 good evening|مَساع الخَيْر||phrase|||
-fine, well|بِخَيْر|||||
-tired|تَعْبان|||||
-perfect, great|تَمام|||||
+fine, well|بِخَيْر||adj|common||
+tired|تَعْبان||adj|common||
+perfect, great|تَمام||adj|common||
 left (alternate)|شِمَال||noun|directions||
-what’s new? what’s going on?|ما أخْبلرُك؟|||||
-how are you?|كَيفَ الحال؟|||||
-where?|أَيْنَ|||||
-television|تِلفاز|تِلفازات||||
+what’s new? what’s going on?|ما أخْبلرُك؟||phrase|common||
+how are you?|كَيفَ الحال؟||phrase|common||
+where?|أَيْنَ||adv|common||
+television|تِلفاز|تِلفازات|noun|technology||
 newspaper (alternate)|جَريدَة|جَراءِد|noun|entertainment||
-computer|حاسوب|حَواسين||||
-you (m/f dual)|أنْتُما|||||
-you (m pl)|أنْتُمْ|||||
-you (f pl)|أنتُنَّ|||||
-they (m/f dual)|هُما|||||
-they (m pl)|هُمْ|||||
-they (f pl)|هَنَّ|||||
-we|نَحْنُ|||||
-at, expresses possesion|عِندَ|||||
+computer|حاسوب|حَواسين|noun|technology||
+you (m/f dual)|أنْتُما||pronoun|common||
+you (m pl)|أنْتُمْ||pronoun|common||
+you (f pl)|أنتُنَّ||pronoun|common||
+they (m/f dual)|هُما||pronoun|common||
+they (m pl)|هُمْ||pronoun|common||
+they (f pl)|هَنَّ||pronoun|common||
+we|نَحْنُ||pronoun|common||
+at, expresses possesion|عِندَ|||common||
 relative adjective|نِسْبَة|||||
-state|وِلايَة|وِلايات||||
-bicycle|دَرّاجَة|دَرّاجات||||
-notebook|دَفتَر|دَفاتِر||||
-car|سَيّارَة|سَيّارات||||
-pen, pencil|قَلَم|أقلام||||
-book|كِتاب|كُتُب||||
-town, city|مَدينَة|مُدُن||||
-tape recorder|مُسَجَّلة|مُسَجَّلات||||
-key|مِفْتاح|مَفاتيح||||
-eyeglasses|نَظّارة|نَظّارات||||
-telephone|هاتِف|هَواتِف|||m|
-door|باب|أبْواب|||m|
-calculator|حاسِبة|حاسِبات|||f|
-picture|صورة|صُوَر|||f|
-table|طاوِلة|طاوِلات|||f|
-chair|كُرسِيّ|كَراسٍ|||m|
-blackboard|لوْح|ألواح|||m|
-pencil sharpener|مِبراة|مَبارٍ/مِبْرَيات|||f|
-ruler|مِسْطَرة|مَساطِر|||f|
-eraser|مِمْحاة|مَماحٍ/مِمْحَيات|||f|
-window|نافِذة|نَوافِذ|||f|
-sheet of paper|وَرَقة|وَرَقات|||f|
-beside|بِجانِب|||||
-under|تَحْتَ|||||
-over|فَوْقَ|||||
-between|بَيْنَ|||||
-in|في|||||
+state|وِلايَة|وِلايات|noun|locations||
+bicycle|دَرّاجَة|دَرّاجات|noun|transportation||
+notebook|دَفتَر|دَفاتِر|noun|common||
+car|سَيّارَة|سَيّارات|noun|transportation||
+pen, pencil|قَلَم|أقلام|noun|common||
+book|كِتاب|كُتُب|noun|entertainment||
+town, city|مَدينَة|مُدُن|noun|locations||
+tape recorder|مُسَجَّلة|مُسَجَّلات|noun|technology||
+key|مِفْتاح|مَفاتيح|noun|common||
+eyeglasses|نَظّارة|نَظّارات|noun|clothing||
+telephone|هاتِف|هَواتِف|noun|technology|m|
+door|باب|أبْواب|noun|household|m|
+calculator|حاسِبة|حاسِبات|noun|technology|f|
+picture|صورة|صُوَر|noun|common|f|
+table|طاوِلة|طاوِلات|noun|household|f|
+chair|كُرسِيّ|كَراسٍ|noun|household|m|
+blackboard|لوْح|ألواح|noun||m|
+pencil sharpener|مِبراة|مَبارٍ/مِبْرَيات|noun||f|
+ruler|مِسْطَرة|مَساطِر|noun||f|
+eraser|مِمْحاة|مَماحٍ/مِمْحَيات|noun||f|
+window|نافِذة|نَوافِذ|noun|household|f|
+sheet of paper|وَرَقة|وَرَقات|noun|common|f|
+beside|بِجانِب||prep|common||
+under|تَحْتَ||prep|common||
+over|فَوْقَ||prep|common||
+between|بَيْنَ||prep|common||
+in|في||prep|common||
