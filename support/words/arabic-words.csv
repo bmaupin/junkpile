@@ -201,7 +201,7 @@ apple|تُفّاح||noun|food|m|8
 to eat; to take; to reach for something|تَناوَلَ (يَتَناوَلُ) تَناوُل||verb|||8
 cheese|جُبْن|أجْبان|noun|food|m|8
 to sit|جَلَسَ (يَجلِسُ) جُلوس (اِجلِسْ)||verb|||8
-ready, all set|حاضِر||participle|||8
+ready, all set|حاضِر||adj|||8
 grain, cereal|حَبّ|حُبوب|noun|food|m|8
 very well, okay (a response denoting agreement)|حَسَناً||adv|common||8
 to prepare|حَضَّرَ (يُحَضِّرُ) تَحضير||verb|||8
@@ -242,7 +242,7 @@ evening|مَساء||noun|times|m|8
 kitchen|مَطْبَخ|مَطابِخ|noun|household|m|8
 restaurant|مَطْعَم|مَطاعِم|noun|locations|m|8
 cafeteria|مَقْصَف|مَقاصِف|noun|locations|m|8
-agree|مُوافِق||participle|||8
+agree|مُوافِق||adj|||8
 one|أحَد|آحاد|noun|other|m|9
 to wake up|اِسْتَيْقَظَ (يَسْتَيْقِظُ) اِسْتَيقاظ||verb|||9
 statistics|إحْصاء||noun|subjects|m|9
@@ -337,7 +337,7 @@ Thursday|الخَميس||noun|days|m|11
 lesson|دَرْس|دُروس|noun|education|m|11
 Islamic month (thu al-Hijja)|ذو الحِجّة||noun|months|m|11
 Islamic month (thu al-qi’da)|ذو القِعدة||noun|months|m|11
-wonderful, awesome|رائع||participle|||11
+wonderful, awesome|رائع||adj|||11
 Islamic month (rabi al-Aghira)|رَبيع الآخِر||noun|months|m|11
 Islamic month (rabi al-‘Awwal)|رَبيع الأوَّل||noun|months|m|11
 Islamic month (rajab)|رَجَب||noun|months|m|11
@@ -366,8 +366,8 @@ shirt|قَميص|قُمْصان|noun|clothing|m|11
 to be (was, were)|كانَ (يَكونُ) كَوْن||verb|common||11
 December|كانون الأوَّل||noun|months|m|11
 January|كانون الثاني||noun|months|m|11
-objection|مانِع||participle|||11
-enthusiastic|مُتَحَمِّس||participle|||11
+objection|مانِع||noun|other||11
+enthusiastic|مُتَحَمِّس||adj|||11
 Islamic month (muHarram)|مُحَرَّم||noun|months|m|11
 to walk|مَشى (يَمْشي) مَشي||verb|common||11
 airport|مَطار|مَطارات|noun|transportation|m|11
@@ -482,7 +482,7 @@ to do (Syrian colloquial)|سلوى (يساوي)||verb|||14
 what (Syrian colloquial)|شو||particle|||14
 journalism|صِحافة||noun|subjects|f|14
 worker, laborer|عامِل|عُمّال|noun|occupations|m|14
-colloquial|عاميّة||participle|||14
+colloquial|عاميّة||adj|||14
 lentils|عَدَس||noun|food|m|14
 break, vacation|عُطلة|عُطَل/عُطلات|noun|other|f|14
 weekend|عُطْلَةُ نِهايَةِ اﻷُسْبوعِ||noun|times|f|14
@@ -881,7 +881,7 @@ peanuts|فول (سوداني)||noun|food|m|20
 rule, principle, basis, foundation, base|قاعِدة|قَواعِد|noun|other|f|20
 cauliflower|قَرنَبيط||noun|food|m|20
 like, as|كَــ||prep|||20
-sufficient|كافٍ (الكافي)||participle|||20
+sufficient|كافٍ (الكافي)||adj|||20
 ball, sphere|كُرة|كُرات|noun|other|f|20
 basketball|كُرةُ السَلّة||noun|sports||20
 table tennis|كُرةُ الطاولة||noun|sports||20
@@ -1077,7 +1077,7 @@ recorded|مُسَجَّل||adj|other||23
 factory, plant|مَصْنَع|مَصانِع|noun|locations|m|23
 tablecloth|مَفرَش|مَفارِش|noun|household|m|23
 seat, bench, armchair|مَقْعَد|مَقاعِد|noun|household|m|23
-enjoyable|مُمْتِع||participle|||23
+enjoyable|مُمْتِع||adj|||23
 polluted|مُلَوَّث||adj|other||23
 house, residence|مَنزِل|مَنازِل|noun|household|m|23
 view, panorama|مَنْظَر|مَناظِر|noun|other|m|23
