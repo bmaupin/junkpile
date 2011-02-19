@@ -105,50 +105,53 @@ identity|هُوِيّة|هُوِيّات|noun|other|f|3
 one|واحِد||noun|numbers|m|3
 vocative particle used to call the attention of the addressee|يا||particle|common||3
 Japanese (language)|اليابانِيَّة||noun|subjects|f|3
-biology|أحْياء|||||
-rather, but|بَلْ|||||
-building|بِناية|بِنايات|||f|
-closet, cupboard|خِزانة|خَزاءِن/خِزانات|||f|
-to study|دَرَسَ (يَدرُسُ) دِراسة/دَرْس||verb|||
-bed|سَرير|أسِرّة|||m|
-small; young|صَغير||||f|
-school subject, course|مادّة|مَوادّ|||f|
-with (someone; not thing)|مَعَ|||||
-middle|وُسْطى||||f|
-father|أب|آباء||||
-elementary|ابْتِداءيّ|||||
-son|ابْنٌ|أبْناء||||
-daughter|ابْنَة|بَنات||||
-brother|أَخ|إخوة||||
-sister|أُخْت|أَخَوات||||
-mother|أُمّ|أُمَّهات||||
-English|إنْكليزيّ|||||
-first|أوَّل|أواءِل|||m|
-girl|بِنْت|بَنات||||
-ninth|تاسِع|||||
-second|ثانٍ (الثاني)||||m|
-third|ثالِث|||||
-eighth|ثامِن|||||
-fifth|خامِس|||||
-of school, academic|دِراسِيّ|||||
-fourth|رابع|||||
-husband|زَوْج|أزْواج||||
-wife|زَوْجَة|زَوْجات||||
-seventh|سابع|||||
-sixth|سادِس|||||
-small; young|صَغير||||m|
-child|طِفْل|أطْفال|||m|
-tenth|عاشِر|||||
-nuclear family|عائِلَة|عائِلات||||
-(academic) term, season|فَصْل|فُصول||||
-only; no more than|فَقَطْ|||||
-physics|فيزياء||||f|
-big|كَبير|||||
-chemistry|كيمياء||||f|
-nice|لَطيف|||||
-who|مَنْ|||||
-sole, only|وَحيد|وَحيدون|||m|
-boy|وَلَد|أَوْلاد|||m|
+biology|أحْياء||noun|subjects|f|4
+rather, but|بَلْ||particle|||4
+building|بِناية|بِنايات|noun|locations|f|4
+bag; briefcase|حَقيبة|حَقائب|noun|clothing|f|4
+closet, cupboard|خِزانة|خَزاءِن/خِزانات|noun|household|f|4
+to study|دَرَسَ (يَدرُسُ) دِراسة/دَرْس||verb|||4
+bed|سَرير|أسِرّة|noun|household|m|4
+small; young|صَغير||adj|common|f|4
+school subject, course|مادّة|مَوادّ|noun|education|f|4
+with (someone; not thing)|مَعَ||preposition|||4
+middle|وُسْطى||adj|common|f|4
+father|أب|آباء|noun|family|m|5
+elementary|ابْتِداءيّ||adj|education||5
+son|ابْنٌ|أبْناء|noun|family|m|5
+daughter|ابْنَة|بَنات|noun|family|f|5
+brother|أَخ|إخوة|noun|family|m|5
+sister|أُخْت|أَخَوات|noun|family|f|5
+mother|أُمّ|أُمَّهات|noun|family|m|5
+English|إنْكليزيّ||noun|subjects|m|5
+first|أوَّل|أواءِل|noun|numbers|m|5
+girl|بِنْت|بَنات|noun|people|f|5
+ninth|تاسِع||adj|numbers||5
+differential equations|تَفاضُل||noun|subjects|m|5
+second|ثانٍ (الثاني)||noun|numbers|m|5
+third|ثالِث||adj|numbers||5
+eighth|ثامِن||adj|numbers||5
+fifth|خامِس||adj|numbers||5
+of school, academic|دِراسِيّ||adj|education||5
+fourth|رابع||adj|numbers||5
+husband|زَوْج|أزْواج|noun|family|m|5
+wife|زَوْجَة|زَوْجات|noun|family|f|5
+seventh|سابع||adj|numbers||5
+sixth|سادِس||adj|numbers||5
+small; young|صَغير||adj|common|m|5
+child|طِفْل|أطْفال|noun|people|m|5
+tenth|عاشِر||adj|numbers||5
+nuclear family|عائِلَة|عائِلات|noun|family|f|5
+(academic) term, season|فَصْل|فُصول|noun|education|m|5
+only; no more than|فَقَطْ||particle|common||5
+physics|فيزياء||noun|subjects|f|5
+big|كَبير||adj|common||5
+chemistry|كيمياء||noun|subjects|f|5
+nice|لَطيف||adj|||5
+who|مَنْ||pronoun|||5
+sole, only|وَحيد|وَحيدون|noun|other|m|5
+middle|وُسْطى||adj|common|f|5
+boy|وَلَد|أَوْلاد|noun|people|m|5
 to be able|اِسْتَطاعَ (يَسْتَطِيعُ) اِسْتِطاعة||verb|||
 sorry (m & f)|آسِف/آسِفة|||||
 God knows|الله أعْلَم|||||
@@ -1170,7 +1173,6 @@ eyeglasses|نَظّارة|نَظّارات||||
 telephone|هاتِف|هَواتِف|||m|
 door|باب|أبْواب|||m|
 calculator|حاسِبة|حاسِبات|||f|
-bag|حَقيبة|حَقاءِب|||f|
 picture|صورة|صُوَر|||f|
 table|طاوِلة|طاوِلات|||f|
 chair|كُرسِيّ|كَراسٍ|||m|
