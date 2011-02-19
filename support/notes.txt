@@ -17,7 +17,6 @@ to fix in words
     hamza
     baa + dash
     lam-alef
-    colors - either all noun or adjectives
 if English > certain length: decrease font size (so it fits on the card)
 same for Arabic?
 fix right-to-leftness in cards?
@@ -143,6 +142,36 @@ noshow: true/false
 
 
 CATEGORIES
+common - 
+animals
+clothing
+colors
+days
+directions - left, right, street, way/road
+dishes - cup, 
+education - 
+entertainment
+family
+food
+geography - sea
+holidays - Labor Day, 
+household - kitchen, furniture, etc.
+locations - park, bank, etc.
+medical
+months
+nature - sky, beach, sun
+numbers
+occupations - doctor, engineer, etc.
+places - Aleppo, Europe, etc.
+plants - flower, 
+people - girl, child, friend, 
+religious
+sports
+subjects - math, science, English language
+times - morning, 
+transportation
+
+
 new:
 education
 
