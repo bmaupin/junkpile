@@ -7,7 +7,7 @@ side|جانِب||noun||m|1
 wall|جَدار|جُدْران|noun||m|1
 Aleppo|حَلَب||noun|places|f|1
 mathematics, calculus|رياضِيّات||noun|subjects|f|1
-of the sun, solar|شّمْسِيّ||adj|other||1
+of the sun, solar|شّمْسِيّ||adj|||1
 thing|شَيء|أشْياء|noun|common|m|1
 class|صَفّ|صُفوف|noun|education|m|1
 male student|طالِب|طُلاّب|noun|education|m|1
@@ -15,7 +15,7 @@ female student|طالِبة|طالِبات|noun|education|f|1
 on|عَلى||prep|common||1
 room|غُرْفَة|غُرَف|noun|household|f|1
 you’re welcome/excuse me|عَفْواً||phrase|common||1
-of the moon, lunar|قَمَريّ||adj|other||1
+of the moon, lunar|قَمَريّ||adj|||1
 but (weak version)|لكِنْ||conj|common||1
 but (strong version)|لكِنَّ||conj|common||1
 if you would; please|لَوسَمَحْت||phrase|||1
@@ -496,12 +496,12 @@ arch|قَوْس|أقْواس|noun||m|14
 lightly salted, partially dehydrated yogurt with olive oil|لَبَنة||noun|food|f|14
 for this reason, therefore|لِذلِكَ||adv|||14
 station|مَحَطّة|مَحَطّات|noun|locations|f|14
-crowded|مُزْدَحِم||adj|other||14
-famous, well-known|مَشْهور|(ون), مَشاهير|adj|other||14
+crowded|مُزْدَحِم||adj|||14
+famous, well-known|مَشْهور|(ون), مَشاهير|adj|||14
 pasta, macaroni|مَعْكَرونة||noun|food|f|14
 place of entertainment|مَلْهىً|مَلاهٍ|noun|entertainment|m|14
 engineer|مُهَنْدِس|مُهَندِسون|noun|occupations|m|14
-clean|نَظيف||adj|other|m|14
+clean|نَظيف||adj||m|14
 end|نِهاية|نِهايات|noun|common|f|14
 to celebrate|اِحْتَفَلَ (يَحْتَفِلُ) اِحْتِفال بِـ||verb|||15
 independence|اِسْتِقلال||noun|abstract|m|15
@@ -514,7 +514,7 @@ instruction, education|تَعليم||noun|education|m|15
 revolution|ثَوْرة|ثَورات|noun||f|15
 pilgrimage|حَجّ||noun|Islam|m|15
 dessert, sweets|حَلْوى|حَلوَيات|noun|food|f|15
-special, particular (to)|خاصّ||adj|other||15
+special, particular (to)|خاصّ||adj|||15
 rooster|ديك|دِيَكة|noun|animals|m|15
 turkey|ديك حَبَش||noun|food|m|15
 with, of, owner of|ذو|ذَوو|noun||m|15
@@ -597,7 +597,7 @@ sociologist|عالِم اجْتِماع||noun|occupations|m|16
 sociology|عِلْم اجْتِماع||noun|subjects|m|16
 to introduce someone to someone else|عَرَّفَ (يُعَرِّف) تَعريف (على)||verb|||16
 race, element|عُنصٌر|عَناصِر|noun||m|16
-racial|عُنصُريّ||adj|other||16
+racial|عُنصُريّ||adj|||16
 philosophy|فَلْسَفة|فَلسَفات|noun|subjects|f|16
 philosopher|فَيْلَسوف|فَلاسِفة|noun|occupations|m|16
 to do, to perform|قامَ (يَقومُ) قِيام||verb|||16
@@ -608,10 +608,10 @@ village|قَرية|قُرى|noun|places|f|16
 priest|قِسّيس|قِسّاوِسة|noun|religious|m|16
 writer, scribe|كاتِب|كُتّاب/كَتَبة|noun|occupations|m|16
 for the sake of (Syrian colloquial)|كرمال||phrase|||16
-generous|كَريم|كُرَماء|adj|other||16
+generous|كَريم|كُرَماء|adj|||16
 necessary|ﻻزِم||adj|common||16
 lawyer, attorney, counsel|مُحامٍ|مُحامون|noun|occupations|m|16
-mixed|مُشَكَّل||adj|other||16
+mixed|مُشَكَّل||adj|||16
 introduction|مُقَدِّمة||noun||f|16
 place, location|مَكان|أمْكِنة|noun||m|16
 king|مَلِك|مُلوك|noun|occupations|m|16
@@ -621,7 +621,7 @@ to be sent into exile, to be expelled|نُفِيَ (يُنْفى) نَفْيٌ||
 now (Syrian colloquial)|هَللأ/هَلَّق||adv|common||16
 minister|وَزير|وُزَراء|noun|occupations|m|16
 foreigner|أَجْنَبيّ|أَجانِب|noun||m|17
-foreign|أجْنَبيّ/أجْنَبيَّة||adj|other||17
+foreign|أجْنَبيّ/أجْنَبيَّة||adj|||17
 to take|أَخَذَ (يَأخُذُ) أخْذ||verb|||17
 to send|أرْسَلَ (يُرسِلُ) إرْسال||verb|||17
 to receive (someone)|اِسْتَقبَلَ (يَسْتَقبِلُ) اِستِقبال||verb|||17
@@ -695,7 +695,7 @@ to sell|باعَ (يَبيعُ) بَيْع||verb|||18
 refrigerator (Syria)|بَرّاد|بَرّادات|noun|household|m|18
 far|بَعيد||adv|||18
 grocer|بَقّال|بَقّالون|noun|occupations|m|18
-local, popular|بَلَديّ||adj|other||18
+local, popular|بَلَديّ||adj|||18
 bank (colloquial)|بَنْك|بُنوك|noun|locations|m|18
 to be late|تَأخَّرَ (يَتَأخَّرُ) تَأخُّر||verb|||18
 insurance|تأمين|تأمينات|noun||m|18
@@ -725,7 +725,7 @@ doctor's practice, clinic|عِيادة|عِيادات|noun|locations|f|18
 bread (Egypt)|عَيش||noun|food|m|18
 [butane] gas|غاز|غازات|noun||m|18
 washing machine|غَسّالة|غَسّالات|noun|household|f|18
-deluxe, fancy, excellent, luxurious|فاخِر||adj|other||18
+deluxe, fancy, excellent, luxurious|فاخِر||adj|||18
 [Syrian] pound; lira|لَيْرة|لَيْرات|noun||f|18
 meter|م (مِتْر)|أمْتار|noun||m|18
 kitchen sink|مَجْلى|مَجالٍ|noun|household|m|18
@@ -733,8 +733,8 @@ bakery|مَخْبَز|مَخابِز|noun|locations|m|18
 [floor] plan, map|مُخَطَّط|مُخَطّطات|noun||m|18
 mirror|مِرْآة|مَرايا|noun|household|f|18
 toilet|مِرْحاض|مَراحيض|noun|household|m|18
-elevated|مُرْتَفِع||adj|other||18
-comfortable|مُريح||adj|other||18
+elevated|مُرْتَفِع||adj|||18
+comfortable|مُريح||adj|||18
 lamp|مِصْباح|مَصابيح|noun|household|m|18
 bank|مَصْرِف|مَصارِف|noun|locations|m|18
 overlooking|مُطِلٌّ||noun|||18
@@ -743,7 +743,7 @@ opposite, across from|مُقابِل||adv|||18
 clothes|مَلبَس|مَلابِس|noun|clothing|m|18
 [cooking] range|مَوْقِد|مَواقِد|noun|household|m|18
 [bus] stop, parking lot|مَوْقِف|مَواقِف|noun|transportation|m|18
-spacious, large|واسِع||adj|other||18
+spacious, large|واسِع||adj|||18
 there is/are, to exist|وُجِدَ (يوجَدُ)||verb|||18
 to put|وَضَعَ (يَضَعُ) وَضْع||verb|||18
 to be located; fall down|وَقَعَ (يَقَعُ) وُقوع/وَقْع||verb|||18
@@ -782,7 +782,7 @@ to ride, to mount|رَكِبَ (يَركَبُ) رُكوب||verb|||19
 square, courtyard|ساحة|ساحات|noun|locations|f|19
 unsweetened coffee|سادة||noun|food||19
 to move, to walk, to travel, to march, to follow|سارَ (يَسيرُ) سَيْر||verb|||19
-happy, pleased, joyful|سَعيد|سُعَداء|adj|other|m|19
+happy, pleased, joyful|سَعيد|سُعَداء|adj||m|19
 question, query|سُؤال|أسئِلة|noun||m|19
 to witness, to see, to watch|شاهَدَ (يُشاهِدُ) مُشاهَدة||verb|||19
 waterfall|شَلاّل|شَلاّلات|noun||m|19
@@ -866,7 +866,7 @@ to explain, to explain, to illustrate|شَرَحَ (يَشرَحُ) شَرْح||
 sandwich|شَطيرة|شَطائِر|noun|food|f|20
 to grill, to boil|شَوى (يَشوي) شَي||verb|||20
 to laugh|ضَحِكَ (يَضْحَكُ) ضِحْك||verb|||20
-public|عامّ||adj|other||20
+public|عامّ||adj|||20
 stick, rod, cane|عَصا|عُصِيّ|noun||f|20
 it seems; it appears|على ما يَبْدو (أنّ)||phrase|||20
 grape|عِنَب||noun|food|m|20
@@ -891,7 +891,7 @@ water polo|كُرةُ الماء||noun|sports||20
 tennis|كُرةُ المَضرِب||noun|sports||20
 zucchini|كوسا||noun|food|m|20
 kernel, seed|لُبّ|لُبوب|noun|plants|m|20
-delicious, delightful, tasty|لَذيذ||adj|other|m|20
+delicious, delightful, tasty|لَذيذ||adj||m|20
 to play|لَعِبَ (يَلعَبُ) لُعْب||verb|||20
 no longer|لَمْ يَعُدْ||phrase|||20
 soda|ماء غازيّ|مِياه غازيّة|noun|food|f|20
@@ -900,7 +900,7 @@ spectator|مُتَفَرِّج|ون|noun|sports|m|20
 roasted, toasted|مُحَمَّص||adj|food|m|20
 grill, gridiron|مِشواة|مَشاوٍ|noun||f|20
 grilled|مَشويّ||adj|food||20
-preferred, favorite|مُفَضَّل||adj|other|m|20
+preferred, favorite|مُفَضَّل||adj||m|20
 banana|مَوْز||noun|food|m|20
 small, spicy mutton sausage|نَقانِق (أو مَقانِق)||noun|food||20
 time|وَقْت|أوْقات|noun||m|20
@@ -920,7 +920,7 @@ semi-arid desert|بادِية|بَوادٍ|noun|geography|f|21
 merchandise, goods|بِضاعة|بَضائِع|noun||f|21
 ice cream|بوظة||noun|food|f|21
 to consist of, to comprise|تَأَلَّفَ (يَتَألَّفُ) تَألُّف||verb|||21
-traditional|تَقْليديّ||adj|other||21
+traditional|تَقْليديّ||adj|||21
 date (fruit)|تَمْر|تُمور|noun|food|m|21
 hole|ثَقْب|ثُقوب|noun||m|21
 mountain|جَبَل|جِباب|noun|geography|m|21
@@ -933,7 +933,7 @@ to border, to demarcate, to limit|حدَّ (يَحُدُّ) حَدّ||verb|||21
 border, edge, boundary, borderline|حَدّ|حُدود|noun||m|21
 shoe|حِذاء|أحْذية|noun|clothing|m|21
 map|خَريطة|خَرائِط|noun|directions|f|21
-fertile|خَصيب||adj|other||21
+fertile|خَصيب||adj|||21
 gulf, bay|خَليج|خُلجان|noun|geography|m|21
 passenger, rider|راكِب|رُكّاب|noun|transportation|m|21
 trip, journey, flight|رِحْلة|رِحلات|noun|transportation|f|21
@@ -951,9 +951,9 @@ to flow into|صَبَّ (يصُبُّ) صَبّ||verb|||21
 desert|صَحْراء|صَحاري|noun|geography|f|21
 to manufacture, to make|صَنَعَ (يَصنَعُ) صِناعة||verb|||21
 characteristic|صِفة|صِفات|noun||f|21
-narrow, tight|ضَيِّق||adj|other||21
+narrow, tight|ضَيِّق||adj|||21
 capital city|عاصِمة|عَواصِم|noun|places|f|21
-high, elevated|عالٍ (العالي)||adj|other||21
+high, elevated|عالٍ (العالي)||adj|||21
 several, multiple|عَديد||adj|common||21
 throughout, all the way|على طُول||prep|||21
 flag, banner|عَلَم|أعْلام|noun||m|21
@@ -965,7 +965,7 @@ wheat|قَمْح||noun|food|m|21
 both|كِلا||noun|common||21
 what|ما||particle|||21
 ocean|مُحيط|مُحيطات|noun|geography|m|21
-square|مُرَبَّع||adj|other||21
+square|مُرَبَّع||adj|||21
 area|مِساحة|مِساحات|noun||f|21
 made (of/from)|مَصْنوع (مِن)||participle|||21
 covered (with)|مُغَطَّى (بِـ)||participle|||21
@@ -1001,10 +1001,10 @@ nature|طَبيعة||noun||f|22
 child|طِفْل|أطْفال|noun|people|m|22
 to appear, to become visible|ظَهَرَ (يَظهَرُ) ظُهور||verb|||22
 to go back, to return|عادَ (يعودُ) عَوْد||verb|||22
-colloquial, vulgar, dialectal|عاميّ||adj|other||22
+colloquial, vulgar, dialectal|عاميّ||adj|||22
 to sing|غَنّى (يُغَنّي) غِناء||verb|||22
 riddle|فَزّورة|فَوازير|noun||f|22
-pure, good, clear, standard, or literary, Arabic|فَصيح||adj|other||22
+pure, good, clear, standard, or literary, Arabic|فَصيح||adj|||22
 space|فَضاء||noun||m|22
 moon, satellite|قَمَر|أقْمار|noun||m|22
 channel|قَناة|قَنَوات|noun|entertainment|f|22
@@ -1012,7 +1012,7 @@ cable|كيبِل||noun||m|22
 what|ما||pronoun|||22
 to die|ماتَ (يموتُ) مَوْت||verb|||22
 married man|مُتَزَوِّج|ون|noun|people|m|22
-free of charge|مَجّانيّ||adj|other||22
+free of charge|مَجّانيّ||adj|||22
 announcer|مُذيع|ون|noun|occupations|m|22
 series, serial|مُسَلَسل|مُسَلسَلات|noun||m|22
 entertainer|مُطْرِب|مُطْرِبون|noun|occupations|m|22
@@ -1034,7 +1034,7 @@ to draw near, get close (to)|اِقْتَرَبَ (يَقْتَرِبُ) اِق�
 if|إنْ||particle|||23
 to wait|اِنتَظَرَ (يَنْتَظِرُ) اِنتِظار||verb|||23
 immensely, greatly|أيَّما||noun|||23
-simple|بَسيط|بُسطاء|adj|other||23
+simple|بَسيط|بُسطاء|adj|||23
 visa|تأشيرة دُخول||noun||f|23
 to push, shove one another|تَدافَعَ (يَتَدافَعُ) تَدافُع||verb|||23
 to be acquainted with|تَعَرَّفَ (يَتَعَرَّفُ) تَعَرُّف (على)||verb|||23
@@ -1049,11 +1049,11 @@ class, step, level, degree|دَرَجة|دَرَجات|noun||f|23
 to pay|دَفَعَ (يَدْفَعُ) دَفْع||verb|||23
 trip, journey, flight|رِحْلة|رِحلات|noun|transportation|f|23
 to drive|ساقَ (يَسوقُ) سِياقة||verb|||23
-silly, absurd, foolish|سَخيف|سُخَفاء|adj|other||23
+silly, absurd, foolish|سَخيف|سُخَفاء|adj|||23
 to please, to be glad|سَرَّ (يَسُرُّ) سُرور||verb|||23
 surface, level|سَطْح|سُطوح|noun||m|23
-political|سِياسيّ||adj|other||23
-interesting, thrilling|شَيِّق||adj|other||23
+political|سِياسيّ||adj|||23
+interesting, thrilling|شَيِّق||adj|||23
 journalist|صَحَفِيّ|ون|noun|occupations|m|23
 newspaper|صَحيفة|صُحُف|noun|entertainment|f|23
 to laugh|ضَحِكَ (يَضْحَكُ) ضِحْك||verb|||23
@@ -1071,24 +1071,24 @@ player|لاعِب|ون|noun|sports|m|23
 denotes completed action, emphasis, or possibility (variation)|لَقَد||particle|||23
 society, community|مُجْتَمَع|مُجْتَمَعات|noun||m|23
 accountant|مُحاسِب|ون|noun|occupations|m|23
-crowded|مُزدَحِم||adj|other||23
+crowded|مُزدَحِم||adj|||23
 farm|مَزْرَعة|مَزارع|noun|locations|f|23
-recorded|مُسَجَّل||adj|other||23
+recorded|مُسَجَّل||adj|||23
 factory, plant|مَصْنَع|مَصانِع|noun|locations|m|23
 tablecloth|مَفرَش|مَفارِش|noun|household|m|23
 seat, bench, armchair|مَقْعَد|مَقاعِد|noun|household|m|23
 enjoyable|مُمْتِع||adj|||23
-polluted|مُلَوَّث||adj|other||23
+polluted|مُلَوَّث||adj|||23
 house, residence|مَنزِل|مَنازِل|noun|household|m|23
 view, panorama|مَنْظَر|مَناظِر|noun||m|23
 means of transportation|مُواصَلة|مُواصَلات|noun|transportation|f|23
 waiter|نادِل|نُدُل|noun|occupations|m|23
 mint, peppermint|نَعناع||noun|food|m|23
-pure|تَقيّ||adj|other||23
-quiet, serene|هادِئ||adj|other||23
+pure|تَقيّ||adj|||23
+quiet, serene|هادِئ||adj|||23
 present, gift|هَدِيّة|هَدايا|noun||f|23
 to select|اِخْتارَ (يَخْتارُ) اِخْتِيار||verb|||24
-last, latest|آخِر||adj|other||24
+last, latest|آخِر||adj|||24
 department|إدارة|إدارات|noun||f|24
 to import|اِسْتَوْرَدَ (يَسْتَوْرِدُ) اِسْتِيراد||verb|||24
 bottom, lowest point, lower|أسْفَل|أسافِل|noun||m|24
@@ -1113,7 +1113,7 @@ guide|دَليل|أدِلاّء|noun||m|24
 to refer to, to review|راجَعَ (يُراجِعُ) مُراجعَة||verb|||24
 to respond, to answer|رَدَّ (يَرُدُّ) رَدّ||verb|||24
 to register, to record|سَجَّلَ (يُسَجِّلُ) تَسْجيل||verb|||24
-tourist|سياحيّ||adj|other||24
+tourist|سياحيّ||adj|||24
 hair|شَعْر|شُعور/أشْعار|noun|body|m|24
 poetry, poem|شِعْر|أشْعار|noun||m|24
 last name, surname|شُهْرة||noun||f|24
