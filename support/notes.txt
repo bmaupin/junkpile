@@ -12,11 +12,12 @@ handle swiping left/right to change cards
 
 post on 2 authors sites: why doesn't reshaper work with other fonts?
 using this library: http://github.com/AhmedEssam/Better-Arabic-Reshaper
-once nouns are labeled, remove "other" label (to make db smaller).  we can handle this in code.
 to fix in words
-    hamza
-    baa + dash
-    lam-alef
+    duplicate English words with differing Arabic words got screwed up somewhere...
+        to come, green, 
+    clean up/remove/update categories
+        abstract?
+        titles?
 if English > certain length: decrease font size (so it fits on the card)
 same for Arabic?
 fix right-to-leftness in cards?
