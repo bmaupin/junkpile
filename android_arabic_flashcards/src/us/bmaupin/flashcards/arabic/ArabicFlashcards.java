@@ -215,7 +215,8 @@ public class ArabicFlashcards extends Activity {
     	case R.id.menu_categories:
 //    		startActivityForResult(intent, requestCode);
     		Intent intent = new Intent(this, Categories.class);
-    		startActivityForResult(intent, SHOW_SUBACTIVITY);
+//    		startActivityForResult(intent, SHOW_SUBACTIVITY);
+    		startActivity(intent);
 
 //    		startActivity(new Intent(this, Categories.class));
     		return true;
