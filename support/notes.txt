@@ -1,6 +1,12 @@
 $Id$
 
 DO:
+get chapter selection working
+    -try getting dialog results?
+        apress p. 210ish
+        dialog1.getValue1()
+    -try implementing setOnDismissListener()
+        http://developer.android.com/guide/topics/ui/dialogs.html
 card chooser: see below
 see wrox p. 175ish for calling an activity and getting results
 we'll need to store favorites and noshow in a separate db so they don't get overwritten...
