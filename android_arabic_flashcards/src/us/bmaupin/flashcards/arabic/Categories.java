@@ -26,6 +26,8 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class Categories extends Activity {
 	private static final String TAG = "Categories";
+	//unique dialog id
+	private static final int DIALOG_AWS_CHAPTER_ID = 0;
 	protected static final String EXTRA_CATEGORY = null;
 	protected static final String EXTRA_AWS_CHAPTER = null;
 	String selectedChapter;
@@ -67,7 +69,12 @@ public class Categories extends Activity {
 				
 				if (itemText.equals("Ahlan wa sahlan")) {
 					Log.d(TAG, "chose AWS");
-					chooseAWSChapter();
+//					chooseAWSChapter();
+					showDialog(DIALOG_AWS_CHAPTER_ID);
+//					DEBUG					
+					Toast toast = Toast.makeText(context, "selectedChapter: " + selectedChapter, Toast.LENGTH_LONG);
+					toast.show();
+					/*
 					if (selectedChapter != null) {
 						Intent result = new Intent();
 						result.putExtra(EXTRA_CATEGORY, "Ahlan wa sahlan");
@@ -79,13 +86,85 @@ public class Categories extends Activity {
 						setResult(RESULT_CANCELED, null);
 						finish();
 					}
+					*/
 				}
 			}
 			});
 
 	}
+	private void nothin() {
+		final CharSequence[] items = {"Red", "Green", "Blue"};
+	
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Pick a color");
+//		builder.setItems(items, new DialogInterface.OnClickListener() {
+		builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+		    public void onClick(DialogInterface dialog, int item) {
+		        Toast.makeText(getApplicationContext(), items[item], Toast.LENGTH_SHORT).show();
+		    }
+		});
+		AlertDialog alert = builder.create();
+	}
+	/*
+	private Dialog createAlertDialog()
+	{
+	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	builder.setTitle("Alert");
+	builder.setMessage("some message");
+	EmptyOnClickListener emptyListener = new EmptyOnClickListener();
+	builder.setPositiveButton("Ok", emptyListener );
+	AlertDialog ad = builder.create();
+	return ad;
+	}
+	*/
+	
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+			case DIALOG_AWS_CHAPTER_ID:
+				return createAWSChapterDialog();
+		}
+		return null;
+	}
+	
+	private Dialog createAWSChapterDialog() {
+		Log.d(TAG, "createAWSChapterDialog");
+		
+		final String[] chapters = getChapters();
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.choose_aws_chapter_title);
+		builder.setItems(chapters, new DialogInterface.OnClickListener() {
+		    public void onClick(DialogInterface dialog, int item) {
+//		        Toast.makeText(getApplicationContext(), chapters[i], Toast.LENGTH_SHORT).show();
+				Log.d(TAG, "createAWSChapterDialog: int=" + item);
+				Log.d(TAG, "createAWSChapterDialog: chapter=" + chapters[item]);
+				selectedChapter = chapters[item];
+		    }
+		});
+		AlertDialog ad = builder.create();
+		return ad;
+	}
 	
 	private void chooseAWSChapter() {
+		Log.d(TAG, "chooseAWSChapter");
+		
+		final String[] chapters = getChapters();
+		
+		AlertDialog.Builder ad = new AlertDialog.Builder(context);
+		ad.setTitle(R.string.choose_aws_chapter_title);
+		ad.setItems(chapters, new DialogInterface.OnClickListener() {
+		    public void onClick(DialogInterface dialog, int i) {
+//		        Toast.makeText(getApplicationContext(), chapters[i], Toast.LENGTH_SHORT).show();
+				Log.d(TAG, "chooseAWSChapter: int=" + i);
+				Log.d(TAG, "chooseAWSChapter: chapter=" + chapters[i]);
+				selectedChapter = chapters[i];
+		    }
+		});
+		AlertDialog alert = ad.create();
+	}
+	
+	private void chooseAWSChapterOld() {
 		Log.d(TAG, "chooseAWSChapter");
 		
 		AlertDialog.Builder ad = new AlertDialog.Builder(context);
