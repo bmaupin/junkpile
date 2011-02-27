@@ -92,31 +92,6 @@ public class Categories extends Activity {
 			});
 
 	}
-	private void nothin() {
-		final CharSequence[] items = {"Red", "Green", "Blue"};
-	
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Pick a color");
-//		builder.setItems(items, new DialogInterface.OnClickListener() {
-		builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
-		    public void onClick(DialogInterface dialog, int item) {
-		        Toast.makeText(getApplicationContext(), items[item], Toast.LENGTH_SHORT).show();
-		    }
-		});
-		AlertDialog alert = builder.create();
-	}
-	/*
-	private Dialog createAlertDialog()
-	{
-	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	builder.setTitle("Alert");
-	builder.setMessage("some message");
-	EmptyOnClickListener emptyListener = new EmptyOnClickListener();
-	builder.setPositiveButton("Ok", emptyListener );
-	AlertDialog ad = builder.create();
-	return ad;
-	}
-	*/
 	
 	@Override
 	protected Dialog onCreateDialog(int id) {
@@ -144,24 +119,6 @@ public class Categories extends Activity {
 		});
 		AlertDialog ad = builder.create();
 		return ad;
-	}
-	
-	private void chooseAWSChapter() {
-		Log.d(TAG, "chooseAWSChapter");
-		
-		final String[] chapters = getChapters();
-		
-		AlertDialog.Builder ad = new AlertDialog.Builder(context);
-		ad.setTitle(R.string.choose_aws_chapter_title);
-		ad.setItems(chapters, new DialogInterface.OnClickListener() {
-		    public void onClick(DialogInterface dialog, int i) {
-//		        Toast.makeText(getApplicationContext(), chapters[i], Toast.LENGTH_SHORT).show();
-				Log.d(TAG, "chooseAWSChapter: int=" + i);
-				Log.d(TAG, "chooseAWSChapter: chapter=" + chapters[i]);
-				selectedChapter = chapters[i];
-		    }
-		});
-		AlertDialog alert = ad.create();
 	}
 	
 	private void chooseAWSChapterOld() {
