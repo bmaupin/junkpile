@@ -34,6 +34,11 @@ fix right-to-leftness in cards?
     same problems with slashes!
 
 
+CLEANUP:
+    will we be using getChapters in more than one activity?
+        if so, put it in the db class
+
+
 DONE?
 memory leak
     db needs to be closed during onpause, onstop, or somewhere
