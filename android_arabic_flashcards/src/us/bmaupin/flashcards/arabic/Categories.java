@@ -72,8 +72,8 @@ public class Categories extends Activity {
 //					chooseAWSChapter();
 					showDialog(DIALOG_AWS_CHAPTER_ID);
 //					DEBUG					
-					Toast toast = Toast.makeText(context, "selectedChapter: " + selectedChapter, Toast.LENGTH_LONG);
-					toast.show();
+//					Toast toast = Toast.makeText(context, "selectedChapter: " + selectedChapter, Toast.LENGTH_LONG);
+//					toast.show();
 					/*
 					if (selectedChapter != null) {
 						Intent result = new Intent();
@@ -114,7 +114,14 @@ public class Categories extends Activity {
 //		        Toast.makeText(getApplicationContext(), chapters[i], Toast.LENGTH_SHORT).show();
 				Log.d(TAG, "createAWSChapterDialog: int=" + item);
 				Log.d(TAG, "createAWSChapterDialog: chapter=" + chapters[item]);
-				selectedChapter = chapters[item];
+//				selectedChapter = chapters[item];
+				
+				Intent result = new Intent();
+				result.putExtra(EXTRA_CATEGORY, "Ahlan wa sahlan");
+				result.putExtra(EXTRA_AWS_CHAPTER, chapters[item]);
+				
+				setResult(RESULT_OK, result);
+				finish();
 		    }
 		});
 		AlertDialog ad = builder.create();
