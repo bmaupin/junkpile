@@ -18,6 +18,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -153,6 +154,7 @@ public class ArabicFlashcards extends Activity {
 		// show the first card (do it here in case default card language changed)
 		loadCards();
 		
+		/*
 //		DEBUGGING: show chapters instead of front of first card		
 		ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();
 //		int currentLayoutId = currentLayout.getId();
@@ -162,6 +164,7 @@ public class ArabicFlashcards extends Activity {
 		
 //		TextView centerView = (TextView)vf.findViewById(R.id.centerView);
 		showChapters(currentView);
+		*/
 	}
     
     @Override
@@ -213,12 +216,8 @@ public class ArabicFlashcards extends Activity {
     		startActivity(new Intent(this, About.class));
     		return true;
     	case R.id.menu_categories:
-//    		startActivityForResult(intent, requestCode);
     		Intent intent = new Intent(this, Categories.class);
     		startActivityForResult(intent, SHOW_SUBACTIVITY);
-//    		startActivity(intent);
-
-//    		startActivity(new Intent(this, Categories.class));
     		return true;
     	case R.id.menu_exit:
     		finish();
@@ -238,12 +237,27 @@ public class ArabicFlashcards extends Activity {
 		switch(requestCode) {
 			case (SHOW_SUBACTIVITY) : {
 				if (resultCode == Activity.RESULT_OK) {
-					String category = data.getStringExtra(EXTRA_CATEGORY);
+					/*
+// returns nothing					Uri u = data.getData();
+// returns nothing					String s = data.getDataString();
+//					Bundle b = data.getExtras();
+					String s = data.getExtras().getString(EXTRA_CATEGORY);
+					
+//					Log.d(TAG, "onActivityResult: u=" + u);
+					Log.d(TAG, "onActivityResult: s=" + s);
+					Log.d(TAG, "onActivityResult: b=" + b);
+					Log.d(TAG, "onActivityResult: EXTRA_CATEGORY=" + EXTRA_CATEGORY);
+					
+					*/
+//					String category = data.getStringExtra(EXTRA_CATEGORY);
+					String category = data.getExtras().getString(EXTRA_CATEGORY);
 					Log.d(TAG, "onActivityResult: category=" + category);
 					if (category.equals("Ahlan wa sahlan")) {
-						String chapter = data.getStringExtra(EXTRA_AWS_CHAPTER);
+//						String chapter = data.getStringExtra(EXTRA_AWS_CHAPTER);
+						String chapter = data.getExtras().getString(EXTRA_AWS_CHAPTER);
 						Log.d(TAG, "onActivityResult: chapter=" + chapter);
 					}
+					
 					
 					
 //					Uri horse = data.getData();
