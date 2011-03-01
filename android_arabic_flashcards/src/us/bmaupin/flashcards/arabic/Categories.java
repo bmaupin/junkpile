@@ -22,8 +22,6 @@ public class Categories extends Activity {
 	private static final String TAG = "Categories";
 	//unique dialog id
 	private static final int DIALOG_AWS_CHAPTER_ID = 0;
-	protected static final String EXTRA_CATEGORY = null;
-	protected static final String EXTRA_AWS_CHAPTER = null;
 	String selectedChapter;
 	private DatabaseHelper helper;
 	private SQLiteDatabase db; 
@@ -83,8 +81,8 @@ public class Categories extends Activity {
 				Log.d(TAG, "createAWSChapterDialog: chapter=" + chapters[item]);
 				
 				Intent result = new Intent();
-				result.putExtra(EXTRA_CATEGORY, "Ahlan wa sahlan");
-				result.putExtra(EXTRA_AWS_CHAPTER, chapters[item]);
+				result.putExtra("category", "Ahlan wa sahlan");
+				result.putExtra("aws_chapter", chapters[item]);
 				
 				setResult(RESULT_OK, result);
 				finish();
