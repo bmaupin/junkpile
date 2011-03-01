@@ -54,8 +54,6 @@ public class ArabicFlashcards extends Activity {
     private static final int SWIPE_MIN_DISTANCE = 120;
     private static final int SWIPE_MAX_OFF_PATH = 250;
 	private static final int SWIPE_THRESHOLD_VELOCITY = 200;
-	private static final String EXTRA_CATEGORY = null;
-	private static final String EXTRA_AWS_CHAPTER = null;
 	private GestureDetector gestureDetector;
 	View.OnTouchListener gestureListener;
 	private Animation slideLeftIn;
@@ -250,13 +248,19 @@ public class ArabicFlashcards extends Activity {
 					
 					*/
 //					String category = data.getStringExtra(EXTRA_CATEGORY);
-					String category = data.getExtras().getString(EXTRA_CATEGORY);
+					String category = data.getExtras().getString("category");
 					Log.d(TAG, "onActivityResult: category=" + category);
+					
+					String chapter = data.getExtras().getString("aws_chapter");
+					Log.d(TAG, "onActivityResult: chapter=" + chapter);
+					
+					/*
 					if (category.equals("Ahlan wa sahlan")) {
 //						String chapter = data.getStringExtra(EXTRA_AWS_CHAPTER);
 						String chapter = data.getExtras().getString(EXTRA_AWS_CHAPTER);
 						Log.d(TAG, "onActivityResult: chapter=" + chapter);
 					}
+					*/
 					
 					
 					
