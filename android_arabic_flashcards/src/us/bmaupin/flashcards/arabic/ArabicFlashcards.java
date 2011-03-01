@@ -41,13 +41,14 @@ public class ArabicFlashcards extends Activity {
 	private static final String TAG = "ArabicFlashcards";
 	String selectedChapter;
 	public static final String PREFS_NAME = "FlashcardPrefsFile";
-	private static final int SHOW_SUBACTIVITY = 1;
+	private static final int GET_CATEGORY = 0;
 	private DatabaseHelper helper;
 	private SQLiteDatabase db;
 	private int cursorPosition;
 	private Cursor cursor;
 	private String currentLang;
 	private String defaultLang;
+	private boolean gotCategory;
 	private SharedPreferences settings;
 	
 	// class variables for swipe
@@ -215,7 +216,7 @@ public class ArabicFlashcards extends Activity {
     		return true;
     	case R.id.menu_categories:
     		Intent intent = new Intent(this, Categories.class);
-    		startActivityForResult(intent, SHOW_SUBACTIVITY);
+    		startActivityForResult(intent, GET_CATEGORY);
     		return true;
     	case R.id.menu_exit:
     		finish();
@@ -233,40 +234,25 @@ public class ArabicFlashcards extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		switch(requestCode) {
-			case (SHOW_SUBACTIVITY) : {
+			case (GET_CATEGORY) : {
 				if (resultCode == Activity.RESULT_OK) {
-					/*
-// returns nothing					Uri u = data.getData();
-// returns nothing					String s = data.getDataString();
-//					Bundle b = data.getExtras();
-					String s = data.getExtras().getString(EXTRA_CATEGORY);
+					gotCategory = true;
 					
-//					Log.d(TAG, "onActivityResult: u=" + u);
-					Log.d(TAG, "onActivityResult: s=" + s);
-					Log.d(TAG, "onActivityResult: b=" + b);
-					Log.d(TAG, "onActivityResult: EXTRA_CATEGORY=" + EXTRA_CATEGORY);
-					
-					*/
-//					String category = data.getStringExtra(EXTRA_CATEGORY);
-					String category = data.getExtras().getString("category");
+					String category = data.getStringExtra("category");
 					Log.d(TAG, "onActivityResult: category=" + category);
-					
-					String chapter = data.getExtras().getString("aws_chapter");
-					Log.d(TAG, "onActivityResult: chapter=" + chapter);
-					
-					/*
+										
 					if (category.equals("Ahlan wa sahlan")) {
-//						String chapter = data.getStringExtra(EXTRA_AWS_CHAPTER);
-						String chapter = data.getExtras().getString(EXTRA_AWS_CHAPTER);
+						String chapter = data.getStringExtra("aws_chapter");
 						Log.d(TAG, "onActivityResult: chapter=" + chapter);
+						
+						// close the old cursor
+						cursor.close();
+						
+						String[] FROM = { "english", "arabic" };
+						String WHERE = "aws_chapter = " + chapter;
+						cursor = db.query("words", FROM, WHERE, null, null, null, null);
+						startManagingCursor(cursor);
 					}
-					*/
-					
-					
-					
-//					Uri horse = data.getData();
-//					boolean inputCorrect = data.getBooleanExtra(IS_INPUT_CORRECT, false);
-//					String selectedPistol = data.getStringExtra(SELECTED_PISTOL);
 				}
 				break;
 			}
