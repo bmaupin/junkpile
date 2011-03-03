@@ -30,6 +30,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 
@@ -403,6 +404,7 @@ public class ArabicFlashcards extends Activity {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             try {
+            	/*
                 if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
                     return false;
                 // right to left swipe
@@ -413,6 +415,27 @@ public class ArabicFlashcards extends Activity {
                 	prevCard();
                 	return true;
                 }
+                */
+            	// from http://stackoverflow.com/questions/4098198/adding-fling-gesture-to-an-image-view-android
+            	// right to left
+                if(e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                	nextCard();
+                	return true;
+                // left to right
+                }  else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                	prevCard();
+                	return true;
+                }
+                // bottom to top
+                if(e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
+                	Toast.makeText(getApplicationContext(), "TODO: swiped up", Toast.LENGTH_SHORT).show();
+                    return true;
+                // top to bottom
+                }  else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
+                	Toast.makeText(getApplicationContext(), "TODO: swiped down", Toast.LENGTH_SHORT).show();
+                	return true;
+                }
+                return false;
             } catch (Exception e) {
                 // nothing
             }
