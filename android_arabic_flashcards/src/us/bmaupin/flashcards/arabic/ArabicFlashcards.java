@@ -2,12 +2,9 @@ package us.bmaupin.flashcards.arabic;
 
 // $Id$
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.amr.arabic.ArabicReshaper;
 import org.amr.arabic.ArabicUtilities;
 
 import us.bmaupin.flashcards.arabic.DatabaseHelper;
@@ -18,7 +15,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -48,7 +44,6 @@ public class ArabicFlashcards extends Activity {
 	private Cursor cursor;
 	private String currentLang;
 	private String defaultLang;
-	private boolean gotCategory;
 	private SharedPreferences settings;
 	
 	// class variables for swipe
@@ -152,18 +147,6 @@ public class ArabicFlashcards extends Activity {
 		defaultLang = Settings.getDefaultLang(this);
 		// show the first card (do it here in case default card language changed)
 		loadCards();
-		
-		/*
-//		DEBUGGING: show chapters instead of front of first card		
-		ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();
-//		int currentLayoutId = currentLayout.getId();
-		currentView = (TextView) currentLayout.getChildAt(0);
-//		currentWord = getCurrentWord();
-//		showWord(currentView, currentWord);
-		
-//		TextView centerView = (TextView)vf.findViewById(R.id.centerView);
-		showChapters(currentView);
-		*/
 	}
     
     @Override
@@ -236,8 +219,6 @@ public class ArabicFlashcards extends Activity {
 		switch(requestCode) {
 			case (GET_CATEGORY) : {
 				if (resultCode == Activity.RESULT_OK) {
-					gotCategory = true;
-					
 					String category = data.getStringExtra("category");
 					Log.d(TAG, "onActivityResult: category=" + category);
 										
@@ -256,12 +237,6 @@ public class ArabicFlashcards extends Activity {
 				}
 				break;
 			}
-//			case (SHOW_SUB_ACTIVITY_TWO) : {
-//				if (resultCode == Activity.RESULT_OK) {
-//					// TODO: Handle OK click.
-//				}
-//				break;
-//			}
 		}
 	}
 
@@ -297,40 +272,6 @@ public class ArabicFlashcards extends Activity {
 		cursor = db.query("words", FROM, null, null, null, null, null);
 		startManagingCursor(cursor);
 	}
-
-	private List<String> getChapters() {
-		Log.d(TAG, "getChapters called");
-	    List<String> chapters = new ArrayList<String>();
-	    
-	    String[] FROM = {"aws_chapter"};
-	    // as much fun as it'd be, let's not get null values
-	    String WHERE = "aws_chapter not NULL";
-	    
-	    Cursor mCursor = db.query(true, "words", FROM, WHERE, null, null, null, null, null);
-	    startManagingCursor(mCursor);
-	    
-	    int chapterCount = mCursor.getCount();
-	    Log.d(TAG, "getChapters, chapterCount: " + chapterCount);
-	    
-	    while (mCursor.moveToNext()) {
-	    	String thisChapter = mCursor.getString(0);
-	    	
-//	    	if (thisChapter != null) {
-	    		chapters.add(thisChapter);
-//	    	}
-	    }
-	    
-	    return chapters;
-	}
-	
-	private void showChapters(TextView thisView) {
-		Log.d(TAG, "showChapters called");
-		List<String> chapters = getChapters();
-		
-		Log.d(TAG, "showChapters, chapters: " + chapters);
-		
-		thisView.setText(chapters.toString());
-	}
 	
 	private Map<String, String> getWord(int thisPosition, boolean updatePosition) {
 		Log.d(TAG, "getWord(position), cursorPosition: " + cursorPosition);
@@ -364,11 +305,11 @@ public class ArabicFlashcards extends Activity {
 		Log.d(TAG, "getWord returning thisWord");
 		return thisWord;
 	}
-	
+	/*
 	private Map<String, String> getWordAtPosition(int thisPosition) {
 		return getWord(thisPosition, false);
 	}
-	
+	*/
 	private Map<String, String> getCurrentWord() {
 		return getWord(cursorPosition, true);
 	}
