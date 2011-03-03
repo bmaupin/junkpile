@@ -20,13 +20,13 @@ but (weak version)|لكِنْ||conj|common||1
 but (strong version)|لكِنَّ||conj|common||1
 if you would; please|لَوسَمَحْت||phrase|||1
 not|لَيْسَ||particle|common||1
-place; store|مَحَلّ||noun|locations|m|1
-with|مَعَ||conj|common||1
-found|مَوْجود||noun||m|1
+store, shop; place, location|مَحَلّ|مَحَلات|noun|locations|m|1
+with (someone; not thing)|مَعَ||prep|common||1
+found; existing, present|مَوْجود|مَوْجودون|noun||m|1
 there, there is/are|هُناكَ||pronoun|||1
 and|وَ||conj|||1
 literature|أدَب|آداب|noun|subjects|m|2
-ground|أرْض|أراضٍ|noun||f|2
+ground, land|أرْض|أراضٍ|noun||f|2
 those (pl, dem)|أولائِكَ||pronoun|||2
 house, home|بَيْت|بُيوت|noun|household|m|2
 those (dual, nom)|تانِكَ||pronoun|||2
@@ -66,7 +66,7 @@ woman|اِمرأة|نِساء|noun|people|f|3
 now|الآنَ||noun|common||3
 English (language)|اﻹنكليزية||adj|subjects|f|3
 or (used with statements)|أو||conj|common||3
-in, with, by|بِـ||prep|common||3
+3||||||3
 card|بِطاقة|بِطاقات|noun||f|3
 small town|بَلْدة|بَلْدات|noun|places|f|3
 nine|تِسْعة||noun|numbers|f|3
@@ -90,7 +90,7 @@ zero|صِفْر|أصْفار|noun|numbers|m|3
 Arabic (language)|العَرَبيّة||adj|subjects|f|3
 to know|عَرَفَ (يَعرِقُ) مَعْرِفة||verb|||3
 ten|عَشَرة||noun|numbers|f|3
-you're welcome (response to "thank you")|عَفْواً||phrase|common||3
+17||||||3
 address|عُنوان|عَناوين|noun|directions|m|3
 French (language)|الفَرَنْسِيَّة||adj|subjects|f|3
 word|كَلِمَة|كَلِمات|noun|common|f|3
@@ -112,9 +112,9 @@ bag; briefcase|حَقيبة|حَقائب|noun|clothing|f|4
 closet, cupboard|خِزانة|خَزائِن/خِزانات|noun|household|f|4
 to study|دَرَسَ (يَدرُسُ) دِراسة/دَرْس||verb|||4
 bed|سَرير|أسِرّة|noun|household|m|4
-small; young|صَغير||adj|common|f|4
+small; young|صَغيرة||adj|common|f|4
 school subject, course|مادّة|مَوادّ|noun|education|f|4
-with (someone; not thing)|مَعَ||prep|common||4
+24||||||4
 middle|وُسْطى||adj|common|f|4
 father|أب|آباء|noun|family|m|5
 elementary|ابْتِدائيّ||adj|education||5
@@ -150,7 +150,7 @@ chemistry|كيمياء||noun|subjects|f|5
 nice|لَطيف||adj|||5
 who|مَنْ||pronoun|common||5
 sole, only|وَحيد|وَحيدون|noun||m|5
-middle|وُسْطى||adj|common|f|5
+118||||||5
 boy|وَلَد|أَوْلاد|noun|people|m|5
 to be able|اِسْتَطاعَ (يَسْتَطِيعُ) اِسْتِطاعة||verb|common||6
 sorry|آسِف/آسِفة||noun|common|m/f|6
@@ -170,7 +170,7 @@ little|قَليل||adj|common||6
 a little|قَليلاً||adv|common||6
 to, for, by|لـ||prep|||6
 don’t worry about it|لا شُكْرَ على واجِب||phrase|common||6
-boss; director|مُدير|مُدَراء|noun|occupations|m|6
+boss; director, manager|مُدير|مُدَراء|noun|occupations|m|6
 help, assistance|مُساعَدة||noun|||6
 agreement|مُوافَقَة||noun|||6
 worker; employee|مُوَظَّف|مُوَظَّفون|noun|occupations|m|6
@@ -235,7 +235,7 @@ a great deal|كَثيراً||adv|||8
 meat|لحْم|لُحوم|noun|food|m|8
 What’s your opinion?|ما رأيُك||phrase|||8
 water|ماء|مِياه|noun|food|m|8
-when|حينَ||particle|||8
+when|مَتى||particle|common||8
 jam, preserve|مُرَبّى|مُرَبَّيات|noun|food|m|8
 boiled|مَسْلوق||particle|||8
 evening|مَساء||noun|times|m|8
@@ -279,7 +279,7 @@ new|جَديد|جُدُد|adj|common|m|10
 beautiful, good-looking|جَميل|ون|adj|common||10
 modern|حَديث||adj|||10
 house|دار|دور|noun|household|f|10
-chicken|دَجاج||noun|food|m|10
+213||||||10
 study|دِراسة|دِراسات|noun|education|f|10
 to go|ذَهَبَ (يَذْهَبُ) ذَهاب||verb|common||10
 driver, chauffeur|سائِق|سائقون|noun|occupations|m|10
@@ -318,7 +318,7 @@ that (after the verb for “say”)|إنَّ||particle|||11
 God willing, hopefully|إنْ شاءَ الله||phrase|common||11
 May|أيّار||noun|months|m|11
 September|أَيْلول||noun|months|m|11
-some|بَعْض||adj|||11
+some|بَعْضُ||noun|||11
 October|تِشرين الأوَّل||noun|months|m|11
 November|تِشرين الثاني||noun|months|m|11
 to be acquainted with|تَعَرَّفَ (بَتَعَرَّفُ) تَعَرُّف|على|verb|||11
@@ -384,14 +384,14 @@ green|أخْضَر|خُضْر|adj|colors|m|12
 cold|بارِد||adj||m|12
 sea|بَحْر|بِحار|noun|geography|m|12
 lake|بُحَيْرة|بُحَيْرات|noun|geography|f|12
-some|بَعْض||noun|||12
+321||||||12
 snow|ثَلْج|ثُلوج|noun||m|12
 hot|حارّ||adj|common|m|12
 heat|حَرارة||noun||f|12
 autumn|خَريف||noun|times|m|12
 green|خَضْراء|خُضْر|adj|colors|f|12
 warm|دافِئ||adj|common|m|12
-degree (temperature), step|دَرَجة (حرارة)|دَرَجات|noun||f|12
+class, step, level, degree (temperature)|دَرَجة|دَرَجات|noun||f|12
 spring|رَبيع||noun|times|m|12
 wind|ريح|رِياح|noun||f|12
 flower|زَهْرة|زَهَرات/أزْهار|noun|plants|f|12
@@ -418,12 +418,12 @@ rainy|ماطِر||adj||m|12
 rain|مَطَر|أمْطار|noun|nature|m|12
 moderate|مُعْتَدِل||adj|||12
 most|مُعْظَم||noun|||12
-minus|ناقِص||noun||m|12
+102||||||12
 daytime|نَهار||noun|times|m|12
 to bathe, to take a bath or shower|اسْتَحَمَّ (يَستَحِمُّ) استِحْمام||verb|||13
 to move, to relocate|اِنتَقَلَ (يَنتَقِلُ) اِنْتِقال||verb|||13
 in need of|بِحاجةٍ (إلى)||phrase|||13
-program|بَرنامَج|بَرامِج|noun||m|13
+160||||||13
 tabouleh salad|تَبّولة||noun|food|f|13
 then, and again|ثُمَّ||conj|||13
 to prepare|جَهَّزَ (يُجَهِّزُ) تَجْهيز||verb|||13
@@ -438,7 +438,7 @@ to organize|رَتّبَ (يُرَتِّبُ) تَرْتيب||verb|||13
 to return, to go back|رَجَعَ (يَرْجِعُ) رُجوع||verb|||13
 letter, message|رِسالة|رَسائِل|noun||f|13
 tooth|سِنٌّ|أسْنان|noun|body|f|13
-to watch|شاهَدَ (يُشاهِدُ) مُشاهَدة||verb|||13
+to witness, to see, to watch|شاهَدَ (يُشاهِدُ) مُشاهَدة||verb|||13
 soap|صابون||noun||m|13
 plate|صَحْن|صُحون|noun|dishes|m|13
 to return|عادَ (يَعودُ) عَوْدة||verb|||13
@@ -449,7 +449,7 @@ lunch|غَداء|أغْدِية|noun|food|m|13
 to wash|غَسَلَ (يَغْسِلُ) غَسْل||verb|||13
 to change something|غَيَّرَ (يُغَيِّرُ) تَغيير||verb|||13
 brush|فُرْشاة|فَراشٍ|noun||f|13
-breakfast|فَطور||noun|food|m|13
+227||||||13
 to spend time|قَضى (يَقضي) قَضاء||verb|||13
 writing|كِتابة||noun|subjects||13
 much, a great deal|كَثير|كَثيرون/كِثار|noun|common|m|13
@@ -460,7 +460,7 @@ one coming early|مُبَكِّر|مُبَكِّرون|noun||m|13
 one coming late|مُتَأخِّر|مُتَأخِّرهن|noun||m|13
 stewed|مٌدَمَّس||adj|||13
 once, one occurrence|مَرّة|مَرّات|noun|common|f|13
-show, (television) series|مُسَلسَل|مُسَلسَلات|noun|entertainment|m|13
+show, (television) series, serial|مُسَلسَل|مُسَلسَلات|noun|entertainment|m|13
 watching|مٌشاهَدة||noun|||13
 busy|مَشْغول|مَشْغولون|noun||m|13
 together|مَعاً||adv|||13
@@ -472,16 +472,16 @@ to get up|نَهَضَ (يَنهَضُ) نُهوض||verb|||13
 by God, I swear, really (used to add emphasis)|وَاللّهِ||phrase|||13
 face|وَجْه|وُجوه|noun|body|m|13
 hand|يَد|أيْدٍ|noun|body|f|13
-rice|أرُزّ||noun|food|m|14
+195||||||14
 extended family|أُسْرة|أُسَر|noun|family|f|14
 to wait|اِنتَظَرَ (يَنْتَظِرُ) اِنتِظار||verb|||14
 onion|بَصَل||noun|food|m|14
-neighborhood, borough|حَيّ|أحْياء|noun|locations|m|14
-to visit|زارَ (يَزورُ) زِيارة||verb|||14
+neighborhood, borough; a living person|حَيّ|أحْياء|noun||m|14
+345||||||14
 to do (Syrian colloquial)|سلوى (يساوي)||verb|||14
 what (Syrian colloquial)|شو||particle|||14
 journalism|صِحافة||noun|subjects|f|14
-worker, laborer|عامِل|عُمّال|noun|occupations|m|14
+410||||||14
 colloquial|عاميّة||adj|||14
 lentils|عَدَس||noun|food|m|14
 break, vacation|عُطلة|عُطَل/عُطلات|noun||f|14
@@ -506,7 +506,7 @@ end|نِهاية|نِهايات|noun|common|f|14
 to celebrate|اِحْتَفَلَ (يَحْتَفِلُ) اِحْتِفال بِـ||verb|||15
 independence|اِسْتِقلال||noun|abstract|m|15
 Islam|إسلام||noun|Islam|m|15
-to move, to relocate|اِنتَقَلَ (يَنتَقِلُ) اِنْتِقال||verb|||15
+424||||||15
 country|بَلَد|بِلاد|noun|places|m|15
 to graduate|تَخَرَّجَ (يتخرَّجُ) تَخَرُّج||verb|||15
 education, upbringing|تَرْبِية||noun|education|f|15
@@ -519,7 +519,7 @@ rooster|ديك|دِيَكة|noun|animals|m|15
 turkey|ديك حَبَش||noun|food|m|15
 with, of, owner of|ذو|ذَوو|noun||m|15
 head|رأس|رُؤوس|noun|body|m|15
-Ramadan, the month of fasting|رَمَضان||noun|Islam|m|15
+344||||||15
 to adorn, to decorate|زَيَّنَ (يُزَيِّنُ) تزيين||verb|||15
 square, courtyard|ساحة|ساحات|noun|locations|f|15
 to save, to protect|سَلَّمَ (يُسَلِّمُ) تَسْليم||verb|||15
@@ -539,9 +539,9 @@ Christmas|عيدُ الميلاد||noun|holidays|m|15
 dawn, daybreak|فَجْر||noun|times|m|15
 pie|فَطيرة|فَطائِر|noun|food|f|15
 pumpkin|قَرْع||noun|food|m|15
-blessed|مُبارَك||noun|abstract|m|15
+blessed|مُبارَك||noun||m|15
 intermediate|مُتَوَسِّط||adj|common|m|15
-director, manager|مُدير|مُدَراء|noun|occupations|m|15
+173||||||15
 Muslim|مُسْلِم|مُسْلِمون|noun|Islam|m|15
 Christ|المَسيح||noun|religious|m|15
 teacher|مُعَلِّم|مُعَلِّمون|noun|occupations|m|15
@@ -582,7 +582,7 @@ orator, preacher, speaker|خَطيب|خُطَباء|noun|occupations|m|16
 to enter|دَخَلَ (يَدخُلُ) دُخول||verb|||16
 to pay|دَفَعَ (يَدْفَعُ) دَفْع||verb|||16
 defense|دِفاع|دِفاعات|noun||m|16
-head|رأس|رُؤوس|noun|body|m|16
+521||||||16
 to reject|رَفَضَ (يَرفُضُ/يَرفِضُ) رَفْض||verb|||16
 leader, president|رَئيس|رُؤَساء|noun|occupations|m|16
 leader (popular)|زَعيم|زُعَماء|noun|occupations|m|16
@@ -603,7 +603,7 @@ philosopher|فَيْلَسوف|فَلاسِفة|noun|occupations|m|16
 to do, to perform|قامَ (يَقومُ) قِيام||verb|||16
 law|قانون|قَوانين|noun|subjects|m|16
 leader (military)|قائد|قادة|noun|occupations|m|16
-nearby, close|قُرْب||adv|||16
+190||||||16
 village|قَرية|قُرى|noun|places|f|16
 priest|قِسّيس|قِسّاوِسة|noun|religious|m|16
 writer, scribe|كاتِب|كُتّاب/كَتَبة|noun|occupations|m|16
@@ -668,12 +668,12 @@ not (particle used to negate past-tense verbs)|لَمْ||particle|||17
 (a) night|لَيْلة|لَيالٍ|noun|times|f|17
 except|ما عَدا||particle|||17
 previous, last, past|ماضٍ (الماضي)||adj|common||17
-blessed|مُبارَك||noun||m|17
+542||||||17
 school|مَدْرَسة|مَدارِس|noun|education|f|17
 greeting|مُعايَدة|مُعايَدات|noun||f|17
 written|مَكْتوب||noun||m|17
 scholarship, grant, gift|مِنْحة|مِنَح|noun|education|f|17
-existing, present|مَوْجود|مَوْجودون|noun||m|17
+25||||||17
 kind, sort|نَوْع|أنْواع|noun||m|17
 to find|وَجَدَ (يَجِدُ) وُجود||verb|||17
 furniture|أثاث||noun|household|m|18
@@ -681,17 +681,17 @@ to meet; to gather|اِجْتَمَعَ (يَجْتَمِع) اِجْتِماع|
 to lease, to let|أجَّر (يؤجِّر) تأجير||verb|||18
 rent, wage, fare|أُجْرة|أُجور|noun||f|18
 other|آخَر|آخَرون|noun|common|m|18
-ground, land|أرض|أراضٍ|noun||f|18
+29||||||18
 couch|أريكة|أرائِك|noun|household|f|18
 to rent, to hire|استأجَرَ (يَستأجِرُ) استِئجار||verb|||18
-to use, to utilize, to employ|اِستَخدَمَ (يَستَخدِمُ) اِستِخدام||verb|||18
+558||||||18
 to please|أَعْجَبَ (يُعْجِبُ) إعْجاب||verb|||18
 advertisement|إعْلان|إعْلانات|noun||m|18
 in front of|أمامَ||prep|common||18
 to (infinitive)|أنْ||particle|||18
 Europe|أوروبا||noun|places|f|18
 rent|إيجار|إيجارات|noun||m|18
-to sell|باعَ (يَبيعُ) بَيْع||verb|||18
+185||||||18
 refrigerator (Syria)|بَرّاد|بَرّادات|noun|household|m|18
 far|بَعيد||adv|||18
 grocer|بَقّال|بَقّالون|noun|occupations|m|18
@@ -708,7 +708,7 @@ park, garden|حَديقة|حَدائِق|noun|locations|f|18
 [bath] tub|حَوْض|أحْواض|noun|household|m|18
 servant|خادِم|خَدَم|noun|occupations|m|18
 baker|خَبّاز|خَبّازون|noun|occupations|m|18
-closet, cupboard|خِزانة|خَزائِن/خِزانات|noun|household|f|18
+112||||||18
 wood, lumber, timber|خَشَب|أخْشاب|noun||m|18
 greengrocer|خُضَريّ|خُضَريّون|noun|occupations|m|18
 behind|خَلفَ||prep|common||18
@@ -770,7 +770,7 @@ to build, to construct|بَنى (يَبني) بِناء||verb|||19
 to wander about, to tour|تَجَوَّلَ (يَتَجَوَّلُ) تَجَوُّل||verb|||19
 ticket|تَذكِرة|تَذاكِر|noun||f|19
 statue|تِمثال|تَماثيل|noun||m|19
-to eat; to take; to reach for something|تَناوَلَ (يَتَناوَلُ) تَناوُل||verb|||19
+201||||||19
 camel|جَمَل|جِمال|noun|animals|m|19
 liberty, freedom|حُرِّيّة|حُرِّيّات|noun|abstract|f|19
 animal|حَيَوان|حَيَوانات|noun|animals|m|19
@@ -779,19 +779,19 @@ to smoke (e.g. a cigarette)|دَخَّنَ (يُدَخِّنُ) تَدْخين||
 to go (Syrian colloquial)|راح (يروح) على||verb|||19
 to hope|رَجا (يَرجو)رَجاء||verb|||19
 to ride, to mount|رَكِبَ (يَركَبُ) رُكوب||verb|||19
-square, courtyard|ساحة|ساحات|noun|locations|f|19
+524||||||19
 unsweetened coffee|سادة||noun|food||19
 to move, to walk, to travel, to march, to follow|سارَ (يَسيرُ) سَيْر||verb|||19
 happy, pleased, joyful|سَعيد|سُعَداء|adj||m|19
 question, query|سُؤال|أسئِلة|noun||m|19
-to witness, to see, to watch|شاهَدَ (يُشاهِدُ) مُشاهَدة||verb|||19
+441||||||19
 waterfall|شَلاّل|شَلاّلات|noun||m|19
 north|شَمال||noun|directions|m|19
 thing, object|شَيْء|أشياء|noun|common|m|19
 bon appétit (Syrian colloquial)|صَحّة و هَنا||phrase|||19
 industry|صِناعة|صِناعات|noun||f|19
 to make a picture, to portray, to illustrate|سَوَّرَ (يُصَوِّرُ) تَصوير||verb|||19
-way, road|طَريق|طُرُق، طُرُقات|noun|directions|f|19
+408||||||19
 number (quantity)|عَدَد|أعْداد|noun||m|19
 show, demonstration, performance|عَرْض|عُروض|noun|entertainment|m|19
 dear, esteemed, beloved|عَزيز|أعِزّاء|noun|descriptive|m|19
@@ -820,7 +820,7 @@ one who is longing, yearning|مُشْتاق|مُشْتاقون|noun|||19
 elevator, lift|مِصعَد|مَصاعِد|noun||m|19
 though, although|مَعَأنَّ||conj|||19
 coming, next, following|مُقبِل|مُقبِلون|noun|common|m|19
-place, location|مَكان|أمْكِنة|noun||m|19
+616||||||19
 million|مِليون||noun|numbers|m|19
 since, for|مُنْدُ||prep|||19
 square, field, arena|مَيدان|مَيادين|noun|locations|m|19
@@ -846,7 +846,7 @@ slowly|بِبُطءٍ||adv|||20
 seed, kernel|بِذرة|بُذور|noun|plants|f|20
 watermelon|بِطّيخ||noun|food|m|20
 cow, cattle|بَقَرة|أبْقار/بَقَر|noun|animals|f|20
-to remain, to stay|بَقِيَ (يَبْقى) بَقاء||verb|||20
+768||||||20
 tomato|بَنَدورة (طَماطِم في مصر)||noun|food|f|20
 white|بَيضاء|بيض|adj|colors|f|20
 spice, condiment, seasoning|تابِل|تَوابِل|noun|food|m|20
@@ -949,7 +949,7 @@ emblem, sign, slogan|شِعار|شِعارات، أشعِرة|noun||m|21
 to form, to constitute|شَكَّلَ (يُشَكِّلُ) تَشكيل||verb|||21
 to flow into|صَبَّ (يصُبُّ) صَبّ||verb|||21
 desert|صَحْراء|صَحاري|noun|geography|f|21
-to manufacture, to make|صَنَعَ (يَصنَعُ) صِناعة||verb|||21
+530||||||21
 characteristic|صِفة|صِفات|noun||f|21
 narrow, tight|ضَيِّق||adj|||21
 capital city|عاصِمة|عَواصِم|noun|places|f|21
@@ -963,7 +963,7 @@ country|قُطْر|أقْطار|noun|places|m|21
 cotton|قُطْن||noun|plants|m|21
 wheat|قَمْح||noun|food|m|21
 both|كِلا||noun|common||21
-what|ما||particle|||21
+98||||||21
 ocean|مُحيط|مُحيطات|noun|geography|m|21
 square|مُرَبَّع||adj|||21
 area|مِساحة|مِساحات|noun||f|21
@@ -988,7 +988,7 @@ to broadcast|بَثَّ (يَبُثُّ) بَثّ||verb|||22
 a few|بِضْع||noun|||22
 to guess|حَزَرَ (يحْزِرُ) حَزْر||verb|||22
 to improve, to make better|حَسَّنَ (يحَسِّنُ) تَحْسين||verb|||22
-a living person|حَيّ|أحْياء|noun|people|m|22
+479||||||22
 during, through|خِلال||prep|||22
 to dance|رَقَصَ (يرقُصُ) رَقْص||verb|||22
 wire|سِلْك|أسْلاك|noun||m|22
@@ -998,7 +998,7 @@ person|شَخْص|أشْخاص|noun|people|m|22
 honestly, candidly|صَراحةً (بِصَراحة)||noun||f|22
 of course|طَبْعاً||adv|||22
 nature|طَبيعة||noun||f|22
-child|طِفْل|أطْفال|noun|people|m|22
+142||||||22
 to appear, to become visible|ظَهَرَ (يَظهَرُ) ظُهور||verb|||22
 to go back, to return|عادَ (يعودُ) عَوْد||verb|||22
 colloquial, vulgar, dialectal|عاميّ||adj|||22
@@ -1009,12 +1009,12 @@ space|فَضاء||noun||m|22
 moon, satellite|قَمَر|أقْمار|noun||m|22
 channel|قَناة|قَنَوات|noun|entertainment|f|22
 cable|كيبِل||noun||m|22
-what|ما||pronoun|||22
+98||||||22
 to die|ماتَ (يموتُ) مَوْت||verb|||22
 married man|مُتَزَوِّج|ون|noun|people|m|22
 free of charge|مَجّانيّ||adj|||22
 announcer|مُذيع|ون|noun|occupations|m|22
-series, serial|مُسَلَسل|مُسَلسَلات|noun||m|22
+463||||||22
 entertainer|مُطْرِب|مُطْرِبون|noun|occupations|m|22
 singer|مُغَنٍّ|ون|noun|occupations|m|22
 interview|مُقابَلة|ات|noun||f|22
@@ -1029,10 +1029,10 @@ to rise, to be higher|اِرتَفَعَ (يَرتَفِعُ) اِرتِفاع||
 to host|اِستَضافَ (يستَضيفُ) استِضافة||verb|||23
 to long (for), to yearn|اِشْتاقَ (يَشْتاقُ) اِشْتِياق (لـ/ألى)||verb|||23
 to insist|أصَرَّ (يُصِرُّ) إصْرار||verb|||23
-to believe|اِعتَقَدَ (يَعتَقِدُ) اِعتِقاد||verb|||23
+628||||||23
 to draw near, get close (to)|اِقْتَرَبَ (يَقْتَرِبُ) اِقْتِراب (مِن)||verb|||23
 if|إنْ||particle|||23
-to wait|اِنتَظَرَ (يَنْتَظِرُ) اِنتِظار||verb|||23
+477||||||23
 immensely, greatly|أيَّما||noun|||23
 simple|بَسيط|بُسطاء|adj|||23
 visa|تأشيرة دُخول||noun||f|23
@@ -1045,9 +1045,9 @@ to attend, to be present|حَضَرَ (يحْضُرُ) حُضور||verb|||23
 outside|خارِج||noun|||23
 to diminish the difficulty of|خَفَّفَ (يُخَفِّفُ) تَخْفيف (عَن)||verb|||23
 caliph, successor|خَليفة|خُلَفاء|noun|titles|m|23
-class, step, level, degree|دَرَجة|دَرَجات|noun||f|23
-to pay|دَفَعَ (يَدْفَعُ) دَفْع||verb|||23
-trip, journey, flight|رِحْلة|رِحلات|noun|transportation|f|23
+394||||||23
+583||||||23
+939||||||23
 to drive|ساقَ (يَسوقُ) سِياقة||verb|||23
 silly, absurd, foolish|سَخيف|سُخَفاء|adj|||23
 to please, to be glad|سَرَّ (يَسُرُّ) سُرور||verb|||23
@@ -1056,7 +1056,7 @@ political|سِياسيّ||adj|||23
 interesting, thrilling|شَيِّق||adj|||23
 journalist|صَحَفِيّ|ون|noun|occupations|m|23
 newspaper|صَحيفة|صُحُف|noun|entertainment|f|23
-to laugh|ضَحِكَ (يَضْحَكُ) ضِحْك||verb|||23
+868||||||23
 to cross|عَبَرَ (يَعبُرُ) عُبور||verb|||23
 opposite, reverse, contrary|عَكْس||noun|||23
 to leave|غادَرَ (يُغادِرُ) مُغادَرة||verb|||23
@@ -1064,11 +1064,11 @@ peasant, farmworker|فَلاّح|ون|noun|people|m|23
 denotes completed action, emphasis, or possibility|قَد||particle|||23
 a relative|قَريب|أقارِب|noun|family|m|23
 heart|قَلْل|قُلوب|noun|body|m|23
-as, like|كَـ||prep|||23
+883||||||23
 hospitality, generosity|كَرَم||noun|abstract|m|23
 speech, speaking|كَلام||noun||m|23
 player|لاعِب|ون|noun|sports|m|23
-denotes completed action, emphasis, or possibility (variation)|لَقَد||particle|||23
+expresses completed action with a perfect tense verb|لَقَد||particle|||23
 society, community|مُجْتَمَع|مُجْتَمَعات|noun||m|23
 accountant|مُحاسِب|ون|noun|occupations|m|23
 crowded|مُزدَحِم||adj|||23
@@ -1094,7 +1094,7 @@ to import|اِسْتَوْرَدَ (يَسْتَوْرِدُ) اِسْتِيرا
 bottom, lowest point, lower|أسْفَل|أسافِل|noun||m|24
 to resemble|أشْبَهَ (يُشْبِهُ) شَبَه||verb|||24
 to take care of, to tend|اِعْتَنى (يَعْتَني) اِعتِناء (بِـ)||verb|||24
-top, highest point, upper|أعْلى|أعالٍ|noun||m|24
+913||||||24
 to reside in|أقام (يُقيم) إقامة||verb|||24
 to pick up; to take (a picture)|اِلْتَقَطَ (يَلْتَقِطُ) اِلْتِقاط||verb|||24
 female|أُنْثى|إناث|noun|descriptive|f|24
@@ -1102,7 +1102,7 @@ salesperson|بائِع|بائعون|noun|occupations|m|24
 to appear, to seem|بَدا (يَبدو) بُدُوُّ/بَداء||verb|||24
 brown|بُنّيّ||adj|colors||24
 merchant, businessperson|تاجِر|تُجّار|noun|occupations|m|24
-to be late|تَأخَّرَ (يَتَأخَّرُ) تَأخُّر||verb|||24
+700||||||24
 to retire (from work)|تَقاعَدَ (يَتَقاعَدُ) تَقاعُد (عن)||verb|||24
 signature|تَوْقيع||noun||m|24
 grandfather|جَدّ|جُدود|noun|family|m|24
@@ -1118,7 +1118,7 @@ hair|شَعْر|شُعور/أشْعار|noun|body|m|24
 poetry, poem|شِعْر|أشْعار|noun||m|24
 last name, surname|شُهْرة||noun||f|24
 to issue|صَدَرَ (يَصْدُرُ) صُدور||verb|||24
-youngest, smallest|صَغيرة||adj|common||24
+youngest, smallest|صُغرى||adj|common||24
 pharmacist|صَيدلانِيّة||noun|occupations|f|24
 pharmacy|صَيْدَليّة||noun|locations|f|24
 height|طول||noun||m|24
@@ -1128,9 +1128,9 @@ eye|عَيْن|عُيون|noun|body|f|24
 spare part, change|غِيار|غيارات|noun||m|24
 branch, subdivision|فَرْع|فُروع|noun||m|24
 to talk to, to speak with|كَلَّمَ (يُكَلِّمُ)||verb|||24
-expresses completed action with a perfect tense verb|لَقَد||particle|||24
+1071||||||24
 retired person|مُتَقاعِد|مُتَقاعِدون|noun|people|m|24
-store, shop; place, location|مَحَلّ|مَحَلات|noun|locations|m|24
+23||||||24
 store, warehouse|مَخْزَن|مَخازِن|noun|locations|m|24
 teacher|مُدَرِّس|مُدَرِّسون|noun|occupations|m|24
 sick, ill, patient|مَريض|مَرْضى|adj|medical|m|24
