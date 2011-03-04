@@ -72,7 +72,9 @@ public class ArabicFlashcards extends Activity {
     	Log.d(TAG, "onCreate called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
+        
+        test();
+        
         vf = (ViewFlipper)findViewById(R.id.flipper);
         slideLeftIn = AnimationUtils.loadAnimation(this, R.anim.slide_left_in);
         slideLeftOut = AnimationUtils.loadAnimation(this, R.anim.slide_left_out);
@@ -457,6 +459,13 @@ public class ArabicFlashcards extends Activity {
 	        return true;
 	    else
 	    	return false;
+    }
+    
+    private void test() {
+        RankDatabaseHelper ranksHelper = new RankDatabaseHelper(this);
+        SQLiteDatabase ranksDb = ranksHelper.getReadableDatabase();
+        ranksHelper.initializeDb(ranksDb, 5);
+        ranksHelper.close();
     }
        
 }
