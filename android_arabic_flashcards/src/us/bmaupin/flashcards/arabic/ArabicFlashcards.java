@@ -462,10 +462,14 @@ public class ArabicFlashcards extends Activity {
     }
     
     private void test() {
+    	CardHelper ch = new CardHelper(this);
+    	ch.loadCards("Ahlan wa sahlan", "3");
+    	/*
         RankDatabaseHelper ranksHelper = new RankDatabaseHelper(this);
         SQLiteDatabase ranksDb = ranksHelper.getReadableDatabase();
         ranksHelper.initializeDb(ranksDb, 5);
         ranksHelper.close();
+        */
     }
        
 }
