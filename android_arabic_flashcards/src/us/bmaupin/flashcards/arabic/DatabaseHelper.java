@@ -18,6 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	public static final String DATABASE_NAME = "words.db";
 	public static final int DATABASE_VERSION = 6;
+	public static final String DB_TABLE_NAME = "words";
 
 	// variable to tell us whether onCreate() or onUpgrade() has been called
 	boolean dbNeedsRefreshing = false;
