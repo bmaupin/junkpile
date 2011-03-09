@@ -14,6 +14,7 @@ import java.util.Map;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
@@ -102,16 +103,21 @@ public class CardHelper {
 		for (int thisId : currentCardIds) {
 			String selection = "_ID = " + thisId;
 //			try {
-				this.cursor = ranksDb.query("ranks", columns, selection, null, null, null, null);
+			this.cursor = ranksDb.query("ranks", columns, selection, null, null, null, null);
 //			} catch (SQLiteException e) {
 //				Log.d(TAG, "loadCards: SQLiteException: " + e.getMessage());
 //			}
-// TODO: implement CursorIndexOutOfBoundsException handling here?				
-//			try {
-				cursor.moveToFirst();
-//			} catch 
-			int thisRank = cursor.getInt(0);
-			currentCardRanks.put(thisId, thisRank);
+			cursor.moveToFirst();
+// TODO: implement CursorIndexOutOfBoundsException handling here?		
+			try {
+				int thisRank = cursor.getInt(0);
+			} catch (CursorIndexOutOfBoundsException e) {
+				Log.d(TAG, "loadCards: CursorIndexOutOfBoundsException: " + e.getMessage());
+				
+//				ContentValues cv=new ContentValues();
+//				cv.put(TITLE, "Gravity, Death Star I");
+			}
+//			currentCardRanks.put(thisId, thisRank);
 		}
 		
 		return currentCardRanks;
