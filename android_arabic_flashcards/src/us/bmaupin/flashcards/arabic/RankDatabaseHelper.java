@@ -21,17 +21,19 @@ public class RankDatabaseHelper extends SQLiteOpenHelper {
     public static final String DB_TABLE_NAME = "ranks";
    
     // The name of each column in the database
-    public static final String KEY_RANK = "rank";
-
+    public static final String RANK = "rank";
+    
+    private final Context context;    
     // SQL Statement to create a new database.
     public static final String DB_TABLE_CREATE =
         "CREATE TABLE " + DB_TABLE_NAME + " (" +
         BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-        KEY_RANK + " INTEGER);";
+        RANK + " INTEGER);";
    
     // The constructor method
     public RankDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     /* Called when the super class getWritableDatabase (or getReadableDatabase)
@@ -40,7 +42,9 @@ public class RankDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
     	Log.d(TAG, "onCreate called");
-        db.execSQL(DB_TABLE_CREATE);       
+        db.execSQL(DB_TABLE_CREATE);
+        
+        initializeDb(db);
     }
 
     /* Called when the super class getWritableDatabase (or getReadableDatabase)
@@ -56,14 +60,24 @@ public class RankDatabaseHelper extends SQLiteOpenHelper {
 // TODO: upgrade the db properly
     }
     
-    void initializeDb (SQLiteDatabase db, int totalRows) {
-    	String sql = "SELECT COALESCE(MAX(_ID)+1, 0) FROM " + DB_TABLE_NAME;
+    void initializeDb (SQLiteDatabase db) {
+    	String sql = "SELECT COALESCE(MAX(_ID)+1, 0) FROM " + DatabaseHelper.DB_TABLE_NAME;
+    	
+    	DatabaseHelper cardsHelper = new DatabaseHelper(context);
+        SQLiteDatabase cardsDb = cardsHelper.getReadableDatabase();
+        Cursor cardsCursor = cardsDb.rawQuery(sql, null);
+        cardsCursor.moveToFirst();
+        int cardsRows = cardsCursor.getInt(0);
+        Log.d(TAG, "initializeDb: cardsRows=" + cardsRows );
+        cardsCursor.close();
+        
+        sql = "SELECT COALESCE(MAX(_ID)+1, 0) FROM " + DB_TABLE_NAME;
     	Cursor cursor = db.rawQuery(sql, null);
     	cursor.moveToFirst();
-    	int existingRows = cursor.getInt(0);
-    	Log.d(TAG, "initializeDb: existingRows=" + existingRows );
+    	int ranksRows = cursor.getInt(0);
+    	Log.d(TAG, "initializeDb: ranksRows=" + ranksRows );
     	cursor.close();
     	
-    	// TODO: fill db with data up to number of total rows
+// TODO: fill db with data up to number of total rows
     }
 }
