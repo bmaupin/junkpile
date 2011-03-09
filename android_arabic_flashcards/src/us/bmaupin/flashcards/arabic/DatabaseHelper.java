@@ -89,7 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				mDatabase = super.getReadableDatabase();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+// TODO: how do we properly handle errors here?
 			e.printStackTrace();
 		}
 		dbNeedsRefreshing = false;
@@ -134,9 +134,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		dbNeedsRefreshing = true;
 		Log.d(TAG, "onUpgrade called");
 	}
-	
-	/*
-	 * TODO
-	 * how to properly handle errors?
-	 */
 }
