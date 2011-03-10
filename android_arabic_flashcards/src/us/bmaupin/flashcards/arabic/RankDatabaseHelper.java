@@ -2,6 +2,7 @@ package us.bmaupin.flashcards.arabic;
 
 // $Id$
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -61,8 +62,9 @@ public class RankDatabaseHelper extends SQLiteOpenHelper {
     }
     
     void initializeDb (SQLiteDatabase db) {
-    	String sql = "SELECT COALESCE(MAX(_ID)+1, 0) FROM " + DatabaseHelper.DB_TABLE_NAME;
+    	String sql = "SELECT COALESCE(MAX(_ID), 0) FROM " + DatabaseHelper.DB_TABLE_NAME;
     	
+    	// get the number of rows in the cards db
     	DatabaseHelper cardsHelper = new DatabaseHelper(context);
         SQLiteDatabase cardsDb = cardsHelper.getReadableDatabase();
         Cursor cardsCursor = cardsDb.rawQuery(sql, null);
@@ -70,14 +72,29 @@ public class RankDatabaseHelper extends SQLiteOpenHelper {
         int cardsRows = cardsCursor.getInt(0);
         Log.d(TAG, "initializeDb: cardsRows=" + cardsRows );
         cardsCursor.close();
+        cardsHelper.close();
         
-        sql = "SELECT COALESCE(MAX(_ID)+1, 0) FROM " + DB_TABLE_NAME;
+        // get the number of rows in the cards db
+        sql = "SELECT COALESCE(MAX(_ID), 0) FROM " + DB_TABLE_NAME;
     	Cursor cursor = db.rawQuery(sql, null);
     	cursor.moveToFirst();
     	int ranksRows = cursor.getInt(0);
     	Log.d(TAG, "initializeDb: ranksRows=" + ranksRows );
+    	
+    	// get the difference, fill the ranks db with that number of empty rows
+    	int rowsToAdd = cardsRows - ranksRows;
+    	Log.d(TAG, "initializeDb: rowsToAdd=" + rowsToAdd );
+    	ContentValues cv=new ContentValues();
+    	for (int i=1; i<rowsToAdd + 1; i++) {
+    		db.insert(DB_TABLE_NAME, RANK, cv);
+    	}
+    	
+    	cursor = db.rawQuery(sql, null);
+    	cursor.moveToFirst();
+    	ranksRows = cursor.getInt(0);
+    	Log.d(TAG, "initializeDb: ranksRows=" + ranksRows );
     	cursor.close();
     	
-// TODO: fill db with data up to number of total rows
+// TODO: db fill takes way too long (>5 sec), need to do little by little, or show user progress
     }
 }
