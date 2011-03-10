@@ -1,6 +1,8 @@
 $Id$
 
 DO:
+ranks
+    ranks db takes >5 seconds to create, either fix this or show progress
 get chapter selection working
     -try getting dialog results?
         apress p. 210ish
