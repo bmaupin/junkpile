@@ -16,7 +16,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
 public class CardHelper {
@@ -41,11 +40,17 @@ public class CardHelper {
 		helper = new DatabaseHelper(context);
 		db = helper.getReadableDatabase();
 		
-		RankDatabaseHelper ranksHelper = new RankDatabaseHelper(context);
+		ranksHelper = new RankDatabaseHelper(context);
 		ranksDb = ranksHelper.getReadableDatabase();
 //		createCursor();
 	}
-
+	
+	public void close() {
+		// clean up after ourselves
+		ranksHelper.close();
+		helper.close();
+	}
+	
 	private void createCursor() {
 		// Perform a managed query. The Activity will handle closing
 		// and re-querying the cursor when needed.
@@ -71,23 +76,37 @@ public class CardHelper {
 		}
 		
 		cursor = db.query("words", columns, selection, null, null, null, null);
+		cursor.moveToFirst();
 		
-// TODO: for now, only get 5 cards		
+//		while (cursor.moveToNext()) {
+// TODO: for now, only get 5 cards
 		for (int i=1; i<6; i++) {
-			cursor.moveToFirst();
 			int thisId = cursor.getInt(0);
 			currentCardIds.add(thisId);
-			cursor.moveToFirst();
+// TESTING		
+			cursor.moveToNext();
 		}
 		
 		currentCardRanks = loadRanks(currentCardIds);
-		
-		Log.d(TAG, "loadCards");
+
+//		
+		Log.d(TAG, "loadCards: currentCardRanks:");
 		for (Map.Entry<Integer, Integer> entry : currentCardRanks.entrySet()) {
 			Log.d(TAG, entry.getKey() + "\t" + entry.getValue());
 		}
 		
-//		currentCardWeights = buildWeights(currentCardRanks);
+		currentCardWeights = buildWeights(currentCardRanks);
+
+//		
+		Log.d(TAG, "loadCards: currentCardWeights:");
+		for (Map.Entry<Integer, Integer> entry : currentCardWeights.entrySet()) {
+			Log.d(TAG, entry.getKey() + "\t" + entry.getValue());
+		}
+//		
+		Log.d(TAG, "loadCards: nullRanks:");
+		for (int thisID : nullRanks) {
+			Log.d(TAG, "" + thisID);
+		}
 	}
 	
 	
@@ -100,38 +119,34 @@ public class CardHelper {
 		Map<Integer, Integer> currentCardRanks = new HashMap<Integer, Integer>();
 		String[] columns = { "rank" };
 		
+		// for each card ID in current cards
 		for (int thisId : currentCardIds) {
 			String selection = "_ID = " + thisId;
-//			try {
+			// get its rank
 			this.cursor = ranksDb.query("ranks", columns, selection, null, null, null, null);
-//			} catch (SQLiteException e) {
-//				Log.d(TAG, "loadCards: SQLiteException: " + e.getMessage());
-//			}
 			cursor.moveToFirst();
-// TODO: implement CursorIndexOutOfBoundsException handling here?		
-			try {
-				int thisRank = cursor.getInt(0);
-			} catch (CursorIndexOutOfBoundsException e) {
-				Log.d(TAG, "loadCards: CursorIndexOutOfBoundsException: " + e.getMessage());
-				
-//				ContentValues cv=new ContentValues();
-//				cv.put(TITLE, "Gravity, Death Star I");
-			}
-//			currentCardRanks.put(thisId, thisRank);
+			int thisRank = cursor.getInt(0);
+			// put it in currentCardRanks
+			currentCardRanks.put(thisId, thisRank);
 		}
 		
 		return currentCardRanks;
 	}
 	
-	/*
 	Map<Integer, Integer> buildWeights(Map<Integer, Integer> currentCardRanks) {
-		Map<Integer, Double> currentCardWeights = new HashMap<Integer, Double>();
+		Map<Integer, Integer> currentCardWeights = new HashMap<Integer, Integer>();
+		// initialize the running total of weights
+		int runningTotal = 0;
+		nullRanks = new ArrayList<Integer>();
+		
+		// first we need to sort the ranks
+		currentCardRanks = sortByValue(currentCardRanks);
+		
 //		List<Double> totals = new ArrayList<Double>();
 		
 //		Iterator it = currentCardRanks.keySet().iterator();
 		
-		// initialize the running total of weights
-		double runningTotal = 0;
+
 		
 // TODO: we need to sort the currentCardRanks first		
 		
@@ -141,11 +156,11 @@ public class CardHelper {
 		// for each card and its rank
 		for (Map.Entry<Integer, Integer> entry : currentCardRanks.entrySet()) {
 			// if it doesn't have a rank, add it to the list of cards with no rank
-			if (entry.getValue() == null) {
+			if (entry.getValue().equals(0)) {
 				nullRanks.add(entry.getKey());
 			} else {
-//				runningTotal += entry.getValue();
-				currentCardWeights.put()
+				runningTotal += entry.getValue();
+				currentCardWeights.put(runningTotal, entry.getKey());
 			}
 			
 			/*
@@ -153,13 +168,13 @@ public class CardHelper {
 			this.cursor = db.query("ranks", columns, selection, null, null, null, null);
 			int thisRank = cursor.getInt(0);
 			currentCardRanks.put(thisId, thisRank);
-			
+			*/
 		}
 		
 		return currentCardWeights;
 	}
-	*/
 	
+	// from http://stackoverflow.com/questions/109383/how-to-sort-a-mapkey-value-on-the-values-in-java
 	static Map sortByValue(Map map) {
 	     List list = new LinkedList(map.entrySet());
 	     Collections.sort(list, new Comparator() {
