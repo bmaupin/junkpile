@@ -25,8 +25,10 @@ public class CardHelper {
 	private Cursor cursor;
 	private RankDatabaseHelper ranksHelper;
 	private SQLiteDatabase ranksDb;
+	private List<Map<String, String>> cardHistory = new ArrayList<Map<String, String>>();
 	private String currentCategory = "All";
-	private List<Integer> nullRanks;
+	private String currentSubCategory;
+	private List<Integer> nullRanks = new ArrayList<Integer>();
 	
 	public CardHelper(Context context) {
 /*		super();
@@ -61,7 +63,7 @@ public class CardHelper {
 	}
 	
 	// loadCards in arabicFlashcards should prob be called something like loadViews
-	void loadCards(String category, String subCategory) {
+	void loadCards() {
 		List<Integer> currentCardIds = new ArrayList<Integer>();
 		Map<Integer, Integer> currentCardRanks = new HashMap<Integer, Integer>();
 		Map<Integer, Integer> currentCardWeights = new HashMap<Integer, Integer>();
@@ -71,8 +73,8 @@ public class CardHelper {
 		String[] columns = { "_ID" };
 		String selection = null;
 		
-		if (category.equals("Ahlan wa sahlan")) {
-			selection = "aws_chapter = " + subCategory;
+		if (currentCategory.equals("Ahlan wa sahlan")) {
+			selection = "aws_chapter = " + currentSubCategory;
 		}
 		
 		cursor = db.query("words", columns, selection, null, null, null, null);
@@ -112,7 +114,14 @@ public class CardHelper {
 	
 	
 	void loadCards(String category) {
-		loadCards(category, null);
+		currentCategory = category;
+		loadCards();
+	}
+	
+	void loadCards(String category, String subCategory) {
+		currentCategory = category;
+		currentSubCategory = subCategory;
+		loadCards();
 	}
 	
 	Map<Integer, Integer> loadRanks(List<Integer> currentCardIds) {
@@ -123,7 +132,7 @@ public class CardHelper {
 		for (int thisId : currentCardIds) {
 			String selection = "_ID = " + thisId;
 			// get its rank
-			this.cursor = ranksDb.query("ranks", columns, selection, null, null, null, null);
+			cursor = ranksDb.query("ranks", columns, selection, null, null, null, null);
 			cursor.moveToFirst();
 			int thisRank = cursor.getInt(0);
 			// put it in currentCardRanks
@@ -137,18 +146,10 @@ public class CardHelper {
 		Map<Integer, Integer> currentCardWeights = new HashMap<Integer, Integer>();
 		// initialize the running total of weights
 		int runningTotal = 0;
-		nullRanks = new ArrayList<Integer>();
+		
 		
 		// first we need to sort the ranks
 		currentCardRanks = sortByValue(currentCardRanks);
-		
-//		List<Double> totals = new ArrayList<Double>();
-		
-//		Iterator it = currentCardRanks.keySet().iterator();
-		
-
-		
-// TODO: we need to sort the currentCardRanks first		
 		
 // TODO: iterate java map: http://stackoverflow.com/questions/1066589/java-iterate-through-hashmap
 // TODO: sort java map: http://stackoverflow.com/questions/109383/how-to-sort-a-mapkey-value-on-the-values-in-java
@@ -162,16 +163,56 @@ public class CardHelper {
 				runningTotal += entry.getValue();
 				currentCardWeights.put(runningTotal, entry.getKey());
 			}
-			
-			/*
-			String selection = "_ID = " + thisId;
-			this.cursor = db.query("ranks", columns, selection, null, null, null, null);
-			int thisRank = cursor.getInt(0);
-			currentCardRanks.put(thisId, thisRank);
-			*/
 		}
 		
 		return currentCardWeights;
+	} 
+	
+	// nextCard in arabicflashcards should prob be called something like showNextCard
+	Map<String, String> nextCard() {
+		String[] columns = { "english", "arabic" };
+		String selection = "_ID = ?";
+		String[] selectionArgs = new String[1];
+		int thisId;
+		Map<String, String> thisCard = new HashMap<String, String>();
+		
+		if (!nullRanks.isEmpty()) {
+			// remove the first element from the list
+			thisId = nullRanks.remove(0);
+			selectionArgs[0] = "" + thisId;
+			this.cursor = ranksDb.query("ranks", columns, selection, selectionArgs, null, null, null);
+			cursor.moveToFirst();
+			
+			String english = cursor.getString(0);
+			String arabic = cursor.getString(1);
+
+			thisCard.put("english", english);
+			thisCard.put("arabic", arabic);
+			
+			// add word to the card history
+			cardHistory.add(thisCard);
+// TODO: implement else {  // select cards by rank
+		// if we've no more cards
+		} else {
+			// load more
+			loadCards();
+			return nextCard();
+		}
+		
+		return thisCard;
+	}
+	
+	Map<String, String> prevCard() {
+		if (!cardHistory.isEmpty()) {
+			// return the last card
+			return cardHistory.remove(cardHistory.size() - 1);
+		// if cardHistory is empty
+		} else {
+// TODO: implement if cardHistory is empty	
+			Map<String, String> thisCard = new HashMap<String, String>();
+			thisCard.put("error", "no previous cards");
+			return thisCard;
+		}
 	}
 	
 	// from http://stackoverflow.com/questions/109383/how-to-sort-a-mapkey-value-on-the-values-in-java
@@ -190,10 +231,5 @@ public class CardHelper {
 	        result.put(entry.getKey(), entry.getValue());
 	    }
 	    return result;
-	} 
-	
-	// nextCard in arabicflashcards should prob be called something like showNextCard
-	void nextCard() {
-		
 	}
 }
