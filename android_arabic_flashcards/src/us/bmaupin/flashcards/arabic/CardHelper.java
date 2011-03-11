@@ -147,12 +147,8 @@ public class CardHelper {
 		// initialize the running total of weights
 		int runningTotal = 0;
 		
-		
 		// first we need to sort the ranks
 		currentCardRanks = sortByValue(currentCardRanks);
-		
-// TODO: iterate java map: http://stackoverflow.com/questions/1066589/java-iterate-through-hashmap
-// TODO: sort java map: http://stackoverflow.com/questions/109383/how-to-sort-a-mapkey-value-on-the-values-in-java
 		
 		// for each card and its rank
 		for (Map.Entry<Integer, Integer> entry : currentCardRanks.entrySet()) {
