@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -19,7 +20,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class CardHelper {
-	private static final String TAG = "Cards";
+	private static final String TAG = "CardHelper";
 	private DatabaseHelper helper;
 	private SQLiteDatabase db;
 	private Cursor cursor;
@@ -28,7 +29,10 @@ public class CardHelper {
 	private List<Map<String, String>> cardHistory = new ArrayList<Map<String, String>>();
 	private String currentCategory = "All";
 	private String currentSubCategory;
-	private List<Integer> nullRanks = new ArrayList<Integer>();
+//	private Map<Integer, Integer> currentCardWeights = new HashMap<Integer, Integer>();
+	private List<Integer> currentCardWeights = new ArrayList<Integer>();
+	private List<Integer> currentRankedIds = new ArrayList<Integer>();
+	private List<Integer> currentUnrankedIds = new ArrayList<Integer>();
 	
 	public CardHelper(Context context) {
 /*		super();
@@ -65,8 +69,10 @@ public class CardHelper {
 	// loadCards in arabicFlashcards should prob be called something like loadViews
 	void loadCards() {
 		List<Integer> currentCardIds = new ArrayList<Integer>();
-		Map<Integer, Integer> currentCardRanks = new HashMap<Integer, Integer>();
-		Map<Integer, Integer> currentCardWeights = new HashMap<Integer, Integer>();
+//		Map<Integer, Integer> currentCardRanks = new HashMap<Integer, Integer>();
+//		Map<Integer, Integer> currentCardWeights = new HashMap<Integer, Integer>();
+		List<Integer> currentCardRanks = new ArrayList<Integer>();
+		List<Integer> currentCardWeights = new ArrayList<Integer>();
 
 // TODO: in the future, do we want to put all this into some kind of list/array?		
 //		String[] columns = { "_ID", "english", "arabic" };
@@ -93,20 +99,26 @@ public class CardHelper {
 
 //		
 		Log.d(TAG, "loadCards: currentCardRanks:");
-		for (Map.Entry<Integer, Integer> entry : currentCardRanks.entrySet()) {
-			Log.d(TAG, entry.getKey() + "\t" + entry.getValue());
+		for (int thisRank : currentCardRanks) { 
+			Log.d(TAG, "" + thisRank);
 		}
+//		for (Map.Entry<Integer, Integer> entry : currentCardRanks.entrySet()) {
+//			Log.d(TAG, entry.getKey() + "\t" + entry.getValue());
+//		}
 		
-		currentCardWeights = buildWeights(currentCardRanks);
+		buildWeights(currentCardRanks);
 
 //		
 		Log.d(TAG, "loadCards: currentCardWeights:");
-		for (Map.Entry<Integer, Integer> entry : currentCardWeights.entrySet()) {
-			Log.d(TAG, entry.getKey() + "\t" + entry.getValue());
+		for (int thisWeight : currentCardWeights) {
+			Log.d(TAG, "" + thisWeight);
 		}
+//		for (Map.Entry<Integer, Integer> entry : currentCardWeights.entrySet()) {
+//			Log.d(TAG, entry.getKey() + "\t" + entry.getValue());
+//		}
 //		
-		Log.d(TAG, "loadCards: nullRanks:");
-		for (int thisID : nullRanks) {
+		Log.d(TAG, "loadCards: currentUnrankedIds:");
+		for (int thisID : currentUnrankedIds) {
 			Log.d(TAG, "" + thisID);
 		}
 	}
@@ -124,8 +136,38 @@ public class CardHelper {
 		loadCards();
 	}
 	
+	List<Integer> loadRanks(List<Integer> currentCardIds) {
+		List<Integer> currentCardRanks = new ArrayList<Integer>();
+//		List<Integer> currentRankedIds = new ArrayList<Integer>();
+		String[] columns = { "rank" };
+		
+		// for each card ID in current cards
+		for (int thisId : currentCardIds) {
+			String selection = "_ID = " + thisId;
+			// get its rank
+			cursor = ranksDb.query("ranks", columns, selection, null, null, null, null);
+			cursor.moveToFirst();
+			int thisRank = cursor.getInt(0);
+			
+			// if the rank for this particular card is 0
+			if (thisRank == 0) {
+				// add it to the list of cards with no rank
+				currentUnrankedIds.add(thisId);
+			} else {
+				// add it to the list of ranked cards
+				currentRankedIds.add(thisId);
+				// put the rank in currentCardRanks
+				currentCardRanks.add(thisRank);
+			}
+		}
+		
+		return currentCardRanks;
+	}
+	
+	/*
 	Map<Integer, Integer> loadRanks(List<Integer> currentCardIds) {
 		Map<Integer, Integer> currentCardRanks = new HashMap<Integer, Integer>();
+//		List<Integer> currentCardRanks = new ArrayList<Integer>();
 		String[] columns = { "rank" };
 		
 		// for each card ID in current cards
@@ -136,14 +178,32 @@ public class CardHelper {
 			cursor.moveToFirst();
 			int thisRank = cursor.getInt(0);
 			// put it in currentCardRanks
-			currentCardRanks.put(thisId, thisRank);
+//			currentCardRanks.put(thisId, thisRank);
+			currentCardRanks.add(thisRank);
 		}
 		
 		return currentCardRanks;
 	}
+	*/
+
+	void buildWeights(List<Integer> currentCardRanks) {
+		int runningTotal = 0;
+
+// TODO: make sure we empty the currentCardWeights list first
+		
+		// make sure we empty the currentCardWeights list first
+		currentCardRanks.clear();
+		
+		for (int thisRank : currentCardRanks) {
+			runningTotal += thisRank;
+			currentCardWeights.add(runningTotal);
+		}
+	}
 	
-	Map<Integer, Integer> buildWeights(Map<Integer, Integer> currentCardRanks) {
-		Map<Integer, Integer> currentCardWeights = new HashMap<Integer, Integer>();
+	/*
+	void buildWeights(Map<Integer, Integer> currentCardRanks) {
+//	Map<Integer, Integer> buildWeights(Map<Integer, Integer> currentCardRanks) {
+//		Map<Integer, Integer> currentCardWeights = new HashMap<Integer, Integer>();
 		// initialize the running total of weights
 		int runningTotal = 0;
 		
@@ -154,15 +214,16 @@ public class CardHelper {
 		for (Map.Entry<Integer, Integer> entry : currentCardRanks.entrySet()) {
 			// if it doesn't have a rank, add it to the list of cards with no rank
 			if (entry.getValue().equals(0)) {
-				nullRanks.add(entry.getKey());
+				currentUnrankedIds.add(entry.getKey());
 			} else {
 				runningTotal += entry.getValue();
 				currentCardWeights.put(runningTotal, entry.getKey());
 			}
 		}
 		
-		return currentCardWeights;
-	} 
+//		return currentCardWeights;
+	}
+	*/
 	
 	// nextCard in arabicflashcards should prob be called something like showNextCard
 	Map<String, String> nextCard() {
@@ -172,9 +233,11 @@ public class CardHelper {
 		int thisId;
 		Map<String, String> thisCard = new HashMap<String, String>();
 		
-		if (!nullRanks.isEmpty()) {
+		// if some of the selected cards don't have ranks, that means they 
+		// haven't been shown yet, so show them
+		if (!currentUnrankedIds.isEmpty()) {
 			// remove the first element from the list
-			thisId = nullRanks.remove(0);
+			thisId = currentUnrankedIds.remove(0);
 			selectionArgs[0] = "" + thisId;
 			this.cursor = ranksDb.query("ranks", columns, selection, selectionArgs, null, null, null);
 			cursor.moveToFirst();
@@ -188,8 +251,15 @@ public class CardHelper {
 			// add word to the card history
 			cardHistory.add(thisCard);
 // TODO: implement else {  // select cards by rank
+// TODO: how many cards do we go through before we stop going through ranks?
+// 
+		} else if (cardHistory.size() > (currentRankedIds.size() + currentUnrankedIds.size())) {
+			Random rnd = new Random(System.nanoTime());
+//			double rndNum = rnd.nextDouble() * currentCardWeights
+			
+			
 		// if we've no more cards
-		} else {
+		} else { 
 			// load more
 			loadCards();
 			return nextCard();
@@ -204,7 +274,7 @@ public class CardHelper {
 			return cardHistory.remove(cardHistory.size() - 1);
 		// if cardHistory is empty
 		} else {
-// TODO: implement if cardHistory is empty	
+// TODO: implement if cardHistory is empty
 			Map<String, String> thisCard = new HashMap<String, String>();
 			thisCard.put("error", "no previous cards");
 			return thisCard;
