@@ -71,7 +71,7 @@ public class CardHelper {
 		List<Integer> currentCardIds = new ArrayList<Integer>();
 //		Map<Integer, Integer> currentCardRanks = new HashMap<Integer, Integer>();
 //		Map<Integer, Integer> currentCardWeights = new HashMap<Integer, Integer>();
-		List<Integer> currentCardRanks = new ArrayList<Integer>();
+		List<Integer> currentOrderedRanks = new ArrayList<Integer>();
 		List<Integer> currentCardWeights = new ArrayList<Integer>();
 
 // TODO: in the future, do we want to put all this into some kind of list/array?		
@@ -95,18 +95,18 @@ public class CardHelper {
 			cursor.moveToNext();
 		}
 		
-		currentCardRanks = loadRanks(currentCardIds);
+		currentOrderedRanks = loadRanks(currentCardIds);
 
 //		
-		Log.d(TAG, "loadCards: currentCardRanks:");
-		for (int thisRank : currentCardRanks) { 
+		Log.d(TAG, "loadCards: currentOrderedRanks:");
+		for (int thisRank : currentOrderedRanks) { 
 			Log.d(TAG, "" + thisRank);
 		}
 //		for (Map.Entry<Integer, Integer> entry : currentCardRanks.entrySet()) {
 //			Log.d(TAG, entry.getKey() + "\t" + entry.getValue());
 //		}
 		
-		buildWeights(currentCardRanks);
+//		buildWeights(currentOrderedRanks);
 
 //		
 		Log.d(TAG, "loadCards: currentCardWeights:");
@@ -123,8 +123,6 @@ public class CardHelper {
 		}
 	}
 	
-	
-	
 	void loadCards(String category) {
 		currentCategory = category;
 		loadCards();
@@ -136,6 +134,7 @@ public class CardHelper {
 		loadCards();
 	}
 	
+	/*
 	List<Integer> loadRanks(List<Integer> currentCardIds) {
 		List<Integer> currentCardRanks = new ArrayList<Integer>();
 //		List<Integer> currentRankedIds = new ArrayList<Integer>();
@@ -163,11 +162,12 @@ public class CardHelper {
 		
 		return currentCardRanks;
 	}
+	*/
 	
-	/*
-	Map<Integer, Integer> loadRanks(List<Integer> currentCardIds) {
+	
+	private List<Integer> loadRanks(List<Integer> currentCardIds) {
 		Map<Integer, Integer> currentCardRanks = new HashMap<Integer, Integer>();
-//		List<Integer> currentCardRanks = new ArrayList<Integer>();
+		List<Integer> currentOrderedRanks = new ArrayList<Integer>();
 		String[] columns = { "rank" };
 		
 		// for each card ID in current cards
@@ -177,14 +177,36 @@ public class CardHelper {
 			cursor = ranksDb.query("ranks", columns, selection, null, null, null, null);
 			cursor.moveToFirst();
 			int thisRank = cursor.getInt(0);
-			// put it in currentCardRanks
-//			currentCardRanks.put(thisId, thisRank);
-			currentCardRanks.add(thisRank);
+			
+			// if the rank for this particular card is 0
+			if (thisRank == 0) {
+				// add it to the list of cards with no rank
+				currentUnrankedIds.add(thisId);
+			} else {
+				// put it in currentCardRanks
+				currentCardRanks.put(thisId, thisRank);
+				
+//				// add it to the list of ranked cards
+//				currentRankedIds.add(thisId);
+//				// put the rank in currentCardRanks
+//				currentCardRanks.add(thisRank);
+			}
+		}
+	
+		// the binary search function we'll be using later needs this to be sorted
+		currentCardRanks = sortByValue(currentCardRanks);
+		
+		// for each card and its rank
+		for (Map.Entry<Integer, Integer> entry : currentCardRanks.entrySet()) {
+			// put the id into the list of ranked ids
+			currentRankedIds.add(entry.getKey());
+			// put the rank into the list of ranks
+			currentOrderedRanks.add(entry.getValue());
 		}
 		
-		return currentCardRanks;
+		return currentOrderedRanks;
 	}
-	*/
+	
 
 	void buildWeights(List<Integer> currentCardRanks) {
 		int runningTotal = 0;
@@ -198,6 +220,35 @@ public class CardHelper {
 			runningTotal += thisRank;
 			currentCardWeights.add(runningTotal);
 		}
+	}
+	
+	private class WeightedRandomGenerator {
+//		private int runningTotal;
+		private List<Double> totals = new ArrayList<Double>();
+		
+		private WeightedRandomGenerator(List<Integer> weights) {
+			double runningTotal = 0;
+			
+			for (int thisRank: weights) {
+				runningTotal += thisRank;
+				totals.add(runningTotal);
+			}
+		}
+		
+		private int next() {
+			Random rnd = new Random(System.nanoTime());
+//			Integer rndNum = rnd.nextInt() * totals.get(totals.size() - 1);
+			Double rndNum = rnd.nextDouble() * totals.get(totals.size() - 1);
+			int sNum = Collections.binarySearch(totals, rndNum);
+			int idx = (sNum < 0) ? (Math.abs(sNum) - 1) : sNum;
+			return idx;
+		}
+		
+		/*
+		private List<Integer> getWeights() {
+			return weights;
+		}
+		*/
 	}
 	
 	/*
@@ -254,8 +305,8 @@ public class CardHelper {
 // TODO: how many cards do we go through before we stop going through ranks?
 // 
 		} else if (cardHistory.size() > (currentRankedIds.size() + currentUnrankedIds.size())) {
-			Random rnd = new Random(System.nanoTime());
-//			double rndNum = rnd.nextDouble() * currentCardWeights
+//			Random rnd = new Random(System.nanoTime());
+//			double rndNum = rnd.nextDouble() * currentCardWeights[currentCardWeights.size() - 1];
 			
 			
 		// if we've no more cards
