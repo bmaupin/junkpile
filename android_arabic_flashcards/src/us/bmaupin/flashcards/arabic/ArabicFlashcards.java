@@ -40,9 +40,11 @@ public class ArabicFlashcards extends Activity {
 	public static final String PREFS_NAME = "FlashcardPrefsFile";
 	private static final int GET_CATEGORY = 0;
 	private DatabaseHelper helper;
-	private SQLiteDatabase db;
-	private int cursorPosition;
-	private Cursor cursor;
+//	private SQLiteDatabase db;
+// TODO: do we want to remember last card position?  card ID would probably be more
+//	universal than cursor position
+//	private int cursorPosition;
+//	private Cursor cursor;
 	private String currentLang;
 	private String defaultLang;
 	private SharedPreferences settings;
@@ -91,13 +93,13 @@ public class ArabicFlashcards extends Activity {
             }
         };
         
-        helper = new DatabaseHelper(this);
-        db = helper.getReadableDatabase();
+//        helper = new DatabaseHelper(this);
+//        db = helper.getReadableDatabase();
         
 		// Restore preferences
         settings = getSharedPreferences(PREFS_NAME, 0);
-        cursorPosition = settings.getInt("cursorPosition", -2);
-        Log.d(TAG, "onCreate, cursorPosition: " + cursorPosition);
+//        cursorPosition = settings.getInt("cursorPosition", -2);
+//        Log.d(TAG, "onCreate, cursorPosition: " + cursorPosition);
         
         defaultLang = Settings.getDefaultLang(this);
         
@@ -105,15 +107,15 @@ public class ArabicFlashcards extends Activity {
 			currentLang = defaultLang;
 		}
         
-        createCursor();
+//        createCursor();
         
         // cursorPosition will be -2 if it hasn't been stored yet
-		if (cursorPosition == -2) {
-			cursor.moveToFirst();
-		} else {
-			cursor.moveToPosition(cursorPosition);
-		}
-		cursorPosition = cursor.getPosition();
+//		if (cursorPosition == -2) {
+//			cursor.moveToFirst();
+//		} else {
+//			cursor.moveToPosition(cursorPosition);
+//		}
+//		cursorPosition = cursor.getPosition();
 		
 //      Typeface face=Typeface.createFromAsset(getAssets(), "fonts/sil-lateef/LateefRegOT.ttf");
 //      Typeface face=Typeface.createFromAsset(getAssets(), "fonts/tahoma.ttf");
@@ -149,7 +151,7 @@ public class ArabicFlashcards extends Activity {
 		// get the default card language again in case it's changed
 		defaultLang = Settings.getDefaultLang(this);
 		// show the first card (do it here in case default card language changed)
-		loadCards();
+		loadViews();
 	}
     
     @Override
@@ -170,7 +172,7 @@ public class ArabicFlashcards extends Activity {
 		// All objects are from android.context.Context
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
-		editor.putInt("cursorPosition", cursorPosition);
+//		editor.putInt("cursorPosition", cursorPosition);
 		
 		// Commit the edits!
 		editor.commit();
@@ -230,12 +232,12 @@ public class ArabicFlashcards extends Activity {
 						Log.d(TAG, "onActivityResult: chapter=" + chapter);
 						
 						// close the old cursor
-						cursor.close();
+//						cursor.close();
 						
-						String[] FROM = { "english", "arabic" };
-						String WHERE = "aws_chapter = " + chapter;
-						cursor = db.query("words", FROM, WHERE, null, null, null, null);
-						startManagingCursor(cursor);
+//						String[] FROM = { "english", "arabic" };
+//						String WHERE = "aws_chapter = " + chapter;
+//						cursor = db.query("words", FROM, WHERE, null, null, null, null);
+//						startManagingCursor(cursor);
 					}
 				}
 				break;
@@ -253,10 +255,10 @@ public class ArabicFlashcards extends Activity {
 		case KeyEvent.KEYCODE_DPAD_DOWN:
 			break;
 		case KeyEvent.KEYCODE_DPAD_LEFT:
-			prevCard();
+			showPrevCard();
 			break;
 		case KeyEvent.KEYCODE_DPAD_RIGHT:
-			nextCard();
+			showNextCard();
 			break;
 		case KeyEvent.KEYCODE_DPAD_CENTER:
 			flipCard();
@@ -267,6 +269,7 @@ public class ArabicFlashcards extends Activity {
 		return true;
 	}
     
+	/*
 	private void createCursor() {
 		// Perform a managed query. The Activity will handle closing
 		// and re-querying the cursor when needed.
@@ -275,7 +278,8 @@ public class ArabicFlashcards extends Activity {
 		cursor = db.query("words", FROM, null, null, null, null, null);
 		startManagingCursor(cursor);
 	}
-	
+	*/
+	/*
 	private Map<String, String> getWord(int thisPosition, boolean updatePosition) {
 		Log.d(TAG, "getWord(position), cursorPosition: " + cursorPosition);
 
@@ -313,10 +317,16 @@ public class ArabicFlashcards extends Activity {
 		return getWord(thisPosition, false);
 	}
 	*/
+	/*
 	private Map<String, String> getCurrentWord() {
 		return getWord(cursorPosition, true);
 	}
+	*/
 	
+	/**
+	 * Given a view, a word, and a language, shows the word in the view and 
+	 * formats it depending on the language
+	 */
 	private void showWord(TextView thisView, Map<String, String> thisWord, String thisLang) {
 		Log.d(TAG, "showWord called, thisLang: " + thisLang);
 		currentLang = thisLang;
@@ -344,8 +354,8 @@ public class ArabicFlashcards extends Activity {
 		}
 	}
 	
-	private void loadCards() {
-		Log.d(TAG, "loadCards called");
+	private void loadViews() {
+		Log.d(TAG, "loadViews called");
 		//TextView thisView = (TextView) vf.getChildAt(vf.getDisplayedChild() -1);
 		//vf.getChildAt(vf.getDisplayedChild() - 1); // previous
 		//vf.getChildAt(vf.getDisplayedChild() + 1); // next
@@ -353,6 +363,7 @@ public class ArabicFlashcards extends Activity {
 		ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();
 //		int currentLayoutId = currentLayout.getId();
 		currentView = (TextView) currentLayout.getChildAt(0);
+// TODO: get current (prob next) card		
 		currentWord = getCurrentWord();
 		showWord(currentView, currentWord);
 
@@ -386,20 +397,22 @@ public class ArabicFlashcards extends Activity {
 
 	}
 	
-	private void nextCard() {
+	private void showNextCard() {
     	vf.setInAnimation(slideLeftIn);
         vf.setOutAnimation(slideLeftOut);
     	vf.showNext();
+// TODO: get next card
     	cursorPosition++;
-    	loadCards();
+    	loadViews();
 	}
 	
-	private void prevCard() {
+	private void showPrevCard() {
     	vf.setInAnimation(slideRightIn);
         vf.setOutAnimation(slideRightOut);
     	vf.showPrevious();
+// TODO: get previous card    	
     	cursorPosition--;
-    	loadCards();
+    	loadViews();
 	}
 	
     class MyGestureDetector extends SimpleOnGestureListener {
@@ -411,21 +424,21 @@ public class ArabicFlashcards extends Activity {
                     return false;
                 // right to left swipe
                 if(e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                	nextCard();
+                	showNextCard();
                 	return true;
                 }  else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                	prevCard();
+                	showPrevCard();
                 	return true;
                 }
                 */
             	// from http://stackoverflow.com/questions/4098198/adding-fling-gesture-to-an-image-view-android
             	// right to left
                 if(e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                	nextCard();
+                	showNextCard();
                 	return true;
                 // left to right
                 }  else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                	prevCard();
+                	showPrevCard();
                 	return true;
                 }
                 // bottom to top
