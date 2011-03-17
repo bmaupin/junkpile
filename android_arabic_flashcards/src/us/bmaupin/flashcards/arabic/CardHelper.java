@@ -33,6 +33,7 @@ public class CardHelper {
 	private List<Integer> currentCardWeights = new ArrayList<Integer>();
 	private List<Integer> currentRankedIds = new ArrayList<Integer>();
 	private List<Integer> currentUnrankedIds = new ArrayList<Integer>();
+	private WeightedRandomGenerator weightedCardIds;
 	
 	public CardHelper(Context context) {
 /*		super();
@@ -106,7 +107,10 @@ public class CardHelper {
 //			Log.d(TAG, entry.getKey() + "\t" + entry.getValue());
 //		}
 		
+		if (!currentOrderedRanks.isEmpty()) {
+			weightedCardIds = new WeightedRandomGenerator(currentOrderedRanks);
 //		buildWeights(currentOrderedRanks);
+		}
 
 //		
 		Log.d(TAG, "loadCards: currentCardWeights:");
@@ -192,18 +196,23 @@ public class CardHelper {
 //				currentCardRanks.add(thisRank);
 			}
 		}
-	
-		// the binary search function we'll be using later needs this to be sorted
-		currentCardRanks = sortByValue(currentCardRanks);
 		
-		// for each card and its rank
-		for (Map.Entry<Integer, Integer> entry : currentCardRanks.entrySet()) {
-			// put the id into the list of ranked ids
-			currentRankedIds.add(entry.getKey());
-			// put the rank into the list of ranks
-			currentOrderedRanks.add(entry.getValue());
+		if (!currentCardRanks.isEmpty()) {
+//			
+			Log.d(TAG, "loadRanks: processing ranks");
+			
+			// the binary search function we'll be using later needs this to be sorted
+			currentCardRanks = sortByValue(currentCardRanks);
+			
+			// for each card and its rank
+			for (Map.Entry<Integer, Integer> entry : currentCardRanks.entrySet()) {
+				// put the id into the list of ranked ids
+				currentRankedIds.add(entry.getKey());
+				// put the rank into the list of ranks
+				currentOrderedRanks.add(entry.getValue());
+			}
 		}
-		
+			
 		return currentOrderedRanks;
 	}
 	
@@ -276,47 +285,57 @@ public class CardHelper {
 	}
 	*/
 	
-	// nextCard in arabicflashcards should prob be called something like showNextCard
-	Map<String, String> nextCard() {
+	private Map<String, String> getCard(int thisId) {
 		String[] columns = { "english", "arabic" };
 		String selection = "_ID = ?";
 		String[] selectionArgs = new String[1];
-		int thisId;
 		Map<String, String> thisCard = new HashMap<String, String>();
 		
+		selectionArgs[0] = "" + thisId;
+		this.cursor = ranksDb.query("ranks", columns, selection, selectionArgs, null, null, null);
+		cursor.moveToFirst();
+		
+		String english = cursor.getString(0);
+		String arabic = cursor.getString(1);
+
+		thisCard.put("english", english);
+		thisCard.put("arabic", arabic);
+		
+		// add word to the card history
+		cardHistory.add(thisCard);
+		
+		return thisCard;
+	}
+	
+	// nextCard in arabicflashcards should prob be called something like showNextCard
+	Map<String, String> nextCard() {
+		int thisId;
+
 		// if some of the selected cards don't have ranks, that means they 
 		// haven't been shown yet, so show them
 		if (!currentUnrankedIds.isEmpty()) {
 			// remove the first element from the list
 			thisId = currentUnrankedIds.remove(0);
-			selectionArgs[0] = "" + thisId;
-			this.cursor = ranksDb.query("ranks", columns, selection, selectionArgs, null, null, null);
-			cursor.moveToFirst();
-			
-			String english = cursor.getString(0);
-			String arabic = cursor.getString(1);
+			return getCard(thisId);
 
-			thisCard.put("english", english);
-			thisCard.put("arabic", arabic);
-			
-			// add word to the card history
-			cardHistory.add(thisCard);
 // TODO: implement else {  // select cards by rank
 // TODO: how many cards do we go through before we stop going through ranks?
 // 
 		} else if (cardHistory.size() > (currentRankedIds.size() + currentUnrankedIds.size())) {
+			thisId = weightedCardIds.next();
+			return getCard(thisId);
+						
 //			Random rnd = new Random(System.nanoTime());
 //			double rndNum = rnd.nextDouble() * currentCardWeights[currentCardWeights.size() - 1];
 			
-			
 		// if we've no more cards
-		} else { 
+		} else {
 			// load more
 			loadCards();
 			return nextCard();
 		}
 		
-		return thisCard;
+//		return thisCard;
 	}
 	
 	Map<String, String> prevCard() {
