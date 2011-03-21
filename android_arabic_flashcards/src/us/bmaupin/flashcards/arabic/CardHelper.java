@@ -21,8 +21,8 @@ import android.util.Log;
 
 public class CardHelper {
 	private static final String TAG = "CardHelper";
-	private DatabaseHelper helper;
-	private SQLiteDatabase db;
+	private DatabaseHelper wordsHelper;
+	private SQLiteDatabase wordsDb;
 	private Cursor cursor;
 	private RankDatabaseHelper ranksHelper;
 	private SQLiteDatabase ranksDb;
@@ -44,8 +44,8 @@ public class CardHelper {
 		this.ranksDb = ranksDb;
 		this.currentCategory = currentCategory;
 */	
-		helper = new DatabaseHelper(context);
-		db = helper.getReadableDatabase();
+		wordsHelper = new DatabaseHelper(context);
+		wordsDb = wordsHelper.getReadableDatabase();
 		
 		ranksHelper = new RankDatabaseHelper(context);
 		ranksDb = ranksHelper.getReadableDatabase();
@@ -55,15 +55,15 @@ public class CardHelper {
 	public void close() {
 		// clean up after ourselves
 		ranksHelper.close();
-		helper.close();
+		wordsHelper.close();
 	}
 	
 	private void createCursor() {
 		// Perform a managed query. The Activity will handle closing
 		// and re-querying the cursor when needed.
-//		SQLiteDatabase db = helper.getReadableDatabase();
+//		SQLiteDatabase wordsDb = wordsHelper.getReadableDatabase();
 		String[] FROM = { "english", "arabic" };
-		cursor = db.query("words", FROM, null, null, null, null, null);
+		cursor = wordsDb.query("words", FROM, null, null, null, null, null);
 //		startManagingCursor(cursor);
 	}
 	
@@ -84,7 +84,7 @@ public class CardHelper {
 			selection = "aws_chapter = " + currentSubCategory;
 		}
 		
-		cursor = db.query("words", columns, selection, null, null, null, null);
+		cursor = wordsDb.query("words", columns, selection, null, null, null, null);
 		cursor.moveToFirst();
 		
 //		while (cursor.moveToNext()) {
@@ -292,7 +292,7 @@ public class CardHelper {
 		Map<String, String> thisCard = new HashMap<String, String>();
 		
 		selectionArgs[0] = "" + thisId;
-		this.cursor = ranksDb.query("ranks", columns, selection, selectionArgs, null, null, null);
+		this.cursor = wordsDb.query("words", columns, selection, selectionArgs, null, null, null);
 		cursor.moveToFirst();
 		
 		String english = cursor.getString(0);
@@ -311,6 +311,8 @@ public class CardHelper {
 	Map<String, String> nextCard() {
 		int thisId;
 
+// TODO: when doing nextCard, go through history until past end of history list		
+		
 		// if some of the selected cards don't have ranks, that means they 
 		// haven't been shown yet, so show them
 		if (!currentUnrankedIds.isEmpty()) {
@@ -321,7 +323,7 @@ public class CardHelper {
 // TODO: implement else {  // select cards by rank
 // TODO: how many cards do we go through before we stop going through ranks?
 // 
-		} else if (cardHistory.size() > (currentRankedIds.size() + currentUnrankedIds.size())) {
+		} else if (cardHistory.size() < (currentRankedIds.size() + currentUnrankedIds.size())) {
 			thisId = weightedCardIds.next();
 			return getCard(thisId);
 						
@@ -339,9 +341,19 @@ public class CardHelper {
 	}
 	
 	Map<String, String> prevCard() {
-		if (!cardHistory.isEmpty()) {
+// TODO: implement history
+/*
+ * keep track of history position, don't show same card when doing prevCard, 
+ * when going to nextCard we need to go back through history until history 
+ * is past end of history list
+ */
+//		if (!cardHistory.isEmpty()) {
+		// since the last card in the history is the current
+		if (cardHistory.size() > 1) {
+			// drop the current word
+			cardHistory.remove(cardHistory.size() - 1);
 			// return the last card
-			return cardHistory.remove(cardHistory.size() - 1);
+			return cardHistory.get(cardHistory.size() - 1);
 		// if cardHistory is empty
 		} else {
 // TODO: implement if cardHistory is empty
