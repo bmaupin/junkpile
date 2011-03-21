@@ -36,6 +36,11 @@ fix right-to-leftness in cards?
     same problems with slashes!
 
 
+BUGS:
+onResume goes to next card
+
+
+
 CLEANUP:
     will we be using getChapters in more than one activity?
         if so, put it in the db class
