@@ -39,7 +39,8 @@ public class ArabicFlashcards extends Activity {
 	String selectedChapter;
 	public static final String PREFS_NAME = "FlashcardPrefsFile";
 	private static final int GET_CATEGORY = 0;
-	private DatabaseHelper helper;
+	private CardHelper ch;
+//	private DatabaseHelper helper;
 //	private SQLiteDatabase db;
 // TODO: do we want to remember last card position?  card ID would probably be more
 //	universal than cursor position
@@ -92,6 +93,8 @@ public class ArabicFlashcards extends Activity {
                 return false;
             }
         };
+        
+    	ch = new CardHelper(this);
         
 //        helper = new DatabaseHelper(this);
 //        db = helper.getReadableDatabase();
@@ -148,10 +151,13 @@ public class ArabicFlashcards extends Activity {
 		// cursor so it loses its position
 //		cursor.moveToPosition(cursorPosition);
 		
+		ch.loadCards();
+		
 		// get the default card language again in case it's changed
 		defaultLang = Settings.getDefaultLang(this);
 		// show the first card (do it here in case default card language changed)
-		loadViews();
+//		loadViews();
+		showNextCard();
 	}
     
     @Override
@@ -184,7 +190,8 @@ public class ArabicFlashcards extends Activity {
 		Log.d(TAG, "onDestroy called");
 		
 		// close the database helper so android doesn't whine
-		helper.close();
+//		helper.close();
+		ch.close();
 	}
 
 	/* Inflates the menu */
@@ -354,6 +361,7 @@ public class ArabicFlashcards extends Activity {
 		}
 	}
 	
+	/*
 	private void loadViews() {
 		Log.d(TAG, "loadViews called");
 		//TextView thisView = (TextView) vf.getChildAt(vf.getDisplayedChild() -1);
@@ -363,7 +371,7 @@ public class ArabicFlashcards extends Activity {
 		ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();
 //		int currentLayoutId = currentLayout.getId();
 		currentView = (TextView) currentLayout.getChildAt(0);
-// TODO: get current (prob next) card		
+// TODO: get current (prob next) card
 		currentWord = getCurrentWord();
 		showWord(currentView, currentWord);
 
@@ -394,9 +402,10 @@ public class ArabicFlashcards extends Activity {
 		TextView thisView = (TextView) thisLayout.getChildAt(0);
 		thisView.setText("success!");
 */
-
+/*
 	}
-	
+*/
+	/*
 	private void showNextCard() {
     	vf.setInAnimation(slideLeftIn);
         vf.setOutAnimation(slideLeftOut);
@@ -413,6 +422,29 @@ public class ArabicFlashcards extends Activity {
 // TODO: get previous card    	
     	cursorPosition--;
     	loadViews();
+	}
+	*/
+
+	private void showNextCard() {
+    	vf.setInAnimation(slideLeftIn);
+        vf.setOutAnimation(slideLeftOut);
+    	vf.showNext();
+
+    	currentWord = ch.nextCard();
+    	ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();
+    	currentView = (TextView) currentLayout.getChildAt(0);
+    	showWord(currentView, currentWord);
+	}
+	
+	private void showPrevCard() {
+    	vf.setInAnimation(slideRightIn);
+        vf.setOutAnimation(slideRightOut);
+    	vf.showPrevious();
+    	
+    	currentWord = ch.prevCard();
+    	ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();
+    	currentView = (TextView) currentLayout.getChildAt(0);
+    	showWord(currentView, currentWord);
 	}
 	
     class MyGestureDetector extends SimpleOnGestureListener {
