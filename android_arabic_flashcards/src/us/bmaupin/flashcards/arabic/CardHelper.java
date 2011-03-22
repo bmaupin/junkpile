@@ -311,11 +311,11 @@ public class CardHelper {
 	// nextCard in arabicflashcards should prob be called something like showNextCard
 	Map<String, String> nextCard() {
 		int thisId;
-
-// TODO: when doing nextCard, go through history until past end of history list		
 		
+		// if we're going forward through the card history
 		if (cardHistoryIndex > 0) {
 			cardHistoryIndex --;
+			// return the next card in the card history
 			return cardHistory.get(cardHistory.size() - (cardHistoryIndex + 1));
 			
 		// if some of the selected cards don't have ranks, that means they 
@@ -346,23 +346,12 @@ public class CardHelper {
 	}
 	
 	Map<String, String> prevCard() {
-// TODO: implement history
-/*
- * keep track of history position, don't show same card when doing prevCard, 
- * when going to nextCard we need to go back through history until history 
- * is past end of history list
- */
-//		if (!cardHistory.isEmpty()) {
-		// since the last card in the history is the current
+		// if we have anything in card history
 		if (cardHistory.size() > 1) {
 			cardHistoryIndex ++;
+			// return the previous card
 			return cardHistory.get(cardHistory.size() - (cardHistoryIndex + 1));
-			
-			
-			// drop the current word
-//			cardHistory.remove(cardHistory.size() - 1);
-			// return the last card
-//			return cardHistory.get(cardHistory.size() - 1);
+
 		// if cardHistory is empty
 		} else {
 // TODO: implement if cardHistory is empty
