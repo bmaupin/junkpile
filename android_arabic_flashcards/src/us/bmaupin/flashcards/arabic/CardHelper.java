@@ -299,6 +299,7 @@ public class CardHelper {
 		String english = cursor.getString(0);
 		String arabic = cursor.getString(1);
 
+		thisCard.put("ID", "" + thisId);
 		thisCard.put("english", english);
 		thisCard.put("arabic", arabic);
 		
@@ -309,7 +310,7 @@ public class CardHelper {
 	}
 	
 	// nextCard in arabicflashcards should prob be called something like showNextCard
-	Map<String, String> nextCard() {
+	private Map<String, String> nextCard() {
 		int thisId;
 		
 		// if we're going forward through the card history
@@ -345,7 +346,7 @@ public class CardHelper {
 //		return thisCard;
 	}
 	
-	Map<String, String> prevCard() {
+	private Map<String, String> prevCard() {
 		// if we have anything in card history
 		if (cardHistory.size() > 1) {
 			cardHistoryIndex ++;
@@ -359,6 +360,26 @@ public class CardHelper {
 			thisCard.put("error", "no previous cards");
 			return thisCard;
 		}
+	}
+	
+	Map<String, String> nextCardNormalRank(int oldId) {
+		
+		return nextCard();
+	}
+	
+	Map<String, String> prevCardNormalRank(int oldId) {
+		
+		return prevCard();
+	}
+	
+	Map<String, String> nextCardUpRank(int oldId) {
+		
+		return nextCard();
+	}
+	
+	Map<String, String> nextCardDownRank(int oldId) {
+		
+		return nextCard();
 	}
 	
 	// from http://stackoverflow.com/questions/109383/how-to-sort-a-mapkey-value-on-the-values-in-java

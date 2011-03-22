@@ -66,6 +66,7 @@ public class ArabicFlashcards extends Activity {
 //    private TextView centerView;
 //    private TextView rightView;
     
+    private int currentId;
     private TextView currentView;
     private Map<String, String> currentWord;
 
@@ -76,7 +77,7 @@ public class ArabicFlashcards extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        test();
+//        test();
         
         vf = (ViewFlipper)findViewById(R.id.flipper);
         slideLeftIn = AnimationUtils.loadAnimation(this, R.anim.slide_left_in);
@@ -429,8 +430,12 @@ public class ArabicFlashcards extends Activity {
     	vf.setInAnimation(slideLeftIn);
         vf.setOutAnimation(slideLeftOut);
     	vf.showNext();
-
-    	currentWord = ch.nextCard();
+    	
+    	currentWord = ch.nextCardNormalRank(currentId);
+    	// store the ID of the current Word
+    	currentId = stringToInteger(currentWord.get("ID"));
+//
+    	Log.d(TAG, "showNextCard: currentId=" + currentId);
     	ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();
     	currentView = (TextView) currentLayout.getChildAt(0);
     	showWord(currentView, currentWord);
@@ -441,7 +446,11 @@ public class ArabicFlashcards extends Activity {
         vf.setOutAnimation(slideRightOut);
     	vf.showPrevious();
     	
-    	currentWord = ch.prevCard();
+    	currentWord = ch.prevCardNormalRank(currentId);
+    	// store the ID of the current Word
+    	currentId = stringToInteger(currentWord.get("ID"));
+//
+    	Log.d(TAG, "showPrevCard: currentId=" + currentId);
     	ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();
     	currentView = (TextView) currentLayout.getChildAt(0);
     	showWord(currentView, currentWord);
@@ -517,5 +526,14 @@ public class ArabicFlashcards extends Activity {
         ranksHelper.close();
         */
     }
-       
+    
+    int stringToInteger(String s) {
+    	try {
+    		int i = Integer.parseInt(s.trim());
+    		return i;
+    	} catch (NumberFormatException e) {
+    		Log.d(TAG, "stringToInteger: error: " + e.getMessage());
+    		return 0;
+    	}
+    }
 }
