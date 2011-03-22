@@ -66,7 +66,7 @@ public class ArabicFlashcards extends Activity {
 //    private TextView centerView;
 //    private TextView rightView;
     
-    private int currentId;
+    private String currentId;
     private TextView currentView;
     private Map<String, String> currentWord;
 
@@ -158,6 +158,7 @@ public class ArabicFlashcards extends Activity {
 		defaultLang = Settings.getDefaultLang(this);
 		// show the first card (do it here in case default card language changed)
 //		loadViews();
+// TODO: show the last saved card instead of the next card?
 		showNextCard();
 	}
     
@@ -433,7 +434,7 @@ public class ArabicFlashcards extends Activity {
     	
     	currentWord = ch.nextCardNormalRank(currentId);
     	// store the ID of the current Word
-    	currentId = stringToInteger(currentWord.get("ID"));
+    	currentId = currentWord.get("ID");
 //
     	Log.d(TAG, "showNextCard: currentId=" + currentId);
     	ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();
@@ -448,7 +449,7 @@ public class ArabicFlashcards extends Activity {
     	
     	currentWord = ch.prevCardNormalRank(currentId);
     	// store the ID of the current Word
-    	currentId = stringToInteger(currentWord.get("ID"));
+    	currentId = currentWord.get("ID");
 //
     	Log.d(TAG, "showPrevCard: currentId=" + currentId);
     	ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();

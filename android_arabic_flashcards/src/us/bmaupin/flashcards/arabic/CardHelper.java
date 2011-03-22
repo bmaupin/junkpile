@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
@@ -362,24 +363,43 @@ public class CardHelper {
 		}
 	}
 	
-	Map<String, String> nextCardNormalRank(int oldId) {
+	Map<String, String> nextCardNormalRank(String oldId) {
+		normalRank(oldId);
 		
 		return nextCard();
 	}
 	
-	Map<String, String> prevCardNormalRank(int oldId) {
+	Map<String, String> prevCardNormalRank(String oldId) {
 		
 		return prevCard();
 	}
 	
-	Map<String, String> nextCardUpRank(int oldId) {
+	Map<String, String> nextCardUpRank(String oldId) {
 		
 		return nextCard();
 	}
 	
-	Map<String, String> nextCardDownRank(int oldId) {
+	Map<String, String> nextCardDownRank(String oldId) {
 		
 		return nextCard();
+	}
+	
+	private void normalRank(String thisId) {
+		String sql = "UPDATE " + RankDatabaseHelper.DB_TABLE_NAME + " SET " + 
+				RankDatabaseHelper.RANK + " = " + RankDatabaseHelper.RANK + 
+				" + 1 WHERE _ID = " + thisId; 
+		
+		ranksDb.execSQL(sql);
+		
+		/*
+		String whereClause = "_ID = ?";
+		String[] whereArgs = {thisId};
+		
+		ContentValues cv=new ContentValues();
+		cv.put(RankDatabaseHelper.RANK, RankDatabaseHelper.RANK + "+ 1");
+		
+		ranksDb.update(RankDatabaseHelper.DB_TABLE_NAME, cv, whereClause, whereArgs);
+		*/
 	}
 	
 	// from http://stackoverflow.com/questions/109383/how-to-sort-a-mapkey-value-on-the-values-in-java
