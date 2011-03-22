@@ -27,6 +27,7 @@ public class CardHelper {
 	private RankDatabaseHelper ranksHelper;
 	private SQLiteDatabase ranksDb;
 	private List<Map<String, String>> cardHistory = new ArrayList<Map<String, String>>();
+	private int cardHistoryIndex = 0;
 	private String currentCategory = "All";
 	private String currentSubCategory;
 //	private Map<Integer, Integer> currentCardWeights = new HashMap<Integer, Integer>();
@@ -313,9 +314,13 @@ public class CardHelper {
 
 // TODO: when doing nextCard, go through history until past end of history list		
 		
+		if (cardHistoryIndex > 0) {
+			cardHistoryIndex --;
+			return cardHistory.get(cardHistory.size() - (cardHistoryIndex + 1));
+			
 		// if some of the selected cards don't have ranks, that means they 
 		// haven't been shown yet, so show them
-		if (!currentUnrankedIds.isEmpty()) {
+		} else if (!currentUnrankedIds.isEmpty()) {
 			// remove the first element from the list
 			thisId = currentUnrankedIds.remove(0);
 			return getCard(thisId);
@@ -350,10 +355,14 @@ public class CardHelper {
 //		if (!cardHistory.isEmpty()) {
 		// since the last card in the history is the current
 		if (cardHistory.size() > 1) {
+			cardHistoryIndex ++;
+			return cardHistory.get(cardHistory.size() - (cardHistoryIndex + 1));
+			
+			
 			// drop the current word
-			cardHistory.remove(cardHistory.size() - 1);
+//			cardHistory.remove(cardHistory.size() - 1);
 			// return the last card
-			return cardHistory.get(cardHistory.size() - 1);
+//			return cardHistory.get(cardHistory.size() - 1);
 		// if cardHistory is empty
 		} else {
 // TODO: implement if cardHistory is empty
