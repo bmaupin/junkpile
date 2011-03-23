@@ -288,6 +288,8 @@ public class CardHelper {
 	*/
 	
 	private Map<String, String> getCard(int thisId) {
+		Log.d(TAG, "getCard: thisId=" + thisId);
+		
 		String[] columns = { "english", "arabic" };
 		String selection = "_ID = ?";
 		String[] selectionArgs = new String[1];
@@ -320,7 +322,7 @@ public class CardHelper {
 	}
 	
 	// nextCard in arabicflashcards should prob be called something like showNextCard
-	private Map<String, String> nextCard() {
+	Map<String, String> nextCard() {
 		int thisId;
 		
 		// if we're going forward through the card history
@@ -346,10 +348,10 @@ public class CardHelper {
 // TODO: how many cards do we go through before we stop going through ranks?
 // 
 		} else if (cardHistory.size() < (currentRankedIds.size() + currentUnrankedIds.size())) {
-			thisId = weightedCardIds.next();
+			thisId = currentRankedIds.get(weightedCardIds.next());
 			// get the next weighted card ID
 			Map<String, String> thisCard = getCard(thisId);
-			// update its rank
+			// get its rank
 			thisCard.put("rank", "" + getRank(thisCard.get("ID")));
 			// return it
 			return thisCard;
@@ -383,8 +385,9 @@ public class CardHelper {
 		}
 	}
 	
-	Map<String, String> nextCardNormalRank(Map<String, String> currentCard) {
+	Map<String, String> nextCardNormalRank(String currentCardId, int currentCardRank) {
 //		normalRank(oldId);
+		updateRankNormal(currentCardId, currentCardRank);
 		
 		return nextCard();
 	}
@@ -404,7 +407,8 @@ public class CardHelper {
 		return nextCard();
 	}
 	
-	private void normalRank(String thisId) {
+	private void updateRankNormal(String thisCardId, int thisCardRank) {
+		/*
 		String sql = "UPDATE " + RankDatabaseHelper.DB_TABLE_NAME + " SET " + 
 				RankDatabaseHelper.RANK + " = " + RankDatabaseHelper.RANK + 
 				" + 1 WHERE _ID = " + thisId; 
@@ -420,6 +424,27 @@ public class CardHelper {
 		
 		ranksDb.update(RankDatabaseHelper.DB_TABLE_NAME, cv, whereClause, whereArgs);
 		*/
+		
+		int newCardRank;
+		
+		// don't go any lower than 2; 1 is reserved for cards we know
+		if (thisCardRank == 2) {
+			return;
+		// if a card is unranked, set the default starting rank to 20
+		} else if (thisCardRank == 0) {
+			newCardRank = 20;
+		// reduce the rank by 1
+		} else {
+			newCardRank = thisCardRank -1;
+		}
+		
+		String whereClause = "_ID = ?";
+		String[] whereArgs = {thisCardId};
+		
+		ContentValues cv=new ContentValues();
+		cv.put(RankDatabaseHelper.RANK, newCardRank);
+		
+		ranksDb.update(RankDatabaseHelper.DB_TABLE_NAME, cv, whereClause, whereArgs);
 	}
 	
 	// from http://stackoverflow.com/questions/109383/how-to-sort-a-mapkey-value-on-the-values-in-java

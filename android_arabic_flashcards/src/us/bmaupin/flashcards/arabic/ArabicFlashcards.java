@@ -66,7 +66,8 @@ public class ArabicFlashcards extends Activity {
 //    private TextView centerView;
 //    private TextView rightView;
     
-    private String currentId;
+    private String currentCardId;
+    private int currentCardRank;
     private TextView currentView;
     private Map<String, String> currentWord;
 
@@ -159,7 +160,7 @@ public class ArabicFlashcards extends Activity {
 		// show the first card (do it here in case default card language changed)
 //		loadViews();
 // TODO: show the last saved card instead of the next card?
-		showNextCard();
+		showFirstCard();
 	}
     
     @Override
@@ -427,14 +428,29 @@ public class ArabicFlashcards extends Activity {
 	}
 	*/
 
+	private void showFirstCard() {
+		currentWord = ch.nextCard();
+    	// store the ID and rank of the current Word
+    	currentCardId = currentWord.get("ID");
+    	currentCardRank = stringToInteger(currentWord.get("rank"));
+    	
+//
+    	Log.d(TAG, "showNextCard: currentWord=" + currentWord);
+    	ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();
+    	currentView = (TextView) currentLayout.getChildAt(0);
+    	showWord(currentView, currentWord);
+	}
+	
 	private void showNextCard() {
     	vf.setInAnimation(slideLeftIn);
         vf.setOutAnimation(slideLeftOut);
     	vf.showNext();
     	
-    	currentWord = ch.nextCardNormalRank(currentWord);
-//    	// store the ID of the current Word
-//   	currentId = currentWord.get("ID");
+    	currentWord = ch.nextCardNormalRank(currentCardId, currentCardRank);
+    	// store the ID and rank of the current Word
+    	currentCardId = currentWord.get("ID");
+    	currentCardRank = stringToInteger(currentWord.get("rank"));
+    	
 //
     	Log.d(TAG, "showNextCard: currentWord=" + currentWord);
     	ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();
@@ -448,8 +464,10 @@ public class ArabicFlashcards extends Activity {
     	vf.showPrevious();
     	
     	currentWord = ch.prevCardNormalRank(currentWord);
-//    	// store the ID of the current Word
-//    	currentId = currentWord.get("ID");
+    	// store the ID and rank of the current Word
+    	currentCardId = currentWord.get("ID");
+    	currentCardRank = stringToInteger(currentWord.get("rank"));
+    	
 //
     	Log.d(TAG, "showNextCard: currentWord=" + currentWord);
     	ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();
