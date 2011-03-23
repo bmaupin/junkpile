@@ -37,13 +37,27 @@ fix right-to-leftness in cards?
 
 
 BUGS:
+prevCard doesn't use updated rank
 onResume goes to next card
+prevCard crashes when history is empty
 
 
 
 CLEANUP:
     will we be using getChapters in more than one activity?
         if so, put it in the db class
+
+
+POST 1.0 FEATURES
+- background/font changing
+    -color, size, font
+- profiles
+    - use separate ranks db table for each profile
+- back up profiles
+- remove profiles
+- delete ranks (essentially same as removing profile)
+- store app on sd card?
+- user uploaded dbs?
 
 
 DONE?
