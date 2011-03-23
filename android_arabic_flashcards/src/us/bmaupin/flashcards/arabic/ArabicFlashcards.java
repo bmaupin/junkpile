@@ -432,11 +432,11 @@ public class ArabicFlashcards extends Activity {
         vf.setOutAnimation(slideLeftOut);
     	vf.showNext();
     	
-    	currentWord = ch.nextCardNormalRank(currentId);
-    	// store the ID of the current Word
-    	currentId = currentWord.get("ID");
+    	currentWord = ch.nextCardNormalRank(currentWord);
+//    	// store the ID of the current Word
+//   	currentId = currentWord.get("ID");
 //
-    	Log.d(TAG, "showNextCard: currentId=" + currentId);
+    	Log.d(TAG, "showNextCard: currentWord=" + currentWord);
     	ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();
     	currentView = (TextView) currentLayout.getChildAt(0);
     	showWord(currentView, currentWord);
@@ -447,11 +447,11 @@ public class ArabicFlashcards extends Activity {
         vf.setOutAnimation(slideRightOut);
     	vf.showPrevious();
     	
-    	currentWord = ch.prevCardNormalRank(currentId);
-    	// store the ID of the current Word
-    	currentId = currentWord.get("ID");
+    	currentWord = ch.prevCardNormalRank(currentWord);
+//    	// store the ID of the current Word
+//    	currentId = currentWord.get("ID");
 //
-    	Log.d(TAG, "showPrevCard: currentId=" + currentId);
+    	Log.d(TAG, "showNextCard: currentWord=" + currentWord);
     	ViewGroup currentLayout = (RelativeLayout)vf.getCurrentView();
     	currentView = (TextView) currentLayout.getChildAt(0);
     	showWord(currentView, currentWord);

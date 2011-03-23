@@ -299,7 +299,7 @@ public class CardHelper {
 		
 		String english = cursor.getString(0);
 		String arabic = cursor.getString(1);
-
+		
 		thisCard.put("ID", "" + thisId);
 		thisCard.put("english", english);
 		thisCard.put("arabic", arabic);
@@ -310,6 +310,15 @@ public class CardHelper {
 		return thisCard;
 	}
 	
+	private int getRank(String thisId) {
+		String[] columns = { RankDatabaseHelper.RANK };
+		String selection = "_ID = " + thisId;
+		// get its rank
+		cursor = ranksDb.query(RankDatabaseHelper.DB_TABLE_NAME, columns, selection, null, null, null, null);
+		cursor.moveToFirst();
+		return cursor.getInt(0);
+	}
+	
 	// nextCard in arabicflashcards should prob be called something like showNextCard
 	private Map<String, String> nextCard() {
 		int thisId;
@@ -317,22 +326,33 @@ public class CardHelper {
 		// if we're going forward through the card history
 		if (cardHistoryIndex > 0) {
 			cardHistoryIndex --;
-			// return the next card in the card history
-			return cardHistory.get(cardHistory.size() - (cardHistoryIndex + 1));
-			
-		// if some of the selected cards don't have ranks, that means they 
+			// get the next card in the card history
+			Map<String, String> thisCard = cardHistory.get(cardHistory.size() - (cardHistoryIndex + 1));
+			// update its rank
+			thisCard.put("rank", "" + getRank(thisCard.get("ID")));
+			// return it
+			return thisCard;
+
+			// if some of the selected cards don't have ranks, that means they 
 		// haven't been shown yet, so show them
 		} else if (!currentUnrankedIds.isEmpty()) {
 			// remove the first element from the list
 			thisId = currentUnrankedIds.remove(0);
-			return getCard(thisId);
+			Map<String, String> thisCard = getCard(thisId);
+			thisCard.put("rank", "0");
+			return thisCard;
 
 // TODO: implement else {  // select cards by rank
 // TODO: how many cards do we go through before we stop going through ranks?
 // 
 		} else if (cardHistory.size() < (currentRankedIds.size() + currentUnrankedIds.size())) {
 			thisId = weightedCardIds.next();
-			return getCard(thisId);
+			// get the next weighted card ID
+			Map<String, String> thisCard = getCard(thisId);
+			// update its rank
+			thisCard.put("rank", "" + getRank(thisCard.get("ID")));
+			// return it
+			return thisCard;
 						
 //			Random rnd = new Random(System.nanoTime());
 //			double rndNum = rnd.nextDouble() * currentCardWeights[currentCardWeights.size() - 1];
@@ -363,23 +383,23 @@ public class CardHelper {
 		}
 	}
 	
-	Map<String, String> nextCardNormalRank(String oldId) {
-		normalRank(oldId);
+	Map<String, String> nextCardNormalRank(Map<String, String> currentCard) {
+//		normalRank(oldId);
 		
 		return nextCard();
 	}
 	
-	Map<String, String> prevCardNormalRank(String oldId) {
+	Map<String, String> prevCardNormalRank(Map<String, String> currentCard) {
 		
 		return prevCard();
 	}
 	
-	Map<String, String> nextCardUpRank(String oldId) {
+	Map<String, String> nextCardUpRank(Map<String, String> currentCard) {
 		
 		return nextCard();
 	}
 	
-	Map<String, String> nextCardDownRank(String oldId) {
+	Map<String, String> nextCardDownRank(Map<String, String> currentCard) {
 		
 		return nextCard();
 	}
