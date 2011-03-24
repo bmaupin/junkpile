@@ -153,7 +153,7 @@ public class ArabicFlashcards extends Activity {
 		// cursor so it loses its position
 //		cursor.moveToPosition(cursorPosition);
 		
-		ch.loadCards();
+//		ch.loadCards();
 		
 		// get the default card language again in case it's changed
 		defaultLang = Settings.getDefaultLang(this);
@@ -463,7 +463,7 @@ public class ArabicFlashcards extends Activity {
         vf.setOutAnimation(slideRightOut);
     	vf.showPrevious();
     	
-    	currentWord = ch.prevCardNormalRank(currentWord);
+    	currentWord = ch.prevCardNormalRank(currentCardId, currentCardRank);
     	// store the ID and rank of the current Word
     	currentCardId = currentWord.get("ID");
     	currentCardRank = stringToInteger(currentWord.get("rank"));
