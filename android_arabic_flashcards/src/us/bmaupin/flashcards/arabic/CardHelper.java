@@ -61,15 +61,6 @@ public class CardHelper {
 		wordsHelper.close();
 	}
 	
-	private void createCursor() {
-		// Perform a managed query. The Activity will handle closing
-		// and re-querying the cursor when needed.
-//		SQLiteDatabase wordsDb = wordsHelper.getReadableDatabase();
-		String[] FROM = { "english", "arabic" };
-		cursor = wordsDb.query("words", FROM, null, null, null, null, null);
-//		startManagingCursor(cursor);
-	}
-	
 	// loadCards in arabicFlashcards should prob be called something like loadViews
 	void loadCards() {
 		Log.d(TAG, "loadCards called");
