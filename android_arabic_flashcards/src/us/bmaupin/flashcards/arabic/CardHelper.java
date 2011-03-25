@@ -16,7 +16,6 @@ import java.util.Random;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -32,27 +31,16 @@ public class CardHelper {
 	private int cardsShown = 0;
 	private String currentCategory = "All";
 	private String currentSubCategory;
-//	private Map<Integer, Integer> currentCardWeights = new HashMap<Integer, Integer>();
-//	private List<Integer> currentCardWeights = new ArrayList<Integer>();
 	private List<Integer> currentRankedIds = new ArrayList<Integer>();
 	private List<Integer> currentUnrankedIds = new ArrayList<Integer>();
 	private WeightedRandomGenerator weightedCardIds;
 	
 	public CardHelper(Context context) {
-/*		super();
-		this.helper = helper;
-		this.db = db;
-		this.cursor = cursor;
-		this.ranksHelper = ranksHelper;
-		this.ranksDb = ranksDb;
-		this.currentCategory = currentCategory;
-*/	
 		wordsHelper = new DatabaseHelper(context);
 		wordsDb = wordsHelper.getReadableDatabase();
 		
 		ranksHelper = new RankDatabaseHelper(context);
 		ranksDb = ranksHelper.getReadableDatabase();
-//		createCursor();
 	}
 	
 	public void close() {
@@ -65,10 +53,7 @@ public class CardHelper {
 	void loadCards() {
 		Log.d(TAG, "loadCards called");
 		List<Integer> currentCardIds = new ArrayList<Integer>();
-//		Map<Integer, Integer> currentCardRanks = new HashMap<Integer, Integer>();
-//		Map<Integer, Integer> currentCardWeights = new HashMap<Integer, Integer>();
 		List<Integer> currentOrderedRanks = new ArrayList<Integer>();
-//		List<Integer> currentCardWeights = new ArrayList<Integer>();
 		
 		// these need to be emptied each time loadCards is called
 		currentRankedIds.clear();
@@ -105,23 +90,11 @@ public class CardHelper {
 		for (int thisRank : currentOrderedRanks) { 
 			Log.d(TAG, "" + thisRank);
 		}
-//		for (Map.Entry<Integer, Integer> entry : currentCardRanks.entrySet()) {
-//			Log.d(TAG, entry.getKey() + "\t" + entry.getValue());
-//		}
 		
 		if (!currentOrderedRanks.isEmpty()) {
 			weightedCardIds = new WeightedRandomGenerator(currentOrderedRanks);
-//		buildWeights(currentOrderedRanks);
 		}
 
-//		
-//		Log.d(TAG, "loadCards: currentCardWeights:");
-//		for (int thisWeight : currentCardWeights) {
-//			Log.d(TAG, "" + thisWeight);
-//		}
-//		for (Map.Entry<Integer, Integer> entry : currentCardWeights.entrySet()) {
-//			Log.d(TAG, entry.getKey() + "\t" + entry.getValue());
-//		}
 //		
 		Log.d(TAG, "loadCards: currentUnrankedIds:");
 		for (int thisID : currentUnrankedIds) {
@@ -138,38 +111,7 @@ public class CardHelper {
 		currentCategory = category;
 		currentSubCategory = subCategory;
 		loadCards();
-	}
-	
-	/*
-	List<Integer> loadRanks(List<Integer> currentCardIds) {
-		List<Integer> currentCardRanks = new ArrayList<Integer>();
-//		List<Integer> currentRankedIds = new ArrayList<Integer>();
-		String[] columns = { "rank" };
-		
-		// for each card ID in current cards
-		for (int thisId : currentCardIds) {
-			String selection = "_ID = " + thisId;
-			// get its rank
-			cursor = ranksDb.query("ranks", columns, selection, null, null, null, null);
-			cursor.moveToFirst();
-			int thisRank = cursor.getInt(0);
-			
-			// if the rank for this particular card is 0
-			if (thisRank == 0) {
-				// add it to the list of cards with no rank
-				currentUnrankedIds.add(thisId);
-			} else {
-				// add it to the list of ranked cards
-				currentRankedIds.add(thisId);
-				// put the rank in currentCardRanks
-				currentCardRanks.add(thisRank);
-			}
-		}
-		
-		return currentCardRanks;
-	}
-	*/
-	
+	}	
 	
 	private List<Integer> loadRanks(List<Integer> currentCardIds) {
 		Map<Integer, Integer> currentCardRanks = new HashMap<Integer, Integer>();
@@ -192,11 +134,6 @@ public class CardHelper {
 			} else {
 				// put it in currentCardRanks
 				currentCardRanks.put(thisId, thisRank);
-				
-//				// add it to the list of ranked cards
-//				currentRankedIds.add(thisId);
-//				// put the rank in currentCardRanks
-//				currentCardRanks.add(thisRank);
 			}
 		}
 		
@@ -219,24 +156,7 @@ public class CardHelper {
 		return currentOrderedRanks;
 	}
 	
-	/*
-	void buildWeights(List<Integer> currentCardRanks) {
-		int runningTotal = 0;
-
-// TODO: make sure we empty the currentCardWeights list first
-		
-		// make sure we empty the currentCardWeights list first
-		currentCardRanks.clear();
-		
-		for (int thisRank : currentCardRanks) {
-			runningTotal += thisRank;
-			currentCardWeights.add(runningTotal);
-		}
-	}
-	*/
-	
 	private class WeightedRandomGenerator {
-//		private int runningTotal;
 		private List<Double> totals = new ArrayList<Double>();
 		
 		private WeightedRandomGenerator(List<Integer> weights) {
@@ -250,44 +170,12 @@ public class CardHelper {
 		
 		private int next() {
 			Random rnd = new Random(System.nanoTime());
-//			Integer rndNum = rnd.nextInt() * totals.get(totals.size() - 1);
 			Double rndNum = rnd.nextDouble() * totals.get(totals.size() - 1);
 			int sNum = Collections.binarySearch(totals, rndNum);
 			int idx = (sNum < 0) ? (Math.abs(sNum) - 1) : sNum;
 			return idx;
 		}
-		
-		/*
-		private List<Integer> getWeights() {
-			return weights;
-		}
-		*/
 	}
-	
-	/*
-	void buildWeights(Map<Integer, Integer> currentCardRanks) {
-//	Map<Integer, Integer> buildWeights(Map<Integer, Integer> currentCardRanks) {
-//		Map<Integer, Integer> currentCardWeights = new HashMap<Integer, Integer>();
-		// initialize the running total of weights
-		int runningTotal = 0;
-		
-		// first we need to sort the ranks
-		currentCardRanks = sortByValue(currentCardRanks);
-		
-		// for each card and its rank
-		for (Map.Entry<Integer, Integer> entry : currentCardRanks.entrySet()) {
-			// if it doesn't have a rank, add it to the list of cards with no rank
-			if (entry.getValue().equals(0)) {
-				currentUnrankedIds.add(entry.getKey());
-			} else {
-				runningTotal += entry.getValue();
-				currentCardWeights.put(runningTotal, entry.getKey());
-			}
-		}
-		
-//		return currentCardWeights;
-	}
-	*/
 	
 	private Map<String, String> getCard(int thisId) {
 		Log.d(TAG, "getCard: thisId=" + thisId);
@@ -401,7 +289,6 @@ public class CardHelper {
 	}
 	
 	Map<String, String> nextCardNormalRank(String currentCardId, int currentCardRank) {
-//		normalRank(oldId);
 		// if we're not going through the card history
 		if (cardHistoryIndex < 1) {
 			// update the card's rank
