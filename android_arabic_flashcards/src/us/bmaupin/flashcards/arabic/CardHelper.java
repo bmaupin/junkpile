@@ -217,6 +217,8 @@ public class CardHelper {
 	// nextCard in arabicflashcards should prob be called something like showNextCard
 	Map<String, String> nextCard() {
 		Log.d(TAG, "nextCard called");
+//		
+		Log.d(TAG, "nextCard: cardHistoryIndex=" + cardHistoryIndex);
 		
 		// if we're going forward through the card history
 		if (cardHistoryIndex > 0) {
@@ -238,7 +240,8 @@ public class CardHelper {
 			// increment the counter of cards shown
 			cardsShown ++;
 			return thisCard;
- 
+
+// TODO: only going off currentunrankedids before loading more, not including current ordered ranks?
 		} else if (cardsShown < (currentRankedIds.size() + currentUnrankedIds.size())) {
 //			
 			Log.d(TAG, "nextCard: cardsShown=" + cardsShown);
@@ -268,7 +271,10 @@ public class CardHelper {
 //		return thisCard;
 	}
 	
-	private Map<String, String> prevCard() {
+	Map<String, String> prevCard() {
+//
+		Log.d(TAG, "prevCard: cardHistoryIndex=" + cardHistoryIndex);
+		
 		// if we have anything in card history
 		if (cardHistory.size() > 1) {
 			cardHistoryIndex ++;
@@ -288,36 +294,31 @@ public class CardHelper {
 		}
 	}
 	
-	Map<String, String> nextCardNormalRank(String currentCardId, int currentCardRank) {
+	/**
+	 * Update the rank of the current card
+	 * @param currentCardId
+	 * @param currentCardRank
+	 * @param direction
+	 */
+	void updateRank(String currentCardId, int currentCardRank, String direction) {
 		// if we're not going through the card history
 		if (cardHistoryIndex < 1) {
 			// update the card's rank
-			updateRankNormal(currentCardId, currentCardRank);
+			if (direction == "right") {
+				updateRankNormal(currentCardId, currentCardRank);
+			} else if (direction == "up") {
+				updateRankKnown(currentCardId);
+			} else if (direction == "down") {
+				updateRankNotKnown(currentCardId, currentCardRank);
+			}
 		}
-		
-		return nextCard();
 	}
 	
-	Map<String, String> prevCardNormalRank(String currentCardId, int currentCardRank) {
-		// if we're not going through the card history
-		if (cardHistoryIndex < 1) {
-			// update the card's rank
-			updateRankNormal(currentCardId, currentCardRank);
-		}
-		
-		return prevCard();
-	}
-	
-	Map<String, String> nextCardUpRank(Map<String, String> currentCard) {
-		
-		return nextCard();
-	}
-	
-	Map<String, String> nextCardDownRank(Map<String, String> currentCard) {
-		
-		return nextCard();
-	}
-	
+	/**
+	 * Updates the rank of a card during a normal (right) swipe
+	 * @param thisCardId
+	 * @param thisCardRank
+	 */
 	private void updateRankNormal(String thisCardId, int thisCardRank) {
 		/*
 		String sql = "UPDATE " + RankDatabaseHelper.DB_TABLE_NAME + " SET " + 
@@ -339,14 +340,14 @@ public class CardHelper {
 		int newCardRank;
 		
 		// don't go any lower than 2; 1 is reserved for cards we know
-		if (thisCardRank == 2) {
+		if (thisCardRank == 1 || thisCardRank == 2) {
 			return;
 		// if a card is unranked, set the default starting rank to 20
 		} else if (thisCardRank == 0) {
 			newCardRank = 20;
 		// reduce the rank by 1
 		} else {
-			newCardRank = thisCardRank -1;
+			newCardRank = thisCardRank - 1;
 		}
 		
 		String whereClause = "_ID = ?";
@@ -354,6 +355,44 @@ public class CardHelper {
 		
 		ContentValues cv=new ContentValues();
 		cv.put(RankDatabaseHelper.RANK, newCardRank);
+		
+		ranksDb.update(RankDatabaseHelper.DB_TABLE_NAME, cv, whereClause, whereArgs);
+	}
+	
+	/**
+	 * Updates the rank of a card marked as "known"
+	 * @param thisCardId
+	 * @param thisCardRank
+	 */
+	private void updateRankKnown(String thisCardId) {
+		String whereClause = "_ID = ?";
+		String[] whereArgs = {thisCardId};
+		
+		ContentValues cv=new ContentValues();
+		// set the rank to 1
+		cv.put(RankDatabaseHelper.RANK, 1);
+		
+		ranksDb.update(RankDatabaseHelper.DB_TABLE_NAME, cv, whereClause, whereArgs);
+	}
+	
+	/**
+	 * Updates the rank of a card marked as "not known"
+	 * @param thisCardId
+	 * @param thisCardRank
+	 */
+	private void updateRankNotKnown(String thisCardId, int thisCardRank) {
+		// if a card is unranked, set the default starting rank to 20
+		if (thisCardRank == 0) {
+			thisCardRank = 20;
+		}
+		// increase the rank by 2
+		thisCardRank = thisCardRank + 2;
+		
+		String whereClause = "_ID = ?";
+		String[] whereArgs = {thisCardId};
+		
+		ContentValues cv=new ContentValues();
+		cv.put(RankDatabaseHelper.RANK, thisCardRank);
 		
 		ranksDb.update(RankDatabaseHelper.DB_TABLE_NAME, cv, whereClause, whereArgs);
 	}

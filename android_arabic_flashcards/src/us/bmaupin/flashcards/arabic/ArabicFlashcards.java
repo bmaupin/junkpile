@@ -261,14 +261,16 @@ public class ArabicFlashcards extends Activity {
 				+ event);
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_DPAD_UP:
+			showNextCard("up");
 			break;
 		case KeyEvent.KEYCODE_DPAD_DOWN:
+			showNextCard("down");
 			break;
 		case KeyEvent.KEYCODE_DPAD_LEFT:
 			showPrevCard();
 			break;
 		case KeyEvent.KEYCODE_DPAD_RIGHT:
-			showNextCard();
+			showNextCard("right");
 			break;
 		case KeyEvent.KEYCODE_DPAD_CENTER:
 			flipCard();
@@ -441,12 +443,16 @@ public class ArabicFlashcards extends Activity {
     	showWord(currentView, currentWord);
 	}
 	
-	private void showNextCard() {
+	private void showNextCard(String direction) {
     	vf.setInAnimation(slideLeftIn);
         vf.setOutAnimation(slideLeftOut);
     	vf.showNext();
     	
-    	currentWord = ch.nextCardNormalRank(currentCardId, currentCardRank);
+    	// update the rank of the current card
+    	ch.updateRank(currentCardId, currentCardRank, direction);
+    	// get the next one
+    	currentWord = ch.nextCard();
+    	
     	// store the ID and rank of the current Word
     	currentCardId = currentWord.get("ID");
     	currentCardRank = stringToInteger(currentWord.get("rank"));
@@ -463,7 +469,7 @@ public class ArabicFlashcards extends Activity {
         vf.setOutAnimation(slideRightOut);
     	vf.showPrevious();
     	
-    	currentWord = ch.prevCardNormalRank(currentCardId, currentCardRank);
+    	currentWord = ch.prevCard();
     	// store the ID and rank of the current Word
     	currentCardId = currentWord.get("ID");
     	currentCardRank = stringToInteger(currentWord.get("rank"));
@@ -494,7 +500,7 @@ public class ArabicFlashcards extends Activity {
             	// from http://stackoverflow.com/questions/4098198/adding-fling-gesture-to-an-image-view-android
             	// right to left
                 if(e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                	showNextCard();
+                	showNextCard("right");
                 	return true;
                 // left to right
                 }  else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
@@ -503,11 +509,13 @@ public class ArabicFlashcards extends Activity {
                 }
                 // bottom to top
                 if(e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
-                	Toast.makeText(getApplicationContext(), "TODO: swiped up", Toast.LENGTH_SHORT).show();
+//                	Toast.makeText(getApplicationContext(), "TODO: swiped up", Toast.LENGTH_SHORT).show();
+                	showNextCard("up");
                     return true;
                 // top to bottom
                 }  else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
-                	Toast.makeText(getApplicationContext(), "TODO: swiped down", Toast.LENGTH_SHORT).show();
+//                	Toast.makeText(getApplicationContext(), "TODO: swiped down", Toast.LENGTH_SHORT).show();
+                	showNextCard("down");
                 	return true;
                 }
                 return false;
