@@ -26,7 +26,8 @@ public class CardHelper {
 	private Cursor cursor;
 	private RankDatabaseHelper ranksHelper;
 	private SQLiteDatabase ranksDb;
-	private List<Map<String, String>> cardHistory = new ArrayList<Map<String, String>>();
+//	private List<Map<String, String>> cardHistory = new ArrayList<Map<String, String>>();
+	private List<Integer> cardHistory = new ArrayList<Integer>();
 	private int cardHistoryIndex = 0;
 	private int rankedCardsShown = 0;
 	private String currentCategory = "All";
@@ -58,7 +59,6 @@ public class CardHelper {
 		// these need to be emptied each time loadCards is called
 		currentRankedIds.clear();
 		currentUnrankedIds.clear();
-		
 
 // TODO: in the future, do we want to put all this into some kind of list/array?		
 //		String[] columns = { "_ID", "english", "arabic" };
@@ -203,7 +203,7 @@ public class CardHelper {
 		thisCard.put("arabic", arabic);
 		
 		// add word to the card history
-		cardHistory.add(thisCard);
+		cardHistory.add(thisId);
 		
 		return thisCard;
 	}
@@ -228,7 +228,9 @@ public class CardHelper {
 		if (cardHistoryIndex > 0) {
 			cardHistoryIndex --;
 			// get the next card in the card history
-			Map<String, String> thisCard = cardHistory.get(cardHistory.size() - (cardHistoryIndex + 1));
+			int thisId = cardHistory.get(cardHistory.size() - (cardHistoryIndex + 1));
+			Map<String, String> thisCard = getCard(thisId);
+// TODO: this seems messy; most of the time getCard is called, we want the rank...
 			// update its rank
 			thisCard.put("rank", "" + getRank(thisCard.get("ID")));
 			// return it
@@ -280,7 +282,8 @@ public class CardHelper {
 		if (cardHistory.size() > 1) {
 			cardHistoryIndex ++;
 			// get the previous card in the card history
-			Map<String, String> thisCard = cardHistory.get(cardHistory.size() - (cardHistoryIndex + 1));
+			int thisId = cardHistory.get(cardHistory.size() - (cardHistoryIndex + 1));
+			Map<String, String> thisCard = getCard(thisId);		
 			// update its rank
 			thisCard.put("rank", "" + getRank(thisCard.get("ID")));
 			// return it
