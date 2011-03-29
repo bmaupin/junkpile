@@ -28,7 +28,7 @@ public class CardHelper {
 	private SQLiteDatabase ranksDb;
 	private List<Map<String, String>> cardHistory = new ArrayList<Map<String, String>>();
 	private int cardHistoryIndex = 0;
-	private int cardsShown = 0;
+	private int rankedCardsShown = 0;
 	private String currentCategory = "All";
 	private String currentSubCategory;
 	private List<Integer> currentRankedIds = new ArrayList<Integer>();
@@ -95,6 +95,11 @@ public class CardHelper {
 			weightedCardIds = new WeightedRandomGenerator(currentOrderedRanks);
 		}
 
+//		
+		Log.d(TAG, "loadCards: currentRankedIds:");
+		for (int thisID : currentRankedIds) {
+			Log.d(TAG, "" + thisID);
+		}
 //		
 		Log.d(TAG, "loadCards: currentUnrankedIds:");
 		for (int thisID : currentUnrankedIds) {
@@ -214,7 +219,6 @@ public class CardHelper {
 		return thisRank;
 	}
 	
-	// nextCard in arabicflashcards should prob be called something like showNextCard
 	Map<String, String> nextCard() {
 		Log.d(TAG, "nextCard called");
 //		
@@ -237,14 +241,11 @@ public class CardHelper {
 			int thisId = currentUnrankedIds.remove(0);
 			Map<String, String> thisCard = getCard(thisId);
 			thisCard.put("rank", "0");
-			// increment the counter of cards shown
-			cardsShown ++;
 			return thisCard;
 
-// TODO: only going off currentunrankedids before loading more, not including current ordered ranks?
-		} else if (cardsShown < (currentRankedIds.size() + currentUnrankedIds.size())) {
+		} else if (rankedCardsShown < currentRankedIds.size()) {
 //			
-			Log.d(TAG, "nextCard: cardsShown=" + cardsShown);
+			Log.d(TAG, "nextCard: rankedCardsShown=" + rankedCardsShown);
 			Log.d(TAG, "nextCard: currentRankedIds.size()=" + currentRankedIds.size());
 			Log.d(TAG, "nextCard: currentUnrankedIds.size()=" + currentUnrankedIds.size());
 			
@@ -254,8 +255,8 @@ public class CardHelper {
 			Map<String, String> thisCard = getCard(thisId);
 			// get its rank
 			thisCard.put("rank", "" + getRank(thisCard.get("ID")));
-			// increment the counter of cards shown
-			cardsShown ++;
+			// increment the counter of ranked cards shown
+			rankedCardsShown ++;
 			// return it
 			return thisCard;
 			
@@ -263,8 +264,8 @@ public class CardHelper {
 		} else {
 			// load more
 			loadCards();
-			// reset the counter of cards shown
-			cardsShown = 0;
+			// reset the counter of ranked cards shown
+			rankedCardsShown = 0;
 			return nextCard();
 		}
 		
