@@ -26,7 +26,6 @@ public class CardHelper {
 	private Cursor cursor;
 	private RankDatabaseHelper ranksHelper;
 	private SQLiteDatabase ranksDb;
-//	private List<Map<String, String>> cardHistory = new ArrayList<Map<String, String>>();
 	private List<Integer> cardHistory = new ArrayList<Integer>();
 	private int cardHistoryIndex = 0;
 	private int rankedCardsShown = 0;
@@ -251,9 +250,40 @@ public class CardHelper {
 			Log.d(TAG, "nextCard: currentRankedIds.size()=" + currentRankedIds.size());
 			Log.d(TAG, "nextCard: currentUnrankedIds.size()=" + currentUnrankedIds.size());
 			
-			// get the next weighted card ID
-			int thisId = currentRankedIds.get(weightedCardIds.next());
-// TODO: don't show the same card if it's within the last X cards in history			
+			int thisId = 0;
+			
+			// try 5 times to get a card that isn't one of the last 5 shown
+			for (int i=1; i<7; i++) {
+//				
+				Log.d(TAG, "nextCard: i=" + i);
+				
+				// on the 6th try
+				if (i == 6) {
+					Random rnd = new Random(System.nanoTime());
+					// return a random card
+					thisId = currentRankedIds.get((int)(rnd.nextDouble() * (currentRankedIds.size())));
+					break;
+				}
+				
+				// get the next weighted card ID
+				thisId = currentRankedIds.get(weightedCardIds.next());
+				
+				// if there is no card history, then we're good to go
+				if (cardHistory.size() == 0) {
+					break;
+				// make sure the card history is at least 5
+				} else if (cardHistory.size() < 5) {
+					// if it's less than 5, just make sure the card isn't in the history
+					if (!cardHistory.contains(thisId)) {
+						break;
+					}
+				// if this ID isn't one of the last 5 shown
+				} else if (!cardHistory.subList(cardHistory.size() - 5, cardHistory.size()).contains(thisId)) {
+					// show it
+					break;
+				}
+			}
+			
 			Map<String, String> thisCard = getCard(thisId);
 			// get its rank
 			thisCard.put("rank", "" + getRank(thisCard.get("ID")));
