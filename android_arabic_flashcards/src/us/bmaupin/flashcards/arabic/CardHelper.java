@@ -23,7 +23,7 @@ public class CardHelper {
 	private static final String TAG = "CardHelper";
 	private DatabaseHelper wordsHelper;
 	private SQLiteDatabase wordsDb;
-	private Cursor cursor;
+	private Cursor cursor = null;
 	private RankDatabaseHelper ranksHelper;
 	private SQLiteDatabase ranksDb;
 	private List<Integer> cardHistory = new ArrayList<Integer>();
@@ -45,6 +45,7 @@ public class CardHelper {
 	
 	public void close() {
 		// clean up after ourselves
+		cursor.close();
 		ranksHelper.close();
 		wordsHelper.close();
 	}
@@ -58,42 +59,48 @@ public class CardHelper {
 		// these need to be emptied each time loadCards is called
 		currentRankedIds.clear();
 		currentUnrankedIds.clear();
-
-// TODO: in the future, do we want to put all this into some kind of list/array?		
-//		String[] columns = { "_ID", "english", "arabic" };
-		String[] columns = { "_ID" };
-		String selection = null;
 		
-		if (currentCategory.equals("Ahlan wa sahlan")) {
-			selection = "aws_chapter = " + currentSubCategory;
+		// create a new cursor if necessary
+		if (cursor == null || cursor.isClosed()) {
+// TODO: in the future, do we want to put all this into some kind of list/array?		
+//			String[] columns = { "_ID", "english", "arabic" };
+			String[] columns = { "_ID" };
+			String selection = null;
+			
+			if (currentCategory.equals("Ahlan wa sahlan")) {
+				selection = "aws_chapter = " + currentSubCategory;
+			}
+			
+			cursor = wordsDb.query("words", columns, selection, null, null, null, null);
+			cursor.moveToFirst();
 		}
 		
-		cursor = wordsDb.query("words", columns, selection, null, null, null, null);
-		cursor.moveToFirst();
-		
-//		while (cursor.moveToNext()) {
 // TODO: for now, only get 5 cards
+		// only get 100 cards at a time
 		for (int i=1; i<6; i++) {
 			int thisId = cursor.getInt(0);
 			currentCardIds.add(thisId);
-// TESTING		
-			cursor.moveToNext();
+			
+// TODO: we're probably going to run into issues if we have, for instance, 103 cards on the second goaround
+			// if there are no more cards to get
+			if (!cursor.moveToNext()) {
+				// close the cursor and move along
+				cursor.close();
+				break;
+			}
 		}
-		
-		cursor.close();
 		
 		currentOrderedRanks = loadRanks(currentCardIds);
 
+		if (!currentOrderedRanks.isEmpty()) {
+			weightedCardIds = new WeightedRandomGenerator(currentOrderedRanks);
+		}
+		
 //		
 		Log.d(TAG, "loadCards: currentOrderedRanks:");
 		for (int thisRank : currentOrderedRanks) { 
 			Log.d(TAG, "" + thisRank);
 		}
-		
-		if (!currentOrderedRanks.isEmpty()) {
-			weightedCardIds = new WeightedRandomGenerator(currentOrderedRanks);
-		}
-
 //		
 		Log.d(TAG, "loadCards: currentRankedIds:");
 		for (int thisID : currentRankedIds) {
