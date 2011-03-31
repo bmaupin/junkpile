@@ -126,10 +126,10 @@ public class CardHelper {
 		for (int thisId : currentCardIds) {
 			String selection = "_ID = " + thisId;
 			// get its rank
-			cursor = ranksDb.query("ranks", columns, selection, null, null, null, null);
-			cursor.moveToFirst();
-			int thisRank = cursor.getInt(0);
-			cursor.close();
+			Cursor thisCursor = ranksDb.query("ranks", columns, selection, null, null, null, null);
+			thisCursor.moveToFirst();
+			int thisRank = thisCursor.getInt(0);
+			thisCursor.close();
 			
 			// if the rank for this particular card is 0
 			if (thisRank == 0) {
@@ -190,12 +190,12 @@ public class CardHelper {
 		Map<String, String> thisCard = new HashMap<String, String>();
 		
 		selectionArgs[0] = "" + thisId;
-		this.cursor = wordsDb.query("words", columns, selection, selectionArgs, null, null, null);
-		cursor.moveToFirst();
+		Cursor thisCursor = wordsDb.query("words", columns, selection, selectionArgs, null, null, null);
+		thisCursor.moveToFirst();
 		
-		String english = cursor.getString(0);
-		String arabic = cursor.getString(1);
-		cursor.close();
+		String english = thisCursor.getString(0);
+		String arabic = thisCursor.getString(1);
+		thisCursor.close();
 		
 		thisCard.put("ID", "" + thisId);
 		thisCard.put("english", english);
@@ -211,10 +211,10 @@ public class CardHelper {
 		String[] columns = { RankDatabaseHelper.RANK };
 		String selection = "_ID = " + thisId;
 		// get its rank
-		cursor = ranksDb.query(RankDatabaseHelper.DB_TABLE_NAME, columns, selection, null, null, null, null);
-		cursor.moveToFirst();
-		int thisRank = cursor.getInt(0);
-		cursor.close();
+		Cursor thisCursor = ranksDb.query(RankDatabaseHelper.DB_TABLE_NAME, columns, selection, null, null, null, null);
+		thisCursor.moveToFirst();
+		int thisRank = thisCursor.getInt(0);
+		thisCursor.close();
 		return thisRank;
 	}
 	
@@ -251,7 +251,8 @@ public class CardHelper {
 			Log.d(TAG, "nextCard: currentUnrankedIds.size()=" + currentUnrankedIds.size());
 			
 			int thisId = 0;
-			
+
+// TODO: we might need to make sure that there are more than 5 cards to show in the first place
 			// try 5 times to get a card that isn't one of the last 5 shown
 			for (int i=1; i<7; i++) {
 //				
