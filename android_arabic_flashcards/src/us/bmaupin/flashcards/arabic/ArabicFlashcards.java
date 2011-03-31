@@ -2,18 +2,13 @@ package us.bmaupin.flashcards.arabic;
 
 // $Id$
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.amr.arabic.ArabicUtilities;
 
-import us.bmaupin.flashcards.arabic.DatabaseHelper;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,7 +25,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 
@@ -236,10 +230,13 @@ public class ArabicFlashcards extends Activity {
 				if (resultCode == Activity.RESULT_OK) {
 					String category = data.getStringExtra("category");
 					Log.d(TAG, "onActivityResult: category=" + category);
-										
+					
 					if (category.equals("Ahlan wa sahlan")) {
 						String chapter = data.getStringExtra("aws_chapter");
 						Log.d(TAG, "onActivityResult: chapter=" + chapter);
+
+// TODO: this doesn't work :)
+						ch.loadCards(category, chapter);
 						
 						// close the old cursor
 //						cursor.close();
