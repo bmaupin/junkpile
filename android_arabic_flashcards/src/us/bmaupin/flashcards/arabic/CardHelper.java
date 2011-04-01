@@ -51,7 +51,7 @@ public class CardHelper {
 	}
 	
 	// loadCards in arabicFlashcards should prob be called something like loadViews
-	void loadCards() {
+	private void loadCards(boolean categoryChanged) {
 		Log.d(TAG, "loadCards called");
 		List<Integer> currentCardIds = new ArrayList<Integer>();
 		List<Integer> currentOrderedRanks = new ArrayList<Integer>();
@@ -61,7 +61,7 @@ public class CardHelper {
 		currentUnrankedIds.clear();
 		
 		// create a new cursor if necessary
-		if (cursor == null || cursor.isClosed()) {
+		if (categoryChanged || cursor == null || cursor.isClosed()) {
 // TODO: in the future, do we want to put all this into some kind of list/array?		
 //			String[] columns = { "_ID", "english", "arabic" };
 			String[] columns = { "_ID" };
@@ -113,15 +113,15 @@ public class CardHelper {
 		}
 	}
 	
-	void loadCards(String category) {
+	void loadCategory(String category) {
 		currentCategory = category;
-		loadCards();
+		loadCards(true);
 	}
 	
-	void loadCards(String category, String subCategory) {
+	void loadCategory(String category, String subCategory) {
 		currentCategory = category;
 		currentSubCategory = subCategory;
-		loadCards();
+		loadCards(true);
 	}	
 	
 	private List<Integer> loadRanks(List<Integer> currentCardIds) {
@@ -303,7 +303,7 @@ public class CardHelper {
 		// if we've no more cards
 		} else {
 			// load more
-			loadCards();
+			loadCards(false);
 			// reset the counter of ranked cards shown
 			rankedCardsShown = 0;
 			return nextCard();
