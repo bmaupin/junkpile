@@ -235,16 +235,7 @@ public class ArabicFlashcards extends Activity {
 						String chapter = data.getStringExtra("aws_chapter");
 						Log.d(TAG, "onActivityResult: chapter=" + chapter);
 
-// TODO: this doesn't work :)
-						ch.loadCards(category, chapter);
-						
-						// close the old cursor
-//						cursor.close();
-						
-//						String[] FROM = { "english", "arabic" };
-//						String WHERE = "aws_chapter = " + chapter;
-//						cursor = db.query("words", FROM, WHERE, null, null, null, null);
-//						startManagingCursor(cursor);
+						ch.loadCategory(category, chapter);
 					}
 				}
 				break;
@@ -539,17 +530,19 @@ public class ArabicFlashcards extends Activity {
 	    	return false;
     }
     
+    /*
     private void test() {
     	CardHelper ch = new CardHelper(this);
-    	ch.loadCards("Ahlan wa sahlan", "3");
+    	ch.loadCategory("Ahlan wa sahlan", "3");
     	ch.close();
     	/*
         RankDatabaseHelper ranksHelper = new RankDatabaseHelper(this);
         SQLiteDatabase ranksDb = ranksHelper.getReadableDatabase();
         ranksHelper.initializeDb(ranksDb, 5);
         ranksHelper.close();
-        */
+        
     }
+	*/
     
     int stringToInteger(String s) {
     	try {
