@@ -35,6 +35,7 @@
             android:layout_margin="30dp"
             android:textColor="#000000"
             />
+        <ImageView android:layout_height="wrap_content" android:src="@drawable/btn_check_buttonless_on" android:id="@+id/imageView1" android:layout_width="wrap_content" android:layout_above="@+id/leftView" android:layout_toRightOf="@+id/leftView"></ImageView>
     </RelativeLayout>
     <RelativeLayout 
         android:orientation="vertical"
