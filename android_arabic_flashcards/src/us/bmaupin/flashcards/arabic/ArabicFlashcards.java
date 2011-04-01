@@ -530,20 +530,6 @@ public class ArabicFlashcards extends Activity {
 	    	return false;
     }
     
-    /*
-    private void test() {
-    	CardHelper ch = new CardHelper(this);
-    	ch.loadCategory("Ahlan wa sahlan", "3");
-    	ch.close();
-    	/*
-        RankDatabaseHelper ranksHelper = new RankDatabaseHelper(this);
-        SQLiteDatabase ranksDb = ranksHelper.getReadableDatabase();
-        ranksHelper.initializeDb(ranksDb, 5);
-        ranksHelper.close();
-        
-    }
-	*/
-    
     int stringToInteger(String s) {
     	try {
     		int i = Integer.parseInt(s.trim());
