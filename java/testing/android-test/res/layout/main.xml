@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    />
-</LinearLayout>
+    <TextView
+        android:id="@+id/myTextView"
+        android:background="@layout/card"
+        android:gravity="center"
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent"
+        android:layout_margin="30dp"
+        android:textColor="#000000"
+        />
+</RelativeLayout>
