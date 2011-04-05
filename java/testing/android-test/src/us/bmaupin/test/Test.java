@@ -16,6 +16,20 @@ public class Test extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        ImageView i = (ImageView) findViewById(R.id.knownCheck);
+        i.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				ImageView i = (ImageView)arg0;
+				i.setImageResource(R.drawable.btn_check_buttonless_on);
+				
+//				vs.showNext();
+			}
+        	
+        });
+        
+        
+        
 //        ImageView i = new ImageView(this);
 //        i.setImageResource(R.drawable.btn_check_buttonless_on);
 //        i.setAdjustViewBounds(true); // set the ImageView bounds to match the Drawable's dimensions
@@ -33,7 +47,7 @@ public class Test extends Activity {
         vs.addView(buttonUnchecked);
         */
         
-        ImageView i = (ImageView) findViewById(R.id.imageView1);
+//        ImageView i = (ImageView) findViewById(R.id.imageView1);
         
         /*
         i.setOnTouchListener(new OnTouchListener() {
@@ -44,6 +58,7 @@ public class Test extends Activity {
         });
         */
         
+        /*
         i.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -54,5 +69,6 @@ public class Test extends Activity {
 			}
         	
         });
+        */
     }
 }
