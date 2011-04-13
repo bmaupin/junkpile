@@ -2,9 +2,9 @@ package us.bmaupin.test;
 
 // $Id: RankDatabaseHelper.java 111 2011-03-10 20:36:17Z bmaupin $
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils.InsertHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
@@ -17,7 +17,7 @@ public class RankDatabaseHelper extends SQLiteOpenHelper {
     // The name of your database
     public static final String DATABASE_NAME = "ranks.db";
     // The version of your database (increment this every time you change something)
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 3;
     // The name of the table in your database
     public static final String DB_TABLE_NAME = "ranks";
    
@@ -56,8 +56,8 @@ public class RankDatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w(TAG, "Upgrading database from version " + oldVersion + " to "
                 + newVersion + ", which will destroy all old data");
-//        db.execSQL("DROP TABLE IF EXISTS " + DB_TABLE_NAME);
-//        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + DB_TABLE_NAME);
+        onCreate(db);
 // TODO: upgrade the db properly
     }
     
@@ -87,10 +87,27 @@ public class RankDatabaseHelper extends SQLiteOpenHelper {
     	
     	// get the difference, fill the ranks db with that number of empty rows
     	int rowsToAdd = cardsRows - ranksRows;
+    	
     	Log.d(TAG, "initializeDb: rowsToAdd=" + rowsToAdd );
+    	/*
     	ContentValues cv=new ContentValues();
     	for (int i=1; i<rowsToAdd + 1; i++) {
     		db.insert(DB_TABLE_NAME, RANK, cv);
+    	}
+    	*/
+    	
+    	
+    	
+    	InsertHelper ih = new InsertHelper(db, DB_TABLE_NAME);
+    	
+//    	final int ID_COLUMN = ih.getColumnIndex(BaseColumns._ID);
+//    	final int RANK_COLUMN = ih.getColumnIndex(RankDatabaseHelper.RANK);
+    	
+    	
+    	for (int i=1; i<rowsToAdd + 1; i++) {
+    		ih.prepareForInsert();
+//    		ih.bind(ID_COLUMN, RANK_COLUMN);
+    		ih.execute();
     	}
     	
     	cursor = db.rawQuery(sql, null);
