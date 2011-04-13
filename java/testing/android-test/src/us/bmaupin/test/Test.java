@@ -1,21 +1,25 @@
 package us.bmaupin.test;
 
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.ViewSwitcher;
+import android.util.Log;
 
 public class Test extends Activity {
+	private static final String TAG = "Test";
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        Log.d(TAG, "START db creation");
+        RankDatabaseHelper dbHelper = new RankDatabaseHelper(this);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Log.d(TAG, "FINISH db creation");
+        
+        /*
         ImageView i = (ImageView) findViewById(R.id.knownCheck);
         i.setOnClickListener(new OnClickListener() {
 			@Override
@@ -27,6 +31,7 @@ public class Test extends Activity {
 			}
         	
         });
+        */
         
         
         
