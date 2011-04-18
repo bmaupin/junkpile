@@ -24,7 +24,7 @@ public class RankDatabaseHelper extends SQLiteOpenHelper {
     // The name of each column in the database
     public static final String RANK = "rank";
     
-//    private final Context context;
+    private final Context context;
     // SQL Statement to create a new database.
     public static final String DB_TABLE_CREATE =
         "CREATE TABLE " + DB_TABLE_NAME + " (" +
@@ -34,7 +34,7 @@ public class RankDatabaseHelper extends SQLiteOpenHelper {
     // The constructor method
     public RankDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-//        this.context = context;
+        this.context = context;
     }
 
     /* Called when the super class getWritableDatabase (or getReadableDatabase)
@@ -62,9 +62,9 @@ public class RankDatabaseHelper extends SQLiteOpenHelper {
     }
     
     void initializeDb (SQLiteDatabase db) {
-    	String sql;// = "SELECT COALESCE(MAX(_ID), 0) FROM " + DatabaseHelper.DB_TABLE_NAME;
+    	String sql = "SELECT COALESCE(MAX(_ID), 0) FROM " + DatabaseHelper.DB_TABLE_NAME;
 
-    	/*
+    	
     	// get the number of rows in the cards db
     	DatabaseHelper cardsHelper = new DatabaseHelper(context);
         SQLiteDatabase cardsDb = cardsHelper.getReadableDatabase();
@@ -74,9 +74,9 @@ public class RankDatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "initializeDb: cardsRows=" + cardsRows );
         cardsCursor.close();
         cardsHelper.close();
-        */
+        
     	
-    	int cardsRows = 1190;
+//    	int cardsRows = 1190;
         
         // get the number of rows in the cards db
         sql = "SELECT COALESCE(MAX(_ID), 0) FROM " + DB_TABLE_NAME;
