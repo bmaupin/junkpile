@@ -1,9 +1,14 @@
 package us.bmaupin.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 public class Test extends Activity {
 	private static final String TAG = "Test";
@@ -11,13 +16,41 @@ public class Test extends Activity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	List<String> currentUnseenIds = new ArrayList<String>();
+    	
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+		DatabaseHelper wordsHelper = new DatabaseHelper(this);
+		SQLiteDatabase wordsDb = wordsHelper.getReadableDatabase();
+        
         Log.d(TAG, "START db creation");
-        RankDatabaseHelper dbHelper = new RankDatabaseHelper(this);
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ProfileDatabaseHelper profileHelper = new ProfileDatabaseHelper(this);
+        SQLiteDatabase profileDb = profileHelper.getReadableDatabase();
         Log.d(TAG, "FINISH db creation");
+        profileDb.close();
+        profileHelper.close();
+        
+        wordsDb.execSQL("attach database ? as profileDb", 
+        		new String[] {this.getDatabasePath("profiles.db").getPath()});
+        
+        String sql = "SELECT _ID FROM " + DatabaseHelper.DB_TABLE_NAME +
+        	" WHERE _ID IN (SELECT _ID FROM profileDb." + 
+        	ProfileDatabaseHelper.DB_TABLE_NAME + " WHERE " + 
+        	ProfileDatabaseHelper.STATUS + "= 0);";
+		
+        Cursor cursor = wordsDb.rawQuery(sql, null);
+        cursor.moveToFirst();
+        
+        while (cursor.moveToNext()) {
+        	currentUnseenIds.add(cursor.getString(0));
+        }
+        
+        cursor.close();
+        
+        Log.d(TAG, "onCreate: currentUnseenIds.size()=" + currentUnseenIds.size());
+        Toast.makeText(this, currentUnseenIds.size() + "", Toast.LENGTH_LONG).show();
+        
         
         /*
         ImageView i = (ImageView) findViewById(R.id.knownCheck);
