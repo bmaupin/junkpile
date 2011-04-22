@@ -16,14 +16,15 @@ public class Test extends Activity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-    	List<String> currentUnseenIds = new ArrayList<String>();
+//    	List<String> currentUnseenIds = new ArrayList<String>();
     	
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
         Log.d(TAG, "START db creation");
         ProfileDatabaseHelper profileHelper = new ProfileDatabaseHelper(this);
-        SQLiteDatabase profileDb = profileHelper.getReadableDatabase("default3");
+        SQLiteDatabase profileDb = profileHelper.getReadableDatabase("profile14");
+//        SQLiteDatabase profileDb = profileHelper.getReadableDatabase();
         Log.d(TAG, "FINISH db creation");
         profileDb.close();
         profileHelper.close();
