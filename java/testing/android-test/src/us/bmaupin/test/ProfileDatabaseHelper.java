@@ -2,6 +2,9 @@ package us.bmaupin.test;
 
 // $Id: ProfileDatabaseHelper.java 173 2011-04-13 18:42:48Z bmaupin $
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils.InsertHelper;
@@ -17,11 +20,12 @@ public class ProfileDatabaseHelper extends SQLiteOpenHelper {
     // The name of your database
     public static final String DATABASE_NAME = "profiles.db";
     // The version of your database (increment this every time you change something)
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 1;
+// TODO: we never quite got this working...
     // profile name; this will be used as the database table name
-//    private String DB_TABLE_NAME;
+    private String profileName = "profile1";
 //    private static final String DEFAULT_PROFILE_NAME = "profile1";
-    public static final String DB_TABLE_NAME = "profile1";
+//    public static final String DB_TABLE_NAME = "profile1";
     
     // The name of each column in the database
 //    public static final String CARD_ID = "card_ID";
@@ -29,12 +33,10 @@ public class ProfileDatabaseHelper extends SQLiteOpenHelper {
     
     // SQL Statement to create a new database.
     private String DB_TABLE_CREATE =
-        "CREATE TABLE " + DB_TABLE_NAME + " (" +
+        "CREATE TABLE %s (" +
         BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
         STATUS + " INTEGER);";
-    
-//  CARD_ID + " INTEGER, " +
-    
+       
     private final Context context;
     
     /*
@@ -42,35 +44,71 @@ public class ProfileDatabaseHelper extends SQLiteOpenHelper {
     public ProfileDatabaseHelper(Context context, String DB_TABLE_NAME) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 //        ProfileDatabaseHelper.DB_TABLE_NAME = DB_TABLE_NAME;
-        this.context = context;
+//        this.context = context;
     }
     */
     
     public ProfileDatabaseHelper(Context context) {
-//    	this(context, DEFAULT_PROFILE_NAME);
     	super(context, DATABASE_NAME, null, DATABASE_VERSION);
     	this.context = context;
     }
     
 	@Override
 	public synchronized SQLiteDatabase getReadableDatabase() {
-		// TODO Auto-generated method stub
-		return super.getReadableDatabase();
+	    List<String> tables = new ArrayList<String>();
+	    String SQL_GET_ALL_TABLES = "SELECT name FROM " + 
+            "sqlite_master WHERE type='table' ORDER BY name";
+	    
+	    // fetch the database
+		SQLiteDatabase db = super.getReadableDatabase();
+		// get the list of tables in the db
+		Cursor cursor = db.rawQuery(SQL_GET_ALL_TABLES, null);
+		cursor.moveToFirst();
+		while (cursor.moveToNext()) {
+		    tables.add(cursor.getString(0));
+		}
+		// if the table we want isn't in the db, create it
+		if (!tables.contains(profileName)) {
+    		// create the profile table
+    		db.execSQL(String.format(DB_TABLE_CREATE, profileName));
+    		// initialize the profile table
+    		initializeDb(db);
+		}
+		
+		return db;
 	}
 	
+	public synchronized SQLiteDatabase getReadableDatabase(String profileName) {
+	    Log.d(TAG, "our getReadableDatabase called");
+	    Log.d(TAG, "our getReadableDatabase: this.profileName=" + profileName);
+	    this.profileName = profileName;
+	    Log.d(TAG, "our getReadableDatabase: this.profileName=" + profileName);
+	    return getReadableDatabase();
+	}
+	
+    /*
 	public String getDB_TABLE_NAME() {
     	return DB_TABLE_NAME;
     }
-    
+    */
+	
     /* Called when the super class getWritableDatabase (or getReadableDatabase)
      * method determines that the database doesn't exist yet and needs to be created
      */
+	/*
     @Override
     public void onCreate(SQLiteDatabase db) {
     	Log.d(TAG, "onCreate called");
         db.execSQL(DB_TABLE_CREATE);
         
         initializeDb(db);
+    }
+    */
+	
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        Log.d(TAG, "onCreate called");
+        
     }
 
     /* Called when the super class getWritableDatabase (or getReadableDatabase)
@@ -81,10 +119,12 @@ public class ProfileDatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w(TAG, "Upgrading database from version " + oldVersion + " to "
                 + newVersion + ", which will destroy all old data");
-        db.execSQL("DROP TABLE IF EXISTS " + DB_TABLE_NAME);
-        onCreate(db);
+//        db.execSQL("DROP TABLE IF EXISTS " + DB_TABLE_NAME);
+//        onCreate(db);
+//      initializeDb();        
 // TODO: upgrade the db properly
     }
+    
     
     void initializeDb (SQLiteDatabase db) {
     	String sql = "SELECT COALESCE(MAX(_ID), 0) FROM " + DatabaseHelper.DB_TABLE_NAME;
@@ -100,7 +140,7 @@ public class ProfileDatabaseHelper extends SQLiteOpenHelper {
         cardsHelper.close();
         
         // get the number of rows in the cards db
-        sql = "SELECT COALESCE(MAX(_ID), 0) FROM " + DB_TABLE_NAME;
+        sql = "SELECT COALESCE(MAX(_ID), 0) FROM " + profileName;
     	Cursor cursor = db.rawQuery(sql, null);
     	cursor.moveToFirst();
     	int profileRows = cursor.getInt(0);
@@ -117,7 +157,7 @@ public class ProfileDatabaseHelper extends SQLiteOpenHelper {
     	}
     	*/
     	
-    	InsertHelper ih = new InsertHelper(db, DB_TABLE_NAME);
+    	InsertHelper ih = new InsertHelper(db, profileName);
     	
 //    	final int ID_COLUMN = ih.getColumnIndex(BaseColumns._ID);
     	final int STATUS_COLUMN = ih.getColumnIndex(ProfileDatabaseHelper.STATUS);
@@ -139,4 +179,5 @@ public class ProfileDatabaseHelper extends SQLiteOpenHelper {
     	
 // TODO: db fill takes way too long (>5 sec), need to do little by little, or show user progress
     }
+    
 }
