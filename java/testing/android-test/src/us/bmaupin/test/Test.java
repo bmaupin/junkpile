@@ -21,6 +21,14 @@ public class Test extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        Log.d(TAG, "START db creation");
+        ProfileDatabaseHelper profileHelper = new ProfileDatabaseHelper(this);
+        SQLiteDatabase profileDb = profileHelper.getReadableDatabase("default3");
+        Log.d(TAG, "FINISH db creation");
+        profileDb.close();
+        profileHelper.close();
+        
+        /*
 		DatabaseHelper wordsHelper = new DatabaseHelper(this);
 		SQLiteDatabase wordsDb = wordsHelper.getReadableDatabase();
         
@@ -37,7 +45,7 @@ public class Test extends Activity {
         String sql = "SELECT _ID FROM " + DatabaseHelper.DB_TABLE_NAME +
         	" WHERE _ID IN (SELECT _ID FROM profileDb." + 
         	ProfileDatabaseHelper.DB_TABLE_NAME + " WHERE " + 
-        	ProfileDatabaseHelper.STATUS + "= 0);";
+        	ProfileDatabaseHelper.STATUS + "= 1);";
 		
         Cursor cursor = wordsDb.rawQuery(sql, null);
         cursor.moveToFirst();
@@ -50,7 +58,7 @@ public class Test extends Activity {
         
         Log.d(TAG, "onCreate: currentUnseenIds.size()=" + currentUnseenIds.size());
         Toast.makeText(this, currentUnseenIds.size() + "", Toast.LENGTH_LONG).show();
-        
+        */
         
         /*
         ImageView i = (ImageView) findViewById(R.id.knownCheck);
