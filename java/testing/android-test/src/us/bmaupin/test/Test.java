@@ -1,121 +1,45 @@
 package us.bmaupin.test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.database.Cursor;
+import android.database.DatabaseUtils.InsertHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 public class Test extends Activity {
+    public static final String table = "mytable";
+    
 	private static final String TAG = "Test";
-	
-    /** Called when the activity is first created. */
+	// Log.d(TAG, "START db creation");
+
+    /* (non-Javadoc)
+     * @see android.app.Activity#onCreate(android.os.Bundle)
+     */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-//    	List<String> currentUnseenIds = new ArrayList<String>();
-    	
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
         
-        Log.d(TAG, "START db creation");
-        ProfileDatabaseHelper profileHelper = new ProfileDatabaseHelper(this);
-        SQLiteDatabase profileDb = profileHelper.getReadableDatabase("profile14");
-//        SQLiteDatabase profileDb = profileHelper.getReadableDatabase();
-        Log.d(TAG, "FINISH db creation");
-        profileDb.close();
-        profileHelper.close();
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
         
-        /*
-		DatabaseHelper wordsHelper = new DatabaseHelper(this);
-		SQLiteDatabase wordsDb = wordsHelper.getReadableDatabase();
+        int rowsToAdd = 2000;
+        String sql = "SELECT COALESCE(MAX(_ID), 0) FROM " + table;
         
-        Log.d(TAG, "START db creation");
-        ProfileDatabaseHelper profileHelper = new ProfileDatabaseHelper(this);
-        SQLiteDatabase profileDb = profileHelper.getReadableDatabase();
-        Log.d(TAG, "FINISH db creation");
-        profileDb.close();
-        profileHelper.close();
+        InsertHelper ih = new InsertHelper(db, table);
+        final int STATUS_COLUMN = ih.getColumnIndex(DatabaseHelper.STATUS);
         
-        wordsDb.execSQL("attach database ? as profileDb", 
-        		new String[] {this.getDatabasePath("profiles.db").getPath()});
-        
-        String sql = "SELECT _ID FROM " + DatabaseHelper.DB_TABLE_NAME +
-        	" WHERE _ID IN (SELECT _ID FROM profileDb." + 
-        	ProfileDatabaseHelper.DB_TABLE_NAME + " WHERE " + 
-        	ProfileDatabaseHelper.STATUS + "= 1);";
-		
-        Cursor cursor = wordsDb.rawQuery(sql, null);
-        cursor.moveToFirst();
-        
-        while (cursor.moveToNext()) {
-        	currentUnseenIds.add(cursor.getString(0));
+        Log.d(TAG, "start insertion");
+        for (int i=1; i<rowsToAdd + 1; i++) {
+            ih.prepareForInsert();
+            // insert a row with a status of 0 (unseen)
+            ih.bind(STATUS_COLUMN, 0);
+            ih.execute();
         }
-        
+//
+        Cursor cursor = db.rawQuery(sql, null);
+        cursor.moveToFirst();
+        Log.d(TAG, "rows=" + cursor.getInt(0));
         cursor.close();
-        
-        Log.d(TAG, "onCreate: currentUnseenIds.size()=" + currentUnseenIds.size());
-        Toast.makeText(this, currentUnseenIds.size() + "", Toast.LENGTH_LONG).show();
-        */
-        
-        /*
-        ImageView i = (ImageView) findViewById(R.id.knownCheck);
-        i.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				ImageView i = (ImageView)arg0;
-				i.setImageResource(R.drawable.btn_check_buttonless_on);
-				
-//				vs.showNext();
-			}
-        	
-        });
-        */
-        
-        
-        
-//        ImageView i = new ImageView(this);
-//        i.setImageResource(R.drawable.btn_check_buttonless_on);
-//        i.setAdjustViewBounds(true); // set the ImageView bounds to match the Drawable's dimensions
-        
-//        TextView text = (TextView) findViewById(R.id.myTextView);
-        
-        /*
-        ViewSwitcher vs = new ViewSwitcher(this);
-        
-        ImageView buttonChecked = (ImageView) findViewById(R.id.imageView1);
-        ImageView buttonUnchecked = (ImageView) findViewById(R.id.imageView1);
-        buttonUnchecked.setImageResource(R.drawable.btn_check_buttonless_off);
-        
-        vs.addView(buttonChecked);
-        vs.addView(buttonUnchecked);
-        */
-        
-//        ImageView i = (ImageView) findViewById(R.id.imageView1);
-        
-        /*
-        i.setOnTouchListener(new OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                // TODO Process touch event, return true if handled
-                return false;
-            }
-        });
-        */
-        
-        /*
-        i.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				ImageView i = (ImageView)findViewById(R.id.imageView1);
-				i.setImageResource(R.drawable.btn_check_buttonless_off);
-				
-//				vs.showNext();
-			}
-        	
-        });
-        */
     }
 }
