@@ -32,12 +32,12 @@ private String profileTableName;
  private String DB_TABLE_CREATE =
      "CREATE TABLE " + DB_TABLE_NAME + " (" +
      BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-     STATUS + " INTEGER);";
+     STATUS + " INTEGER DEFAULT 0);";
  
  private String DB_TABLE_CREATE2 =
      "CREATE TABLE %s (" +
      BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-     STATUS + " INTEGER);";
+     STATUS + " INTEGER DEFAULT 0);";
  
 //CARD_ID + " INTEGER, " +
  
@@ -61,8 +61,10 @@ private String profileTableName;
     public synchronized SQLiteDatabase getReadableDatabase(String profileTableName) {
         this.profileTableName = profileTableName;
         SQLiteDatabase db =  super.getReadableDatabase();
-        db.execSQL(String.format(DB_TABLE_CREATE2, this.profileTableName));
-        initializeDb(db, this.profileTableName);
+//        db.execSQL(String.format(DB_TABLE_CREATE2, this.profileTableName));
+//        initializeDb(db, this.profileTableName);
+        db.execSQL(String.format(DB_TABLE_CREATE2, DB_TABLE_NAME));
+        initializeDb(db, DB_TABLE_NAME);
         return db;
     }
     
@@ -76,9 +78,14 @@ private String profileTableName;
  @Override
  public void onCreate(SQLiteDatabase db) {
     Log.d(TAG, "onCreate called");
+    /*
      db.execSQL(DB_TABLE_CREATE);
      
-     initializeDb(db, DB_TABLE_NAME);
+     
+//     initializeDb(db, DB_TABLE_NAME);
+     String someTable = "profile11";
+     initializeDb(db, someTable);
+     */
  }
 
  /* Called when the super class getWritableDatabase (or getReadableDatabase)
@@ -99,7 +106,7 @@ private String profileTableName;
  void initializeDb (SQLiteDatabase db, String profileTableName) {
      final String PROFILE_TABLE_NAME = profileTableName;
     String sql = "SELECT COALESCE(MAX(_ID), 0) FROM " + DatabaseHelper.DB_TABLE_NAME;
-    
+    /*
     // get the number of rows in the cards db
     DatabaseHelper cardsHelper = new DatabaseHelper(context);
      SQLiteDatabase cardsDb = cardsHelper.getReadableDatabase();
@@ -110,7 +117,10 @@ private String profileTableName;
      cardsCursor.close();
      cardsDb.close();
      cardsHelper.close();
-     
+     */
+    
+    int cardsRows = 1190;
+    
      // get the number of rows in the profiles db
      sql = "SELECT COALESCE(MAX(_ID), 0) FROM " + PROFILE_TABLE_NAME;
     Cursor cursor = db.rawQuery(sql, null);
@@ -130,7 +140,8 @@ private String profileTableName;
     }
     */
     
-    InsertHelper ih = new InsertHelper(db, PROFILE_TABLE_NAME);
+//    InsertHelper ih = new InsertHelper(db, profileTableName);
+    InsertHelper ih = new InsertHelper(db, profileTableName);
     
 //  final int ID_COLUMN = ih.getColumnIndex(BaseColumns._ID);
     final int STATUS_COLUMN = ih.getColumnIndex(ProfileDatabaseHelper.STATUS);
@@ -140,7 +151,7 @@ private String profileTableName;
         ih.prepareForInsert();
 //      ih.bind(ID_COLUMN, RANK_COLUMN);
         // just insert an empty row with null values
-        ih.bind(STATUS_COLUMN, 0);
+//        ih.bind(STATUS_COLUMN, 0);
         ih.execute();
     }
     
