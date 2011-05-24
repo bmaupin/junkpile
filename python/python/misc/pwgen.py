@@ -17,13 +17,13 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-'''
-Generates a password of a specified length given specific character classes
-'''
-
-
-# enables true division; not avaliable until Python 3.0
+# enables true division; not available until Python 3.0
 from __future__ import division
+
+'''
+ Generates a password of a specified length given specific character classes
+'''
+
 
 import bisect 
 import random
