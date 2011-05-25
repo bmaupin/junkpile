@@ -16,8 +16,6 @@ public class Test extends Activity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-    	List<String> currentUnseenIds = new ArrayList<String>();
-    	
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
@@ -34,89 +32,40 @@ public class Test extends Activity {
         wordsDb.execSQL("attach database ? as profileDb", 
         		new String[] {this.getDatabasePath("profiles.db").getPath()});
         
-        /*
-        String sql = "SELECT _ID FROM " + DatabaseHelper.DB_TABLE_NAME +
-        	" WHERE _ID IN (SELECT _ID FROM profileDb." + 
-        	ProfileDatabaseHelper.DB_TABLE_NAME + " WHERE " + 
-        	ProfileDatabaseHelper.STATUS + " IS NULL);";
-        */
+        String[] sqlSelectionArgs = new String[1];
+        String sql = "SELECT * from words where _ID IS ?";
+        sqlSelectionArgs[0] = "NULL";
+        Log.d(TAG, "sqlSelectionArgs=" + sqlSelectionArgs);
+        Log.d(TAG, "sqlSelectionArgs[0]=" + sqlSelectionArgs[0]);
+//        Log.d(TAG, "sqlSelectionArgs[1]" + sqlSelectionArgs[1]);
         
-        String sql = "SELECT " + DatabaseHelper.DB_TABLE_NAME + "._ID" +
+        String test = "1";
+        
+        Cursor cursor = wordsDb.rawQuery(sql, sqlSelectionArgs);
+        cursor.moveToFirst();
+        
+        
+        /*
+        String sql = "SELECT  *" +
         		" FROM " + DatabaseHelper.DB_TABLE_NAME +
         		" LEFT JOIN profileDb." + ProfileDatabaseHelper.DB_TABLE_NAME + 
         		" ON " + DatabaseHelper.DB_TABLE_NAME + "._ID = profileDb." + 
         		ProfileDatabaseHelper.DB_TABLE_NAME + "." + 
-        		ProfileDatabaseHelper.CARD_ID + 
-        		" WHERE " + ProfileDatabaseHelper.STATUS + " IS NULL;";
+        		ProfileDatabaseHelper.CARD_ID;
+//        		" WHERE " + ProfileDatabaseHelper.STATUS + " IS NULL;";
 		
         Cursor cursor = wordsDb.rawQuery(sql, null);
 //        cursor.moveToFirst();
         
-        while (cursor.moveToNext()) {
-        	currentUnseenIds.add(cursor.getString(0));
+        Log.d(TAG, "START getting cards");
+        
+        int id;
+        for (int i=1; i<501; i++) {
+            cursor.moveToNext();
+            id = cursor.getInt(0);
         }
         
-        cursor.close();
-        
-        Log.d(TAG, "onCreate: currentUnseenIds.size()=" + currentUnseenIds.size());
-        Toast.makeText(this, currentUnseenIds.size() + "", Toast.LENGTH_LONG).show();
-        
-        
-        /*
-        ImageView i = (ImageView) findViewById(R.id.knownCheck);
-        i.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				ImageView i = (ImageView)arg0;
-				i.setImageResource(R.drawable.btn_check_buttonless_on);
-				
-//				vs.showNext();
-			}
-        	
-        });
-        */
-        
-        
-        
-//        ImageView i = new ImageView(this);
-//        i.setImageResource(R.drawable.btn_check_buttonless_on);
-//        i.setAdjustViewBounds(true); // set the ImageView bounds to match the Drawable's dimensions
-        
-//        TextView text = (TextView) findViewById(R.id.myTextView);
-        
-        /*
-        ViewSwitcher vs = new ViewSwitcher(this);
-        
-        ImageView buttonChecked = (ImageView) findViewById(R.id.imageView1);
-        ImageView buttonUnchecked = (ImageView) findViewById(R.id.imageView1);
-        buttonUnchecked.setImageResource(R.drawable.btn_check_buttonless_off);
-        
-        vs.addView(buttonChecked);
-        vs.addView(buttonUnchecked);
-        */
-        
-//        ImageView i = (ImageView) findViewById(R.id.imageView1);
-        
-        /*
-        i.setOnTouchListener(new OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                // TODO Process touch event, return true if handled
-                return false;
-            }
-        });
-        */
-        
-        /*
-        i.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				ImageView i = (ImageView)findViewById(R.id.imageView1);
-				i.setImageResource(R.drawable.btn_check_buttonless_off);
-				
-//				vs.showNext();
-			}
-        	
-        });
+        Log.d(TAG, "FINISH getting cards");
         */
     }
 }
