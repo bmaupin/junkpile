@@ -4,14 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Test extends Activity {
 	private static final String TAG = "Test";
+	private static final int DIALOG_SELECT_COLOR_ID = 0;
 	
     /** Called when the activity is first created. */
     @Override
@@ -19,6 +34,9 @@ public class Test extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        showDialog(DIALOG_SELECT_COLOR_ID);
+        
+        /*
 		DatabaseHelper wordsHelper = new DatabaseHelper(this);
 		SQLiteDatabase wordsDb = wordsHelper.getReadableDatabase();
         
@@ -43,6 +61,7 @@ public class Test extends Activity {
         
         Cursor cursor = wordsDb.rawQuery(sql, sqlSelectionArgs);
         cursor.moveToFirst();
+        */
         
         
         /*
@@ -67,5 +86,131 @@ public class Test extends Activity {
         
         Log.d(TAG, "FINISH getting cards");
         */
+    }
+    
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DIALOG_SELECT_COLOR_ID:
+                return createSelectColorDialog();
+        }
+        return null;
+    }
+    
+    private Dialog createSelectColorDialog() {
+        final CharSequence[] items = {"Red", "Green", "Blue"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setPadding(0, -6, 0, -10);
+        
+        CheckBox checkBox = new CheckBox(this);
+        TextView textView = new TextView(this);
+        
+        textView.setText("Save as default");
+
+        linearLayout.addView(checkBox);
+        linearLayout.addView(textView);
+
+        builder.setView(linearLayout);
+        
+        builder.setTitle("Pick a color");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                Toast.makeText(getApplicationContext(), items[item], Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        AlertDialog ad = builder.create();
+        return ad;
+    }
+    
+    private Dialog createSelectColorDialogOld() {
+        final CharSequence[] items = {"Red", "Green", "Blue"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        
+        CheckBox checkBox = new CheckBox(this);
+        TextView textView = new TextView(this);
+//        RelativeLayout linearLayout = new RelativeLayout(this);
+        
+
+        LinearLayout linearLayout = new LinearLayout(this);
+        
+        
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+              LinearLayout.LayoutParams.WRAP_CONTENT);
+        
+//        lp.setMargins(0, -6, 0, -10);
+        
+//        linearLayout.setLayoutParams(new LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+//                        LinearLayout.LayoutParams.FILL_PARENT));
+//        linearLayout.setOrientation(1);
+//        textView.setText("Save as default (dont' show this again)");
+        textView.setText("Save as default");
+        
+//        checkBox.setPadding(0, 0, 0, 0);
+        
+//        linearLayout.setPadding(0, 0, 0, 0);
+//        linearLayout.setPadding(0,-6,0,-10);
+        linearLayout.setPadding(0,-9,0,-13);
+        
+//        linearLayout.setMargins(0,3,0,3);
+        
+        
+//        lp.setMargins(0,0,0,0);
+//        lp.setMargins(1,1,1,1);
+//        lp.setMargins(0, -6, 0, -10);
+        //lp.setMargins(0,5,0,5);
+//        lp.setMargins(0,2,0,2);
+        lp.setMargins(0,-3,0,-3);
+        
+
+//        lp2.setMargins(0,0,0,0);
+        
+//        lp.setWeight(1);
+        linearLayout.setLayoutParams(lp);
+        
+//        checkBox.setPadding(0, 3, 0, 3);
+        
+        linearLayout.addView(checkBox);
+        linearLayout.addView(textView);
+
+        builder.setView(linearLayout);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+        }});
+        
+        
+        builder.setTitle("Pick a color");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                Toast.makeText(getApplicationContext(), items[item], Toast.LENGTH_SHORT).show();
+            }
+        });
+        
+
+        AlertDialog ad = builder.create();
+        return ad;
+    }
+    
+    /* Inflates the menu */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    
+    /* Handles menu selections */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_exit:
+            finish();
+            return true;
+        }
+        return false;
     }
 }
