@@ -2,4 +2,6 @@
 <resources>
     <string name="hello">Hello World, Test!</string>
     <string name="app_name">Test</string>
+    <string name="menu_exit_label">Exit</string>
+    <string name="menu_exit_shortcut">x</string>
 </resources>
