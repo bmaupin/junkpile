@@ -27,6 +27,9 @@ import ldap
 # change these as necessary
 debug           = True
 ldap_host       = 'ldap.example.com'
+# DN used for binding to LDAP
+ldap_bind_dn    = 'uid=%s,ou=accounts,dc=example,dc=com'
+# DN used as the search base
 ldap_base_dn    = 'ou=groups,dc=example,dc=com'
 ldap_filter     = 'cn=somegroup'
 ldap_attrs      = ['member',
@@ -53,7 +56,7 @@ def ldap_connect():
     if username == '':
         username = getpass.getuser()
         
-    bind_dn = 'uid=%s,ou=accounts,dc=example,dc=com' % (username)
+    bind_dn = ldap_bind_dn % (username)
     bind_password = getpass.getpass('Please enter your LDAP password: ')
     
     if debug:  
