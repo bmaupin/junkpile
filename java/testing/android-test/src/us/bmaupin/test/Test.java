@@ -13,13 +13,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -96,23 +100,56 @@ public class Test extends Activity {
         }
         return null;
     }
-    
+
     private Dialog createSelectColorDialog() {
+        final CharSequence[] items = {"Red", "Green", "Blue"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+/*        
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setPadding(0, -6, 0, -10);
+        CheckBox checkBox = new CheckBox(this);
+        TextView textView = new TextView(this);
+        textView.setText("Save as default");
+        linearLayout.addView(checkBox);
+        linearLayout.addView(textView);
+*/
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.card_order_dialog,
+                (ViewGroup) findViewById(R.id.card_order_dialog_layout));
+        
+//        TableLayout layout = (TableLayout) inflater.inflate(R.layout.card_order_dialog,
+//                (ViewGroup) findViewById(R.id.card_order_dialog_layout));
+        
+//        layout.setPadding(0, -6, 0, -10);
+        layout.setPadding(0, -10, 0, -15);
+        layout.setClipToPadding(false);
+        builder.setView(layout);
+        
+        builder.setTitle("Pick a color");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                Toast.makeText(getApplicationContext(), items[item], Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        AlertDialog ad = builder.create();
+        return ad;
+    }
+    
+    private Dialog createSelectColorDialogOld2() {
         final CharSequence[] items = {"Red", "Green", "Blue"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setPadding(0, -6, 0, -10);
-        
         CheckBox checkBox = new CheckBox(this);
         TextView textView = new TextView(this);
-        
         textView.setText("Save as default");
-
         linearLayout.addView(checkBox);
         linearLayout.addView(textView);
-
         builder.setView(linearLayout);
         
         builder.setTitle("Pick a color");
