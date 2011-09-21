@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -38,11 +39,20 @@ public class Test extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-  
-        boolean mobileDataAllowed = Settings.Secure.getInt(getContentResolver(), "mobile_data", 1) == 1;
         
-        Log.d(TAG, "mobileDataAllowed: " + mobileDataAllowed);
-        Toast.makeText(getApplicationContext(), "mobileDataAllowed: " + mobileDataAllowed, Toast.LENGTH_SHORT).show();
+        String sdk = Build.VERSION.SDK;
+        Toast.makeText(getApplicationContext(), "sdk: " + sdk, Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "sdk=" + sdk);
+        
+        int sdk_int = Integer.parseInt(Build.VERSION.SDK);
+        Toast.makeText(getApplicationContext(), "sdk_int: " + sdk_int, Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "sdk_int=" + sdk_int);
+        
+        /*
+        sdk_int = Build.VERSION.SDK_INT;
+        Toast.makeText(getApplicationContext(), "sdk_int: " + sdk_int, Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "sdk_int=" + sdk_int);
+        */
         
 //        showDialog(DIALOG_SELECT_COLOR_ID);
         
