@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -37,8 +38,13 @@ public class Test extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+  
+        boolean mobileDataAllowed = Settings.Secure.getInt(getContentResolver(), "mobile_data", 1) == 1;
         
-        showDialog(DIALOG_SELECT_COLOR_ID);
+        Log.d(TAG, "mobileDataAllowed: " + mobileDataAllowed);
+        Toast.makeText(getApplicationContext(), "mobileDataAllowed: " + mobileDataAllowed, Toast.LENGTH_SHORT).show();
+        
+//        showDialog(DIALOG_SELECT_COLOR_ID);
         
         /*
 		DatabaseHelper wordsHelper = new DatabaseHelper(this);
