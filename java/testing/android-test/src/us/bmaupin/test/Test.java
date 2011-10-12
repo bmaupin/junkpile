@@ -48,11 +48,16 @@ public class Test extends Activity {
         Toast.makeText(getApplicationContext(), "sdk_int: " + sdk_int, Toast.LENGTH_SHORT).show();
         Log.d(TAG, "sdk_int=" + sdk_int);
         
-        /*
-        sdk_int = Build.VERSION.SDK_INT;
-        Toast.makeText(getApplicationContext(), "sdk_int: " + sdk_int, Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "sdk_int=" + sdk_int);
-        */
+        try {
+            if (Integer.parseInt(Build.VERSION.SDK) > 3) {
+                int android_sdk_int = Build.VERSION.SDK_INT;
+                Toast.makeText(getApplicationContext(), "android_sdk_int: " + android_sdk_int, Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "sdk_int=" + sdk_int);
+            }
+        } catch (Exception e) {
+            
+        }
+        
         
 //        showDialog(DIALOG_SELECT_COLOR_ID);
         
