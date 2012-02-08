@@ -15,6 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider android:name=".MyProvider"
+                  android:authorities="com.example.myapp.myprovider"
+                  >
+                  <grant-uri-permission android:pathPattern=".*" />
+        </provider>
 
     </application>
 </manifest>
