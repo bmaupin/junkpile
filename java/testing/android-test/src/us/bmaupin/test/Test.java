@@ -1,8 +1,12 @@
 package us.bmaupin.test;
 
+import java.util.Arrays;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,6 +27,7 @@ public class Test extends Activity {
         buttonTest.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
+/*                
                 Intent i = new Intent(Intent.ACTION_VIEW, 
                         MyProvider.CONTENT_URI);
 //                i.putExtra(
@@ -37,6 +42,26 @@ public class Test extends Activity {
                         ChooseCardGroup.class);
                 startActivityForResult(intent, REQUEST_CARD_SET_BROWSE);
                 */
+                
+                final String[] demo_pie_labels = new String[] {
+                    "known",
+                    "iffy",
+                    "unknown"
+                };
+                final int[] demo_pie_data = new int[] {12, 5, 3};
+/*                int[] colors = new int[demo_pie_labels.length];
+                for (int j=0; j<demo_pie_labels.length; j++)
+                                colors[j] = Color.HSVToColor(new float[] {360 * j / (float) colors.length, 0.6f, 1});
+                Log.d(TAG, "colors=" + Arrays.toString(colors));
+*/              
+                int[] colors = {-10027162, -3276954, -39322};
+                Intent i = new Intent("com.googlecode.chartdroid.intent.action.PLOT");
+                i.addCategory("com.googlecode.chartdroid.intent.category.PIE_CHART");
+                i.putExtra(Intent.EXTRA_TITLE, "Impressions");
+                i.putExtra("com.googlecode.chartdroid.intent.extra.LABELS", demo_pie_labels);
+                i.putExtra("com.googlecode.chartdroid.intent.extra.DATA", demo_pie_data);
+                i.putExtra("com.googlecode.chartdroid.intent.extra.COLORS", colors);
+                startActivity(i);
             }
         });
         
