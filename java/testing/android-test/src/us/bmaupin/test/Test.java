@@ -57,7 +57,7 @@ public class Test extends Activity {
                 int[] colors = {-10027162, -3276954, -39322};
                 Intent i = new Intent("com.googlecode.chartdroid.intent.action.PLOT");
                 i.addCategory("com.googlecode.chartdroid.intent.category.PIE_CHART");
-                i.putExtra(Intent.EXTRA_TITLE, "Impressions");
+                i.putExtra(Intent.EXTRA_TITLE, "Summary");
                 i.putExtra("com.googlecode.chartdroid.intent.extra.LABELS", demo_pie_labels);
                 i.putExtra("com.googlecode.chartdroid.intent.extra.DATA", demo_pie_data);
                 i.putExtra("com.googlecode.chartdroid.intent.extra.COLORS", colors);

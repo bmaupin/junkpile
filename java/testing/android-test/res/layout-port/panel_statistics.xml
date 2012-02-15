@@ -5,8 +5,8 @@
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
     android:padding="20px"
-    android:background="@drawable/chartdroid_panel_background"
     >
+    <!-- android:background="@drawable/chartdroid_panel_background" -->
 
 	<include layout="@layout/chart"
 		android:layout_width="fill_parent"
