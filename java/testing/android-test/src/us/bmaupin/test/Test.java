@@ -55,6 +55,13 @@ public class Test extends Activity {
                 Log.d(TAG, "colors=" + Arrays.toString(colors));
 */              
                 int[] colors = {-10027162, -3276954, -39322};
+                // color-blind safe colors
+/*                int[] colors = {
+                        Color.parseColor("#1BA1E2"),
+                        -3276954,
+                        Color.parseColor("#674f00")
+                        };
+*/
                 Intent i = new Intent("com.googlecode.chartdroid.intent.action.PLOT");
                 i.addCategory("com.googlecode.chartdroid.intent.category.PIE_CHART");
                 i.putExtra(Intent.EXTRA_TITLE, "Summary");
