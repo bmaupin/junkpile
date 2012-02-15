@@ -41,7 +41,7 @@ public class ChartPanelActivity extends ListActivity {
         getWindow().requestFeature(Window.FEATURE_LEFT_ICON);
         setContentView(R.layout.panel_statistics);
 // TODO: we shouldn't need this
-        getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.drawable.titlebar_icon);
+//        getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.drawable.titlebar_icon);
 
         
         color_values = getIntent().getIntArrayExtra(IntentConstants.EXTRA_COLORS);
