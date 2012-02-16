@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import us.bmaupin.test.R;
-import us.bmaupin.test.R.drawable;
-import us.bmaupin.test.R.id;
-import us.bmaupin.test.R.layout;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -21,7 +18,6 @@ import android.widget.TextView;
 
 //import com.googlecode.chartdroid.R;
 import com.googlecode.chartdroid.core.IntentConstants;
-import com.googlecode.chartdroid.core.ContentSchemaOld.PlotData;
 import com.googlecode.chartdroid.pie.ColorSwatchKeyAdapter.PieDataElement;
 
 
@@ -134,4 +130,11 @@ public class ChartPanelActivity extends ListActivity {
 
         return null;
     }
+}
+
+
+final class PlotData implements BaseColumns {
+    public static final String COLUMN_AXIS_INDEX = "COLUMN_AXIS_INDEX";
+    public static final String COLUMN_DATUM_VALUE = "COLUMN_DATUM_VALUE";
+    public static final String COLUMN_DATUM_LABEL = "COLUMN_DATUM_LABEL";
 }
