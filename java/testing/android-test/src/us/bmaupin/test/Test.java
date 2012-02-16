@@ -64,13 +64,11 @@ public class Test extends Activity {
                         Color.parseColor("#674f00")
                         };
 */
-//                Intent i = new Intent("com.googlecode.chartdroid.intent.action.PLOT");
                 Intent i = new Intent(Test.this, ChartPanelActivity.class);
-                i.addCategory("com.googlecode.chartdroid.intent.category.PIE_CHART");
                 i.putExtra(Intent.EXTRA_TITLE, "Summary");
-                i.putExtra("com.googlecode.chartdroid.intent.extra.LABELS", demo_pie_labels);
-                i.putExtra("com.googlecode.chartdroid.intent.extra.DATA", demo_pie_data);
-                i.putExtra("com.googlecode.chartdroid.intent.extra.COLORS", colors);
+                i.putExtra(ChartPanelActivity.EXTRA_LABELS, demo_pie_labels);
+                i.putExtra(ChartPanelActivity.EXTRA_DATA, demo_pie_data);
+                i.putExtra(ChartPanelActivity.EXTRA_COLORS, colors);
                 startActivity(i);
             }
         });
