@@ -1,3 +1,7 @@
+/*
+ * this file has been modified
+ */
+
 package com.googlecode.chartdroid.pie;
 
 import android.content.Context;
@@ -9,7 +13,6 @@ import android.graphics.RectF;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.View;
 
 public class PieChartDrawable extends Drawable {

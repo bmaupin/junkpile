@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- this file has been modified -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:gravity="center_horizontal"
@@ -22,6 +23,5 @@
 		android:scaleType="center"
 		android:adjustViewBounds="false"
 	/>
-	<!-- android:src="@drawable/chartdroid_icon" -->
 
 </LinearLayout>

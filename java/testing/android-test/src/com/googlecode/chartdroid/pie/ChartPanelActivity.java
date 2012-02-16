@@ -1,3 +1,7 @@
+/*
+ * this file has been modified
+ */
+
 package com.googlecode.chartdroid.pie;
 
 import java.util.ArrayList;
