@@ -16,16 +16,16 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-//import com.googlecode.chartdroid.R;
-import com.googlecode.chartdroid.core.IntentConstants;
 import com.googlecode.chartdroid.pie.ColorSwatchKeyAdapter.PieDataElement;
 
-
-public class ChartPanelActivity extends ListActivity {
-    
+public class ChartPanelActivity extends ListActivity {    
     static final String TAG = "ChartPanelActivity"; 
-    
 
+    // Pie chart extras
+    public static final String EXTRA_COLORS = "com.googlecode.chartdroid.intent.extra.COLORS";
+    public static final String EXTRA_LABELS = "com.googlecode.chartdroid.intent.extra.LABELS";
+    public static final String EXTRA_DATA = "com.googlecode.chartdroid.intent.extra.DATA";
+    
     String[] data_labels;
     int[] data_values;
     int[] color_values;
@@ -36,26 +36,17 @@ public class ChartPanelActivity extends ListActivity {
 
         getWindow().requestFeature(Window.FEATURE_LEFT_ICON);
         setContentView(R.layout.panel_statistics);
-// TODO: we shouldn't need this
-//        getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.drawable.titlebar_icon);
-
         
-        color_values = getIntent().getIntArrayExtra(IntentConstants.EXTRA_COLORS);
+        color_values = getIntent().getIntArrayExtra(ChartPanelActivity.EXTRA_COLORS);
 /*        if (color_values == null) {
             color_values = getResources().getIntArray(R.array.colors_watermelon);
         }
 */
-
         
         TextView title_holder = (TextView) findViewById(R.id.chart_title_placeholder);
-        String title = getIntent().getStringExtra(Intent.EXTRA_TITLE);
-        String deprecated_title = getIntent().getStringExtra(IntentConstants.EXTRA_TITLE);
-        title_holder.setText( title != null ? title : deprecated_title);
+        title_holder.setText(getIntent().getStringExtra(Intent.EXTRA_TITLE));
         
         ImageView img = (ImageView) findViewById(R.id.image_placeholder);
-        
-        
-
 
         Uri intent_data = getIntent().getData();
         
@@ -65,13 +56,11 @@ public class ChartPanelActivity extends ListActivity {
             // We have been passed a cursor to the data via a content provider.
             
             Log.d(TAG, "Querying content provider for: " + intent_data);
-
+// TODO: managedQuery is deprecated
             Cursor cursor = managedQuery(intent_data,
                     new String[] {BaseColumns._ID, PlotData.COLUMN_AXIS_INDEX, PlotData.COLUMN_DATUM_VALUE},
                     null, null, null);
 
-            int id_column = cursor.getColumnIndex(BaseColumns._ID);
-            int axis_column = cursor.getColumnIndex(PlotData.COLUMN_AXIS_INDEX);
             int data_column = cursor.getColumnIndex(PlotData.COLUMN_DATUM_VALUE);
             int label_column = cursor.getColumnIndex(PlotData.COLUMN_DATUM_LABEL);
 
@@ -94,8 +83,8 @@ public class ChartPanelActivity extends ListActivity {
             }
         } else {
             
-            data_values = getIntent().getIntArrayExtra(IntentConstants.EXTRA_DATA);
-            data_labels = getIntent().getStringArrayExtra(IntentConstants.EXTRA_LABELS);
+            data_values = getIntent().getIntArrayExtra(ChartPanelActivity.EXTRA_DATA);
+            data_labels = getIntent().getStringArrayExtra(ChartPanelActivity.EXTRA_LABELS);
 
             
             int i = 0;
