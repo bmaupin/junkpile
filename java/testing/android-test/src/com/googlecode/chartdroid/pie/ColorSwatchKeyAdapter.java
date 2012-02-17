@@ -3,7 +3,7 @@
  * http://code.google.com/p/chartdroid/
  * 
  * This file has been modified from the original source by bmaupin:
- * - reference to chart resource renamed
+ * - references to chart resources renamed
  */
 
 package com.googlecode.chartdroid.pie;
@@ -91,9 +91,9 @@ public class ColorSwatchKeyAdapter extends BaseAdapter {
 		
 
             holder = new ViewHolderPieDatum();
-            holder.swatch_holder = (ImageView) convertView.findViewById(R.id.swatch_holder);
-            holder.label_holder = (TextView) convertView.findViewById(R.id.label_holder);
-            holder.datum_holder = (TextView) convertView.findViewById(R.id.datum_holder);
+            holder.swatch_holder = (ImageView) convertView.findViewById(R.id.chart_swatch_holder);
+            holder.label_holder = (TextView) convertView.findViewById(R.id.chart_label_holder);
+            holder.datum_holder = (TextView) convertView.findViewById(R.id.chart_datum_holder);
             
 
             convertView.setTag(holder);
