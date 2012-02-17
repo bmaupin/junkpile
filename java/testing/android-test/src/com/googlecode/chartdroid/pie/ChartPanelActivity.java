@@ -47,7 +47,7 @@ public class ChartPanelActivity extends ListActivity {
         TextView title_holder = (TextView) findViewById(R.id.chart_title_placeholder);
         title_holder.setText(getIntent().getStringExtra(Intent.EXTRA_TITLE));
         
-        ImageView img = (ImageView) findViewById(R.id.image_placeholder);
+        ImageView img = (ImageView) findViewById(R.id.chart_image_placeholder);
         
         // Zip the data.
         List<PieDataElement> list = new ArrayList<PieDataElement>();
