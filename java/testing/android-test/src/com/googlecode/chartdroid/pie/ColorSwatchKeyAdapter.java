@@ -1,5 +1,6 @@
 /*
- * this file has been modified
+ * this file has been modified:
+ * - reference to chart resource renamed
  */
 
 package com.googlecode.chartdroid.pie;

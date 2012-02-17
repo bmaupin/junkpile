@@ -1,5 +1,10 @@
 /*
- * this file has been modified
+ * this file has been modified:
+ * - chartdroid icons removed
+ * - constants from PlotData class integrated
+ * - constants from IntentConstants class integrated
+ * - unused code removed
+ * - references to chart resources renamed
  */
 
 package com.googlecode.chartdroid.pie;

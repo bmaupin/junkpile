@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
+<!--
+this file has been modified:
+- link to android white color instead of custom color
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
@@ -41,7 +43,7 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
         	android:textAppearance="?android:attr/textAppearanceSmall" 
-			android:textColor="@color/white"
+			android:textColor="@android:color/white"
 	        android:text="Datum" />
 	
 
