@@ -1,5 +1,6 @@
 /*
- * this file has been modified
+ * this file has been modified:
+ * - remove unused import to get rid of warning
  */
 
 package com.googlecode.chartdroid.pie;
