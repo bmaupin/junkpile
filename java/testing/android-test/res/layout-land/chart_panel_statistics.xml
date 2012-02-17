@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- this file has been modified -->
+<!--
+ * Source originally from the chartdroid project, revision 299
+ * http://code.google.com/p/chartdroid/
+ * 
+ * This file has been modified from the original source by bmaupin:
+ * - background removed
+ * - chart resources renamed
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="fill_parent"

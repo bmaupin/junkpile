@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- this file has been modified -->
+<!--
+ * Source originally from the chartdroid project, revision 299
+ * http://code.google.com/p/chartdroid/
+ * 
+ * This file has been modified from the original source by bmaupin:
+ * - chartdroid icon removed
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:gravity="center_horizontal"

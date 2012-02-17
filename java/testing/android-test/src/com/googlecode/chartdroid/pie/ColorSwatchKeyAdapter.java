@@ -1,5 +1,8 @@
 /*
- * this file has been modified:
+ * Source originally from the chartdroid project, revision 299
+ * http://code.google.com/p/chartdroid/
+ * 
+ * This file has been modified from the original source by bmaupin:
  * - reference to chart resource renamed
  */
 
