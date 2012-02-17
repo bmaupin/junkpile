@@ -1,3 +1,7 @@
+/*
+ * this file has been modified
+ */
+
 package com.googlecode.chartdroid.pie;
 
 import java.util.ArrayList;
@@ -79,7 +83,7 @@ public class ColorSwatchKeyAdapter extends BaseAdapter {
 		
         ViewHolderPieDatum holder;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.key_list_item, null);
+            convertView = mInflater.inflate(R.layout.chart_key_list_item, null);
 		
 
             holder = new ViewHolderPieDatum();

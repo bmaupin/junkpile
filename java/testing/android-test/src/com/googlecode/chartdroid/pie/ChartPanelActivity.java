@@ -34,7 +34,7 @@ public class ChartPanelActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.panel_statistics);
+        setContentView(R.layout.chart_panel_statistics);
         
         TextView title_holder = (TextView) findViewById(R.id.chart_title_placeholder);
         title_holder.setText(getIntent().getStringExtra(Intent.EXTRA_TITLE));
