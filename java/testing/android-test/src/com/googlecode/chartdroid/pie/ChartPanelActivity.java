@@ -23,7 +23,10 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ChartPanelActivity extends ListActivity {    
@@ -43,6 +46,14 @@ public class ChartPanelActivity extends ListActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.chart_panel_statistics);
+        
+        LinearLayout layout = (LinearLayout) findViewById(R.id.chart_panel_statictics);
+        layout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                finish();
+            }
+        });
         
         TextView title_holder = (TextView) findViewById(R.id.chart_title_placeholder);
         title_holder.setText(getIntent().getStringExtra(Intent.EXTRA_TITLE));
@@ -68,7 +79,12 @@ public class ChartPanelActivity extends ListActivity {
         }
 
         // Set up our adapter
-        ColorSwatchKeyAdapter adapter = new ColorSwatchKeyAdapter(this);
+        ColorSwatchKeyAdapter adapter = new ColorSwatchKeyAdapter(this) {
+            // prevent the chart key list from being clickable
+            public boolean isEnabled(int position) {
+                return false; 
+            } 
+        };
         adapter.setData(list);
         setListAdapter(adapter);
 

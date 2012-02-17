@@ -7,21 +7,19 @@
  * - background removed
  * - chart resources renamed
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.googlecode.chartdroid.pie.ChartLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/chart_panel_statictics"
     android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
     android:padding="20px"
+    android:focusable="true"
     >
-
 	<include layout="@layout/chart_chart" 
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:layout_weight="1"
 	/>
-
 	<include layout="@layout/chart_key" />
-
-
-</LinearLayout>
+</com.googlecode.chartdroid.pie.ChartLinearLayout>
