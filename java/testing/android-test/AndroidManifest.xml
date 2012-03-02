@@ -9,11 +9,6 @@
                  android:label="@string/app_name"
                  android:theme="@android:style/Theme.NoTitleBar">
         <activity android:name="com.googlecode.chartdroid.pie.ChartPanelActivity">
-            <intent-filter>
-                <action android:name="com.googlecode.chartdroid.intent.action.PLOT" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.googlecode.chartdroid.intent.category.PIE_CHART" />
-            </intent-filter>
         </activity>
         <activity android:name=".Test"
                   android:label="@string/app_name">
