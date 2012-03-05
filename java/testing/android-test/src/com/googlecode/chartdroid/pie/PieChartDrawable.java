@@ -4,6 +4,7 @@
  * 
  * This file has been modified from the original source by bmaupin:
  * - remove unused import to get rid of warning
+ * - make sure the correct color is used for each datum
  */
 
 package com.googlecode.chartdroid.pie;
@@ -79,7 +80,11 @@ public class PieChartDrawable extends Drawable {
 		float current_arc_position_degrees = 0;
 		int i = 0;
 		for (int datum : data_values) {
-			if (datum == 0) continue;
+			if (datum == 0) {
+			    // increment i so the correct color is used for each datum
+			    i++;
+			    continue;
+			}
 			
 			float arc_sweep = value_sum == 0 ? 0 : 360 * datum / (float) value_sum;
 			
@@ -100,6 +105,7 @@ public class PieChartDrawable extends Drawable {
 			paint.setStyle(Paint.Style.STROKE);
 			paint.setStrokeJoin(Join.ROUND);
 			paint.setStrokeCap(Cap.ROUND);
+			// this is the width of the white border in the pie chart
 			paint.setStrokeWidth(4);
 			paint.setColor(Color.WHITE);
 			canvas.drawArc(arc_bounds, current_arc_position_degrees, arc_sweep, true, paint);
