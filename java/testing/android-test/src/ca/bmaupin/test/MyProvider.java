@@ -1,4 +1,4 @@
-package us.bmaupin.test;
+package ca.bmaupin.test;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
