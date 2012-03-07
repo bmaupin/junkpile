@@ -1,4 +1,4 @@
-package us.bmaupin.test;
+package ca.bmaupin.test;
 
 // $Id: DatabaseHelper.java 109 2011-03-09 20:53:40Z bmaupin $
 

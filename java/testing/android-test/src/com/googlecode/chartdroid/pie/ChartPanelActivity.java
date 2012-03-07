@@ -17,7 +17,7 @@ import java.util.List;
 
 import com.googlecode.chartdroid.pie.ColorSwatchKeyAdapter.PieDataElement;
 
-import us.bmaupin.test.R;
+import ca.bmaupin.test.R;
 
 import android.app.ListActivity;
 import android.content.Intent;
