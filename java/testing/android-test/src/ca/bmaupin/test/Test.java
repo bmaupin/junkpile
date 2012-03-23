@@ -56,7 +56,25 @@ public class Test extends Activity {
                                 colors[j] = Color.HSVToColor(new float[] {360 * j / (float) colors.length, 0.6f, 1});
                 Log.d(TAG, "colors=" + Arrays.toString(colors));
 */              
+                int[] colors = {
+                        Color.parseColor("#66FF66"),
+                        Color.parseColor("#CDFF66"),
+                        Color.parseColor("#FF6666")
+                };
+                /*
                 int[] colors = {-10027162, -3276954, -39322};
+                Log.d(TAG, String.format("#%06X", (0xFFFFFF & -10027162)));
+                Log.d(TAG, String.format("#%06X", (0xFFFFFF & -3276954)));
+                Log.d(TAG, String.format("#%06X", (0xFFFFFF & -39322)));
+                /*
+                int[] colors = {
+                        /*
+                        Color.parseColor("#66ff65"),
+                        //Color.parseColor("#ff99009a"),//-10027162,
+                        Color.parseColor("#dff650"),
+                        //-3276954,
+                        -39322
+                        *//*};
                 // color-blind safe colors
 /*                int[] colors = {
                         Color.parseColor("#1BA1E2"),
