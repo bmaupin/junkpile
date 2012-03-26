@@ -6,6 +6,7 @@
  * This file has been modified from the original source by bmaupin:
  * - background removed
  * - chart resources renamed
+ * - add a chart message element
 -->
 <com.googlecode.chartdroid.pie.ChartLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/chart_panel_statictics"
@@ -16,10 +17,11 @@
     android:padding="20px"
     android:focusable="true"
     >
-	<include layout="@layout/chart_chart"
-		android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:layout_weight="1"
-	/>
-	<include layout="@layout/chart_key" />
+    <include layout="@layout/chart_chart"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+    />
+    <include layout="@layout/chart_key" />
+    <!-- <include layout="@layout/chart_message" /> -->
 </com.googlecode.chartdroid.pie.ChartLinearLayout>

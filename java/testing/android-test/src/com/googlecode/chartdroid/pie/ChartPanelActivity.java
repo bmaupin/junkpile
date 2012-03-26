@@ -47,7 +47,7 @@ public class ChartPanelActivity extends ListActivity {
 
         setContentView(R.layout.chart_panel_statistics);
         
-        LinearLayout layout = (LinearLayout) findViewById(R.id.chart_panel_statictics);
+        RelativeLayout layout = (LinearLayout) findViewById(R.id.chart_panel_statictics);
         layout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
