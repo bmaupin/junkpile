@@ -4,4 +4,6 @@
     <string name="app_name">Test</string>
     <string name="menu_exit_label">Exit</string>
     <string name="menu_exit_shortcut">x</string>
+    
+    <string name="chart_message">Tap anywhere or press back to continue</string>
 </resources>
