@@ -23,6 +23,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -47,7 +48,7 @@ public class ChartPanelActivity extends ListActivity {
 
         setContentView(R.layout.chart_panel_statistics);
         
-        RelativeLayout layout = (LinearLayout) findViewById(R.id.chart_panel_statictics);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.chart_panel_statictics);
         layout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -90,6 +91,8 @@ public class ChartPanelActivity extends ListActivity {
 
         PieChartDrawable pie = new PieChartDrawable(this, img, data_values, color_values);
         img.setImageDrawable( pie );
+        
+        Log.d(TAG, "" + list.size());
     }
 }
 

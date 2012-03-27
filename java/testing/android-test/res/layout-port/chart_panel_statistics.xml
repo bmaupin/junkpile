@@ -23,5 +23,5 @@
         android:layout_weight="1"
     />
     <include layout="@layout/chart_key" />
-    <!-- <include layout="@layout/chart_message" /> -->
+    <include layout="@layout/chart_message" />
 </com.googlecode.chartdroid.pie.ChartLinearLayout>
