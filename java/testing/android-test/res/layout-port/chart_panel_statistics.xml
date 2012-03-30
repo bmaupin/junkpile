@@ -55,18 +55,17 @@
         <include layout="@layout/chart_title" />
         <include layout="@layout/chart_chart" />
     </LinearLayout>
-    <RelativeLayout
-        android:orientation="horizontal"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         >
 	    <include layout="@layout/chart_key" />
 	    <include layout="@layout/chart_message"
-	        android:layout_width="wrap_content"
+	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_centerHorizontal="true"
-	        android:layout_alignParentBottom="true"
+	        android:gravity="bottom|center_horizontal"
 	        />
-    </RelativeLayout>
+    </LinearLayout>
 </com.googlecode.chartdroid.pie.ChartLinearLayout>
