@@ -7,36 +7,8 @@
  * - background removed
  * - chart resources renamed
  * - add a chart message element
+ * - use a custom layout
 -->
-<!-- 
-<com.googlecode.chartdroid.pie.ChartLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/chart_panel_statictics"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:gravity="center_horizontal"
-    android:padding="20px"
-    android:focusable="true"
-    >
-    <include layout="@layout/chart_chart" 
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-    />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <include layout="@layout/chart_key" />
-        <include layout="@layout/chart_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dip"
-            />
-    </LinearLayout>
-</com.googlecode.chartdroid.pie.ChartLinearLayout>
- -->
 <com.googlecode.chartdroid.pie.ChartLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/chart_panel_statictics"
     android:orientation="vertical"
@@ -63,30 +35,4 @@
             />
     </LinearLayout>
     <include layout="@layout/chart_message" />
-    <!-- 
-    
-    
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        >
-        
-        <include layout="@layout/chart_chart" />
-    </LinearLayout>
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        >
-        <include layout="@layout/chart_key" />
-        <include layout="@layout/chart_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            />
-    </RelativeLayout> -->
 </com.googlecode.chartdroid.pie.ChartLinearLayout>
