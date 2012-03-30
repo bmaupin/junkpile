@@ -25,9 +25,9 @@ import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ChartPanelActivity extends ListActivity {    
@@ -48,7 +48,7 @@ public class ChartPanelActivity extends ListActivity {
 
         setContentView(R.layout.chart_panel_statistics);
         
-        ViewGroup layout = (ViewGroup) findViewById(R.id.chart_panel_statictics);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.chart_panel_statictics);
         layout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
