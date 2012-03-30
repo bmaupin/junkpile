@@ -6,29 +6,14 @@
  * This file has been modified from the original source by bmaupin:
  * - chartdroid icon removed
  * - rename resource IDs
+ * - title separated out
+ * - removed linearlayout wrapper
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-
-	<TextView 
-		android:textAppearance="?android:attr/textAppearanceLarge"
-		android:id="@+id/chart_title_placeholder"
-		android:text="Chart Title"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center_horizontal"
-		/>
-	
-	<ImageView android:id="@+id/chart_image_placeholder"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:layout_weight="1"
-		android:scaleType="center"
-		android:adjustViewBounds="false"
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:id="@+id/chart_image_placeholder"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:layout_weight="1"
+	android:scaleType="center"
+	android:adjustViewBounds="false"
 	/>
-
-</LinearLayout>
