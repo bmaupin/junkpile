@@ -69,5 +69,4 @@
 	        android:layout_alignParentBottom="true"
 	        />
     </RelativeLayout>
-
 </com.googlecode.chartdroid.pie.ChartLinearLayout>
