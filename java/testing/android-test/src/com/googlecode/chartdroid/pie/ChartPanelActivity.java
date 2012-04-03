@@ -82,9 +82,12 @@ public class ChartPanelActivity extends ListActivity {
         // Set up our adapter
         ColorSwatchKeyAdapter adapter = new ColorSwatchKeyAdapter(this) {
             // prevent the chart key list from being clickable
+            public boolean areAllItemsEnabled() {
+                return false;
+            }
             public boolean isEnabled(int position) {
-                return false; 
-            } 
+                return false;
+            }
         };
         adapter.setData(list);
         setListAdapter(adapter);
