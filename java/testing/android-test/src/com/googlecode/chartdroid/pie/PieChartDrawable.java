@@ -5,6 +5,7 @@
  * This file has been modified from the original source by bmaupin:
  * - remove unused import to get rid of warning
  * - make sure the correct color is used for each datum
+ * - convert pixels to dips for pie chart border
  */
 
 package com.googlecode.chartdroid.pie;
@@ -106,7 +107,9 @@ public class PieChartDrawable extends Drawable {
 			paint.setStrokeJoin(Join.ROUND);
 			paint.setStrokeCap(Cap.ROUND);
 			// this is the width of the white border in the pie chart
-			paint.setStrokeWidth(4);
+			// convert dip to pixels for a uniform appearance despite display density 
+			paint.setStrokeWidth(4 * context.getResources().getDisplayMetrics()
+			        .density);
 			paint.setColor(Color.WHITE);
 			canvas.drawArc(arc_bounds, current_arc_position_degrees, arc_sweep, true, paint);
 			
