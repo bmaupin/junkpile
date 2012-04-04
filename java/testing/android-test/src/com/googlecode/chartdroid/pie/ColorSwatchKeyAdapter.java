@@ -4,6 +4,7 @@
  * 
  * This file has been modified from the original source by bmaupin:
  * - references to chart resources renamed
+ * - convert pixels to dips for swatch dimensions
  */
 
 package com.googlecode.chartdroid.pie;
@@ -110,10 +111,12 @@ public class ColorSwatchKeyAdapter extends BaseAdapter {
 	    
         PaintDrawable p = new PaintDrawable(color);
         
-        p.setIntrinsicHeight(32);
-        p.setIntrinsicWidth(32);
-        
-        p.setCornerRadius(6);
+        // convert pixels to dips
+        p.setIntrinsicHeight((int)(32 * context.getResources().getDisplayMetrics().density));
+        // convert pixels to dips
+        p.setIntrinsicWidth((int)(32 * context.getResources().getDisplayMetrics().density));
+        // convert pixels to dips
+        p.setCornerRadius((int)(6 * context.getResources().getDisplayMetrics().density));
         
         holder.swatch_holder.setImageDrawable( p );
 	   
