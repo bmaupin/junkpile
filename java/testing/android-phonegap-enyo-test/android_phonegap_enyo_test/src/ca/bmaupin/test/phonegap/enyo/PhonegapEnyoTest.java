@@ -10,6 +10,15 @@ public class PhonegapEnyoTest extends DroidGap {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.main);
-        super.loadUrl("file:///android_asset/www/index.html");
+        // settings sample using onyx
+        super.loadUrl("file:///android_asset/www/enyo/lib/onyx/examples/Settings/index.html");
+        // flickr sample app
+//        super.loadUrl("file:///android_asset/www/enyo/support/apps/flickr/index.html");
+        // fittable layout examples
+//        super.loadUrl("file:///android_asset/www/enyo/lib/layout/fittable/examples/app-layouts.html");
+        // reminder example using onyx
+//        super.loadUrl("file:///android_asset/www/enyo/lib/onyx/examples/Reminders/index.html");
+        // onyx examples
+//        super.loadUrl("file:///android_asset/www/enyo/lib/onyx/examples/OnyxSampler/index.html");
     }
 }
