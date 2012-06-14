@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Id: card.xml 29 2011-01-25 20:23:23Z bmaupin $ -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android" 
     android:shape="rectangle"> 
     <!-- <gradient android:startColor="#FFFFFF" android:endColor="#000000" 
