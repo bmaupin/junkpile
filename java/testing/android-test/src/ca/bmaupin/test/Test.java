@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class Test extends Activity {
 	private static final String TAG = "Test";
@@ -16,9 +15,17 @@ public class Test extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        TextView tv = (TextView) findViewById(R.id.leftView);
+        FontFitTextView tv = (FontFitTextView) findViewById(R.id.leftView);
         tv.setTextSize(42f);
-        tv.setText("international");
+        // short word
+        tv.setText("test");
+        // long word
+//        tv.setText("internationally");
+//        tv.setText("test");
+        
+        // multiple words
+//        tv.setText("test some words");
+//        tv.setText("supercalafragalisticexpialadocious");
     }
     
     /* Inflates the menu */
