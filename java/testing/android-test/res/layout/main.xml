@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Id: main.xml 140 2011-04-01 19:29:18Z bmaupin $ -->
 <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/flipper"
     android:orientation="vertical"
@@ -13,14 +12,13 @@
         >
         <TextView
             android:id="@+id/leftView"
-            android:background="@layout/card"
+            android:background="@layout/card_background"
             android:gravity="center"
             android:layout_width="fill_parent" 
             android:layout_height="fill_parent"
             android:layout_margin="30dp"
             android:textColor="#000000"
             />
-        <ImageView android:layout_height="wrap_content" android:src="@drawable/btn_check_buttonless_off" android:id="@+id/knownCheck" android:layout_width="wrap_content" android:layout_alignTop="@+id/leftView" android:layout_alignRight="@+id/leftView" android:layout_margin="10dp" />
     </RelativeLayout>
     <RelativeLayout 
         android:orientation="vertical"
@@ -29,14 +27,13 @@
         >
         <TextView
             android:id="@+id/centerView"
-            android:background="@layout/card"
+            android:background="@layout/card_background"
             android:gravity="center"
             android:layout_width="fill_parent" 
             android:layout_height="fill_parent"
             android:layout_margin="30dp"
             android:textColor="#000000"
             />
-        <ImageView android:layout_height="wrap_content" android:src="@drawable/btn_check_buttonless_off" android:id="@+id/knownCheck" android:layout_width="wrap_content" android:layout_alignTop="@+id/centerView" android:layout_alignRight="@+id/centerView" android:layout_margin="10dp" />
     </RelativeLayout>
     <RelativeLayout 
         android:orientation="vertical"
@@ -45,32 +42,12 @@
         >
         <TextView
             android:id="@+id/rightView"
-            android:background="@layout/card"
+            android:background="@layout/card_background"
             android:gravity="center"
             android:layout_width="fill_parent" 
             android:layout_height="fill_parent"
             android:layout_margin="30dp"
             android:textColor="#000000"
             />
-        <!-- <ImageView android:layout_height="wrap_content" android:src="@drawable/btn_check_buttonless_off" android:id="@+id/knownCheck" android:layout_width="wrap_content" android:layout_alignTop="@+id/myTextView" android:layout_alignRight="@+id/myTextView" android:layout_margin="10dp" /> -->
     </RelativeLayout>
 </ViewFlipper>
-<!-- 
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-    <TextView
-        android:id="@+id/myTextView"
-        android:background="@layout/card"
-        android:gravity="center"
-        android:layout_width="fill_parent" 
-        android:layout_height="fill_parent"
-        android:layout_margin="30dp"
-        android:textColor="#000000"
-        />
- -->
-    <!-- <ImageView android:layout_height="wrap_content" android:src="@drawable/btn_check_buttonless_on" android:id="@+id/imageView1" android:layout_width="wrap_content" android:layout_above="@+id/myTextView" android:layout_toRightOf="@+id/myTextView"></ImageView> -->
-    <!-- <ImageView android:layout_height="wrap_content" android:src="@drawable/btn_check_buttonless_on" android:id="@+id/imageView1" android:layout_width="wrap_content" android:layout_alignTop="@+id/myTextView" android:layout_alignRight="@+id/myTextView" android:layout_margin="10dp" /></RelativeLayout> -->
