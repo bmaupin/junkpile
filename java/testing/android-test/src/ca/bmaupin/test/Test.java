@@ -2,6 +2,7 @@ package ca.bmaupin.test;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,8 +18,9 @@ public class Test extends Activity {
         
         FontFitTextView tv = (FontFitTextView) findViewById(R.id.leftView);
         tv.setTextSize(42f);
+//        tv.setTextSize(22.868164f);
         // short word
-        tv.setText("test");
+//        tv.setText("test");
         // long word
 //        tv.setText("internationally");
 //        tv.setText("test");
@@ -26,6 +28,12 @@ public class Test extends Activity {
         // multiple words
 //        tv.setText("test some words");
 //        tv.setText("supercalafragalisticexpialadocious");
+        // multiple long words
+        Log.d(TAG, "tv.getTextSize())" + tv.getTextSize());
+        tv.setText("mathematics, appointmentslongword playgrounds,  international");
+        tv.setText("mathematics, appointmentslongword playgrounds,  international");
+//        tv.setText("appointmentslongword mathematics, playgrounds, mathematics");
+        Log.d(TAG, "tv.getTextSize())" + tv.getTextSize());
     }
     
     /* Inflates the menu */
