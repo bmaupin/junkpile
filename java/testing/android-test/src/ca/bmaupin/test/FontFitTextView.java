@@ -74,6 +74,9 @@ public class FontFitTextView extends TextView {
         
         if (newSize != 0) {
             this.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize);
+            // recalculate the line wrapping (pre ICS; ICS doesn't seem to need
+            // this
+            setEllipsize(null);
             Log.d(TAG, "newSize=" + newSize);
         }
         
@@ -104,6 +107,7 @@ public class FontFitTextView extends TextView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.d(TAG, "onMeasure()");
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
         int height = getMeasuredHeight();
@@ -114,14 +118,14 @@ public class FontFitTextView extends TextView {
     @Override
     protected void onTextChanged(final CharSequence text, final int start, 
             final int lengthBefore, final int lengthAfter) {
-        Log.d("FontFitTextView", "onTextChanged()");
+        Log.d(TAG, "onTextChanged()");
         // resize the text if it changes
         refitText(text.toString(), this.getWidth());
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        Log.d("FontFitTextView", "onSizeChanged()");
+        Log.d(TAG, "onSizeChanged()");
         if (w != oldw) {
             // resize the text if the view size changes
             refitText(this.getText().toString(), w);

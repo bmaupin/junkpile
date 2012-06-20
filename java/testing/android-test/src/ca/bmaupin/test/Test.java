@@ -29,11 +29,22 @@ public class Test extends Activity {
 //        tv.setText("test some words");
 //        tv.setText("supercalafragalisticexpialadocious");
         // multiple long words
-        Log.d(TAG, "tv.getTextSize())" + tv.getTextSize());
+//        Log.d(TAG, "tv.getTextSize())" + tv.getTextSize());
+        
+//        tv.setText("mathematics, appointmentslongword playgrounds,  international");
+//        tv.setText("longword mathematics, playgrounds, mathematics");
+//        Log.d(TAG, "tv.getTextSize())" + tv.getTextSize());
+        
+        
+        tv.setText("test");
         tv.setText("mathematics, appointmentslongword playgrounds,  international");
+        tv.setText("test");
         tv.setText("mathematics, appointmentslongword playgrounds,  international");
-//        tv.setText("appointmentslongword mathematics, playgrounds, mathematics");
-        Log.d(TAG, "tv.getTextSize())" + tv.getTextSize());
+        tv.setText("test");
+        tv.setText("internationally");
+        tv.setText("test some words");
+        tv.setText("internationally");
+        tv.setText("appointments mathematics, playgrounds, mathematics");
     }
     
     /* Inflates the menu */
