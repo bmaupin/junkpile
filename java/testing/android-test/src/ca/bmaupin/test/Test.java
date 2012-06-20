@@ -16,7 +16,7 @@ public class Test extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        FontFitTextView tv = (FontFitTextView) findViewById(R.id.leftView);
+        AutofitTextView tv = (AutofitTextView) findViewById(R.id.leftView);
         tv.setTextSize(42f);
 //        tv.setTextSize(22.868164f);
         // short word
@@ -45,6 +45,7 @@ public class Test extends Activity {
         tv.setText("test some words");
         tv.setText("internationally");
         tv.setText("appointments mathematics, playgrounds, mathematics");
+        tv.setText("mathematics, appointmentslongword playgrounds,  international");
     }
     
     /* Inflates the menu */

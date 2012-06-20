@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         >
-        <ca.bmaupin.test.FontFitTextView
+        <ca.bmaupin.test.AutofitTextView
             android:id="@+id/leftView"
             android:background="@layout/card_background"
             android:gravity="center"
