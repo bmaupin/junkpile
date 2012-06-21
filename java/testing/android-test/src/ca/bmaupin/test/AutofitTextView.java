@@ -2,6 +2,8 @@ package ca.bmaupin.test;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.os.Build;
+import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -60,12 +62,16 @@ public class AutofitTextView extends TextView {
             }
         }
         
-        
         if (newSize != 0) {
             this.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize);
-            // recalculate the line wrapping (pre ICS; ICS doesn't seem to need
-            // this
-            setEllipsize(null);
+            // recalculate the line wrapping
+            // pre ICS
+            if (Integer.parseInt(Build.VERSION.SDK) < 14) {
+                setEllipsize(null);
+            // ICS and above
+            } else {
+                setEllipsize(TruncateAt.END);
+            }
         }
     }
 
