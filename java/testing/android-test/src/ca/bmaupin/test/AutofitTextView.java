@@ -10,7 +10,7 @@ import android.util.TypedValue;
 import android.widget.TextView;
 
 public class AutofitTextView extends TextView {
-    private String TAG = "FontFitTextView";
+    private String TAG = "AutofitTextView";
     
     public AutofitTextView(Context context) {
         super(context);
@@ -24,6 +24,7 @@ public class AutofitTextView extends TextView {
      * assuming the text box is the specified width.
      */
     private void refitText(String text, int viewWidth) {
+        Log.d(TAG, "refitText()");
         if (viewWidth <= 0) {
             return;
         }
@@ -42,7 +43,7 @@ public class AutofitTextView extends TextView {
                 continue;
             }
 
-            float hi = paint.measureText(word);
+            float hi = this.getTextSize();
             float lo = 2;
             final float threshold = 0.5f; // How close we have to be
 
@@ -75,7 +76,8 @@ public class AutofitTextView extends TextView {
         }
     }
 
-// TODO not sure how necessary this is...
+// TODO this doesn't seem to be necessary, at least not for what we're using 
+// this class for
 /*
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
