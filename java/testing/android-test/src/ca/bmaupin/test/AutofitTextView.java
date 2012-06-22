@@ -29,7 +29,6 @@ public class AutofitTextView extends TextView {
             return;
         }
         
-        float newSize = 0;
         Paint paint = this.getPaint();
         int maxWidth = viewWidth - this.getPaddingLeft() - 
                 this.getPaddingRight();
@@ -57,17 +56,15 @@ public class AutofitTextView extends TextView {
                 else
                     lo = size; // too small
             }
+
+            // go ahead and resize the text now so the rezise won't have to 
+            // happen again once the largest word has been resized.  use lo so 
+            // that we undershoot rather than overshoot.
+            this.setTextSize(TypedValue.COMPLEX_UNIT_PX, lo);
             
-            // only update newSize the first time or if the new value is smaller
-            if (newSize == 0 || lo < newSize) {
-                // Use lo so that we undershoot rather than overshoot
-                newSize = lo;
-            }
-        }
-        
-        if (newSize != 0) {
-            this.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize);
-            // recalculate the line wrapping
+            // force the view to be redrawn and the line wrapping to be 
+            // recalculated
+// TODO: not sure where honeycomb falls in this
             // pre ICS
             if (Integer.parseInt(Build.VERSION.SDK) < 14) {
                 setEllipsize(null);
