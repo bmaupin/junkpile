@@ -44,7 +44,9 @@ public class AutofitTextView extends TextView {
             }
 
             float hi = this.getTextSize();
-            float lo = 2;
+            // 14sp (this is technically px) is the size used for 
+            // textAppearance.Small.  don't think we want any smaller.
+            float lo = 14;
             final float threshold = 0.5f; // How close we have to be
 
             while ((hi - lo) > threshold) {
