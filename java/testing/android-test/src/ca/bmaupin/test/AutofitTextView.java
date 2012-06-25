@@ -1,8 +1,6 @@
 package ca.bmaupin.test;
 
 import android.content.Context;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.os.Build;
 import android.text.Layout.Alignment;
 import android.text.StaticLayout;
@@ -39,19 +37,17 @@ public class AutofitTextView extends TextView {
             return;
         }
         
-        Paint paint = this.getPaint();
+        TextPaint tp = this.getPaint();
         int maxWidth = viewWidth - this.getPaddingLeft() - 
                 this.getPaddingRight();
-        
-        Log.d(TAG, "maxWidth=" + maxWidth);
-        Log.d(TAG, "maxHeight=" + (this.getHeight() - this.getPaddingTop()
-                - this.getPaddingBottom()));
-/*        
+        int maxHeight = this.getHeight() - this.getPaddingTop()
+                - this.getPaddingBottom();
+                
         String[] words = text.split(" ");
         
         for (String word : words) {
             // if this word isn't larger than the max size
-            if (paint.measureText(word) < maxWidth) {
+            if (tp.measureText(word) < maxWidth) {
                 // go to the next
                 continue;
             }
@@ -64,8 +60,8 @@ public class AutofitTextView extends TextView {
 
             while ((hi - lo) > threshold) {
                 float size = (hi + lo) / 2;
-                paint.setTextSize(size);
-                if (paint.measureText(word) >= maxWidth) 
+                tp.setTextSize(size);
+                if (tp.measureText(word) >= maxWidth) 
                     hi = size; // too big
                 else
                     lo = size; // too small
@@ -75,40 +71,18 @@ public class AutofitTextView extends TextView {
             // happen again once the largest word has been resized.  use lo so 
             // that we undershoot rather than overshoot.
             this.setTextSize(TypedValue.COMPLEX_UNIT_PX, lo);
-            
-            // force the view to be redrawn and the line wrapping to be 
-            // recalculated
-// TODO: not sure where honeycomb falls in this
-            // pre ICS
-            if (Integer.parseInt(Build.VERSION.SDK) < 14) {
-                setEllipsize(null);
-            // ICS and above
-            } else {
-                setEllipsize(TruncateAt.END);
-            }
-        }
-*/
-        
-        
-        
-        TextPaint tp = getPaint();
-        Rect rect = new Rect();
-        tp.getTextBounds(text, 0, text.length(), rect);
-        Log.d(TAG, "rect.height()=" + rect.height());
-
-        Log.d(TAG, "getTextHeight()=" + getTextHeight(text, tp, maxWidth, this.getTextSize()));
-        
-        
-        
-        int maxHeight = this.getHeight() - this.getPaddingTop()
-                - this.getPaddingBottom();
-       
-        while (getTextHeight(text, tp, maxWidth, this.getTextSize()) > maxHeight) {
-            paint.setTextSize(this.getTextSize() - 0.5f);
         }
         
-        Log.d(TAG, "this.getTextSize()=" + this.getTextSize());
+        // if the text is too high
+        while (getTextHeight(text, tp, maxWidth, this.getTextSize()) > 
+                maxHeight) {
+            // reduce the font size by 1 until it fits
+            tp.setTextSize(this.getTextSize() - 1f);
+        }
         
+        // force the view to be redrawn and the line wrapping to be 
+        // recalculated
+//TODO: not sure where honeycomb falls in this
         // pre ICS
         if (Integer.parseInt(Build.VERSION.SDK) < 14) {
             setEllipsize(null);
@@ -119,11 +93,13 @@ public class AutofitTextView extends TextView {
     }
 
     // Set the text size of the text paint object and use a static layout to render text off screen before measuring
-    private int getTextHeight(CharSequence source, TextPaint paint, int width, float textSize) {
+    private int getTextHeight(CharSequence source, TextPaint paint, int width, 
+            float textSize) {
         // Update the text paint object
         paint.setTextSize(textSize);
         // Measure using a static layout
-        StaticLayout layout = new StaticLayout(source, paint, width, Alignment.ALIGN_NORMAL, mSpacingMult, mSpacingAdd, true);
+        StaticLayout layout = new StaticLayout(source, paint, width, 
+                Alignment.ALIGN_NORMAL, mSpacingMult, mSpacingAdd, true);
         return layout.getHeight();
     }
     
@@ -155,8 +131,5 @@ public class AutofitTextView extends TextView {
             // resize the text if the view size changes
             refitText(this.getText().toString(), w);
         }
-        
-        Log.d(TAG, "view width=" + w);
-        Log.d(TAG, "view height=" + h);
     }
 }

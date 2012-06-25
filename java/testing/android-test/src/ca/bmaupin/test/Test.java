@@ -47,7 +47,7 @@ public class Test extends Activity {
         tv.setText("appointments mathematics, playgrounds, mathematics");
         tv.setText("mathematics, appointmentslongword playgrounds,  international");
 */
-        tv.setText("immediate (parents, siblings) and extended families; extended families");
+        tv.setText("immediately (parents, siblings) and extended families; extended families");
     }
     
     /* Inflates the menu */
