@@ -35,7 +35,7 @@ public class Test extends Activity {
 //        tv.setText("longword mathematics, playgrounds, mathematics");
 //        Log.d(TAG, "tv.getTextSize())" + tv.getTextSize());
         
-        
+/*        
         tv.setText("test");
         tv.setText("mathematics, appointmentslongword playgrounds,  international");
         tv.setText("test");
@@ -46,6 +46,8 @@ public class Test extends Activity {
         tv.setText("internationally");
         tv.setText("appointments mathematics, playgrounds, mathematics");
         tv.setText("mathematics, appointmentslongword playgrounds,  international");
+*/
+        tv.setText("immediate (parents, siblings) and extended families; extended families");
     }
     
     /* Inflates the menu */
