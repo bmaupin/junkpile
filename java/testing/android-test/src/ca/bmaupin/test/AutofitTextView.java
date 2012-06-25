@@ -2,7 +2,11 @@ package ca.bmaupin.test;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Build;
+import android.text.Layout.Alignment;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -11,6 +15,12 @@ import android.widget.TextView;
 
 public class AutofitTextView extends TextView {
     private String TAG = "AutofitTextView";
+    
+    // Text view line spacing multiplier
+    private float mSpacingMult = 1.0f;
+
+    // Text view additional line spacing
+    private float mSpacingAdd = 0.0f;
     
     public AutofitTextView(Context context) {
         super(context);
@@ -33,6 +43,10 @@ public class AutofitTextView extends TextView {
         int maxWidth = viewWidth - this.getPaddingLeft() - 
                 this.getPaddingRight();
         
+        Log.d(TAG, "maxWidth=" + maxWidth);
+        Log.d(TAG, "maxHeight=" + (this.getHeight() - this.getPaddingTop()
+                - this.getPaddingBottom()));
+/*        
         String[] words = text.split(" ");
         
         for (String word : words) {
@@ -73,8 +87,46 @@ public class AutofitTextView extends TextView {
                 setEllipsize(TruncateAt.END);
             }
         }
+*/
+        
+        
+        
+        TextPaint tp = getPaint();
+        Rect rect = new Rect();
+        tp.getTextBounds(text, 0, text.length(), rect);
+        Log.d(TAG, "rect.height()=" + rect.height());
+
+        Log.d(TAG, "getTextHeight()=" + getTextHeight(text, tp, maxWidth, this.getTextSize()));
+        
+        
+        
+        int maxHeight = this.getHeight() - this.getPaddingTop()
+                - this.getPaddingBottom();
+       
+        while (getTextHeight(text, tp, maxWidth, this.getTextSize()) > maxHeight) {
+            paint.setTextSize(this.getTextSize() - 0.5f);
+        }
+        
+        Log.d(TAG, "this.getTextSize()=" + this.getTextSize());
+        
+        // pre ICS
+        if (Integer.parseInt(Build.VERSION.SDK) < 14) {
+            setEllipsize(null);
+        // ICS and above
+        } else {
+            setEllipsize(TruncateAt.END);
+        }
     }
 
+    // Set the text size of the text paint object and use a static layout to render text off screen before measuring
+    private int getTextHeight(CharSequence source, TextPaint paint, int width, float textSize) {
+        // Update the text paint object
+        paint.setTextSize(textSize);
+        // Measure using a static layout
+        StaticLayout layout = new StaticLayout(source, paint, width, Alignment.ALIGN_NORMAL, mSpacingMult, mSpacingAdd, true);
+        return layout.getHeight();
+    }
+    
 // TODO this doesn't seem to be necessary, at least not for what we're using 
 // this class for
 /*
@@ -103,5 +155,8 @@ public class AutofitTextView extends TextView {
             // resize the text if the view size changes
             refitText(this.getText().toString(), w);
         }
+        
+        Log.d(TAG, "view width=" + w);
+        Log.d(TAG, "view height=" + h);
     }
 }
