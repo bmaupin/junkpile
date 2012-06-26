@@ -39,7 +39,7 @@ public class Test extends Activity {
         tv.setText("test");
         tv.setText("mathematics, appointmentslongword playgrounds,  international");
         tv.setText("test");
-        tv.setText("mathematics, appointmentslongword playgrounds,  international");
+        
         tv.setText("test");
         tv.setText("internationally");
         tv.setText("test some words");
@@ -47,6 +47,8 @@ public class Test extends Activity {
         tv.setText("appointments mathematics, playgrounds, mathematics");
         tv.setText("mathematics, appointmentslongword playgrounds,  international");
 */
+        tv.setText("Feast of Immolation/sacrifice");
+        tv.setText("good-looking");
         tv.setText("immediately (parents, siblings) and extended families; extended families");
     }
     
