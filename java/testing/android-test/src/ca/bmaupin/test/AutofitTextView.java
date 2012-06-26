@@ -75,6 +75,7 @@ public class AutofitTextView extends TextView {
             // happen again once the largest word has been resized.  use lo so 
             // that we undershoot rather than overshoot.
             tp.setTextSize(lo);
+            Log.d(TAG, "too wide; new size=" + tp.getTextSize());
         }
         
         // if the text is too high
@@ -82,6 +83,7 @@ public class AutofitTextView extends TextView {
                 maxHeight) {
             // reduce the font size by 1 until it fits
             tp.setTextSize(this.getTextSize() - 1f);
+            Log.d(TAG, "too high; new size=" + tp.getTextSize());
         }
         
         // force the view to be redrawn and the line wrapping to be 
