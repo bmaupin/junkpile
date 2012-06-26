@@ -1,6 +1,5 @@
 package ca.bmaupin.test;
 
-import org.amr.arabic.ArabicUtilities;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -17,7 +16,7 @@ import android.widget.TextView;
 public class AutofitTextView extends TextView {
     private String TAG = "AutofitTextView";
     
-   
+
     
     
 //
@@ -55,11 +54,17 @@ public class AutofitTextView extends TextView {
         int maxHeight = this.getHeight() - this.getPaddingTop()
                 - this.getPaddingBottom();
         
+        float ts = tp.getTextSize();
+        
         Log.d(TAG, "viewWidth=" + viewWidth);
         Log.d(TAG, "this.getHeight()" + this.getHeight());
         
-        for (String card : arabic) {
+        int bisectCount = 0;
+        int resizes = 0;
+        
+        for (String card : english) {
         	card = card.replace("/", "/ ");
+        	card = card.replace("-", "- ");
 	        String[] words = card.split(" ");
 	        
 	        for (String word : words) {
@@ -67,11 +72,12 @@ public class AutofitTextView extends TextView {
 	            
 	        	if (tp.measureText(word) >= maxWidth) {
 	        		resizeCount ++;
-	        		text = word;
-	        		Log.d(TAG, "word=" + word);
+//	        		Log.d(TAG, "word=" + word);
+	        	} else {
+	        	    continue;
 	        	}
 	        	
-	/*        	
+	        	/*
 	            // if this word isn't larger than the max size
 	            if (tp.measureText(word) < maxWidth) {
 	                // go to the next
@@ -83,14 +89,18 @@ public class AutofitTextView extends TextView {
 	        		resizeCount ++;
 	        		Log.d(TAG, "resizeCount=" + resizeCount);
 	        	}
+	        	/*/
 	
 	            float hi = this.getTextSize();
 	            // 14sp (this is technically px) is the size used for 
 	            // textAppearance.Small.  don't think we want any smaller.
 	            float lo = 14;
 	            final float threshold = 0.5f; // How close we have to be
-	
+	            
+//	            int bisectCount = 0;
+	            
 	            while ((hi - lo) > threshold) {
+	                bisectCount ++;
 	                float size = (hi + lo) / 2;
 	                tp.setTextSize(size);
 	                if (tp.measureText(word) >= maxWidth) 
@@ -102,12 +112,24 @@ public class AutofitTextView extends TextView {
 	            // go ahead and resize the text now so the resize won't have to 
 	            // happen again once the largest word has been resized.  use lo so 
 	            // that we undershoot rather than overshoot.
-	            this.setTextSize(TypedValue.COMPLEX_UNIT_PX, lo);
-	*/            
+//	            this.setTextSize(TypedValue.COMPLEX_UNIT_PX, lo);
+	            
+//	            Log.d(TAG, "bisectCount=" + bisectCount);
+//	            Log.d(TAG, "newSize=" + lo);
+	            
+	            resizes += (int) Math.ceil(ts - lo);
+//	            Log.d(TAG, "resizes=" + resizes);
+	            
+	            tp.setTextSize(ts);
+	            
+	            
 	        }
         }
         
-        Log.d(TAG, "resizeCount=" + resizeCount);
+        Log.d(TAG, "bisectCount=" + bisectCount);
+        Log.d(TAG, "resizes=" + resizes);
+        
+//        Log.d(TAG, "resizeCount=" + resizeCount);
 //        this.setText(text);
         
         
@@ -130,78 +152,6 @@ public class AutofitTextView extends TextView {
             setEllipsize(TruncateAt.END);
         }
         */
-    }
-    
-    static String fixArabic(String s, boolean showVowels) {
-        // reshape the card
-        s = ArabicUtilities.reshape(s);
-        // this fixes issues with the final character having neutral 
-        // direction (diacritics, parentheses, etc.)
-        s += '\u200f';
-        
-//        Log.d(TAG, "UNICODE: " + splitString(s));
-//        Log.d(TAG, "UNICODE: " + getUnicodeCodes(s));
-        
-        // only fix the sheddas if we're showing the vowels
-        if (showVowels) {
-            return fixSheddas(s);
-        } else {
-            return s;
-        }
-    }
-    
-    /**
-     * Replaces certain combinations of shedda plus another haraka with custom
-     * unicode characters (requiring a font customized with these characters)
-     * and returns the string, since Android doesn't properly show the correct
-     * ligatures for these combinations.
-     * @param s
-     * @return
-     */
-    static String fixSheddas(String s) {
-        char[] charArray = s.toCharArray();
-        String fixedString = "";
-        boolean prevShedda = false;
-        
-        for (char c : charArray) {
-            if (c == '\u0651') {
-                prevShedda = true;
-            } else {
-                // the previous character was a shedda
-                if (prevShedda) {
-                    // reset our flag
-                    prevShedda = false;
-                    // fathatan
-                    if (c == '\u064b') {
-                        fixedString += '\ufbc2';
-                    // dammatan
-                    } else if (c == '\u064c') {
-                        fixedString += '\ufbc3';
-                    // kasratan
-                    } else if (c == '\u064d') {
-                        fixedString += '\ufbc4';
-                    // fatha
-                    } else if (c == '\u064e') {
-                        fixedString += '\ufbc5';
-                    // damma
-                    } else if (c == '\u064f') {
-                        fixedString += '\ufbc6';
-                    // kasra
-                    } else if (c == '\u0650') {
-                        fixedString += '\ufbc7';
-                    } else {
-                        // add the shedda back
-                        fixedString += '\u0651';
-                        // add the current character
-                        fixedString += c;
-                    }
-                } else {
-                    fixedString += c;
-                }
-            }
-        }
-        
-        return fixedString;
     }
 
     // Set the text size of the text paint object and use a static layout to render text off screen before measuring

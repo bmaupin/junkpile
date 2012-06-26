@@ -27,7 +27,7 @@ public class Test extends Activity {
 //        tv.setTextSize(38f);  // 25   6  26
 //        tv.setTextSize(37f);  // 22   3  22
 //        tv.setTextSize(36f);  // 11   9  14
-//        tv.setTextSize(35f);  // 6    5
+        tv.setTextSize(35f);  // 6    5
         
         String ARABIC_TYPEFACE = "fonts/KacstOne.ttf";
         
