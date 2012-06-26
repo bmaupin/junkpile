@@ -1,5 +1,7 @@
 package ca.bmaupin.test;
 
+import org.amr.arabic.ArabicUtilities;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Build;
@@ -14,6 +16,9 @@ import android.widget.TextView;
 
 public class AutofitTextView extends TextView {
     private String TAG = "AutofitTextView";
+    
+   
+    
     
 //
     private int resizeCount = 0;
@@ -53,14 +58,16 @@ public class AutofitTextView extends TextView {
         Log.d(TAG, "viewWidth=" + viewWidth);
         Log.d(TAG, "this.getHeight()" + this.getHeight());
         
-        for (String card : english) {
+        for (String card : arabic) {
         	card = card.replace("/", "/ ");
 	        String[] words = card.split(" ");
 	        
 	        for (String word : words) {
+//	            word = fixArabic(word, true);
+	            
 	        	if (tp.measureText(word) >= maxWidth) {
 	        		resizeCount ++;
-	        		Log.d(TAG, "resizeCount=" + resizeCount);
+	        		text = word;
 	        		Log.d(TAG, "word=" + word);
 	        	}
 	        	
@@ -99,6 +106,11 @@ public class AutofitTextView extends TextView {
 	*/            
 	        }
         }
+        
+        Log.d(TAG, "resizeCount=" + resizeCount);
+//        this.setText(text);
+        
+        
         /*
         // if the text is too high
         while (getTextHeight(text, tp, maxWidth, this.getTextSize()) > 
@@ -118,6 +130,78 @@ public class AutofitTextView extends TextView {
             setEllipsize(TruncateAt.END);
         }
         */
+    }
+    
+    static String fixArabic(String s, boolean showVowels) {
+        // reshape the card
+        s = ArabicUtilities.reshape(s);
+        // this fixes issues with the final character having neutral 
+        // direction (diacritics, parentheses, etc.)
+        s += '\u200f';
+        
+//        Log.d(TAG, "UNICODE: " + splitString(s));
+//        Log.d(TAG, "UNICODE: " + getUnicodeCodes(s));
+        
+        // only fix the sheddas if we're showing the vowels
+        if (showVowels) {
+            return fixSheddas(s);
+        } else {
+            return s;
+        }
+    }
+    
+    /**
+     * Replaces certain combinations of shedda plus another haraka with custom
+     * unicode characters (requiring a font customized with these characters)
+     * and returns the string, since Android doesn't properly show the correct
+     * ligatures for these combinations.
+     * @param s
+     * @return
+     */
+    static String fixSheddas(String s) {
+        char[] charArray = s.toCharArray();
+        String fixedString = "";
+        boolean prevShedda = false;
+        
+        for (char c : charArray) {
+            if (c == '\u0651') {
+                prevShedda = true;
+            } else {
+                // the previous character was a shedda
+                if (prevShedda) {
+                    // reset our flag
+                    prevShedda = false;
+                    // fathatan
+                    if (c == '\u064b') {
+                        fixedString += '\ufbc2';
+                    // dammatan
+                    } else if (c == '\u064c') {
+                        fixedString += '\ufbc3';
+                    // kasratan
+                    } else if (c == '\u064d') {
+                        fixedString += '\ufbc4';
+                    // fatha
+                    } else if (c == '\u064e') {
+                        fixedString += '\ufbc5';
+                    // damma
+                    } else if (c == '\u064f') {
+                        fixedString += '\ufbc6';
+                    // kasra
+                    } else if (c == '\u0650') {
+                        fixedString += '\ufbc7';
+                    } else {
+                        // add the shedda back
+                        fixedString += '\u0651';
+                        // add the current character
+                        fixedString += c;
+                    }
+                } else {
+                    fixedString += c;
+                }
+            }
+        }
+        
+        return fixedString;
     }
 
     // Set the text size of the text paint object and use a static layout to render text off screen before measuring
@@ -149,7 +233,7 @@ public class AutofitTextView extends TextView {
             final int lengthBefore, final int lengthAfter) {
 //        Log.d(TAG, "onTextChanged()");
         // resize the text if it changes
-        refitText(text.toString(), this.getWidth());
+//        refitText(text.toString(), this.getWidth());
         invalidate();
     }
 
