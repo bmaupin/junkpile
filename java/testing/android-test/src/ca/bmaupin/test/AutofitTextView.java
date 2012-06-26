@@ -1,8 +1,6 @@
 package ca.bmaupin.test;
 
-
 import android.content.Context;
-import android.graphics.Canvas;
 import android.os.Build;
 import android.text.Layout.Alignment;
 import android.text.StaticLayout;
@@ -10,17 +8,10 @@ import android.text.TextPaint;
 import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.util.TypedValue;
 import android.widget.TextView;
 
 public class AutofitTextView extends TextView {
     private String TAG = "AutofitTextView";
-    
-
-    
-    
-//
-    private int resizeCount = 0;
     
     // Text view line spacing multiplier
     private float mSpacingMult = 1.0f;
@@ -40,10 +31,7 @@ public class AutofitTextView extends TextView {
      * assuming the text box is the specified width.
      */
     private void refitText(String text, int viewWidth) {
-    	Log.d(TAG, "refitText()");
-    	
-    	Log.d(TAG, "viewWidth=" + viewWidth);
-    	
+        Log.d(TAG, "refitText()");
         if (viewWidth <= 0) {
             return;
         }
@@ -54,93 +42,48 @@ public class AutofitTextView extends TextView {
         int maxHeight = this.getHeight() - this.getPaddingTop()
                 - this.getPaddingBottom();
         
-        float ts = tp.getTextSize();
+        // split up slashed and dashed words, but include the punctuation when
+        // resizing so they don't end up on the next line
+        text = text.replace("/", "/ ");
+        text = text.replace("-", "- ");
         
-        Log.d(TAG, "viewWidth=" + viewWidth);
-        Log.d(TAG, "this.getHeight()" + this.getHeight());
+        String[] words = text.split(" ");
         
-        int bisectCount = 0;
-        int resizes = 0;
-        
-        for (String card : english) {
-        	card = card.replace("/", "/ ");
-        	card = card.replace("-", "- ");
-	        String[] words = card.split(" ");
-	        
-	        for (String word : words) {
-//	            word = fixArabic(word, true);
-	            
-	        	if (tp.measureText(word) >= maxWidth) {
-	        		resizeCount ++;
-//	        		Log.d(TAG, "word=" + word);
-	        	} else {
-	        	    continue;
-	        	}
-	        	
-	        	/*
-	            // if this word isn't larger than the max size
-	            if (tp.measureText(word) < maxWidth) {
-	                // go to the next
-	                continue;
-	            }
-	//            
-	        	if (isNew) {
-	        		isNew = false;
-	        		resizeCount ++;
-	        		Log.d(TAG, "resizeCount=" + resizeCount);
-	        	}
-	        	/*/
-	
-	            float hi = this.getTextSize();
-	            // 14sp (this is technically px) is the size used for 
-	            // textAppearance.Small.  don't think we want any smaller.
-	            float lo = 14;
-	            final float threshold = 0.5f; // How close we have to be
-	            
-//	            int bisectCount = 0;
-	            
-	            while ((hi - lo) > threshold) {
-	                bisectCount ++;
-	                float size = (hi + lo) / 2;
-	                tp.setTextSize(size);
-	                if (tp.measureText(word) >= maxWidth) 
-	                    hi = size; // too big
-	                else
-	                    lo = size; // too small
-	            }
-	
-	            // go ahead and resize the text now so the resize won't have to 
-	            // happen again once the largest word has been resized.  use lo so 
-	            // that we undershoot rather than overshoot.
-//	            this.setTextSize(TypedValue.COMPLEX_UNIT_PX, lo);
-	            
-//	            Log.d(TAG, "bisectCount=" + bisectCount);
-//	            Log.d(TAG, "newSize=" + lo);
-	            
-	            resizes += (int) Math.ceil(ts - lo);
-//	            Log.d(TAG, "resizes=" + resizes);
-	            
-	            tp.setTextSize(ts);
-	            
-	            
-	        }
+        for (String word : words) {
+            // if this word isn't larger than the max size
+            if (tp.measureText(word) < maxWidth) {
+                // go to the next
+                continue;
+            }
+
+            float hi = this.getTextSize();
+            // 14sp (this is technically px) is the size used for 
+            // textAppearance.Small.  don't think we want any smaller.
+            float lo = 14;
+            final float threshold = 0.5f; // How close we have to be
+
+            while ((hi - lo) > threshold) {
+                float size = (hi + lo) / 2;
+                tp.setTextSize(size);
+                if (tp.measureText(word) >= maxWidth) 
+                    hi = size; // too big
+                else
+                    lo = size; // too small
+            }
+
+            // go ahead and resize the text now so the rezise won't have to 
+            // happen again once the largest word has been resized.  use lo so 
+            // that we undershoot rather than overshoot.
+            tp.setTextSize(lo);
         }
         
-        Log.d(TAG, "bisectCount=" + bisectCount);
-        Log.d(TAG, "resizes=" + resizes);
-        
-//        Log.d(TAG, "resizeCount=" + resizeCount);
-//        this.setText(text);
-        
-        
-        /*
         // if the text is too high
         while (getTextHeight(text, tp, maxWidth, this.getTextSize()) > 
                 maxHeight) {
             // reduce the font size by 1 until it fits
             tp.setTextSize(this.getTextSize() - 1f);
         }
-        /*
+        
         // force the view to be redrawn and the line wrapping to be 
         // recalculated
 //TODO: not sure where honeycomb falls in this
@@ -151,7 +94,6 @@ public class AutofitTextView extends TextView {
         } else {
             setEllipsize(TruncateAt.END);
         }
-        */
     }
 
     // Set the text size of the text paint object and use a static layout to render text off screen before measuring
@@ -167,7 +109,7 @@ public class AutofitTextView extends TextView {
     
 // TODO this doesn't seem to be necessary, at least not for what we're using 
 // this class for
-
+/*
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         Log.d(TAG, "onMeasure()");
@@ -176,30 +118,22 @@ public class AutofitTextView extends TextView {
         int height = getMeasuredHeight();
         this.setMeasuredDimension(parentWidth, height);
     }
-
+*/
 
     @Override
     protected void onTextChanged(final CharSequence text, final int start, 
             final int lengthBefore, final int lengthAfter) {
-//        Log.d(TAG, "onTextChanged()");
+        Log.d(TAG, "onTextChanged()");
         // resize the text if it changes
-//        refitText(text.toString(), this.getWidth());
-        invalidate();
+        refitText(text.toString(), this.getWidth());
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-//        Log.d(TAG, "onSizeChanged()");
+        Log.d(TAG, "onSizeChanged()");
         if (w != oldw) {
             // resize the text if the view size changes
-//            refitText(this.getText().toString(), w);
+            refitText(this.getText().toString(), w);
         }
     }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-    	super.onDraw(canvas);
-    	
-    	refitText(this.getText().toString(), this.getWidth());
-    }    
 }
