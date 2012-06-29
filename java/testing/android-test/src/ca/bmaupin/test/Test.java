@@ -17,7 +17,7 @@ public class Test extends Activity {
         setContentView(R.layout.main);
         
         AutofitTextView tv = (AutofitTextView) findViewById(R.id.leftView);
-        tv.setTextSize(38f);
+        tv.setTextSize(42f);
 //        tv.setTextSize(22.868164f);
         // short word
 //        tv.setText("test");
