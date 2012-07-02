@@ -94,7 +94,8 @@ def ldap_search(ldap_object, filter=ldap_filter, attrs=ldap_attrs,
             'base: %s\n'
             'filter: %s\n'
             'attributes: %s\n\n' % (base, filter, attrs))
-            return []
+        
+        return []
         
     except ldap.LDAPError, error_message:
         print 'search_results:'
