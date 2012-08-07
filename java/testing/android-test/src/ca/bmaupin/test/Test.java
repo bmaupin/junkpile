@@ -16,40 +16,7 @@ public class Test extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        AutofitTextView tv = (AutofitTextView) findViewById(R.id.leftView);
-        tv.setTextSize(42f);
-//        tv.setTextSize(22.868164f);
-        // short word
-//        tv.setText("test");
-        // long word
-//        tv.setText("internationally");
-//        tv.setText("test");
         
-        // multiple words
-//        tv.setText("test some words");
-//        tv.setText("supercalafragalisticexpialadocious");
-        // multiple long words
-//        Log.d(TAG, "tv.getTextSize())" + tv.getTextSize());
-        
-//        tv.setText("mathematics, appointmentslongword playgrounds,  international");
-//        tv.setText("longword mathematics, playgrounds, mathematics");
-//        Log.d(TAG, "tv.getTextSize())" + tv.getTextSize());
-        
-/*        
-        tv.setText("test");
-        tv.setText("mathematics, appointmentslongword playgrounds,  international");
-        tv.setText("test");
-        
-        tv.setText("test");
-        tv.setText("internationally");
-        tv.setText("test some words");
-        tv.setText("internationally");
-        tv.setText("appointments mathematics, playgrounds, mathematics");
-        tv.setText("mathematics, appointmentslongword playgrounds,  international");
-*/
-        tv.setText("Feast of Immolation/sacrifice");
-        tv.setText("good-looking");
-        tv.setText("immediately (parents, siblings) and extended families; extended families");
     }
     
     /* Inflates the menu */
