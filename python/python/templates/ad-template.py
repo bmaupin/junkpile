@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 '''
- Copyright (C) 2011 bmaupin <bmaupin@users.noreply.github.com>
+ Copyright (C) 2013 bmaupin <bmaupin@users.noreply.github.com>
  
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -95,10 +95,10 @@ def ad_search(ad_object, filter=ad_filter, attrs=ad_attrs,
         while True:
             # Send search request
             msgid = ad_object.search_ext(
-                ad_base_dn,
-                ad_scope,
-                ad_filter,
-                ad_attrs,
+                base,
+                scope,
+                filter,
+                attrs,
                 serverctrls=[ad_control]
             )
             
@@ -106,7 +106,7 @@ def ad_search(ad_object, filter=ad_filter, attrs=ad_attrs,
             if debug:
                 print 'Getting page %d' % (ad_pages)
             unused_code, results, unused_msgid, serverctrls = \
-                                                        ad_object.result3(msgid)
+                    ad_object.result3(msgid)
             if debug:
                 print '%d results' % len(results)
             
