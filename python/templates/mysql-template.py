@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 '''
- Copyright (C) 2011 Bryan Maupin <bmaupincode@gmail.com>
+ Copyright (C) 2013 Bryan Maupin <bmaupincode@gmail.com>
  
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -56,16 +56,17 @@ def db_connect():
     Requires: globally defined database, host
     Returns: database cursor
     '''
-    
-    current_user = getpass.getuser()
-    if current_user == 'root':
-        sys.exit('Do not run this script as root.  Change users and try '
-                 'again.')
-    print 'Connecting to %s on %s as %s' % (mysql_db, mysql_host, current_user)
+   
+    username = raw_input('Please enter your MySQL username (or press enter to '
+                         'use %s): ' % (getpass.getuser()))
+    if username == '':
+        username = getpass.getuser()
+ 
+    print 'Connecting to %s on %s as %s' % (mysql_db, mysql_host, username)
     mysql_passwd = getpass.getpass('Please enter your MySQL password: ') 
     
     # connect to database
-    db = MySQLdb.connect(host=mysql_host, user=current_user, 
+    db = MySQLdb.connect(host=mysql_host, user=username, 
             passwd=mysql_passwd, db=mysql_db, charset='utf8', use_unicode=True,
             cursorclass=MySQLdb.cursors.DictCursor) # charset = 'utf8' implies use_unicode = True, but we'll write it anyway 
     # create a cursor
