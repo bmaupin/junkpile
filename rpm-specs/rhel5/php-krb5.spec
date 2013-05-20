@@ -76,6 +76,6 @@ rm -rf %{buildroot}
 * Fri May 10 2013 bmaupin <bmaupin@users.noreply.github.com> 20121214-2
 - Add krb5.ini
 
-* Thu May  10 2013 bmaupin <bmaupin@users.noreply.github.com> 20121214-1
+* Thu May  9 2013 bmaupin <bmaupin@users.noreply.github.com> 20121214-1
 - Initial package
 
