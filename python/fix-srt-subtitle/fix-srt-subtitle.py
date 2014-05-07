@@ -11,38 +11,30 @@ def main():
 
     parser, infile_name, outfile_name = parse_options()
     
-    #if len(sys.argv) < 3:
-    #    sys.exit('USAGE: {0} SRT_INFILE SRT_OUTFILE'.format(sys.argv[0]))
-    # TODO: with contextlib.closing(urllib2.urlopen(url)) as u:
-    infile = open(infile_name) 
-    outfile = open(outfile_name, 'w')
-    
-    ''' 
-    Add an empty subtitle at the beginning of the file to fix avconv subtitle 
-    offset issues. Also makes sure subtitle numbering starts at 1. Starting at 0
-    causes avconv to fail importing the subtitle.
-    '''
-    outfile.write(empty_subtitle)
-    
-    # Renumber remaining subtitles
-    subtitle_number = 2
-    prev_line = ''
-    for line in infile: 
-        line = line.strip()
-        # Optionally reencode subtitles as utf8
-        if parser.values.ensure_utf8 == True:
-            try:
-                line = line.decode('utf8').encode('utf8')
-            except UnicodeDecodeError:
-                line = line.decode('latin1').encode('utf8')
-        if prev_line == '':
-            line = str(subtitle_number)
-            subtitle_number += 1
-        outfile.write('{0}\n'.format(line)) 
-        prev_line = line
-
-    outfile.close() 
-    infile.close()
+    with open(infile_name) as infile, open(outfile_name, 'w') as outfile:
+        ''' 
+        Add an empty subtitle at the beginning of the file to fix avconv subtitle 
+        offset issues. Also makes sure subtitle numbering starts at 1. Starting at 0
+        causes avconv to fail importing the subtitle.
+        '''
+        outfile.write(empty_subtitle)
+        
+        # Renumber remaining subtitles
+        subtitle_number = 2
+        prev_line = ''
+        for line in infile: 
+            line = line.strip()
+            # Optionally reencode subtitles as utf8
+            if parser.values.ensure_utf8 == True:
+                try:
+                    line = line.decode('utf8').encode('utf8')
+                except UnicodeDecodeError:
+                    line = line.decode('latin1').encode('utf8')
+            if prev_line == '':
+                line = str(subtitle_number)
+                subtitle_number += 1
+            outfile.write('{0}\n'.format(line)) 
+            prev_line = line
 
 
 def parse_options():
