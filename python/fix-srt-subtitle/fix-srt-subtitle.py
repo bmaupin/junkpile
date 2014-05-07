@@ -33,6 +33,10 @@ def main():
             if prev_line == '':
                 line = str(subtitle_number)
                 subtitle_number += 1
+            '''
+            \n is apparently platform-independent
+            (https://docs.python.org/2/library/os.html#os.linesep)
+            '''
             outfile.write('{0}\n'.format(line)) 
             prev_line = line
 
