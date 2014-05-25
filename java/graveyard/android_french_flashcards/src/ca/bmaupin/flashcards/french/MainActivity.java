@@ -1,22 +1,24 @@
 package ca.bmaupin.flashcards.french;
 
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// Set title manually since main activity title in manifest is used 
+		// for launcher title
+		this.setTitle(R.string.title_activity_study_sets);
+		
 		setContentView(R.layout.activity_main);
 
 		if (savedInstanceState == null) {
