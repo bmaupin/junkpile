@@ -2,7 +2,7 @@
 <resources>
     <!-- the theme applied to the application or activity -->
     <style name="CustomActionBarTheme"
-           parent="@style/Theme.AppCompat.Light.DarkActionBar">
+           parent="@style/Theme.AppCompat.Light">
         <item name="android:actionBarStyle">@style/MyActionBar</item>
 
         <!-- Support library compatibility -->
