@@ -4,9 +4,11 @@
     <style name="CustomActionBarTheme"
            parent="@style/Theme.AppCompat.Light">
         <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:actionOverflowButtonStyle">@style/ActionOverflowButtonStyle</item>
 
         <!-- Support library compatibility -->
         <item name="actionBarStyle">@style/MyActionBar</item>
+        <item name="actionOverflowButtonStyle">@style/ActionOverflowButtonStyle</item>
     </style>
 
     <!-- ActionBar styles -->
@@ -16,5 +18,11 @@
 
         <!-- Support library compatibility -->
         <item name="background">@color/custom_blue</item>
+    </style>
+    
+    <style name="ActionOverflowButtonStyle"
+           parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <!-- Override the default overflow button with a light one -->
+        <item name="android:src">@drawable/ic_action_overflow</item>
     </style>
 </resources>
