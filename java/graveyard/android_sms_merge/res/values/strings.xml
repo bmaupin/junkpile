@@ -4,5 +4,7 @@
     <string name="app_name">SMS Thread Merge</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    
+    <string name="loading_conversations">Loading conversations.</string>
 
 </resources>
