@@ -1,7 +1,6 @@
 package ca.bmaupin.merge.sms;
 
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.TextView;
 
 
 
@@ -60,5 +59,15 @@ public class MainActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
+
+		@Override
+		public void onActivityCreated(Bundle savedInstanceState) {
+			// TODO Auto-generated method stub
+			super.onActivityCreated(savedInstanceState);
+
+// TEST			
+			TextView tv = (TextView) getActivity().findViewById(R.id.test_textview);
+			tv.setText("Howdy");
+		}
     }
 }
