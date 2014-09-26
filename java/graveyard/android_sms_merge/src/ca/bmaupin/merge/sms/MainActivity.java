@@ -21,8 +21,6 @@ import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
-	private static final int CONVERSATION_LOADER = 0;
-	
 	private static final int SNIPPET        = 4;
 //	private static final int SNIPPET_CHARSET = 5;
 	
@@ -48,7 +46,7 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
                     .commit();
         }
         
-        getSupportLoaderManager().initLoader(CONVERSATION_LOADER, null, this);
+        getSupportLoaderManager().initLoader(0, null, this);
     }
 
 
@@ -117,24 +115,14 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int loaderID, Bundle bundle) {
-	    /*
-	     * Takes action based on the ID of the Loader that's being created
-	     */
-	    switch (loaderID) {
-	        case CONVERSATION_LOADER:
-	            // Returns a new CursorLoader
-	            return new CursorLoader(
-                    this,
-                    sAllThreadsUri,
-                    ALL_THREADS_PROJECTION,
-					null, // selection
-					null, // selectionArgs
-                    Conversations.DEFAULT_SORT_ORDER
-	            );
-	        default:
-	            // An invalid id was passed in
-	            return null;
-	    }
+        return new CursorLoader(
+            this,
+            sAllThreadsUri,
+            ALL_THREADS_PROJECTION,
+			null, // selection
+			null, // selectionArgs
+            Conversations.DEFAULT_SORT_ORDER
+        );
 	}
 
 
