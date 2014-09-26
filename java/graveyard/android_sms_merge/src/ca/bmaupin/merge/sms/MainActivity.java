@@ -2,8 +2,10 @@ package ca.bmaupin.merge.sms;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.app.LoaderManager.LoaderCallbacks;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,7 +20,14 @@ import android.widget.TextView;
 
 
 
-public class MainActivity extends ActionBarActivity implements LoaderCallbacks<Cursor> {
+public class MainActivity extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+	private static final int CONVERSATION_LOADER = 0;
+	
+	private static final int SNIPPET        = 4;
+//	private static final int SNIPPET_CHARSET = 5;
+	
+	
+	
 	public static final Uri sAllThreadsUri =
 	        Threads.CONTENT_URI.buildUpon().appendQueryParameter("simple", "true").build();
 	
@@ -38,6 +47,8 @@ public class MainActivity extends ActionBarActivity implements LoaderCallbacks<C
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+        
+        getSupportLoaderManager().initLoader(CONVERSATION_LOADER, null, this);
     }
 
 
@@ -80,6 +91,7 @@ public class MainActivity extends ActionBarActivity implements LoaderCallbacks<C
 			// TODO Auto-generated method stub
 			super.onActivityCreated(savedInstanceState);
 
+			/*
 			Cursor mCursor = getActivity().getContentResolver().query(
 					sAllThreadsUri,
 					ALL_THREADS_PROJECTION,
@@ -98,23 +110,44 @@ public class MainActivity extends ActionBarActivity implements LoaderCallbacks<C
 				    */ 
 			
 // TEST			
-			TextView tv = (TextView) getActivity().findViewById(R.id.test_textview);
-			tv.setText("Howdy");
-			
-			
+//			TextView tv = (TextView) getActivity().findViewById(R.id.test_textview);
+//			tv.setText("Howdy");
 		}
     }
 
 	@Override
-	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-		// TODO Auto-generated method stub
-		return null;
+	public Loader<Cursor> onCreateLoader(int loaderID, Bundle bundle) {
+	    /*
+	     * Takes action based on the ID of the Loader that's being created
+	     */
+	    switch (loaderID) {
+	        case CONVERSATION_LOADER:
+	            // Returns a new CursorLoader
+	            return new CursorLoader(
+                    this,
+                    sAllThreadsUri,
+                    ALL_THREADS_PROJECTION,
+					null, // selection
+					null, // selectionArgs
+                    Conversations.DEFAULT_SORT_ORDER
+	            );
+	        default:
+	            // An invalid id was passed in
+	            return null;
+	    }
 	}
 
 
 	@Override
-	public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
-		// TODO Auto-generated method stub
+	public void onLoadFinished(Loader<Cursor> arg0, Cursor c) {
+		if (c.getCount() == 0) {
+// TODO handle if no results found
+//            ((TextView)(getListView().getEmptyView())).setText(R.string.no_conversations);
+        } else {
+        	c.moveToNext();
+        	
+        	((TextView) findViewById(R.id.test_textview)).setText(c.getString(SNIPPET));
+        }
 		
 	}
 
