@@ -8,9 +8,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ca.bmaupin.merge.sms.MainActivity$PlaceholderFragment" >
 
+<!--     
     <TextView android:id="@+id/test_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
+ -->
+    
+    <include layout="@layout/conversation_list_item"/>
 
 </RelativeLayout>
