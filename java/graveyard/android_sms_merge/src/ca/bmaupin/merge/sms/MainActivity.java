@@ -134,7 +134,13 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
         } else {
         	c.moveToNext();
         	
-        	((TextView) findViewById(R.id.test_textview)).setText(c.getString(SNIPPET));
+//        	((TextView) findViewById(R.id.test_textview)).setText(c.getString(SNIPPET));
+        	
+        	
+        	// get fragment view and the conversation list item child view
+        	
+        	
+        	// call its bind method
         }
 		
 	}
