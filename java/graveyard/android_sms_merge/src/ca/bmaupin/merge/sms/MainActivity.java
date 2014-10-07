@@ -1,15 +1,11 @@
 package ca.bmaupin.merge.sms;
 
-import com.android.mms.ui.ConversationListAdapter;
-
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.app.LoaderManager.LoaderCallbacks;
+import android.support.v7.app.ActionBarActivity;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -23,28 +19,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 
 
-public class MainActivity extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
-	private static final int SNIPPET        = 4;
-//	private static final int SNIPPET_CHARSET = 5;
-	
-	
-	SimpleCursorAdapter mListAdapter;
-	
-	
-	public static final Uri sAllThreadsUri =
-	        Threads.CONTENT_URI.buildUpon().appendQueryParameter("simple", "true").build();
-	
-    public static final String[] ALL_THREADS_PROJECTION = {
-        Threads._ID, Threads.DATE, Threads.MESSAGE_COUNT, Threads.RECIPIENT_IDS,
-        Threads.SNIPPET, Threads.SNIPPET_CHARSET, Threads.READ, Threads.ERROR,
-        Threads.HAS_ATTACHMENT
-    };
-	
-
+public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +32,6 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
                     .add(R.id.container, new ConversationListFragment())
                     .commit();
         }
-        
-        
     }
 
 
@@ -84,90 +60,28 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
         }
         return super.onOptionsItemSelected(item);
     }
-
-	@Override
-	public Loader<Cursor> onCreateLoader(int loaderID, Bundle bundle) {
-        return new CursorLoader(
-            this,
-            sAllThreadsUri,
-            ALL_THREADS_PROJECTION,
-			null, // selection
-			null, // selectionArgs
-            Conversations.DEFAULT_SORT_ORDER
-        );
-	}
-
-
-	@Override
-	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-/*
-		lv = (ListView) findViewById(android.R.id.list);
-		
-		// if there are no results
-		if (data.getCount() == 0) {
-		    // let the user know
-		    lv.setEmptyView(findViewById(android.R.id.empty));
-		} else {
-		    // otherwise clear it, so it won't flash in between cursor loads
-		    lv.setEmptyView(null);
-		}
-*/
-		
-		mListAdapter.swapCursor(data);
-		
-/*		
-		if (c.getCount() == 0) {
-// TODO handle if no results found
-//            ((TextView)(getListView().getEmptyView())).setText(R.string.no_conversations);
-        } else {
-        	c.moveToNext();
-        	
-//        	TextView mSubjectView = (TextView) findViewById(R.id.subject);
-//        	mSubjectView.setText("Test conversation item");
-        	
-        	
-//        	((TextView) findViewById(R.id.test_textview)).setText(c.getString(SNIPPET));
-        	
-        	
-        	// get fragment view and the conversation list item child view
-        	
-        	
-        	// call its bind method
-        }
-*/		
-	}
-
-
-	@Override
-	public void onLoaderReset(Loader<Cursor> loader) {
-        // This is called when the last Cursor provided to onLoadFinished()
-        // above is about to be closed.  We need to make sure we are no
-        // longer using it.
-        mListAdapter.swapCursor(null);
-    }
 	
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class ConversationListFragment extends ListFragment {
-
-        public ConversationListFragment() {
-        }
+    public static class ConversationListFragment extends ListFragment
+    		implements LoaderManager.LoaderCallbacks<Cursor> {
+    	SimpleCursorAdapter mListAdapter;
+    	
+    	private static final int SNIPPET        = 4;
+//    	private static final int SNIPPET_CHARSET = 5;
+    	public static final Uri sAllThreadsUri =
+    	        Threads.CONTENT_URI.buildUpon().appendQueryParameter("simple", "true").build();
+    	
+        public static final String[] ALL_THREADS_PROJECTION = {
+            Threads._ID, Threads.DATE, Threads.MESSAGE_COUNT, Threads.RECIPIENT_IDS,
+            Threads.SNIPPET, Threads.SNIPPET_CHARSET, Threads.READ, Threads.ERROR,
+            Threads.HAS_ATTACHMENT
+        };
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-        	
-        	setListAdapter(new SimpleCursorAdapter(
-					getActivity(),
-					R.layout.conversation_list_item,
-					null,
-					fromColumns,
-					toViews,
-					0));
-        	
-        	setListAdapter(new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_activated_1, Shakespeare.TITLES));
         	
 	        // Create an empty adapter we will use to display the loaded data.
 	        // We pass null for the cursor, then update it in onLoadFinished()
@@ -175,8 +89,8 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
 					getActivity(),
 					R.layout.conversation_list_item,
 					null,
-					fromColumns,
-					toViews,
+					new String[] {Threads.SNIPPET},
+					new int[] {R.id.subject},
 					0
 					);
 	        setListAdapter(mListAdapter);
@@ -219,6 +133,64 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
 			super.onListItemClick(l, v, position, id);
 		}
 		
-		
+		@Override
+		public Loader<Cursor> onCreateLoader(int loaderID, Bundle bundle) {
+	        return new CursorLoader(
+	            getActivity(),
+	            sAllThreadsUri,
+	            ALL_THREADS_PROJECTION,
+				null, // selection
+				null, // selectionArgs
+	            Conversations.DEFAULT_SORT_ORDER
+	        );
+		}
+
+		@Override
+		public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+	/*
+			lv = (ListView) findViewById(android.R.id.list);
+			
+			// if there are no results
+			if (data.getCount() == 0) {
+			    // let the user know
+			    lv.setEmptyView(findViewById(android.R.id.empty));
+			} else {
+			    // otherwise clear it, so it won't flash in between cursor loads
+			    lv.setEmptyView(null);
+			}
+	*/
+			
+			mListAdapter.swapCursor(data);
+			
+	/*		
+			if (c.getCount() == 0) {
+	// TODO handle if no results found
+//	            ((TextView)(getListView().getEmptyView())).setText(R.string.no_conversations);
+	        } else {
+	        	c.moveToNext();
+	        	
+//	        	TextView mSubjectView = (TextView) findViewById(R.id.subject);
+//	        	mSubjectView.setText("Test conversation item");
+	        	
+	        	
+//	        	((TextView) findViewById(R.id.test_textview)).setText(c.getString(SNIPPET));
+	        	
+	        	
+	        	// get fragment view and the conversation list item child view
+	        	
+	        	
+	        	// call its bind method
+	        }
+	*/		
+		}
+
+
+		@Override
+		public void onLoaderReset(Loader<Cursor> loader) {
+	        // This is called when the last Cursor provided to onLoadFinished()
+	        // above is about to be closed.  We need to make sure we are no
+	        // longer using it.
+	        mListAdapter.swapCursor(null);
+	    }
     }
 }
