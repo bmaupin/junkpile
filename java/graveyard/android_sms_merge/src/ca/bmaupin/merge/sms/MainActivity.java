@@ -34,14 +34,6 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-
-    @Override
-	public View onCreateView(String name, Context context, AttributeSet attrs) {
-		// TODO Auto-generated method stub
-		return super.onCreateView(name, context, attrs);
-	}
-
-
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -61,15 +53,10 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 	
-    /**
-     * A placeholder fragment containing a simple view.
-     */
     public static class ConversationListFragment extends ListFragment
     		implements LoaderManager.LoaderCallbacks<Cursor> {
     	SimpleCursorAdapter mListAdapter;
     	
-    	private static final int SNIPPET        = 4;
-//    	private static final int SNIPPET_CHARSET = 5;
     	public static final Uri sAllThreadsUri =
     	        Threads.CONTENT_URI.buildUpon().appendQueryParameter("simple", "true").build();
     	
@@ -103,28 +90,6 @@ public class MainActivity extends ActionBarActivity {
 		public void onActivityCreated(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
 			super.onActivityCreated(savedInstanceState);
-			
-			/*
-			Cursor mCursor = getActivity().getContentResolver().query(
-					sAllThreadsUri,
-					ALL_THREADS_PROJECTION,
-					null, // selection
-					null, // selectionArgs
-					Conversations.DEFAULT_SORT_ORDER
-					);
-					
-					
-					/*
-				    UserDictionary.Words.CONTENT_URI,   // The content URI of the words table
-				    mProjection,                        // The columns to return for each row
-				    mSelectionClause                    // Selection criteria
-				    mSelectionArgs,                     // Selection criteria
-				    mSortOrder);
-				    */ 
-			
-// TEST			
-//			TextView tv = (TextView) getActivity().findViewById(R.id.test_textview);
-//			tv.setText("Howdy");
 		}
 
 		@Override
@@ -147,43 +112,8 @@ public class MainActivity extends ActionBarActivity {
 
 		@Override
 		public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-	/*
-			lv = (ListView) findViewById(android.R.id.list);
-			
-			// if there are no results
-			if (data.getCount() == 0) {
-			    // let the user know
-			    lv.setEmptyView(findViewById(android.R.id.empty));
-			} else {
-			    // otherwise clear it, so it won't flash in between cursor loads
-			    lv.setEmptyView(null);
-			}
-	*/
-			
 			mListAdapter.swapCursor(data);
-			
-	/*		
-			if (c.getCount() == 0) {
-	// TODO handle if no results found
-//	            ((TextView)(getListView().getEmptyView())).setText(R.string.no_conversations);
-	        } else {
-	        	c.moveToNext();
-	        	
-//	        	TextView mSubjectView = (TextView) findViewById(R.id.subject);
-//	        	mSubjectView.setText("Test conversation item");
-	        	
-	        	
-//	        	((TextView) findViewById(R.id.test_textview)).setText(c.getString(SNIPPET));
-	        	
-	        	
-	        	// get fragment view and the conversation list item child view
-	        	
-	        	
-	        	// call its bind method
-	        }
-	*/		
 		}
-
 
 		@Override
 		public void onLoaderReset(Loader<Cursor> loader) {
