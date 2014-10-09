@@ -27,8 +27,7 @@ import ca.bmaupin.merge.sms.R;
 /**
  * This class manages the view for given conversation.
  */
-public class ConversationListItem extends RelativeLayout implements Contact.UpdateListener,
-            Checkable {
+public class ConversationListItem extends RelativeLayout implements Contact.UpdateListener {
     private static final String TAG = "ConversationListItem";
     private static final boolean DEBUG = false;
 
@@ -223,18 +222,5 @@ public class ConversationListItem extends RelativeLayout implements Contact.Upda
         }
         // Unregister contact update callbacks.
         Contact.removeListener(this);
-    }
-
-    public void setChecked(boolean checked) {
-        mConversation.setIsChecked(checked);
-        updateBackground();
-    }
-
-    public boolean isChecked() {
-        return mConversation.isChecked();
-    }
-
-    public void toggle() {
-        mConversation.setIsChecked(!mConversation.isChecked());
     }
 }
