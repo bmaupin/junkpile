@@ -171,14 +171,6 @@ public class ConversationListItem extends RelativeLayout {
         // From.
         mFromView.setText(formatMessage());
 
-        // Register for updates in changes of any of the contacts in this conversation.
-        ContactList contacts = conversation.getRecipients();
-
-        if (Log.isLoggable(LogTag.CONTACT, Log.DEBUG)) {
-            Log.v(TAG, "bind: contacts.addListeners " + this);
-        }
-        Contact.addListener(this);
-
         // Subject
         mSubjectView.setText(conversation.getSnippet());
         LayoutParams subjectLayout = (LayoutParams)mSubjectView.getLayoutParams();
@@ -206,10 +198,5 @@ public class ConversationListItem extends RelativeLayout {
     }
 
     public final void unbind() {
-        if (Log.isLoggable(LogTag.CONTACT, Log.DEBUG)) {
-            Log.v(TAG, "unbind: contacts.removeListeners " + this);
-        }
-        // Unregister contact update callbacks.
-        Contact.removeListener(this);
     }
 }
