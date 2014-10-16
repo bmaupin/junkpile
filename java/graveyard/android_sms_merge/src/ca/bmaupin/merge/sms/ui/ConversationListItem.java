@@ -27,7 +27,7 @@ import ca.bmaupin.merge.sms.R;
 /**
  * This class manages the view for given conversation.
  */
-public class ConversationListItem extends RelativeLayout {
+public class ConversationListItem extends RelativeLayout implements Contact.UpdateListener {
     private static final String TAG = "ConversationListItem";
     private static final boolean DEBUG = false;
 
@@ -144,6 +144,17 @@ public class ConversationListItem extends RelativeLayout {
         updateAvatarView();
     }
 
+    public void onUpdate(Contact updated) {
+        if (Log.isLoggable(LogTag.CONTACT, Log.DEBUG)) {
+            Log.v(TAG, "onUpdate: " + this + " contact: " + updated);
+        }
+        mHandler.post(new Runnable() {
+            public void run() {
+                updateFromView();
+            }
+        });
+    }
+
     public final void bind(Context context, final Conversation conversation) {
         //if (DEBUG) Log.v(TAG, "bind()");
 
@@ -170,6 +181,14 @@ public class ConversationListItem extends RelativeLayout {
 
         // From.
         mFromView.setText(formatMessage());
+
+        // Register for updates in changes of any of the contacts in this conversation.
+        ContactList contacts = conversation.getRecipients();
+
+        if (Log.isLoggable(LogTag.CONTACT, Log.DEBUG)) {
+            Log.v(TAG, "bind: contacts.addListeners " + this);
+        }
+        Contact.addListener(this);
 
         // Subject
         mSubjectView.setText(conversation.getSnippet());
@@ -198,5 +217,10 @@ public class ConversationListItem extends RelativeLayout {
     }
 
     public final void unbind() {
+        if (Log.isLoggable(LogTag.CONTACT, Log.DEBUG)) {
+            Log.v(TAG, "unbind: contacts.removeListeners " + this);
+        }
+        // Unregister contact update callbacks.
+        Contact.removeListener(this);
     }
 }
