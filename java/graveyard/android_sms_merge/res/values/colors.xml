@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="message_count_color">#66333333</color>
+    
+    <drawable name="text_color_red">#ffff4444</drawable>
+</resources>
