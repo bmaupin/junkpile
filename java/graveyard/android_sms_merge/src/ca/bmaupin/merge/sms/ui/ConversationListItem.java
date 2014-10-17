@@ -31,6 +31,7 @@ public class ConversationListItem extends RelativeLayout implements Contact.Upda
     private static final String TAG = "ConversationListItem";
     private static final boolean DEBUG = false;
 
+    private Context mContext;
     private TextView mSubjectView;
     private TextView mFromView;
     private TextView mDateView;
@@ -49,10 +50,12 @@ public class ConversationListItem extends RelativeLayout implements Contact.Upda
 
     public ConversationListItem(Context context) {
         super(context);
+        mContext = context;
     }
 
     public ConversationListItem(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
 
         if (sDefaultContactImage == null) {
             sDefaultContactImage = context.getResources().getDrawable(R.drawable.ic_contact_picture);
