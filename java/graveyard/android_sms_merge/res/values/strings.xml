@@ -19,6 +19,10 @@
     <string name="loading_conversations">Loading conversations.</string>
     <!-- In conversation list items, this comes after the receipient's name and contains
          the number of messages in the thread [CHAR LIMIT=5] -->
+    <!-- If MMS discovers there isn't much space left on the device, it will show a toast with this message. -->
+    <string name="low_memory" product="tablet">Tablet storage is full. Delete some files to free space.</string>
+    <!-- If MMS discovers there isn't much space left on the device, it will show a toast with this message. -->
+    <string name="low_memory" product="default">Phone storage is full. Delete some files to free space.</string>
     <string name="message_count_format">\u00a0<xliff:g id="number" example="1">%1$s</xliff:g></string>
     <!-- Text to be used for affirmative response button in dialog boxes -->
     <string name="yes">OK</string>
