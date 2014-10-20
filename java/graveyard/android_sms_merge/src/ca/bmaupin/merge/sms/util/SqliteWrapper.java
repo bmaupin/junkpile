@@ -1,5 +1,5 @@
 /*
- * Derived from android.database.sqlite.SqliteWrapper.java
+ * Derived from android.database.sqlite.SqliteWrapper
  * (tag android-4.4.4_r2.0.1)
  */
 
