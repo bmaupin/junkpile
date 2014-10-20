@@ -1,3 +1,8 @@
+/*
+ * Derived from com.android.mms.data.RecipientIdCache.java
+ * (tag android-4.4.4_r2.0.1)
+ */
+
 package ca.bmaupin.merge.sms.data;
 
 import java.util.ArrayList;
@@ -8,8 +13,8 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.mms.LogTag;
-import com.android.mms.ui.MessageUtils;
+import ca.bmaupin.merge.sms.LogTag;
+import ca.bmaupin.merge.sms.ui.MessageUtils;
 
 public class ContactList extends ArrayList<Contact>  {
     private static final long serialVersionUID = 1L;
