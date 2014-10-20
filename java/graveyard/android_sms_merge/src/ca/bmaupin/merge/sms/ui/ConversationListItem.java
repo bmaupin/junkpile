@@ -6,6 +6,7 @@
 package ca.bmaupin.merge.sms.ui;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -21,7 +22,6 @@ import android.widget.Checkable;
 import android.widget.QuickContactBadge;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import ca.bmaupin.merge.sms.R;
 
 /**
@@ -88,7 +88,11 @@ public class ConversationListItem extends RelativeLayout implements Contact.Upda
     }
 
     private CharSequence formatMessage() {
-        final int color = android.R.styleable.Theme_textColorSecondary;
+//        final int color = android.R.styleable.Theme_textColorSecondary;
+    	// Attempt to fix the above line (http://stackoverflow.com/a/1717532/399105)
+        TypedArray a = mContext.obtainStyledAttributes(R.styleable.ConversationListItem);
+        final int color = a.getResourceId(R.styleable.ConversationListItem_android_textColorSecondary, 0);
+        
         String from = mConversation.getRecipients().formatNames(", ");
 
         SpannableStringBuilder buf = new SpannableStringBuilder(from);
