@@ -1,3 +1,8 @@
+/*
+ * Derived from com.android.mms/src/com/android/mms/data/RecipientIdCache.java
+ * (tag android-4.4.4_r2.0.1)
+ */
+
 package ca.bmaupin.merge.sms.data;
 
 import java.util.ArrayList;
@@ -13,13 +18,13 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SqliteWrapper;
 import android.net.Uri;
 import android.provider.Telephony;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.mms.LogTag;
+import ca.bmaupin.merge.sms.LogTag;
+import ca.bmaupin.merge.sms.util.SqliteWrapper;
 
 @ThreadSafe
 public class RecipientIdCache {
