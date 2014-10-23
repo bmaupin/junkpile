@@ -5,11 +5,24 @@
 
 package ca.bmaupin.merge.sms.ui;
 
+import java.util.HashMap;
+
 import android.content.Context;
+import android.provider.Telephony.Mms;
 import android.text.format.DateUtils;
 import android.text.format.Time;
 
 public class MessageUtils {
+    /**
+     * MMS address parsing data structures
+     */
+    // allowable phone number separators
+    private static final char[] NUMERIC_CHARS_SUGAR = {
+        '-', '.', ',', '(', ')', ' ', '/', '\\', '*', '#', '+'
+    };
+
+    private static HashMap numericSugarMap = new HashMap (NUMERIC_CHARS_SUGAR.length);
+	
     public static String formatTimeStampString(Context context, long when, boolean fullFormat) {
         Time then = new Time();
         then.set(when);
@@ -40,5 +53,89 @@ public class MessageUtils {
         }
 
         return DateUtils.formatDateTime(context, when, format_flags);
+    }
+    
+    // An alias (or commonly called "nickname") is:
+    // Nickname must begin with a letter.
+    // Only letters a-z, numbers 0-9, or . are allowed in Nickname field.
+    public static boolean isAlias(String string) {
+        if (!MmsConfig.isAliasEnabled()) {
+            return false;
+        }
+
+        int len = string == null ? 0 : string.length();
+
+        if (len < MmsConfig.getAliasMinChars() || len > MmsConfig.getAliasMaxChars()) {
+            return false;
+        }
+
+        if (!Character.isLetter(string.charAt(0))) {    // Nickname begins with a letter
+            return false;
+        }
+        for (int i = 1; i < len; i++) {
+            char c = string.charAt(i);
+            if (!(Character.isLetterOrDigit(c) || c == '.')) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
+    /**
+     * parse the input address to be a valid MMS address.
+     * - if the address is an email address, leave it as is.
+     * - if the address can be parsed into a valid MMS phone number, return the parsed number.
+     * - if the address is a compliant alias address, leave it as is.
+     */
+    public static String parseMmsAddress(String address) {
+        // if it's a valid Email address, use that.
+        if (Mms.isEmailAddress(address)) {
+            return address;
+        }
+
+        // if we are able to parse the address to a MMS compliant phone number, take that.
+        String retVal = parsePhoneNumberForMms(address);
+        if (retVal != null) {
+            return retVal;
+        }
+
+        // if it's an alias compliant address, use that.
+        if (isAlias(address)) {
+            return address;
+        }
+
+        // it's not a valid MMS address, return null
+        return null;
+    }
+    
+    /**
+     * Given a phone number, return the string without syntactic sugar, meaning parens,
+     * spaces, slashes, dots, dashes, etc. If the input string contains non-numeric
+     * non-punctuation characters, return null.
+     */
+    private static String parsePhoneNumberForMms(String address) {
+        StringBuilder builder = new StringBuilder();
+        int len = address.length();
+
+        for (int i = 0; i < len; i++) {
+            char c = address.charAt(i);
+
+            // accept the first '+' in the address
+            if (c == '+' && builder.length() == 0) {
+                builder.append(c);
+                continue;
+            }
+
+            if (Character.isDigit(c)) {
+                builder.append(c);
+                continue;
+            }
+
+            if (numericSugarMap.get(c) == null) {
+                return null;
+            }
+        }
+        return builder.toString();
     }
 }
