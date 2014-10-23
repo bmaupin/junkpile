@@ -1,6 +1,6 @@
 /*
- * Derived from com.android.mms/src/com/android/mms/ui/MessageUtils.java
- * (tag android-4.4_r1.2.0.1)
+ * Derived from com.android.mms.ui.MessageUtils
+ * (tag android-4.4.4_r2.0.1)
  */
 
 package ca.bmaupin.merge.sms.ui;

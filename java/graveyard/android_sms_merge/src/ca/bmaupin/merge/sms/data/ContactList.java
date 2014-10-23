@@ -1,5 +1,5 @@
 /*
- * Derived from com.android.mms.data.RecipientIdCache.java
+ * Derived from com.android.mms.data.ContactList
  * (tag android-4.4.4_r2.0.1)
  */
 
