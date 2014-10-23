@@ -12,6 +12,8 @@ import android.provider.Telephony.Mms;
 import android.text.format.DateUtils;
 import android.text.format.Time;
 
+import ca.bmaupin.merge.sms.MmsConfig;
+
 public class MessageUtils {
     /**
      * MMS address parsing data structures
