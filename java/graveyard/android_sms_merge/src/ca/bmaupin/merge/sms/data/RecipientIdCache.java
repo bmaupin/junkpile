@@ -22,9 +22,8 @@ import android.net.Uri;
 import android.provider.Telephony;
 import android.text.TextUtils;
 import android.util.Log;
-
 import ca.bmaupin.merge.sms.LogTag;
-import ca.bmaupin.merge.sms.util.SqliteWrapper;
+import ca.bmaupin.merge.sms.android.SqliteWrapper;
 
 @ThreadSafe
 public class RecipientIdCache {
