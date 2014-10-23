@@ -1,3 +1,8 @@
+/*
+ * Derived from com.android.mms.data.Contact
+ * (tag android-4.4.4_r2.0.1)
+ */
+
 package ca.bmaupin.merge.sms.data;
 
 import java.io.IOException;
@@ -13,7 +18,6 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.database.sqlite.SqliteWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -27,15 +31,16 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Presence;
 import android.provider.ContactsContract.Profile;
-import android.provider.Telephony.Mms;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.mms.LogTag;
-import com.android.mms.MmsApp;
-import com.android.mms.R;
-import com.android.mms.ui.MessageUtils;
+import ca.bmaupin.merge.sms.android.SqliteWrapper;
+import ca.bmaupin.merge.sms.android.Telephony.Mms;
+import ca.bmaupin.merge.sms.LogTag;
+import ca.bmaupin.merge.sms.MmsApp;
+import ca.bmaupin.merge.sms.R;
+import ca.bmaupin.merge.sms.ui.MessageUtils;
 
 public class Contact {
     public static final int CONTACT_METHOD_TYPE_UNKNOWN = 0;

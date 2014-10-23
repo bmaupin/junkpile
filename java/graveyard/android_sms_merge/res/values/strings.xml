@@ -25,5 +25,7 @@
     <string name="low_memory" product="default">Phone storage is full. Delete some files to free space.</string>
     <string name="message_count_format">\u00a0<xliff:g id="number" example="1">%1$s</xliff:g></string>
     <!-- Text to be used for affirmative response button in dialog boxes -->
+    <!-- Name of the local user when displaying sender of an outgoing message (personal pronoun) -->
+    <string name="messagelist_sender_self">Me</string>
     <string name="yes">OK</string>
 </resources>
