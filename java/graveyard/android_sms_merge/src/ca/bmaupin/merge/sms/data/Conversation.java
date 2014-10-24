@@ -23,8 +23,6 @@ public class Conversation {
     private static final int RECIPIENT_IDS  = 3;
     private static final int SNIPPET        = 4;
     private static final int SNIPPET_CS     = 5;
-    private static final int READ           = 6;
-    private static final int ERROR          = 7;
     private static final int HAS_ATTACHMENT = 8;
 	
 	
@@ -39,9 +37,7 @@ public class Conversation {
     private long mDate;                 // The last update time.
     private int mMessageCount;          // Number of messages.
     private String mSnippet;            // Text of the most recent message.
-    private boolean mHasUnreadMessages; // True if there are unread messages.
     private boolean mHasAttachment;     // True if any message has an attachment.
-    private boolean mHasError;          // True if any message is in an error state.
 	
     public Conversation(Context context, Cursor cursor, boolean allowQuery) {
         if (DEBUG) {
@@ -72,8 +68,6 @@ public class Conversation {
             }
             conv.mSnippet = snippet;
 
-            conv.setHasUnreadMessages(c.getInt(READ) == 0);
-            conv.mHasError = (c.getInt(ERROR) != 0);
             conv.mHasAttachment = (c.getInt(HAS_ATTACHMENT) != 0);
         }
         // Fill in as much of the conversation as we can before doing the slow stuff of looking
