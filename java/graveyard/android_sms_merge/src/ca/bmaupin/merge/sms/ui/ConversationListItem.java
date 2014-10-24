@@ -106,24 +106,7 @@ public class ConversationListItem extends RelativeLayout {
                     mContext.getResources().getColor(R.color.message_count_color)),
                     before, buf.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         }
-        if (mConversation.hasDraft()) {
-            buf.append(mContext.getResources().getString(R.string.draft_separator));
-            int before = buf.length();
-            int size;
-            buf.append(mContext.getResources().getString(R.string.has_draft));
-            size = android.R.style.TextAppearance_Small;
-            buf.setSpan(new TextAppearanceSpan(mContext, size, color), before,
-                    buf.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-            buf.setSpan(new ForegroundColorSpan(
-                    mContext.getResources().getColor(R.drawable.text_color_red)),
-                    before, buf.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        }
 
-        // Unread messages are shown in bold
-        if (mConversation.hasUnreadMessages()) {
-            buf.setSpan(STYLE_BOLD, 0, buf.length(),
-                    Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        }
         return buf;
     }
 
@@ -157,18 +140,11 @@ public class ConversationListItem extends RelativeLayout {
 
         mConversation = conversation;
 
-        updateBackground();
-
         LayoutParams attachmentLayout = (LayoutParams)mAttachmentView.getLayoutParams();
-        boolean hasError = conversation.hasError();
         // When there's an error icon, the attachment icon is left of the error icon.
         // When there is not an error icon, the attachment icon is left of the date text.
         // As far as I know, there's no way to specify that relationship in xml.
-        if (hasError) {
-            attachmentLayout.addRule(RelativeLayout.LEFT_OF, R.id.error);
-        } else {
-            attachmentLayout.addRule(RelativeLayout.LEFT_OF, R.id.date);
-        }
+        attachmentLayout.addRule(RelativeLayout.LEFT_OF, R.id.date);
 
         boolean hasAttachment = conversation.hasAttachment();
         mAttachmentView.setVisibility(hasAttachment ? VISIBLE : GONE);
@@ -179,45 +155,16 @@ public class ConversationListItem extends RelativeLayout {
         // From.
         mFromView.setText(formatMessage());
 
-        // Register for updates in changes of any of the contacts in this conversation.
-        ContactList contacts = conversation.getRecipients();
-
-        if (Log.isLoggable(LogTag.CONTACT, Log.DEBUG)) {
-            Log.v(TAG, "bind: contacts.addListeners " + this);
-        }
-        Contact.addListener(this);
-
         // Subject
         mSubjectView.setText(conversation.getSnippet());
         LayoutParams subjectLayout = (LayoutParams)mSubjectView.getLayoutParams();
         // We have to make the subject left of whatever optional items are shown on the right.
         subjectLayout.addRule(RelativeLayout.LEFT_OF, hasAttachment ? R.id.attachment :
-            (hasError ? R.id.error : R.id.date));
-
-        // Transmission error indicator.
-        mErrorIndicator.setVisibility(hasError ? VISIBLE : GONE);
+            (R.id.date));
 
         updateAvatarView();
     }
 
-    private void updateBackground() {
-        int backgroundId;
-        if (mConversation.isChecked()) {
-            backgroundId = R.drawable.list_selected_holo_light;
-        } else if (mConversation.hasUnreadMessages()) {
-            backgroundId = R.drawable.conversation_item_background_unread;
-        } else {
-            backgroundId = R.drawable.conversation_item_background_read;
-        }
-        Drawable background = mContext.getResources().getDrawable(backgroundId);
-        setBackground(background);
-    }
-
     public final void unbind() {
-        if (Log.isLoggable(LogTag.CONTACT, Log.DEBUG)) {
-            Log.v(TAG, "unbind: contacts.removeListeners " + this);
-        }
-        // Unregister contact update callbacks.
-        Contact.removeListener(this);
     }
 }
