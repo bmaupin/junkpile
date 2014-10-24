@@ -22,12 +22,13 @@ import android.widget.Checkable;
 import android.widget.QuickContactBadge;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import ca.bmaupin.merge.sms.R;
 
 /**
  * This class manages the view for given conversation.
  */
-public class ConversationListItem extends RelativeLayout implements Contact.UpdateListener {
+public class ConversationListItem extends RelativeLayout {
     private static final String TAG = "ConversationListItem";
     private static final boolean DEBUG = false;
 
@@ -149,17 +150,6 @@ public class ConversationListItem extends RelativeLayout implements Contact.Upda
     private void updateFromView() {
         mFromView.setText(formatMessage());
         updateAvatarView();
-    }
-
-    public void onUpdate(Contact updated) {
-        if (Log.isLoggable(LogTag.CONTACT, Log.DEBUG)) {
-            Log.v(TAG, "onUpdate: " + this + " contact: " + updated);
-        }
-        mHandler.post(new Runnable() {
-            public void run() {
-                updateFromView();
-            }
-        });
     }
 
     public final void bind(Context context, final Conversation conversation) {
