@@ -3,7 +3,7 @@
  * (tag android-4.4.4_r2.0.1)
  */
 
-package ca.bmaupin.merge.sms.ui;
+package ca.bmaupin.merge.sms.archive.ui;
 
 import java.util.HashMap;
 
