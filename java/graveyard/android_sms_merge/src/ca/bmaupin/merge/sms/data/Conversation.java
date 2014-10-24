@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.text.TextUtils;
 import android.util.Log;
 
+import ca.bmaupin.merge.sms.R;
 import ca.bmaupin.merge.sms.ui.MessageUtils;
 
 public class Conversation {
@@ -38,6 +39,7 @@ public class Conversation {
     private long mDate;                 // The last update time.
     private int mMessageCount;          // Number of messages.
     private String mSnippet;            // Text of the most recent message.
+    private boolean mHasUnreadMessages; // True if there are unread messages.
     private boolean mHasAttachment;     // True if any message has an attachment.
     private boolean mHasError;          // True if any message is in an error state.
 	
