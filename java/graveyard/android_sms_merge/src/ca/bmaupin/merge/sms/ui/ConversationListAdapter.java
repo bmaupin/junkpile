@@ -40,7 +40,7 @@ public class ConversationListAdapter extends CursorAdapter implements AbsListVie
         }
 
         ConversationListItem headerView = (ConversationListItem) view;
-        Conversation conv = Conversation.from(context, cursor);
+        Conversation conv = new Conversation(context, cursor, false);
         headerView.bind(context, conv);
     }
 
