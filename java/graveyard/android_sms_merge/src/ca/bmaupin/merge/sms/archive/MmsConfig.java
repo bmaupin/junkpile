@@ -3,7 +3,7 @@
  * (tag android-4.4.4_r2.0.1)
  */
 
-package ca.bmaupin.merge.sms;
+package ca.bmaupin.merge.sms.archive;
 
 public class MmsConfig {
     // Email gateway alias support, including the master switch and different rules
