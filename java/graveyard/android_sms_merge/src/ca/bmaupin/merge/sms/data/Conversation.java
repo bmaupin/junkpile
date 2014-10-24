@@ -7,19 +7,83 @@ package ca.bmaupin.merge.sms.data;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.text.TextUtils;
 import android.util.Log;
+
+import ca.bmaupin.merge.sms.ui.MessageUtils;
 
 public class Conversation {
     private static final String TAG = "Mms/conv";
 	private static final boolean DEBUG = false;
 	
+    private static final int ID             = 0;
+    private static final int DATE           = 1;
+    private static final int MESSAGE_COUNT  = 2;
+    private static final int RECIPIENT_IDS  = 3;
+    private static final int SNIPPET        = 4;
+    private static final int SNIPPET_CS     = 5;
+    private static final int READ           = 6;
+    private static final int ERROR          = 7;
+    private static final int HAS_ATTACHMENT = 8;
+	
+	
 	private final Context mContext;
 	
-    private Conversation(Context context, Cursor cursor, boolean allowQuery) {
+    // The thread ID of this conversation.  Can be zero in the case of a
+    // new conversation where the recipient set is changing as the user
+    // types and we have not hit the database yet to create a thread.
+    private long mThreadId;
+
+    private ContactList mRecipients;    // The current set of recipients.
+    private long mDate;                 // The last update time.
+    private int mMessageCount;          // Number of messages.
+    private String mSnippet;            // Text of the most recent message.
+    private boolean mHasAttachment;     // True if any message has an attachment.
+    private boolean mHasError;          // True if any message is in an error state.
+	
+    public Conversation(Context context, Cursor cursor, boolean allowQuery) {
         if (DEBUG) {
             Log.v(TAG, "Conversation constructor cursor, allowQuery: " + allowQuery);
         }
         mContext = context;
         fillFromCursor(context, this, cursor, allowQuery);
+    }
+    
+    /**
+     * Fill the specified conversation with the values from the specified
+     * cursor, possibly setting recipients to empty if {@value allowQuery}
+     * is false and the recipient IDs are not in cache.  The cursor should
+     * be one made via {@link #startQueryForAll}.
+     */
+    private static void fillFromCursor(Context context, Conversation conv,
+                                       Cursor c, boolean allowQuery) {
+        synchronized (conv) {
+            conv.mThreadId = c.getLong(ID);
+            conv.mDate = c.getLong(DATE);
+            conv.mMessageCount = c.getInt(MESSAGE_COUNT);
+
+            // Replace the snippet with a default value if it's empty.
+            String snippet = MessageUtils.cleanseMmsSubject(context,
+                    MessageUtils.extractEncStrFromCursor(c, SNIPPET, SNIPPET_CS));
+            if (TextUtils.isEmpty(snippet)) {
+                snippet = context.getString(R.string.no_subject_view);
+            }
+            conv.mSnippet = snippet;
+
+            conv.setHasUnreadMessages(c.getInt(READ) == 0);
+            conv.mHasError = (c.getInt(ERROR) != 0);
+            conv.mHasAttachment = (c.getInt(HAS_ATTACHMENT) != 0);
+        }
+        // Fill in as much of the conversation as we can before doing the slow stuff of looking
+        // up the contacts associated with this conversation.
+        String recipientIds = c.getString(RECIPIENT_IDS);
+        ContactList recipients = ContactList.getByIds(recipientIds, allowQuery);
+        synchronized (conv) {
+            conv.mRecipients = recipients;
+        }
+
+        if (Log.isLoggable(LogTag.THREAD_CACHE, Log.VERBOSE)) {
+            Log.d(TAG, "fillFromCursor: conv=" + conv + ", recipientIds=" + recipientIds);
+        }
     }
 }
