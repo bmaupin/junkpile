@@ -5,18 +5,17 @@
 
 package ca.bmaupin.merge.sms.ui;
 
-import ca.bmaupin.merge.sms.R;
-import ca.bmaupin.merge.sms.R.layout;
 import android.content.Context;
 import android.database.Cursor;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
+
+import ca.bmaupin.merge.sms.R;
+import ca.bmaupin.merge.sms.data.Conversation;
 
 /**
  * The back-end data adapter for ConversationList.
