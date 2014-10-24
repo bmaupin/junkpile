@@ -37,7 +37,6 @@ public class ConversationListItem extends RelativeLayout {
     private TextView mFromView;
     private TextView mDateView;
     private View mAttachmentView;
-    private View mErrorIndicator;
     private QuickContactBadge mAvatarView;
 
     static private Drawable sDefaultContactImage;
@@ -72,7 +71,6 @@ public class ConversationListItem extends RelativeLayout {
 
         mDateView = (TextView) findViewById(R.id.date);
         mAttachmentView = findViewById(R.id.attachment);
-        mErrorIndicator = findViewById(R.id.error);
         mAvatarView = (QuickContactBadge) findViewById(R.id.avatar);
     }
 
