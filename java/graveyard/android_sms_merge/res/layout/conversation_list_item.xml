@@ -36,21 +36,12 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true" />
 
-    <ImageView android:id="@+id/error"
-        android:layout_marginLeft="3dip"
-        android:visibility="invisible"
-        android:layout_toLeftOf="@id/date"
-        android:layout_alignBottom="@id/date"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:src="@drawable/ic_list_alert_sms_failed" />
-
     <ImageView android:id="@+id/attachment"
         android:layout_marginLeft="3dip"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:visibility="gone"
-        android:layout_toLeftOf="@id/error"
+        android:layout_toLeftOf="@id/date"
         android:layout_alignBottom="@id/date"
         android:src="@drawable/ic_attachment_universal_small" />
 
