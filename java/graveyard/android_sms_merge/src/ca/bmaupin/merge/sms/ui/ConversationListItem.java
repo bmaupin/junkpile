@@ -140,12 +140,6 @@ public class ConversationListItem extends RelativeLayout {
 
         mConversation = conversation;
 
-        LayoutParams attachmentLayout = (LayoutParams)mAttachmentView.getLayoutParams();
-        // When there's an error icon, the attachment icon is left of the error icon.
-        // When there is not an error icon, the attachment icon is left of the date text.
-        // As far as I know, there's no way to specify that relationship in xml.
-        attachmentLayout.addRule(RelativeLayout.LEFT_OF, R.id.date);
-
         boolean hasAttachment = conversation.hasAttachment();
         mAttachmentView.setVisibility(hasAttachment ? VISIBLE : GONE);
 
