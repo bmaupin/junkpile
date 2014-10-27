@@ -6,17 +6,13 @@
 package ca.bmaupin.merge.sms.ui;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
-import android.text.style.TextAppearanceSpan;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.QuickContactBadge;
 import android.widget.RelativeLayout;
@@ -82,11 +78,6 @@ public class ConversationListItem extends RelativeLayout {
     }
 
     private CharSequence formatMessage() {
-//        final int color = android.R.styleable.Theme_textColorSecondary;
-    	// Attempt to fix the above line (http://stackoverflow.com/a/1717532/399105)
-        TypedArray a = mContext.obtainStyledAttributes(R.styleable.ConversationListItem);
-        final int color = a.getResourceId(R.styleable.ConversationListItem_android_textColorSecondary, 0);
-        
         String from = mConversation.getRecipients().formatNames(", ");
 
         SpannableStringBuilder buf = new SpannableStringBuilder(from);
