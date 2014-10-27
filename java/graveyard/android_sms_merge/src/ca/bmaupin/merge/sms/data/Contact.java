@@ -45,6 +45,10 @@ public class Contact {
         }
     }
     
+    public synchronized String getNumber() {
+        return mNumber;
+    }
+    
     public synchronized Uri getUri() {
         return ContentUris.withAppendedId(Contacts.CONTENT_URI, mPersonId);
     }
