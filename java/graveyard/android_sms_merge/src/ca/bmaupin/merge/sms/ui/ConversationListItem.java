@@ -29,9 +29,6 @@ import ca.bmaupin.merge.sms.data.Conversation;
  * This class manages the view for given conversation.
  */
 public class ConversationListItem extends RelativeLayout {
-    private static final String TAG = "ConversationListItem";
-    private static final boolean DEBUG = false;
-
     private Context mContext;
     private TextView mSubjectView;
     private TextView mFromView;
@@ -40,9 +37,6 @@ public class ConversationListItem extends RelativeLayout {
     private QuickContactBadge mAvatarView;
 
     static private Drawable sDefaultContactImage;
-
-    // For posting UI update Runnables from other threads:
-    private Handler mHandler = new Handler();
 
     private Conversation mConversation;
 
@@ -126,11 +120,6 @@ public class ConversationListItem extends RelativeLayout {
         }
         mAvatarView.setImageDrawable(avatarDrawable);
         mAvatarView.setVisibility(View.VISIBLE);
-    }
-
-    private void updateFromView() {
-        mFromView.setText(formatMessage());
-        updateAvatarView();
     }
 
     public final void bind(Context context, final Conversation conversation) {
