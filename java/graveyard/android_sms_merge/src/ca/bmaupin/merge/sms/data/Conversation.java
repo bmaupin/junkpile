@@ -5,15 +5,13 @@
 
 package ca.bmaupin.merge.sms.data;
 
-import com.android.mms.data.ContactList;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.text.TextUtils;
 import android.util.Log;
+
 import ca.bmaupin.merge.sms.LogTag;
 import ca.bmaupin.merge.sms.R;
-import ca.bmaupin.merge.sms.ui.MessageUtils;
 
 public class Conversation {
     private static final String TAG = "Mms/conv";

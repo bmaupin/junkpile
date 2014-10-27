@@ -5,6 +5,17 @@
 
 package ca.bmaupin.merge.sms.data;
 
-public class Contact {
+import android.text.TextUtils;
 
+public class Contact {
+    private String mNumber;
+    private String mName;
+	
+    public synchronized String getName() {
+        if (TextUtils.isEmpty(mName)) {
+            return mNumber;
+        } else {
+            return mName;
+        }
+    }
 }
