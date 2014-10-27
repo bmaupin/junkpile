@@ -5,12 +5,30 @@
 
 package ca.bmaupin.merge.sms.data;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
 public class Contact {
     private String mNumber;
     private String mName;
+    
+    private BitmapDrawable mAvatar;
+    private byte [] mAvatarData;
 	
+    public synchronized Drawable getAvatar(Context context, Drawable defaultValue) {
+        if (mAvatar == null) {
+            if (mAvatarData != null) {
+                Bitmap b = BitmapFactory.decodeByteArray(mAvatarData, 0, mAvatarData.length);
+                mAvatar = new BitmapDrawable(context.getResources(), b);
+            }
+        }
+        return mAvatar != null ? mAvatar : defaultValue;
+    }
+    
     public synchronized String getName() {
         if (TextUtils.isEmpty(mName)) {
             return mNumber;
