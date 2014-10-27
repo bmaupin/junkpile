@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import ca.bmaupin.merge.sms.R;
+import ca.bmaupin.merge.sms.data.Contact;
 import ca.bmaupin.merge.sms.data.Conversation;
 
 /**
