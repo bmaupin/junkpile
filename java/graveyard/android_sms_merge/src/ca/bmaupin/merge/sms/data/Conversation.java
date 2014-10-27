@@ -84,6 +84,14 @@ public class Conversation {
     }
     
     /**
+     * Returns the time of the last update to this conversation in milliseconds,
+     * on the {@link System#currentTimeMillis} timebase.
+     */
+    public synchronized long getDate() {
+        return mDate;
+    }
+    
+    /**
      * Returns the number of messages in this conversation, excluding the draft
      * (if it exists).
      */
