@@ -5,11 +5,12 @@
 
 package ca.bmaupin.merge.sms.data;
 
+import com.android.mms.data.ContactList;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.text.TextUtils;
 import android.util.Log;
-
 import ca.bmaupin.merge.sms.LogTag;
 import ca.bmaupin.merge.sms.R;
 import ca.bmaupin.merge.sms.ui.MessageUtils;
@@ -80,5 +81,34 @@ public class Conversation {
         if (Log.isLoggable(LogTag.THREAD_CACHE, Log.VERBOSE)) {
             Log.d(TAG, "fillFromCursor: conv=" + conv + ", recipientIds=" + recipientIds);
         }
+    }
+    
+    /**
+     * Returns the number of messages in this conversation, excluding the draft
+     * (if it exists).
+     */
+    public synchronized int getMessageCount() {
+        return mMessageCount;
+    }
+    
+    /**
+     * Returns the recipient set of this conversation.
+     */
+    public synchronized ContactList getRecipients() {
+        return mRecipients;
+    }
+    
+    /**
+     * Returns a snippet of text from the most recent message in the conversation.
+     */
+    public synchronized String getSnippet() {
+        return mSnippet;
+    }
+    
+    /**
+     * Returns true if any messages in the conversation have attachments.
+     */
+    public synchronized boolean hasAttachment() {
+        return mHasAttachment;
     }
 }
