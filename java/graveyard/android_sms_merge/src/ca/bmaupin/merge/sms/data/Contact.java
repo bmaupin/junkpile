@@ -5,11 +5,14 @@
 
 package ca.bmaupin.merge.sms.data;
 
+import android.content.ContentUris;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.provider.ContactsContract.Contacts;
 import android.text.TextUtils;
 
 public class Contact {
@@ -40,5 +43,9 @@ public class Contact {
         } else {
             return mName;
         }
+    }
+    
+    public synchronized Uri getUri() {
+        return ContentUris.withAppendedId(Contacts.CONTENT_URI, mPersonId);
     }
 }
