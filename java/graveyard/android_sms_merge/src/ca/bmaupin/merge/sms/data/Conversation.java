@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.text.TextUtils;
 import android.util.Log;
 
+import ca.bmaupin.merge.sms.LogTag;
 import ca.bmaupin.merge.sms.R;
 import ca.bmaupin.merge.sms.ui.MessageUtils;
 
