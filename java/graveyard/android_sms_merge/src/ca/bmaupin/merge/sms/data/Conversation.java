@@ -22,7 +22,6 @@ public class Conversation {
     private static final int MESSAGE_COUNT  = 2;
     private static final int RECIPIENT_IDS  = 3;
     private static final int SNIPPET        = 4;
-    private static final int SNIPPET_CS     = 5;
     private static final int HAS_ATTACHMENT = 8;
 	
 	
@@ -61,8 +60,7 @@ public class Conversation {
             conv.mMessageCount = c.getInt(MESSAGE_COUNT);
 
             // Replace the snippet with a default value if it's empty.
-            String snippet = MessageUtils.cleanseMmsSubject(context,
-                    MessageUtils.extractEncStrFromCursor(c, SNIPPET, SNIPPET_CS));
+            String snippet = c.getString(SNIPPET);
             if (TextUtils.isEmpty(snippet)) {
                 snippet = context.getString(R.string.no_subject_view);
             }
