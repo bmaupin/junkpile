@@ -16,9 +16,14 @@ public class Contact {
     private String mNumber;
     private String mName;
     
+    private long mPersonId;
     private BitmapDrawable mAvatar;
     private byte [] mAvatarData;
 	
+    public synchronized boolean existsInDatabase() {
+        return (mPersonId > 0);
+    }
+    
     public synchronized Drawable getAvatar(Context context, Drawable defaultValue) {
         if (mAvatar == null) {
             if (mAvatarData != null) {
