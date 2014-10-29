@@ -11,6 +11,7 @@ public class LogTag {
     public static final String TAG = "Mms";
 	
     public static final String THREAD_CACHE = "Mms:threadcache";
+    public static final String CONTACT = "Mms:contact";
     
     public static final boolean VERBOSE = false;
     
