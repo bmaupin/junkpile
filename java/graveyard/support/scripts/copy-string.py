@@ -6,7 +6,7 @@ import sys
 
 import lxml.etree
 
-source_path = os.path.expanduser('~/workspace/git/android/platform/packages/apps/Mms')
+source_path = os.path.expanduser('~/workspace/git/android/frameworks/base/core/res')
 dest_path = os.path.expanduser('~/workspace/git/android-sms-merge/android_sms_merge')
 
 def main():
@@ -54,7 +54,7 @@ def main():
                                 try:
                                     dest_element = it.next()
                                     # Don't insert duplicate elements
-                                    if dest_element.get('name') == source_element.get('name'):
+                                    if dest_element.attrib == source_element.attrib:
                                         break
                                     
                                     # Insert the new string alphabetically
@@ -75,9 +75,6 @@ def main():
                             pretty_print=True,
                             xml_declaration=True,
                             )
-                        
-                        # Don't process any more source elements
-                        break
 
 
 if __name__ == '__main__':
