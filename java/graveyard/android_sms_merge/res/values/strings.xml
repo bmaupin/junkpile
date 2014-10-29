@@ -4,6 +4,8 @@
   <string name="app_name">SMS Thread Merge</string>
   <string name="hello_world">Hello world!</string>
   <string name="loading_conversations">Loading conversations.</string>
+  <string name="low_memory" product="tablet">Tablet storage is full. Delete some files to free space.</string>
+  <string name="low_memory" product="default">Phone storage is full. Delete some files to free space.</string>
   <string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="message_count_format">\u00a0<xliff:g id="number" example="1">%1$s</xliff:g></string>
   <string name="no_subject_view">(No subject)</string>
 </resources>
