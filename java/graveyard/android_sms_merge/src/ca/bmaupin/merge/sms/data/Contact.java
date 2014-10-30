@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import com.android.mms.MmsApp;
-import com.android.mms.data.Contact;
-
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
@@ -30,7 +27,9 @@ import android.provider.ContactsContract.Profile;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
+
 import ca.bmaupin.merge.sms.LogTag;
+import ca.bmaupin.merge.sms.R;
 
 public class Contact {
 	public static final int CONTACT_METHOD_TYPE_PHONE = 1;
