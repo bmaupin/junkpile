@@ -7,8 +7,10 @@ package ca.bmaupin.merge.sms.data;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import android.content.ContentUris;
@@ -22,21 +24,24 @@ import android.net.Uri;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Presence;
+import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Profile;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
-
 import ca.bmaupin.merge.sms.LogTag;
 import ca.bmaupin.merge.sms.R;
+import ca.bmaupin.merge.sms.android.SqliteWrapper;
 
 public class Contact {
 	public static final int CONTACT_METHOD_TYPE_PHONE = 1;
+    public static final int CONTACT_METHOD_TYPE_EMAIL = 2;
     public static final int CONTACT_METHOD_TYPE_SELF = 3;       // the "Me" or profile contact
 	private static final int CONTACT_METHOD_ID_UNKNOWN = -1;
 	private static final String TAG = "Contact";
 	private static ContactsCache sContactCache;
+    private static final String SELF_ITEM_KEY = "Self_Item_Key";
 	
 	private final static HashSet<UpdateListener> mListeners = new HashSet<UpdateListener>();
 	
@@ -265,8 +270,36 @@ public class Contact {
         };
         
         private static final int SELF_NAME_COLUMN = 1;
+        
+        // query params for contact lookup by email
+        private static final Uri EMAIL_WITH_PRESENCE_URI = Data.CONTENT_URI;
+
+        private static final String EMAIL_SELECTION = "UPPER(" + Email.DATA + ")=UPPER(?) AND "
+                + Data.MIMETYPE + "='" + Email.CONTENT_ITEM_TYPE + "'";
+
+        private static final String[] EMAIL_PROJECTION = new String[] {
+                Email._ID,                    // 0
+                Email.DISPLAY_NAME,           // 1
+                Email.CONTACT_PRESENCE,       // 2
+                Email.CONTACT_ID,             // 3
+                Phone.DISPLAY_NAME,           // 4
+                Contacts.SEND_TO_VOICEMAIL    // 5
+        };
+        private static final int EMAIL_ID_COLUMN = 0;
+        private static final int EMAIL_NAME_COLUMN = 1;
+        private static final int EMAIL_STATUS_COLUMN = 2;
+        private static final int EMAIL_CONTACT_ID_COLUMN = 3;
+        private static final int EMAIL_CONTACT_NAME_COLUMN = 4;
+        private static final int EMAIL_SEND_TO_VOICEMAIL_COLUMN = 5;
     	
         private final Context mContext;
+        
+        private final HashMap<String, ArrayList<Contact>> mContactsHash =
+                new HashMap<String, ArrayList<Contact>>();
+        
+        private ContactsCache(Context context) {
+            mContext = context;
+        }
         
         private static class TaskStack {
             Thread mWorkerThread;
@@ -784,6 +817,38 @@ public class Contact {
             }
             return entry;
         }
+        
+        // Invert and truncate to five characters the phoneNumber so that we
+        // can use it as the key in a hashtable.  We keep a mapping of this
+        // key to a list of all contacts which have the same key.
+        private String key(String phoneNumber, CharBuffer keyBuffer) {
+            keyBuffer.clear();
+            keyBuffer.mark();
+
+            int position = phoneNumber.length();
+            int resultCount = 0;
+            while (--position >= 0) {
+                char c = phoneNumber.charAt(position);
+                if (Character.isDigit(c)) {
+                    keyBuffer.put(c);
+                    if (++resultCount == STATIC_KEY_BUFFER_MAXIMUM_LENGTH) {
+                        break;
+                    }
+                }
+            }
+            keyBuffer.reset();
+            if (resultCount > 0) {
+                return keyBuffer.toString();
+            } else {
+                // there were no usable digits in the input phoneNumber
+                return phoneNumber;
+            }
+        }
+        
+        // Reuse this so we don't have to allocate each time we go through this
+        // "get" function.
+        static final int STATIC_KEY_BUFFER_MAXIMUM_LENGTH = 5;
+        static CharBuffer sStaticKeyBuffer = CharBuffer.allocate(STATIC_KEY_BUFFER_MAXIMUM_LENGTH);
         
         private Contact internalGet(String numberOrEmail, boolean isMe) {
             synchronized (ContactsCache.this) {
