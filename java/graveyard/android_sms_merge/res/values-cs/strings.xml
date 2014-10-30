@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
-  <string name="loading_conversations" msgid="5510430408235967094">"Načítání konverzací..."</string>
-  <string name="low_memory" product="tablet" msgid="6494019234102154896">"Úložiště tabletu je plné. Uvolněte místo smazáním některých souborů."</string>
-  <string name="low_memory" product="default" msgid="3475999286680000541">"Paměť telefonu je plná. Uvolněte místo smazáním některých souborů."</string>
-  <string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="message_count_format" msgid="4434763220590778012">" <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-  <string name="no_subject_view" msgid="7795086723069563537">"(Předmět neuveden)"</string>
-</resources>
