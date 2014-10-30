@@ -5,11 +5,11 @@
 
 package ca.bmaupin.merge.sms.ui;
 
-import com.android.mms.MmsConfig;
-
 import android.content.Context;
 import android.text.format.DateUtils;
 import android.text.format.Time;
+
+import ca.bmaupin.merge.sms.MmsConfig;
 
 public class MessageUtils {
     public static String formatTimeStampString(Context context, long when) {
