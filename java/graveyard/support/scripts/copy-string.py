@@ -43,7 +43,9 @@ def main():
                         dest_strings_path = os.path.join(dest_values_path, 'strings.xml')
                         
                         if not os.path.exists(dest_strings_path):
-                            root = lxml.etree.Element('resources')
+                            root = lxml.etree.Element(
+                                source_root.getroot().tag,
+                                nsmap=source_root.getroot().nsmap)
                             root.append(source_element)
                             dest_root = lxml.etree.ElementTree(root)
                         
