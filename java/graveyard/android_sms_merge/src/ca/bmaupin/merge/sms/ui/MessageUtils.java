@@ -5,6 +5,8 @@
 
 package ca.bmaupin.merge.sms.ui;
 
+import com.android.mms.MmsConfig;
+
 import android.content.Context;
 import android.text.format.DateUtils;
 import android.text.format.Time;
@@ -44,5 +46,32 @@ public class MessageUtils {
         }
 
         return DateUtils.formatDateTime(context, when, format_flags);
+    }
+    
+    // An alias (or commonly called "nickname") is:
+    // Nickname must begin with a letter.
+    // Only letters a-z, numbers 0-9, or . are allowed in Nickname field.
+    public static boolean isAlias(String string) {
+        if (!MmsConfig.isAliasEnabled()) {
+            return false;
+        }
+
+        int len = string == null ? 0 : string.length();
+
+        if (len < MmsConfig.getAliasMinChars() || len > MmsConfig.getAliasMaxChars()) {
+            return false;
+        }
+
+        if (!Character.isLetter(string.charAt(0))) {    // Nickname begins with a letter
+            return false;
+        }
+        for (int i = 1; i < len; i++) {
+            char c = string.charAt(i);
+            if (!(Character.isLetterOrDigit(c) || c == '.')) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
