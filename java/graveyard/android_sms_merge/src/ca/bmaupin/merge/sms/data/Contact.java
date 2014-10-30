@@ -27,13 +27,14 @@ import android.provider.ContactsContract.Presence;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Profile;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 import ca.bmaupin.merge.sms.LogTag;
 import ca.bmaupin.merge.sms.R;
+import ca.bmaupin.merge.sms.android.PhoneNumberUtils;
 import ca.bmaupin.merge.sms.android.SqliteWrapper;
 import ca.bmaupin.merge.sms.android.Telephony.Mms;
+import ca.bmaupin.merge.sms.ui.MessageUtils;
 
 public class Contact {
 	public static final int CONTACT_METHOD_TYPE_PHONE = 1;
@@ -146,10 +147,6 @@ public class Contact {
         //                   Tutankhamun <tutank1341@gmail.com>
         //                   (408) 555-1289
         String formattedNumber = number;
-        if (!Mms.isEmailAddress(number)) {
-            formattedNumber = PhoneNumberUtils.formatNumber(number, numberE164,
-                    MmsApp.getApplication().getCurrentCountryIso());
-        }
 
         if (!TextUtils.isEmpty(name) && !name.equals(number)) {
             return name + " <" + formattedNumber + ">";
@@ -163,12 +160,7 @@ public class Contact {
     }
     
     public synchronized void setNumber(String number) {
-        if (!Mms.isEmailAddress(number)) {
-            mNumber = PhoneNumberUtils.formatNumber(number, mNumberE164,
-                    MmsApp.getApplication().getCurrentCountryIso());
-        } else {
-            mNumber = number;
-        }
+        mNumber = number;
         notSynchronizedUpdateNameAndNumber();
         mNumberIsModified = true;
     }

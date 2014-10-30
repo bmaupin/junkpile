@@ -86,6 +86,42 @@ public class PhoneNumberUtils {
         }
         return ret.toString();
     }
+    
+    /**
+     * Extracts the network address portion and canonicalize.
+     *
+     * This function is equivalent to extractNetworkPortion(), except
+     * for allowing the PLUS character to occur at arbitrary positions
+     * in the address portion, not just the first position.
+     *
+     * @hide
+     */
+    public static String extractNetworkPortionAlt(String phoneNumber) {
+        if (phoneNumber == null) {
+            return null;
+        }
+
+        int len = phoneNumber.length();
+        StringBuilder ret = new StringBuilder(len);
+        boolean haveSeenPlus = false;
+
+        for (int i = 0; i < len; i++) {
+            char c = phoneNumber.charAt(i);
+            if (c == '+') {
+                if (haveSeenPlus) {
+                    continue;
+                }
+                haveSeenPlus = true;
+            }
+            if (isDialable(c)) {
+                ret.append(c);
+            } else if (isStartsPostDial (c)) {
+                break;
+            }
+        }
+
+        return ret.toString();
+    }
 	
 	/**
      * Strips separators from a phone number string.
@@ -108,6 +144,43 @@ public class PhoneNumberUtils {
                 ret.append(c);
             }
         }
+        return ret.toString();
+    }
+    
+    /**
+     * Returns the rightmost MIN_MATCH (5) characters in the network portion
+     * in *reversed* order
+     *
+     * This can be used to do a database lookup against the column
+     * that stores getStrippedReversed()
+     *
+     * Returns null if phoneNumber == null
+     */
+    public static String
+    toCallerIDMinMatch(String phoneNumber) {
+        String np = extractNetworkPortionAlt(phoneNumber);
+        return internalGetStrippedReversed(np, MIN_MATCH);
+    }
+    
+    /**
+     * Returns the last numDigits of the reversed phone number
+     * Returns null if np == null
+     */
+    private static String
+    internalGetStrippedReversed(String np, int numDigits) {
+        if (np == null) return null;
+
+        StringBuilder ret = new StringBuilder(numDigits);
+        int length = np.length();
+
+        for (int i = length - 1, s = length
+            ; i >= 0 && (s - i) <= numDigits ; i--
+        ) {
+            char c = np.charAt(i);
+
+            ret.append(c);
+        }
+
         return ret.toString();
     }
     
@@ -161,6 +234,25 @@ public class PhoneNumberUtils {
         }
         return sb.toString();
     }
+    
+    // Three and four digit phone numbers for either special services,
+    // or 3-6 digit addresses from the network (eg carrier-originated SMS messages) should
+    // not match.
+    //
+    // This constant used to be 5, but SMS short codes has increased in length and
+    // can be easily 6 digits now days. Most countries have SMS short code length between
+    // 3 to 6 digits. The exceptions are
+    //
+    // Australia: Short codes are six or eight digits in length, starting with the prefix "19"
+    //            followed by an additional four or six digits and two.
+    // Czech Republic: Codes are seven digits in length for MO and five (not billed) or
+    //            eight (billed) for MT direction
+    //
+    // see http://en.wikipedia.org/wiki/Short_code#Regional_differences for reference
+    //
+    // However, in order to loose match 650-555-1212 and 555-1212, we need to set the min match
+    // to 7.
+    static final int MIN_MATCH = 7;
     
     /**
      * Translates any alphabetic letters (i.e. [A-Za-z]) in the
