@@ -33,6 +33,7 @@ import android.util.Log;
 import ca.bmaupin.merge.sms.LogTag;
 import ca.bmaupin.merge.sms.R;
 import ca.bmaupin.merge.sms.android.SqliteWrapper;
+import ca.bmaupin.merge.sms.android.Telephony.Mms;
 
 public class Contact {
 	public static final int CONTACT_METHOD_TYPE_PHONE = 1;
