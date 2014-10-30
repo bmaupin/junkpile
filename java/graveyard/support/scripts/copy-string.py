@@ -6,7 +6,9 @@ import sys
 
 import lxml.etree
 
-source_path = os.path.expanduser('~/workspace/git/android/frameworks/base/core/res')
+source_path = os.path.expanduser('~/workspace/git/android/packages/apps/Mms')
+#source_path = os.path.expanduser('~/workspace/git/android/platform/packages/apps/Mms')
+#source_path = os.path.expanduser('~/workspace/git/android/frameworks/base/core/res')
 dest_path = os.path.expanduser('~/workspace/git/android-sms-merge/android_sms_merge')
 
 def main():
