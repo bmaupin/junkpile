@@ -147,6 +147,10 @@ public class Contact {
         //                   Tutankhamun <tutank1341@gmail.com>
         //                   (408) 555-1289
         String formattedNumber = number;
+        if (!Mms.isEmailAddress(number)) {
+            formattedNumber = PhoneNumberUtils.formatNumber(number, numberE164,
+                    MmsApp.getApplication().getCurrentCountryIso());
+        }
 
         if (!TextUtils.isEmpty(name) && !name.equals(number)) {
             return name + " <" + formattedNumber + ">";
@@ -160,7 +164,12 @@ public class Contact {
     }
     
     public synchronized void setNumber(String number) {
-        mNumber = number;
+        if (!Mms.isEmailAddress(number)) {
+            mNumber = PhoneNumberUtils.formatNumber(number, mNumberE164,
+                    MmsApp.getApplication().getCurrentCountryIso());
+        } else {
+            mNumber = number;
+        }
         notSynchronizedUpdateNameAndNumber();
         mNumberIsModified = true;
     }
