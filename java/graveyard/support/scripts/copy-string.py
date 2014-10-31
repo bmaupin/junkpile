@@ -12,6 +12,12 @@ source_path = os.path.expanduser('~/workspace/git/android/packages/apps/Mms')
 dest_path = os.path.expanduser('~/workspace/git/android-sms-merge/android_sms_merge')
 
 def main():
+    def xml_element_compare(element1, element2):
+        for key in element1.attrib:
+            if element1.attrib[key] != element2.attrib[key]:
+                return False
+        return True
+
     if len(sys.argv) < 2:
         sys.exit('Error: STRING is required')
     
@@ -58,7 +64,9 @@ def main():
                                 try:
                                     dest_element = it.next()
                                     # Don't insert duplicate elements
-                                    if dest_element.attrib == source_element.attrib:
+                                    if xml_element_compare(
+                                        dest_element,
+                                        source_element) == True:
                                         break
                                     
                                     # Insert the new string alphabetically
