@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-
+import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
@@ -33,9 +33,11 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 import ca.bmaupin.merge.sms.LogTag;
+import ca.bmaupin.merge.sms.MmsApp;
 import ca.bmaupin.merge.sms.R;
 import ca.bmaupin.merge.sms.ui.MessageUtils;
 
+@SuppressLint("NewApi")
 public class Contact {
 	public static final int CONTACT_METHOD_TYPE_PHONE = 1;
     public static final int CONTACT_METHOD_TYPE_EMAIL = 2;
