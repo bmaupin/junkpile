@@ -14,6 +14,11 @@ public class LogTag {
     public static final String THREAD_CACHE = "Mms:threadcache";
     public static final String CONTACT = "Mms:contact";
     
+    /**
+     * Log tag for enabling/disabling StrictMode violation log.
+     * To enable: adb shell setprop log.tag.Mms:strictmode DEBUG
+     */
+    public static final String STRICT_MODE_TAG = "Mms:strictmode";
     public static final boolean VERBOSE = false;
     
     private static String prettyArray(String[] array) {
