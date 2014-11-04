@@ -4,5 +4,6 @@
   <string name="low_memory" product="tablet" msgid="6494019234102154896">"ที่จัดเก็บข้อมูลของแท็บเล็ตเต็ม ลบไฟล์บางไฟล์เพื่อเพิ่มพื้นที่ว่าง"</string>
   <string name="low_memory" product="default" msgid="3475999286680000541">"ที่เก็บข้อมูลโทรศัพท์เต็ม ลบบางไฟล์เพื่อเพิ่มที่ว่าง"</string>
   <string name="message_count_format" msgid="4434763220590778012">" <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+  <string name="messagelist_sender_self" msgid="3579016854116401602">"ฉัน"</string>
   <string name="no_subject_view" msgid="7795086723069563537">"(ไม่มีชื่อเรื่อง)"</string>
 </resources>

@@ -7,5 +7,6 @@
   <string name="low_memory" product="tablet">Tablet storage is full. Delete some files to free space.</string>
   <string name="low_memory" product="default">Phone storage is full. Delete some files to free space.</string>
   <string name="message_count_format">\u00a0<xliff:g id="number" example="1">%1$s</xliff:g></string>
+  <string name="messagelist_sender_self">Me</string>
   <string name="no_subject_view">(No subject)</string>
 </resources>

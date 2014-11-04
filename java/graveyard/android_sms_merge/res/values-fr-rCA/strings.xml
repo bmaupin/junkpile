@@ -2,4 +2,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" xmlns:android="http://schemas.android.com/apk/res/android">
   <string name="low_memory" product="tablet" msgid="6494019234102154896">"La mémoire de la tablette est pleine. Supprimez des fichiers pour libérer de l\'espace."</string>
   <string name="low_memory" product="default" msgid="3475999286680000541">"La mémoire du téléphone est pleine. Veuillez supprimer des fichiers pour libérer de l\'espace."</string>
+  <string name="messagelist_sender_self" msgid="3579016854116401602">"Moi"</string>
 </resources>

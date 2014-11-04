@@ -2,4 +2,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" xmlns:android="http://schemas.android.com/apk/res/android">
   <string name="low_memory" product="tablet" msgid="6494019234102154896">"ພື້ນທີ່ຈັດເກັບຂໍ້ມູນໃນແທັບເລັດເຕັມ. ລຶບບາງໄຟລ໌ອອກເພື່ອເພີ່ມພື້ນທີ່ຫວ່າງ."</string>
   <string name="low_memory" product="default" msgid="3475999286680000541">"ພື້ນທີ່ໃນໂທລະສັບເຕັມແລ້ວ. ກະລຸນາລຶບບາງໄຟລ໌ອອກເພື່ອເພີ່ມພື້ນທີ່ຫວ່າງ."</string>
+  <string name="messagelist_sender_self" msgid="3579016854116401602">"ຂ້ອຍ"</string>
 </resources>

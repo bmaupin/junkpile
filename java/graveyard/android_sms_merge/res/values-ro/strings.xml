@@ -4,5 +4,6 @@
   <string name="low_memory" product="tablet" msgid="6494019234102154896">"Stocarea pe tabletă este plină. Ștergeţi câteva fişiere pentru a elibera spaţiu."</string>
   <string name="low_memory" product="default" msgid="3475999286680000541">"Stocarea pe telefon este plină. Ștergeţi câteva fişiere pentru a elibera spaţiu."</string>
   <string name="message_count_format" msgid="4434763220590778012">" <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+  <string name="messagelist_sender_self" msgid="3579016854116401602">"Eu"</string>
   <string name="no_subject_view" msgid="7795086723069563537">"(niciun subiect)"</string>
 </resources>
