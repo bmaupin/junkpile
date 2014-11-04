@@ -7,11 +7,16 @@ package ca.bmaupin.merge.sms;
 
 import android.app.Application;
 import android.content.Context;
+import android.location.Country;
+import android.location.CountryDetector;
+import android.location.CountryListener;
 import android.os.StrictMode;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class MmsApp extends Application {
+    private CountryDetector mCountryDetector;
+    private CountryListener mCountryListener;
+	private String mCountryIso;
 	private static MmsApp sMmsApp = null;
 	
     @Override
@@ -27,9 +32,35 @@ public class MmsApp extends Application {
         }
 
         sMmsApp = this;
+        
+        // Figure out the country *before* loading contacts and formatting numbers
+        mCountryDetector = (CountryDetector) getSystemService(Context.COUNTRY_DETECTOR);
+        mCountryListener = new CountryListener() {
+            @Override
+            public synchronized void onCountryDetected(Country country) {
+                mCountryIso = country.getCountryIso();
+            }
+        };
+        mCountryDetector.addCountryListener(mCountryListener, getMainLooper());
     }
 	
     synchronized public static MmsApp getApplication() {
         return sMmsApp;
+    }
+    
+    @Override
+    public void onTerminate() {
+        mCountryDetector.removeCountryListener(mCountryListener);
+    }
+    
+    // This function CAN return null.
+    public String getCurrentCountryIso() {
+        if (mCountryIso == null) {
+            Country country = mCountryDetector.detectCountry();
+            if (country != null) {
+                mCountryIso = country.getCountryIso();
+            }
+        }
+        return mCountryIso;
     }
 }
