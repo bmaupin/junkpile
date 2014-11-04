@@ -16,6 +16,7 @@ import java.util.HashSet;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SqliteWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -27,13 +28,12 @@ import android.provider.ContactsContract.Presence;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Profile;
+import android.provider.Telephony.Mms;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 import ca.bmaupin.merge.sms.LogTag;
 import ca.bmaupin.merge.sms.R;
-import ca.bmaupin.merge.sms.android.SqliteWrapper;
-import ca.bmaupin.merge.sms.android.Telephony.Mms;
 import ca.bmaupin.merge.sms.ui.MessageUtils;
 
 public class Contact {
