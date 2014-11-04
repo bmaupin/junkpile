@@ -15,11 +15,11 @@ import javax.annotation.concurrent.ThreadSafe;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SqliteWrapper;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 import ca.bmaupin.merge.sms.LogTag;
-import ca.bmaupin.merge.sms.android.SqliteWrapper;
 
 @ThreadSafe
 public class RecipientIdCache {

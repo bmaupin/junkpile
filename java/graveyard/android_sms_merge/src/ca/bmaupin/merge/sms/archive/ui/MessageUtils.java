@@ -8,10 +8,9 @@ package ca.bmaupin.merge.sms.archive.ui;
 import java.util.HashMap;
 
 import android.content.Context;
+import android.provider.Telephony.Mms;
 import android.text.format.DateUtils;
 import android.text.format.Time;
-
-import ca.bmaupin.merge.sms.android.Telephony.Mms;
 import ca.bmaupin.merge.sms.MmsConfig;
 
 public class MessageUtils {
