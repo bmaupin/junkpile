@@ -52,4 +52,8 @@ public class LogTag {
     public static void debug(String format, Object... args) {
         Log.d(TAG, logFormat(format, args));
     }
+    
+    public static void error(String format, Object... args) {
+        Log.e(TAG, logFormat(format, args));
+    }
 }
