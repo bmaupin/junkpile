@@ -1,3 +1,4 @@
+*.py~
 android_sms_merge/bin/
 android_sms_merge/gen/
-*.py~
+support/doc/.~*
