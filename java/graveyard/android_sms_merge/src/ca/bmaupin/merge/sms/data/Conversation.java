@@ -5,6 +5,10 @@
 
 package ca.bmaupin.merge.sms.data;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import android.content.AsyncQueryHandler;
 import android.content.Context;
 import android.database.Cursor;
@@ -49,12 +53,22 @@ public class Conversation {
     private String mSnippet;            // Text of the most recent message.
     private boolean mHasAttachment;     // True if any message has an attachment.
 	
+    private static boolean sLoadingThreads;
+    
     public Conversation(Context context, Cursor cursor, boolean allowQuery) {
         if (DEBUG) {
             Log.v(TAG, "Conversation constructor cursor, allowQuery: " + allowQuery);
         }
         mContext = context;
         fillFromCursor(context, this, cursor, allowQuery);
+    }
+    
+    /**
+     * Returns the thread ID of this conversation.  Can be zero if
+     * {@link #ensureThreadId} has not been called yet.
+     */
+    public synchronized long getThreadId() {
+        return mThreadId;
     }
     
     /**
@@ -166,6 +180,219 @@ public class Conversation {
 
         if (Log.isLoggable(LogTag.THREAD_CACHE, Log.VERBOSE)) {
             Log.d(TAG, "fillFromCursor: conv=" + conv + ", recipientIds=" + recipientIds);
+        }
+    }
+    
+    /**
+     * Private cache for the use of the various forms of Conversation.get.
+     */
+    private static class Cache {
+        private static Cache sInstance = new Cache();
+        static Cache getInstance() { return sInstance; }
+        private final HashSet<Conversation> mCache;
+        private Cache() {
+            mCache = new HashSet<Conversation>(10);
+        }
+
+        /**
+         * Return the conversation with the specified thread ID, or
+         * null if it's not in cache.
+         */
+        static Conversation get(long threadId) {
+            synchronized (sInstance) {
+                if (Log.isLoggable(LogTag.THREAD_CACHE, Log.VERBOSE)) {
+                    LogTag.debug("Conversation get with threadId: " + threadId);
+                }
+                for (Conversation c : sInstance.mCache) {
+                    if (DEBUG) {
+                        LogTag.debug("Conversation get() threadId: " + threadId +
+                                " c.getThreadId(): " + c.getThreadId());
+                    }
+                    if (c.getThreadId() == threadId) {
+                        return c;
+                    }
+                }
+            }
+            return null;
+        }
+        
+        /**
+         * Put the specified conversation in the cache.  The caller
+         * should not place an already-existing conversation in the
+         * cache, but rather update it in place.
+         */
+        static void put(Conversation c) {
+            synchronized (sInstance) {
+                // We update cache entries in place so people with long-
+                // held references get updated.
+                if (Log.isLoggable(LogTag.THREAD_CACHE, Log.VERBOSE)) {
+                    Log.d(TAG, "Conversation.Cache.put: conv= " + c + ", hash: " + c.hashCode());
+                }
+
+                if (sInstance.mCache.contains(c)) {
+                    if (DEBUG) {
+                        dumpCache();
+                    }
+                    throw new IllegalStateException("cache already contains " + c +
+                            " threadId: " + c.mThreadId);
+                }
+                sInstance.mCache.add(c);
+            }
+        }
+        
+        /**
+         * Replace the specified conversation in the cache. This is used in cases where we
+         * lookup a conversation in the cache by threadId, but don't find it. The caller
+         * then builds a new conversation (from the cursor) and tries to add it, but gets
+         * an exception that the conversation is already in the cache, because the hash
+         * is based on the recipients and it's there under a stale threadId. In this function
+         * we remove the stale entry and add the new one. Returns true if the operation is
+         * successful
+         */
+        static boolean replace(Conversation c) {
+            synchronized (sInstance) {
+                if (Log.isLoggable(LogTag.THREAD_CACHE, Log.VERBOSE)) {
+                    LogTag.debug("Conversation.Cache.put: conv= " + c + ", hash: " + c.hashCode());
+                }
+
+                if (!sInstance.mCache.contains(c)) {
+                    if (DEBUG) {
+                        dumpCache();
+                    }
+                    return false;
+                }
+                // Here it looks like we're simply removing and then re-adding the same object
+                // to the hashset. Because the hashkey is the conversation's recipients, and not
+                // the thread id, we'll actually remove the object with the stale threadId and
+                // then add the the conversation with updated threadId, both having the same
+                // recipients.
+                sInstance.mCache.remove(c);
+                sInstance.mCache.add(c);
+                return true;
+            }
+        }
+        
+        static void dumpCache() {
+            synchronized (sInstance) {
+                LogTag.debug("Conversation dumpCache: ");
+                for (Conversation c : sInstance.mCache) {
+                    LogTag.debug("   conv: " + c.toString() + " hash: " + c.hashCode());
+                }
+            }
+        }
+        
+        /**
+         * Remove all conversations from the cache that are not in
+         * the provided set of thread IDs.
+         */
+        static void keepOnly(Set<Long> threads) {
+            synchronized (sInstance) {
+                Iterator<Conversation> iter = sInstance.mCache.iterator();
+                while (iter.hasNext()) {
+                    Conversation c = iter.next();
+                    if (!threads.contains(c.getThreadId())) {
+                        iter.remove();
+                    }
+                }
+            }
+            if (DEBUG) {
+                LogTag.debug("after keepOnly");
+                dumpCache();
+            }
+        }
+    }
+    
+    /**
+     * Set up the conversation cache.  To be called once at application
+     * startup time.
+     */
+    public static void init(final Context context) {
+        Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    cacheAllThreads(context);
+                }
+            }, "Conversation.init");
+        thread.setPriority(Thread.MIN_PRIORITY);
+        thread.start();
+    }
+    
+    /**
+     * Are we in the process of loading and caching all the threads?.
+     */
+    public static boolean loadingThreads() {
+        synchronized (Cache.getInstance()) {
+            return sLoadingThreads;
+        }
+    }
+    
+    private static void cacheAllThreads(Context context) {
+        if (Log.isLoggable(LogTag.THREAD_CACHE, Log.VERBOSE)) {
+            LogTag.debug("[Conversation] cacheAllThreads: begin");
+        }
+        synchronized (Cache.getInstance()) {
+            if (sLoadingThreads) {
+                return;
+                }
+            sLoadingThreads = true;
+        }
+
+        // Keep track of what threads are now on disk so we
+        // can discard anything removed from the cache.
+        HashSet<Long> threadsOnDisk = new HashSet<Long>();
+
+        // Query for all conversations.
+        Cursor c = context.getContentResolver().query(sAllThreadsUri,
+                ALL_THREADS_PROJECTION, null, null, null);
+        try {
+            if (c != null) {
+                while (c.moveToNext()) {
+                    long threadId = c.getLong(ID);
+                    threadsOnDisk.add(threadId);
+
+                    // Try to find this thread ID in the cache.
+                    Conversation conv;
+                    synchronized (Cache.getInstance()) {
+                        conv = Cache.get(threadId);
+                    }
+
+                    if (conv == null) {
+                        // Make a new Conversation and put it in
+                        // the cache if necessary.
+                        conv = new Conversation(context, c, true);
+                        try {
+                            synchronized (Cache.getInstance()) {
+                                Cache.put(conv);
+                            }
+                        } catch (IllegalStateException e) {
+                            LogTag.error("Tried to add duplicate Conversation to Cache" +
+                                    " for threadId: " + threadId + " new conv: " + conv);
+                            if (!Cache.replace(conv)) {
+                                LogTag.error("cacheAllThreads cache.replace failed on " + conv);
+                            }
+                        }
+                    } else {
+                        // Or update in place so people with references
+                        // to conversations get updated too.
+                        fillFromCursor(context, conv, c, true);
+                    }
+                }
+            }
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            synchronized (Cache.getInstance()) {
+                sLoadingThreads = false;
+            }
+        }
+
+        // Purge the cache of threads that no longer exist on disk.
+        Cache.keepOnly(threadsOnDisk);
+
+        if (Log.isLoggable(LogTag.THREAD_CACHE, Log.VERBOSE)) {
+            LogTag.debug("[Conversation] cacheAllThreads: finished");
+            Cache.dumpCache();
         }
     }
 }
