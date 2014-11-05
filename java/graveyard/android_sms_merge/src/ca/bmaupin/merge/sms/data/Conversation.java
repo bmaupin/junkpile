@@ -24,7 +24,6 @@ public class Conversation {
     private static final int SNIPPET        = 4;
     private static final int HAS_ATTACHMENT = 8;
 	
-	
 	private final Context mContext;
 	
     // The thread ID of this conversation.  Can be zero in the case of a
@@ -44,6 +43,43 @@ public class Conversation {
         }
         mContext = context;
         fillFromCursor(context, this, cursor, allowQuery);
+    }
+    
+    /**
+     * Returns the recipient set of this conversation.
+     */
+    public synchronized ContactList getRecipients() {
+        return mRecipients;
+    }
+    
+    /**
+     * Returns the time of the last update to this conversation in milliseconds,
+     * on the {@link System#currentTimeMillis} timebase.
+     */
+    public synchronized long getDate() {
+        return mDate;
+    }
+    
+    /**
+     * Returns the number of messages in this conversation, excluding the draft
+     * (if it exists).
+     */
+    public synchronized int getMessageCount() {
+        return mMessageCount;
+    }
+    
+    /**
+     * Returns a snippet of text from the most recent message in the conversation.
+     */
+    public synchronized String getSnippet() {
+        return mSnippet;
+    }
+    
+    /**
+     * Returns true if any messages in the conversation have attachments.
+     */
+    public synchronized boolean hasAttachment() {
+        return mHasAttachment;
     }
     
     /**
@@ -79,42 +115,5 @@ public class Conversation {
         if (Log.isLoggable(LogTag.THREAD_CACHE, Log.VERBOSE)) {
             Log.d(TAG, "fillFromCursor: conv=" + conv + ", recipientIds=" + recipientIds);
         }
-    }
-    
-    /**
-     * Returns the time of the last update to this conversation in milliseconds,
-     * on the {@link System#currentTimeMillis} timebase.
-     */
-    public synchronized long getDate() {
-        return mDate;
-    }
-    
-    /**
-     * Returns the number of messages in this conversation, excluding the draft
-     * (if it exists).
-     */
-    public synchronized int getMessageCount() {
-        return mMessageCount;
-    }
-    
-    /**
-     * Returns the recipient set of this conversation.
-     */
-    public synchronized ContactList getRecipients() {
-        return mRecipients;
-    }
-    
-    /**
-     * Returns a snippet of text from the most recent message in the conversation.
-     */
-    public synchronized String getSnippet() {
-        return mSnippet;
-    }
-    
-    /**
-     * Returns true if any messages in the conversation have attachments.
-     */
-    public synchronized boolean hasAttachment() {
-        return mHasAttachment;
     }
 }
