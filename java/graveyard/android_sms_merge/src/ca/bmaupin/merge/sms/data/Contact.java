@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
@@ -124,6 +125,21 @@ public class Contact {
     
     public static Contact get(String number, boolean canBlock) {
         return sContactCache.get(number, canBlock);
+    }
+    
+    public static void invalidateCache() {
+        if (Log.isLoggable(LogTag.APP, Log.VERBOSE)) {
+            log("invalidateCache");
+        }
+
+        // While invalidating our local Cache doesn't remove the contacts, it will mark them
+        // stale so the next time we're asked for a particular contact, we'll return that
+        // stale contact and at the same time, fire off an asyncUpdateContact to update
+        // that contact's info in the background. UI elements using the contact typically
+        // call addListener() so they immediately get notified when the contact has been
+        // updated with the latest info. They redraw themselves when we call the
+        // listener's onUpdate().
+        sContactCache.invalidate();
     }
     
     public synchronized boolean existsInDatabase() {
@@ -888,6 +904,20 @@ public class Contact {
                         new Contact(numberOrEmail);
                 candidates.add(c);
                 return c;
+            }
+        }
+        
+        void invalidate() {
+            // Don't remove the contacts. Just mark them stale so we'll update their
+            // info, particularly their presence.
+            synchronized (ContactsCache.this) {
+                for (ArrayList<Contact> alc : mContactsHash.values()) {
+                    for (Contact c : alc) {
+                        synchronized (c) {
+                            c.mIsStale = true;
+                        }
+                    }
+                }
             }
         }
     }
