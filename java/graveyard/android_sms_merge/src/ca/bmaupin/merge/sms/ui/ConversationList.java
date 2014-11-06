@@ -5,9 +5,6 @@
 
 package ca.bmaupin.merge.sms.ui;
 
-import com.android.mms.MmsConfig;
-import com.android.mms.util.DraftCache;
-
 import ca.bmaupin.merge.sms.R;
 import ca.bmaupin.merge.sms.data.Contact;
 import ca.bmaupin.merge.sms.data.Conversation;
@@ -18,11 +15,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SqliteWrapper;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class ConversationList extends ListActivity {
+    private static final String TAG = "ConversationList";
     private static final int THREAD_LIST_QUERY_TOKEN       = 1701;
 	
     private ThreadListQueryHandler mQueryHandler;
@@ -117,6 +115,23 @@ public class ConversationList extends ListActivity {
     private final class ThreadListQueryHandler extends AsyncQueryHandler {
         public ThreadListQueryHandler(ContentResolver contentResolver) {
             super(contentResolver);
+        }
+        
+        @Override
+        protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
+            switch (token) {
+            case THREAD_LIST_QUERY_TOKEN:
+                mListAdapter.changeCursor(cursor);
+
+                if (mListAdapter.getCount() == 0) {
+                    ((TextView)(getListView().getEmptyView())).setText(R.string.no_conversations);
+                }
+
+                break;
+
+            default:
+                Log.e(TAG, "onQueryComplete called with unknown token " + token);
+            }
         }
     }
 }
