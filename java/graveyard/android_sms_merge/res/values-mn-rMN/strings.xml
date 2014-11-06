@@ -3,4 +3,5 @@
   <string name="low_memory" product="tablet" msgid="6494019234102154896">"Таблетийн сан дүүрсэн. Зай чөлөөлөх бол зарим файлыг устгана уу."</string>
   <string name="low_memory" product="default" msgid="3475999286680000541">"Утасны сан дүүрсэн. Зай чөлөөлөх бол зарим файлыг устгана уу."</string>
   <string name="messagelist_sender_self" msgid="3579016854116401602">"Би"</string>
+  <string name="no_conversations" msgid="6773767655149258445">"Харилцаа алга байна."</string>
 </resources>

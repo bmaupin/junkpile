@@ -3,4 +3,5 @@
   <string name="low_memory" product="tablet" msgid="6494019234102154896">"ឧបករណ៍​ផ្ទុក​នៃ​​កុំព្យូទ័រ​បន្ទះ​ពេញ។ លុប​ឯកសារ​មួយ​ចំនួន​។"</string>
   <string name="low_memory" product="default" msgid="3475999286680000541">"ឧបករណ៍​ផ្ទុក​ទូរស័ព្ទ​ពេញ! លុប​ឯកសារ​មួយ​ចំនួន​ដើម្បី​បង្កើន​ទំហំ។"</string>
   <string name="messagelist_sender_self" msgid="3579016854116401602">"ខ្ញុំ"</string>
+  <string name="no_conversations" msgid="6773767655149258445">"គ្មាន​ការសន្ទនា​។"</string>
 </resources>

@@ -3,4 +3,5 @@
   <string name="low_memory" product="tablet" msgid="6494019234102154896">"Tahvelarvuti mäluruum on täis. Ruumi vabastamiseks kustutage mõned failid."</string>
   <string name="low_memory" product="default" msgid="3475999286680000541">"Telefonimälu on täis. Ruumi vabastamiseks kustutage mõned failid."</string>
   <string name="messagelist_sender_self" msgid="3579016854116401602">"Mina"</string>
+  <string name="no_conversations" msgid="6773767655149258445">"Vestluseid pole."</string>
 </resources>
