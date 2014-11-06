@@ -5,27 +5,71 @@
 
 package ca.bmaupin.merge.sms.ui;
 
+import com.android.mms.MmsConfig;
+import com.android.mms.util.DraftCache;
+
 import ca.bmaupin.merge.sms.R;
 import ca.bmaupin.merge.sms.data.Contact;
 import ca.bmaupin.merge.sms.data.Conversation;
 import android.app.ListActivity;
 import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SqliteWrapper;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class ConversationList extends ListActivity {
     private static final int THREAD_LIST_QUERY_TOKEN       = 1701;
 	
     private ThreadListQueryHandler mQueryHandler;
+    private ConversationListAdapter mListAdapter;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.conversation_list_screen);
+        
+        ListView listView = getListView();
+        
+        // Tell the list view which view to display when the list is empty
+        listView.setEmptyView(findViewById(R.id.empty));
+
+        initListAdapter();
+    }
+    
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        // Don't listen for changes while we're paused.
+        mListAdapter.setOnContentChangedListener(null);
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mListAdapter.setOnContentChangedListener(mContentChangedListener);
+    }
+    
+    private final ConversationListAdapter.OnContentChangedListener mContentChangedListener =
+            new ConversationListAdapter.OnContentChangedListener() {
+            @Override
+            public void onContentChanged(ConversationListAdapter adapter) {
+                startAsyncQuery();
+            }
+        };
+
+    private void initListAdapter() {
+        mListAdapter = new ConversationListAdapter(this, null);
+        mListAdapter.setOnContentChangedListener(mContentChangedListener);
+        setListAdapter(mListAdapter);
+        getListView().setRecyclerListener(mListAdapter);
     }
     
     @Override
@@ -44,6 +88,20 @@ public class ConversationList extends ListActivity {
         if (!Conversation.loadingThreads()) {
             Contact.invalidateCache();
         }
+    }
+    
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        // Close the cursor in the ListAdapter if the activity stopped.
+        Cursor cursor = mListAdapter.getCursor();
+        
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        mListAdapter.changeCursor(null);
     }
     
     private void startAsyncQuery() {
