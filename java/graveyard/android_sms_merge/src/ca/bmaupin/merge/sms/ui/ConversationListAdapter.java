@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.CursorAdapter;
+
 import ca.bmaupin.merge.sms.R;
 import ca.bmaupin.merge.sms.data.Conversation;
 
@@ -54,7 +55,7 @@ public class ConversationListAdapter extends CursorAdapter implements AbsListVie
         if (LOCAL_LOGV) Log.v(TAG, "inflating new view");
         return mFactory.inflate(R.layout.conversation_list_item, parent, false);
     }
-    
+
     public interface OnContentChangedListener {
         void onContentChanged(ConversationListAdapter adapter);
     }
