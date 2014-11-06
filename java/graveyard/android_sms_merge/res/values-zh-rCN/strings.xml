@@ -5,5 +5,6 @@
   <string name="low_memory" product="default" msgid="3475999286680000541">"手机存储空间已满。请删除一些文件以腾出空间。"</string>
   <string name="message_count_format" msgid="4434763220590778012">" <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
   <string name="messagelist_sender_self" msgid="3579016854116401602">"我"</string>
+  <string name="no_conversations" msgid="6773767655149258445">"无会话。"</string>
   <string name="no_subject_view" msgid="7795086723069563537">"（无主题）"</string>
 </resources>

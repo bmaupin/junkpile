@@ -5,5 +5,6 @@
   <string name="low_memory" product="default" msgid="3475999286680000541">"Se ha agotado el espacio de almacenamiento del teléfono. Elimina algunos archivos para liberar espacio."</string>
   <string name="message_count_format" msgid="4434763220590778012">" <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
   <string name="messagelist_sender_self" msgid="3579016854116401602">"Yo"</string>
+  <string name="no_conversations" msgid="6773767655149258445">"No hay conversaciones."</string>
   <string name="no_subject_view" msgid="7795086723069563537">"(Sin asunto)"</string>
 </resources>
