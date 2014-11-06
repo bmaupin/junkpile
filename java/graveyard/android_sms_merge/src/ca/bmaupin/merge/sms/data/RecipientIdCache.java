@@ -19,6 +19,7 @@ import android.database.sqlite.SqliteWrapper;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
+
 import ca.bmaupin.merge.sms.LogTag;
 
 @ThreadSafe
@@ -44,6 +45,15 @@ public class RecipientIdCache {
             this.number = number;
         }
     };
+    
+    static void init(Context context) {
+        sInstance = new RecipientIdCache(context);
+        new Thread(new Runnable() {
+            public void run() {
+                fill();
+            }
+        }, "RecipientIdCache.init").start();
+    }
     
     RecipientIdCache(Context context) {
         mCache = new HashMap<Long, String>();

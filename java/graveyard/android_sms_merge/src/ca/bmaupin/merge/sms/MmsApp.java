@@ -13,6 +13,9 @@ import android.location.CountryListener;
 import android.os.StrictMode;
 import android.util.Log;
 
+import ca.bmaupin.merge.sms.data.Contact;
+import ca.bmaupin.merge.sms.data.Conversation;
+
 public class MmsApp extends Application {
     private CountryDetector mCountryDetector;
     private CountryListener mCountryListener;
@@ -42,6 +45,9 @@ public class MmsApp extends Application {
             }
         };
         mCountryDetector.addCountryListener(mCountryListener, getMainLooper());
+        
+        Contact.init(this);
+        Conversation.init(this);
     }
 	
     synchronized public static MmsApp getApplication() {

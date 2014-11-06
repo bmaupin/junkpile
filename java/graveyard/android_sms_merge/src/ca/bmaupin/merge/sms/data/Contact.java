@@ -33,6 +33,7 @@ import android.provider.Telephony.Mms;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
+
 import ca.bmaupin.merge.sms.LogTag;
 import ca.bmaupin.merge.sms.MmsApp;
 import ca.bmaupin.merge.sms.R;
@@ -220,6 +221,21 @@ public class Contact {
             }
         }
         return mAvatar != null ? mAvatar : defaultValue;
+    }
+    
+    public static void init(final Context context) {
+        sContactCache = new ContactsCache(context);
+
+        RecipientIdCache.init(context);
+
+        // it maybe too aggressive to listen for *any* contact changes, and rebuild MMS contact
+        // cache each time that occurs. Unless we can get targeted updates for the contacts we
+        // care about(which probably won't happen for a long time), we probably should just
+        // invalidate cache peoridically, or surgically.
+        /*
+        context.getContentResolver().registerContentObserver(
+                Contacts.CONTENT_URI, true, sContactsObserver);
+        */
     }
     
     private static class ContactsCache {
