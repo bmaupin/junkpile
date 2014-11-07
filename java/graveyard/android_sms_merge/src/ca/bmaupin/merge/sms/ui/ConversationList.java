@@ -32,6 +32,8 @@ public class ConversationList extends ListActivity {
 
         setContentView(R.layout.conversation_list_screen);
         
+        mQueryHandler = new ThreadListQueryHandler(getContentResolver());
+        
         ListView listView = getListView();
         
         // Tell the list view which view to display when the list is empty
