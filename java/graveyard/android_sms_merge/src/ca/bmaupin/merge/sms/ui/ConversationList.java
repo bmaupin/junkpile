@@ -5,6 +5,7 @@
 
 package ca.bmaupin.merge.sms.ui;
 
+import ca.bmaupin.merge.sms.LogTag;
 import ca.bmaupin.merge.sms.R;
 import ca.bmaupin.merge.sms.data.Contact;
 import ca.bmaupin.merge.sms.data.Conversation;
@@ -16,6 +17,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SqliteWrapper;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -112,6 +114,30 @@ public class ConversationList extends ListActivity {
         } catch (SQLiteException e) {
             SqliteWrapper.checkSQLiteException(this, e);
         }
+    }
+    
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        // Note: don't read the thread id data from the ConversationListItem view passed in.
+        // It's unreliable to read the cached data stored in the view because the ListItem
+        // can be recycled, and the same view could be assigned to a different position
+        // if you click the list item fast enough. Instead, get the cursor at the position
+        // clicked and load the data from the cursor.
+        // (ConversationListAdapter extends CursorAdapter, so getItemAtPosition() should
+        // return the cursor object, which is moved to the position passed in)
+        Cursor cursor  = (Cursor) getListView().getItemAtPosition(position);
+        Conversation conv = Conversation.from(this, cursor);
+        long tid = conv.getThreadId();
+
+        if (LogTag.VERBOSE) {
+            Log.d(TAG, "onListItemClick: pos=" + position + ", view=" + v + ", tid=" + tid);
+        }
+
+        openThread(tid);
+    }
+    
+    private void openThread(long threadId) {
+        startActivity(ComposeMessageActivity.createIntent(this, threadId));
     }
     
     private final class ThreadListQueryHandler extends AsyncQueryHandler {
