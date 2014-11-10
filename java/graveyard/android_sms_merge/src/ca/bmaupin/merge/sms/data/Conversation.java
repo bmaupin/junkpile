@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import android.content.AsyncQueryHandler;
+import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -93,6 +94,16 @@ public class Conversation {
             }
         }
         return conv;
+    }
+    
+    /**
+     * Return the Uri for all messages in the given thread ID.
+     * @deprecated
+     */
+    public static Uri getUri(long threadId) {
+        // TODO: Callers using this should really just have a Conversation
+        // and call getUri() on it, but this guarantees no blocking.
+        return ContentUris.withAppendedId(Threads.CONTENT_URI, threadId);
     }
     
     /**
