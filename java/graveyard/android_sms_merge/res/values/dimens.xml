@@ -7,4 +7,6 @@
     <dimen name="message_item_text_padding_top">5dip</dimen>
     
     <dimen name="avatar_width_height">64dip</dimen>
+    
+    <dimen name="mms_inline_attachment_size">178dip</dimen>
 </resources>
