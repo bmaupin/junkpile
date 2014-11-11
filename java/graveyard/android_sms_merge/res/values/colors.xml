@@ -5,4 +5,5 @@
     <color name="unread_bgcolor">#ffffffff</color>
     
     <drawable name="text_color_red">#ffff4444</drawable>
+    <color name="text_hairline">#ffcccccc</color>
 </resources>
