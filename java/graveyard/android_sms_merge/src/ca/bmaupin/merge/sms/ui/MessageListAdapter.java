@@ -5,11 +5,311 @@
 
 package ca.bmaupin.merge.sms.ui;
 
+import java.util.regex.Pattern;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.os.Handler;
+import android.provider.BaseColumns;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.CursorAdapter;
+import android.widget.ListView;
 
 /**
  * The back-end data adapter of a message list.
  */
 public class MessageListAdapter extends CursorAdapter {
+    private static final int CACHE_SIZE         = 50;
+	
+    public static final int INCOMING_ITEM_TYPE_SMS = 0;
+    public static final int OUTGOING_ITEM_TYPE_SMS = 1;
+    public static final int INCOMING_ITEM_TYPE_MMS = 2;
+    public static final int OUTGOING_ITEM_TYPE_MMS = 3;
+    
+    protected LayoutInflater mInflater;
+    private final MessageItemCache mMessageItemCache;
+    private final ColumnsMap mColumnsMap;
+    private Handler mMsgListItemHandler;
+	private Pattern mHighlight;
+    private boolean mIsGroupConversation;
+	
+    public MessageListAdapter(
+            Context context, Cursor c, ListView listView,
+            boolean useDefaultColumnsMap, Pattern highlight) {
+        super(context, c, FLAG_REGISTER_CONTENT_OBSERVER);
+        mContext = context;
+        mHighlight = highlight;
 
+        mInflater = (LayoutInflater) context.getSystemService(
+                Context.LAYOUT_INFLATER_SERVICE);
+        mMessageItemCache = new MessageItemCache(CACHE_SIZE);
+
+        if (useDefaultColumnsMap) {
+            mColumnsMap = new ColumnsMap();
+        } else {
+            mColumnsMap = new ColumnsMap(c);
+        }
+
+        listView.setRecyclerListener(new AbsListView.RecyclerListener() {
+            @Override
+            public void onMovedToScrapHeap(View view) {
+                if (view instanceof MessageListItem) {
+                    MessageListItem mli = (MessageListItem) view;
+                    // Clear references to resources
+                    mli.unbind();
+                }
+            }
+        });
+    }
+	
+    @Override
+    public void bindView(View view, Context context, Cursor cursor) {
+        if (view instanceof MessageListItem) {
+            String type = cursor.getString(mColumnsMap.mColumnMsgType);
+            long msgId = cursor.getLong(mColumnsMap.mColumnMsgId);
+
+            MessageItem msgItem = getCachedMessageItem(type, msgId, cursor);
+            if (msgItem != null) {
+                MessageListItem mli = (MessageListItem) view;
+                int position = cursor.getPosition();
+                mli.bind(msgItem, mIsGroupConversation, position);
+                mli.setMsgListItemHandler(mMsgListItemHandler);
+            }
+        }
+    }
+    
+    @Override
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
+        int boxType = getItemViewType(cursor);
+        View view = mInflater.inflate((boxType == INCOMING_ITEM_TYPE_SMS ||
+                boxType == INCOMING_ITEM_TYPE_MMS) ?
+                        R.layout.message_list_item_recv : R.layout.message_list_item_send,
+                        parent, false);
+        if (boxType == INCOMING_ITEM_TYPE_MMS || boxType == OUTGOING_ITEM_TYPE_MMS) {
+            // We've got an mms item, pre-inflate the mms portion of the view
+            view.findViewById(R.id.mms_layout_view_stub).setVisibility(View.VISIBLE);
+        }
+        return view;
+    }
+    
+    public MessageItem getCachedMessageItem(String type, long msgId, Cursor c) {
+        MessageItem item = mMessageItemCache.get(getKey(type, msgId));
+        if (item == null && c != null && isCursorValid(c)) {
+            try {
+                item = new MessageItem(mContext, type, c, mColumnsMap, mHighlight);
+                mMessageItemCache.put(getKey(item.mType, item.mMsgId), item);
+            } catch (MmsException e) {
+                Log.e(TAG, "getCachedMessageItem: ", e);
+            }
+        }
+        return item;
+    }
+    
+    private int getItemViewType(Cursor cursor) {
+        String type = cursor.getString(mColumnsMap.mColumnMsgType);
+        int boxId;
+        if ("sms".equals(type)) {
+            boxId = cursor.getInt(mColumnsMap.mColumnSmsType);
+            // Note that messages from the SIM card all have a boxId of zero.
+            return (boxId == TextBasedSmsColumns.MESSAGE_TYPE_INBOX ||
+                    boxId == TextBasedSmsColumns.MESSAGE_TYPE_ALL) ?
+                    INCOMING_ITEM_TYPE_SMS : OUTGOING_ITEM_TYPE_SMS;
+        } else {
+            boxId = cursor.getInt(mColumnsMap.mColumnMmsMessageBox);
+            // Note that messages from the SIM card all have a boxId of zero: Mms.MESSAGE_BOX_ALL
+            return (boxId == Mms.MESSAGE_BOX_INBOX || boxId == Mms.MESSAGE_BOX_ALL) ?
+                    INCOMING_ITEM_TYPE_MMS : OUTGOING_ITEM_TYPE_MMS;
+        }
+    }
+    
+    public static class ColumnsMap {
+        public int mColumnMsgType;
+        public int mColumnMsgId;
+        public int mColumnSmsAddress;
+        public int mColumnSmsBody;
+        public int mColumnSmsDate;
+        public int mColumnSmsDateSent;
+        public int mColumnSmsRead;
+        public int mColumnSmsType;
+        public int mColumnSmsStatus;
+        public int mColumnSmsLocked;
+        public int mColumnSmsErrorCode;
+        public int mColumnMmsSubject;
+        public int mColumnMmsSubjectCharset;
+        public int mColumnMmsDate;
+        public int mColumnMmsDateSent;
+        public int mColumnMmsRead;
+        public int mColumnMmsMessageType;
+        public int mColumnMmsMessageBox;
+        public int mColumnMmsDeliveryReport;
+        public int mColumnMmsReadReport;
+        public int mColumnMmsErrorType;
+        public int mColumnMmsLocked;
+        public int mColumnMmsStatus;
+        public int mColumnMmsTextOnly;
+
+        public ColumnsMap() {
+            mColumnMsgType            = COLUMN_MSG_TYPE;
+            mColumnMsgId              = COLUMN_ID;
+            mColumnSmsAddress         = COLUMN_SMS_ADDRESS;
+            mColumnSmsBody            = COLUMN_SMS_BODY;
+            mColumnSmsDate            = COLUMN_SMS_DATE;
+            mColumnSmsDateSent        = COLUMN_SMS_DATE_SENT;
+            mColumnSmsType            = COLUMN_SMS_TYPE;
+            mColumnSmsStatus          = COLUMN_SMS_STATUS;
+            mColumnSmsLocked          = COLUMN_SMS_LOCKED;
+            mColumnSmsErrorCode       = COLUMN_SMS_ERROR_CODE;
+            mColumnMmsSubject         = COLUMN_MMS_SUBJECT;
+            mColumnMmsSubjectCharset  = COLUMN_MMS_SUBJECT_CHARSET;
+            mColumnMmsMessageType     = COLUMN_MMS_MESSAGE_TYPE;
+            mColumnMmsMessageBox      = COLUMN_MMS_MESSAGE_BOX;
+            mColumnMmsDeliveryReport  = COLUMN_MMS_DELIVERY_REPORT;
+            mColumnMmsReadReport      = COLUMN_MMS_READ_REPORT;
+            mColumnMmsErrorType       = COLUMN_MMS_ERROR_TYPE;
+            mColumnMmsLocked          = COLUMN_MMS_LOCKED;
+            mColumnMmsStatus          = COLUMN_MMS_STATUS;
+            mColumnMmsTextOnly        = COLUMN_MMS_TEXT_ONLY;
+        }
+
+        public ColumnsMap(Cursor cursor) {
+            // Ignore all 'not found' exceptions since the custom columns
+            // may be just a subset of the default columns.
+            try {
+                mColumnMsgType = cursor.getColumnIndexOrThrow(
+                        MmsSms.TYPE_DISCRIMINATOR_COLUMN);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnMsgId = cursor.getColumnIndexOrThrow(BaseColumns._ID);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnSmsAddress = cursor.getColumnIndexOrThrow(Sms.ADDRESS);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnSmsBody = cursor.getColumnIndexOrThrow(Sms.BODY);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnSmsDate = cursor.getColumnIndexOrThrow(Sms.DATE);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnSmsDateSent = cursor.getColumnIndexOrThrow(Sms.DATE_SENT);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnSmsType = cursor.getColumnIndexOrThrow(Sms.TYPE);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnSmsStatus = cursor.getColumnIndexOrThrow(Sms.STATUS);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnSmsLocked = cursor.getColumnIndexOrThrow(Sms.LOCKED);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnSmsErrorCode = cursor.getColumnIndexOrThrow(Sms.ERROR_CODE);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnMmsSubject = cursor.getColumnIndexOrThrow(Mms.SUBJECT);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnMmsSubjectCharset = cursor.getColumnIndexOrThrow(Mms.SUBJECT_CHARSET);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnMmsMessageType = cursor.getColumnIndexOrThrow(Mms.MESSAGE_TYPE);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnMmsMessageBox = cursor.getColumnIndexOrThrow(Mms.MESSAGE_BOX);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnMmsDeliveryReport = cursor.getColumnIndexOrThrow(Mms.DELIVERY_REPORT);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnMmsReadReport = cursor.getColumnIndexOrThrow(Mms.READ_REPORT);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnMmsErrorType = cursor.getColumnIndexOrThrow(PendingMessages.ERROR_TYPE);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnMmsLocked = cursor.getColumnIndexOrThrow(Mms.LOCKED);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnMmsStatus = cursor.getColumnIndexOrThrow(Mms.STATUS);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+
+            try {
+                mColumnMmsTextOnly = cursor.getColumnIndexOrThrow(Mms.TEXT_ONLY);
+            } catch (IllegalArgumentException e) {
+                Log.w("colsMap", e.getMessage());
+            }
+        }
+    }
+    
+    private static class MessageItemCache extends LruCache<Long, MessageItem> {
+        public MessageItemCache(int maxSize) {
+            super(maxSize);
+        }
+
+        @Override
+        protected void entryRemoved(boolean evicted, Long key,
+                MessageItem oldValue, MessageItem newValue) {
+            oldValue.cancelPduLoading();
+        }
+    }
 }
