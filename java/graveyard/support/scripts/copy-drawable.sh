@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SOURCE=~/workspace/git/android/platform/packages/apps/Mms
+SOURCE=~/workspace/git/android/packages/apps/Mms
 DEST=~/workspace/git/android-sms-merge/android_sms_merge
 
 drawable_folders="drawable-hdpi drawable-mdpi drawable-xhdpi drawable-xxhdpi"
