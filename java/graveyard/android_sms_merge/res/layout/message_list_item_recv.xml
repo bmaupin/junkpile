@@ -72,7 +72,6 @@
                         android:id="@+id/locked_indicator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_lock_message_sms"
                         android:paddingRight="3dip"
                         android:visibility="gone" />
 
@@ -80,7 +79,6 @@
                         android:id="@+id/delivered_indicator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_sms_mms_delivered"
                         android:paddingRight="3dip"
                         android:visibility="gone" />
 
@@ -88,7 +86,6 @@
                         android:id="@+id/details_indicator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_sms_mms_details"
                         android:visibility="gone" />
                 </LinearLayout>
 
@@ -99,11 +96,4 @@
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
-
-    <ViewStub android:id="@+id/mms_downloading_view_stub"
-        android:layout="@layout/mms_downloading_view"
-        android:layout_gravity="center_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
 </com.android.mms.ui.MessageListItem>
