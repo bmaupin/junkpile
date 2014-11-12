@@ -6,5 +6,6 @@
 package ca.bmaupin.merge.sms.data;
 
 public class WorkingMessage {
-
+    // Attachment types
+    public static final int TEXT = 0;
 }
