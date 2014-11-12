@@ -7,10 +7,18 @@ package ca.bmaupin.merge.sms.ui;
 
 import java.util.regex.Pattern;
 
+import com.google.android.mms.MmsException;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Handler;
 import android.provider.BaseColumns;
+import android.provider.Telephony.Mms;
+import android.provider.Telephony.MmsSms;
+import android.provider.Telephony.MmsSms.PendingMessages;
+import android.provider.Telephony.Sms;
+import android.provider.Telephony.TextBasedSmsColumns;
+import android.support.v4.util.LruCache;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +27,37 @@ import android.widget.AbsListView;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 
+import ca.bmaupin.merge.sms.R;
+
 /**
  * The back-end data adapter of a message list.
  */
 public class MessageListAdapter extends CursorAdapter {
+	private static final String TAG = "MessageListAdapter";
+	
+    // The indexes of the default columns which must be consistent
+    // with above PROJECTION.
+    static final int COLUMN_MSG_TYPE            = 0;
+    static final int COLUMN_ID                  = 1;
+    static final int COLUMN_SMS_ADDRESS         = 3;
+    static final int COLUMN_SMS_BODY            = 4;
+    static final int COLUMN_SMS_DATE            = 5;
+    static final int COLUMN_SMS_DATE_SENT       = 6;
+    static final int COLUMN_SMS_TYPE            = 8;
+    static final int COLUMN_SMS_STATUS          = 9;
+    static final int COLUMN_SMS_LOCKED          = 10;
+    static final int COLUMN_SMS_ERROR_CODE      = 11;
+    static final int COLUMN_MMS_SUBJECT         = 12;
+    static final int COLUMN_MMS_SUBJECT_CHARSET = 13;
+    static final int COLUMN_MMS_MESSAGE_TYPE    = 17;
+    static final int COLUMN_MMS_MESSAGE_BOX     = 18;
+    static final int COLUMN_MMS_DELIVERY_REPORT = 19;
+    static final int COLUMN_MMS_READ_REPORT     = 20;
+    static final int COLUMN_MMS_ERROR_TYPE      = 21;
+    static final int COLUMN_MMS_LOCKED          = 22;
+    static final int COLUMN_MMS_STATUS          = 23;
+    static final int COLUMN_MMS_TEXT_ONLY       = 24;
+	
     private static final int CACHE_SIZE         = 50;
 	
     public static final int INCOMING_ITEM_TYPE_SMS = 0;
@@ -107,6 +142,22 @@ public class MessageListAdapter extends CursorAdapter {
             }
         }
         return item;
+    }
+    
+    private boolean isCursorValid(Cursor cursor) {
+        // Check whether the cursor is valid or not.
+        if (cursor == null || cursor.isClosed() || cursor.isBeforeFirst() || cursor.isAfterLast()) {
+            return false;
+        }
+        return true;
+    }
+    
+    private static long getKey(String type, long id) {
+        if (type.equals("mms")) {
+            return -id;
+        } else {
+            return id;
+        }
     }
     
     private int getItemViewType(Cursor cursor) {
