@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * Derived from com.android.mms/res/values/colors.xml
+ * (tag android-4.4.4_r2.0.1)
+ */
+-->
 <resources>
-    <color name="message_count_color">#66333333</color>
-    <color name="read_bgcolor">#ffeeeeee</color>
-    <color name="unread_bgcolor">#ffffffff</color>
-    
     <drawable name="text_color_red">#ffff4444</drawable>
     <color name="text_hairline">#ffcccccc</color>
+    <color name="message_count_color">#66333333</color>
+    
+    <!-- Chat "sent time" text background -->
+    <color name="timestamp_color">#bf000000</color>
+    
+    <!-- the background color used for unread conversation -->
+    <color name="unread_bgcolor">#ffffffff</color>
+    <color name="read_bgcolor">#ffeeeeee</color>
 </resources>
