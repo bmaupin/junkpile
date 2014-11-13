@@ -125,6 +125,15 @@ public class MessageItem {
         return isOutgoingMms || isOutgoingSms;
     }
     
+    // Note: This is the only mutable field in this class.  Think of
+    // mCachedFormattedMessage as a C++ 'mutable' field on a const
+    // object, with this being a lazy accessor whose logic to set it
+    // is outside the class for model/view separation reasons.  In any
+    // case, please keep this class conceptually immutable.
+    public void setCachedFormattedMessage(CharSequence formattedMessage) {
+        mCachedFormattedMessage = formattedMessage;
+    }
+    
     public CharSequence getCachedFormattedMessage() {
         return mCachedFormattedMessage;
     }
