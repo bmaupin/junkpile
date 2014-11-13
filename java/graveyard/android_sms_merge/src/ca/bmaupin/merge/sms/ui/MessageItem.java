@@ -18,7 +18,6 @@ import android.net.Uri;
 import android.provider.Telephony.Mms;
 import android.provider.Telephony.Sms;
 import android.text.TextUtils;
-
 import ca.bmaupin.merge.sms.R;
 import ca.bmaupin.merge.sms.data.Contact;
 import ca.bmaupin.merge.sms.data.WorkingMessage;
@@ -38,6 +37,12 @@ public class MessageItem {
     String mBody; // Body of SMS, first text of MMS.
     String mTextContentType; // ContentType of text of MMS.
     Pattern mHighlight; // portion of message to highlight (from search)
+    
+    // The only non-immutable field.  Not synchronized, as access will
+    // only be from the main GUI thread.  Worst case if accessed from
+    // another thread is it'll return null and be set again from that
+    // thread.
+    CharSequence mCachedFormattedMessage;
     
     Cursor mCursor;
     ColumnsMap mColumnsMap;
@@ -118,5 +123,9 @@ public class MessageItem {
                                             || (mBoxId == Sms.MESSAGE_TYPE_OUTBOX)
                                             || (mBoxId == Sms.MESSAGE_TYPE_QUEUED));
         return isOutgoingMms || isOutgoingSms;
+    }
+    
+    public CharSequence getCachedFormattedMessage() {
+        return mCachedFormattedMessage;
     }
 }
