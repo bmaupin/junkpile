@@ -128,6 +128,10 @@ public class Contact {
         return sContactCache.get(number, canBlock);
     }
     
+    public static Contact getMe(boolean canBlock) {
+        return sContactCache.getMe(canBlock);
+    }
+    
     public static void invalidateCache() {
         if (Log.isLoggable(LogTag.APP, Log.VERBOSE)) {
             log("invalidateCache");
@@ -380,6 +384,10 @@ public class Contact {
     	
         public void pushTask(Runnable r) {
             mTaskQueue.push(r);
+        }
+        
+        public Contact getMe(boolean canBlock) {
+            return get(SELF_ITEM_KEY, true, canBlock);
         }
     	
         public Contact get(String number, boolean canBlock) {
