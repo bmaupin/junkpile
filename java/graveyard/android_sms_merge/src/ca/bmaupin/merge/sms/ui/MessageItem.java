@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.provider.Telephony.Mms;
 import android.provider.Telephony.Sms;
 import android.text.TextUtils;
+import android.util.Log;
 import ca.bmaupin.merge.sms.R;
 import ca.bmaupin.merge.sms.data.Contact;
 import ca.bmaupin.merge.sms.data.WorkingMessage;
@@ -46,6 +47,7 @@ public class MessageItem {
     
     Cursor mCursor;
     ColumnsMap mColumnsMap;
+    private PduLoadedCallback mPduLoadedCallback;
     
     // Fields for MMS only.
     Uri mMessageUri;
@@ -136,5 +138,18 @@ public class MessageItem {
     
     public CharSequence getCachedFormattedMessage() {
         return mCachedFormattedMessage;
+    }
+    
+    public void setOnPduLoaded(PduLoadedCallback pduLoadedCallback) {
+        mPduLoadedCallback = pduLoadedCallback;
+    }
+
+    public interface PduLoadedCallback {
+        /**
+         * Called when this item's pdu and slideshow are finished loading.
+         *
+         * @param messageItem the MessageItem that finished loading.
+         */
+        void onPduLoaded(MessageItem messageItem);
     }
 }
