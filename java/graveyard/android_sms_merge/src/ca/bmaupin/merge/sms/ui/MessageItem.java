@@ -143,6 +143,18 @@ public class MessageItem {
     public void setOnPduLoaded(PduLoadedCallback pduLoadedCallback) {
         mPduLoadedCallback = pduLoadedCallback;
     }
+    
+    public void cancelPduLoading() {
+/* TODO MMS    	
+        if (mItemLoadedFuture != null && !mItemLoadedFuture.isDone()) {
+            if (Log.isLoggable(LogTag.APP, Log.DEBUG)) {
+                Log.v(TAG, "cancelPduLoading for: " + this);
+            }
+            mItemLoadedFuture.cancel(mMessageUri);
+            mItemLoadedFuture = null;
+        }
+*/
+    }
 
     public interface PduLoadedCallback {
         /**
