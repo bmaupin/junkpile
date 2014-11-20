@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.provider.ContactsContract.Profile;
 import android.provider.Telephony.Sms;
 import android.telephony.TelephonyManager;
@@ -45,6 +46,7 @@ public class MessageListItem extends LinearLayout {
 	private ImageView mImageView;
 	private ImageButton mSlideShowButton;
 	private TextView mBodyTextView;
+	private Handler mHandler;
 	private MessageItem mMessageItem;
     private String mDefaultCountryIso;
     private QuickContactBadge mAvatar;
@@ -117,6 +119,11 @@ public class MessageListItem extends LinearLayout {
         }
 */
     }
+    
+    public void setMsgListItemHandler(Handler handler) {
+        mHandler = handler;
+    }
+
     
     private void updateAvatarView(String addr, boolean isSelf) {
         Drawable avatarDrawable;
