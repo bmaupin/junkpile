@@ -8,6 +8,7 @@ package ca.bmaupin.merge.sms.ui;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.android.mms.ContentType;
 import com.google.android.mms.pdu.PduHeaders;
 
 import android.content.Context;
@@ -40,7 +41,9 @@ public class MessageListItem extends LinearLayout {
 	private static final String TAG = "MessageListItem";
 	private static final boolean DEBUG = false;
 	
+	private View mMmsView;
 	private ImageView mImageView;
+	private ImageButton mSlideShowButton;
 	private TextView mBodyTextView;
 	private MessageItem mMessageItem;
     private String mDefaultCountryIso;
@@ -107,10 +110,12 @@ public class MessageListItem extends LinearLayout {
             // Because #drawPlaybackButton sets the tag to mMessageItem
             mSlideShowButton.setTag(null);
         }
+/* TODO MMS        
         // leave the presenter in case it's needed when rebound to a different MessageItem.
         if (mPresenter != null) {
             mPresenter.cancelBackgroundLoading();
         }
+*/
     }
     
     private void updateAvatarView(String addr, boolean isSelf) {
@@ -140,7 +145,8 @@ public class MessageListItem extends LinearLayout {
         // displaying it by the Presenter.
         mBodyTextView.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
 
-        boolean haveLoadedPdu = mMessageItem.isSms() || mMessageItem.mSlideshow != null;
+// TODO MMS
+        boolean haveLoadedPdu = mMessageItem.isSms();// || mMessageItem.mSlideshow != null;
         // Here we're avoiding reseting the avatar to the empty avatar when we're rebinding
         // to the same item. This happens when there's a DB change which causes the message item
         // cache in the MessageListAdapter to get cleared. When an mms MessageItem is newly
@@ -171,7 +177,7 @@ public class MessageListItem extends LinearLayout {
         if (!sameItem || haveLoadedPdu) {
             mBodyTextView.setText(formattedMessage);
         }
-
+/* TODO MMS
         // Debugging code to put the URI of the image attachment in the body of the list item.
         if (DEBUG) {
             String debugText = null;
@@ -189,17 +195,11 @@ public class MessageListItem extends LinearLayout {
             }
             mBodyTextView.setText(mPosition + ": " + debugText);
         }
-
-        // If we're in the process of sending a message (i.e. pending), then we show a "SENDING..."
-        // string in place of the timestamp.
-        if (!sameItem || haveLoadedPdu) {
-            mDateView.setText(buildTimestampLine(mMessageItem.isSending() ?
-                    mContext.getResources().getString(R.string.sending_message) :
-                        mMessageItem.mTimestamp));
-        }
+*/ 
         if (mMessageItem.isSms()) {
             showMmsView(false);
             mMessageItem.setOnPduLoaded(null);
+/*
         } else {
             if (DEBUG) {
                 Log.v(TAG, "bindCommonMessage for item: " + mPosition + " " +
@@ -248,8 +248,8 @@ public class MessageListItem extends LinearLayout {
                 }
                 mPresenter.present(mImageLoadedCallback);
             }
+*/
         }
-        drawRightStatusIndicator(mMessageItem);
 
         requestLayout();
     }
@@ -266,6 +266,7 @@ public class MessageListItem extends LinearLayout {
                 mMmsView = findViewById(R.id.mms_view);
             }
         }
+/* TODO MMS
         if (mMmsView != null) {
             if (mImageView == null) {
                 mImageView = (ImageView) findViewById(R.id.image_view);
@@ -276,6 +277,7 @@ public class MessageListItem extends LinearLayout {
             mMmsView.setVisibility(visible ? View.VISIBLE : View.GONE);
             mImageView.setVisibility(visible ? View.VISIBLE : View.GONE);
         }
+*/
     }
     
     ForegroundColorSpan mColorSpan = null;  // set in ctor
@@ -287,7 +289,7 @@ public class MessageListItem extends LinearLayout {
 
         boolean hasSubject = !TextUtils.isEmpty(subject);
         if (hasSubject) {
-            buf.append(mContext.getResources().getString(R.string.inline_subject, subject));
+// TODO MMS            buf.append(mContext.getResources().getString(R.string.inline_subject, subject));
         }
 
         if (!TextUtils.isEmpty(body)) {
