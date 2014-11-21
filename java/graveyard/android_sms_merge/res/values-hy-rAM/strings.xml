@@ -4,4 +4,7 @@
   <string name="low_memory" product="default" msgid="3475999286680000541">"Հեռախոսի պահոցը լիքն է: Ջնջեք մի քանի ֆայլեր` տարածություն ազատելու համար:"</string>
   <string name="messagelist_sender_self" msgid="3579016854116401602">"Ինձ"</string>
   <string name="no_conversations" msgid="6773767655149258445">"Հաղորդագրություններ չկան:"</string>
+  <plurals name="recipient_count">
+    <item quantity="other" msgid="7338580381574463136">"<xliff:g id="NUMBER">%1$s</xliff:g> մարդ"</item>
+  </plurals>
 </resources>

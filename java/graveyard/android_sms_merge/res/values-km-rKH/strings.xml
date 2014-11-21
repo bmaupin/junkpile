@@ -4,4 +4,7 @@
   <string name="low_memory" product="default" msgid="3475999286680000541">"ឧបករណ៍​ផ្ទុក​ទូរស័ព្ទ​ពេញ! លុប​ឯកសារ​មួយ​ចំនួន​ដើម្បី​បង្កើន​ទំហំ។"</string>
   <string name="messagelist_sender_self" msgid="3579016854116401602">"ខ្ញុំ"</string>
   <string name="no_conversations" msgid="6773767655149258445">"គ្មាន​ការសន្ទនា​។"</string>
+  <plurals name="recipient_count">
+    <item quantity="other" msgid="7338580381574463136">"មនុស្ស <xliff:g id="NUMBER">%1$s</xliff:g> នាក់"</item>
+  </plurals>
 </resources>

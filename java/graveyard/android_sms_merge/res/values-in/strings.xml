@@ -7,4 +7,7 @@
   <string name="messagelist_sender_self" msgid="3579016854116401602">"Saya"</string>
   <string name="no_conversations" msgid="6773767655149258445">"Tidak ada percakapan."</string>
   <string name="no_subject_view" msgid="7795086723069563537">"(Tanpa perihal)"</string>
+  <plurals name="recipient_count">
+    <item quantity="other" msgid="7338580381574463136">"<xliff:g id="NUMBER">%1$s</xliff:g> orang"</item>
+  </plurals>
 </resources>

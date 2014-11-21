@@ -7,4 +7,7 @@
   <string name="messagelist_sender_self" msgid="3579016854116401602">"Я"</string>
   <string name="no_conversations" msgid="6773767655149258445">"Няма размоў."</string>
   <string name="no_subject_view" msgid="7795086723069563537">"(Без тэмы)"</string>
+  <plurals name="recipient_count">
+    <item quantity="other" msgid="7338580381574463136">"Людзей: <xliff:g id="NUMBER">%1$s</xliff:g>"</item>
+  </plurals>
 </resources>

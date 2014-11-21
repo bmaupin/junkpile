@@ -4,4 +4,7 @@
   <string name="low_memory" product="default" msgid="3475999286680000541">"ພື້ນທີ່ໃນໂທລະສັບເຕັມແລ້ວ. ກະລຸນາລຶບບາງໄຟລ໌ອອກເພື່ອເພີ່ມພື້ນທີ່ຫວ່າງ."</string>
   <string name="messagelist_sender_self" msgid="3579016854116401602">"ຂ້ອຍ"</string>
   <string name="no_conversations" msgid="6773767655149258445">"ບໍ່ມີບົດສົນທະນາ."</string>
+  <plurals name="recipient_count">
+    <item quantity="other" msgid="7338580381574463136">"<xliff:g id="NUMBER">%1$s</xliff:g> ຄົນ"</item>
+  </plurals>
 </resources>
