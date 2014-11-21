@@ -16,10 +16,14 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SqliteWrapper;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
+import android.text.TextUtils;
 import android.util.Log;
 import static ca.bmaupin.merge.sms.ui.MessageListAdapter.PROJECTION;
 import ca.bmaupin.merge.sms.LogTag;
+import ca.bmaupin.merge.sms.MmsApp;
 import ca.bmaupin.merge.sms.R;
+import ca.bmaupin.merge.sms.data.ContactList;
 import ca.bmaupin.merge.sms.data.Conversation;
 import ca.bmaupin.merge.sms.data.Conversation.ConversationQueryHandler;
 
@@ -37,6 +41,8 @@ public class ComposeMessageActivity extends Activity {
     private MessageListView mMsgListView;        // ListView for messages in this conversation
     public MessageListAdapter mMsgListAdapter;  // and its corresponding ListAdapter
 	
+    private String mDebugRecipients;
+    
     @SuppressWarnings("unused")
     public static void log(String logMsg) {
         Thread current = Thread.currentThread();
@@ -46,6 +52,35 @@ public class ComposeMessageActivity extends Activity {
         // Prepend current thread ID and name of calling method to the message.
         logMsg = "[" + tid + "] [" + methodName + "] " + logMsg;
         Log.d(TAG, logMsg);
+    }
+    
+    private void updateTitle(ContactList list) {
+        String title = null;
+        String subTitle = null;
+        int cnt = list.size();
+        switch (cnt) {
+            case 1: {
+                title = list.get(0).getName();      // get name returns the number if there's no
+                                                    // name available.
+                String number = list.get(0).getNumber();
+                if (!title.equals(number)) {
+                    subTitle = PhoneNumberUtils.formatNumber(number, number,
+                            MmsApp.getApplication().getCurrentCountryIso());
+                }
+                break;
+            }
+            default: {
+                // Handle multiple recipients
+                title = list.formatNames(", ");
+                subTitle = getResources().getQuantityString(R.plurals.recipient_count, cnt, cnt);
+                break;
+            }
+        }
+        mDebugRecipients = list.serialize();
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setTitle(title);
+        actionBar.setSubtitle(subTitle);
     }
     
     @Override
@@ -65,6 +100,31 @@ public class ComposeMessageActivity extends Activity {
 
 // TODO
 //        initialize(savedInstanceState, 0);
+    }
+    
+    public void initialize(Bundle savedInstanceState, long originalThreadId) {
+        // Read parameters or previously saved state of this activity. This will load a new
+        // mConversation
+        initActivityState(savedInstanceState);
+
+        // Set up the message history ListAdapter
+        initMessageList();
+
+        updateSendButtonState();
+
+        if (Log.isLoggable(LogTag.APP, Log.VERBOSE)) {
+            log("update title, mConversation=" + mConversation.toString());
+        }
+
+        updateTitle(mConversation.getRecipients());
+
+        if (isForwardedMessage && isRecipientsEditorVisible()) {
+            // The user is forwarding the message to someone. Put the focus on the
+            // recipient editor rather than in the message editor.
+            mRecipientsEditor.requestFocus();
+        }
+
+        mMsgListAdapter.setIsGroupConversation(mConversation.getRecipients().size() > 1);
     }
 	
     //==========================================================
