@@ -2,4 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" xmlns:android="http://schemas.android.com/apk/res/android">
   <string name="messagelist_sender_self" msgid="3579016854116401602">"Ինձ"</string>
   <string name="no_conversations" msgid="6773767655149258445">"Չկան զրույցներ:"</string>
+  <plurals name="recipient_count">
+    <item quantity="other" msgid="7338580381574463136">"<xliff:g id="NUMBER">%1$s</xliff:g> մարդ"</item>
+  </plurals>
 </resources>

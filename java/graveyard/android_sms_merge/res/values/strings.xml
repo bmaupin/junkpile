@@ -10,4 +10,8 @@
   <string name="messagelist_sender_self">Me</string>
   <string name="no_conversations">No conversations.</string>
   <string name="no_subject_view">(No subject)</string>
+  <plurals name="recipient_count">
+    <!-- Case of 0 or 2 or more results. -->
+    <item quantity="other"><xliff:g id="number" example="15">%1$s</xliff:g> people</item>
+  </plurals>
 </resources>
