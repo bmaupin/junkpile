@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import android.content.AsyncQueryHandler;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
@@ -24,6 +25,7 @@ import ca.bmaupin.merge.sms.R;
 public class Conversation {
     private static final String TAG = "Mms/conv";
 	private static final boolean DEBUG = false;
+    private static final boolean DELETEDEBUG = false;
 	
     public static final Uri sAllThreadsUri =
             Threads.CONTENT_URI.buildUpon().appendQueryParameter("simple", "true").build();
@@ -55,6 +57,8 @@ public class Conversation {
     private boolean mHasAttachment;     // True if any message has an attachment.
 	
     private static boolean sLoadingThreads;
+    private static boolean sDeletingThreads;
+    private static Object sDeletingThreadsLock = new Object();
     
     public Conversation(Context context, Cursor cursor, boolean allowQuery) {
         if (DEBUG) {
@@ -96,6 +100,17 @@ public class Conversation {
         return conv;
     }
     
+    /**
+     * Returns a content:// URI referring to this conversation,
+     * or null if it does not exist on disk yet.
+     */
+    public synchronized Uri getUri() {
+        if (mThreadId <= 0)
+            return null;
+
+        return ContentUris.withAppendedId(Threads.CONTENT_URI, mThreadId);
+    }
+
     /**
      * Return the Uri for all messages in the given thread ID.
      * @deprecated
@@ -189,6 +204,42 @@ public class Conversation {
 
         handler.startQuery(token, null, sAllThreadsUri,
                 ALL_THREADS_PROJECTION, selection, null, Conversations.DEFAULT_SORT_ORDER);
+    }
+    
+    public static class ConversationQueryHandler extends AsyncQueryHandler {
+        private int mDeleteToken;
+
+        public ConversationQueryHandler(ContentResolver cr) {
+            super(cr);
+        }
+
+        public void setDeleteToken(int token) {
+            mDeleteToken = token;
+        }
+
+        /**
+         * Always call this super method from your overridden onDeleteComplete function.
+         */
+        @Override
+        protected void onDeleteComplete(int token, Object cookie, int result) {
+            if (token == mDeleteToken) {
+                // Test code
+//                try {
+//                    Thread.sleep(10000);
+//                } catch (InterruptedException e) {
+//                }
+
+                // release lock
+                synchronized(sDeletingThreadsLock) {
+                    sDeletingThreads = false;
+                    if (DELETEDEBUG) {
+                        Log.v(TAG, "Conversation onDeleteComplete sDeletingThreads: " +
+                                        sDeletingThreads);
+                    }
+                    sDeletingThreadsLock.notifyAll();
+                }
+            }
+        }
     }
     
     /**

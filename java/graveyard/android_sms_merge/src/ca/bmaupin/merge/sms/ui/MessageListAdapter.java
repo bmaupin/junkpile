@@ -17,6 +17,7 @@ import android.provider.Telephony.Mms;
 import android.provider.Telephony.MmsSms;
 import android.provider.Telephony.MmsSms.PendingMessages;
 import android.provider.Telephony.Sms;
+import android.provider.Telephony.Sms.Conversations;
 import android.provider.Telephony.TextBasedSmsColumns;
 import android.support.v4.util.LruCache;
 import android.util.Log;
@@ -26,7 +27,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
-
 import ca.bmaupin.merge.sms.R;
 
 /**
@@ -34,6 +34,37 @@ import ca.bmaupin.merge.sms.R;
  */
 public class MessageListAdapter extends CursorAdapter {
 	private static final String TAG = "MessageListAdapter";
+	
+    static final String[] PROJECTION = new String[] {
+        // TODO: should move this symbol into com.android.mms.telephony.Telephony.
+        MmsSms.TYPE_DISCRIMINATOR_COLUMN,
+        BaseColumns._ID,
+        Conversations.THREAD_ID,
+        // For SMS
+        Sms.ADDRESS,
+        Sms.BODY,
+        Sms.DATE,
+        Sms.DATE_SENT,
+        Sms.READ,
+        Sms.TYPE,
+        Sms.STATUS,
+        Sms.LOCKED,
+        Sms.ERROR_CODE,
+        // For MMS
+        Mms.SUBJECT,
+        Mms.SUBJECT_CHARSET,
+        Mms.DATE,
+        Mms.DATE_SENT,
+        Mms.READ,
+        Mms.MESSAGE_TYPE,
+        Mms.MESSAGE_BOX,
+        Mms.DELIVERY_REPORT,
+        Mms.READ_REPORT,
+        PendingMessages.ERROR_TYPE,
+        Mms.LOCKED,
+        Mms.STATUS,
+        Mms.TEXT_ONLY
+    };
 	
     // The indexes of the default columns which must be consistent
     // with above PROJECTION.
