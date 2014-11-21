@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from optparse import OptionParser
 import os
 import os.path
 import sys
@@ -13,21 +14,20 @@ dest_path = os.path.expanduser('~/workspace/git/android-sms-merge/android_sms_me
 
 def main():
     def xml_element_compare(element1, element2):
+        if element1.tag != element2.tag:
+            return False
         for key in element1.attrib:
             if element1.attrib[key] != element2.attrib[key]:
                 return False
         return True
-
-    if len(sys.argv) < 2:
-        sys.exit('Error: STRING is required')
-    
-    string_to_copy = sys.argv[1]
+        
+    parse_options()
     
     source_res_path = os.path.join(source_path, 'res')
     dest_res_path = os.path.join(dest_path, 'res')
     
     # This allows lxml to output much nicer looking output
-    parser = lxml.etree.XMLParser(remove_blank_text=True)
+    xml_parser = lxml.etree.XMLParser(remove_blank_text=True)
     
     for values_folder in os.listdir(source_res_path):
         source_values_path = os.path.join(source_res_path, values_folder)
@@ -37,10 +37,10 @@ def main():
             source_strings_path = os.path.join(source_values_path, 'strings.xml') 
             
             if (os.path.isfile(source_strings_path)):
-                source_root = lxml.etree.parse(source_strings_path, parser)
+                source_root = lxml.etree.parse(source_strings_path, xml_parser)
                 
-                for source_element in source_root.iter('string'):
-                    if source_element.get('name') == string_to_copy:
+                for source_element in source_root.iter(parser.values.tag_to_copy):
+                    if source_element.get('name') == name_to_copy:
                         dest_values_path = os.path.join(dest_res_path, values_folder)
                         # Create the destination values folder if necessary
                         if not os.path.exists(dest_values_path):
@@ -56,10 +56,10 @@ def main():
                             dest_root = lxml.etree.ElementTree(root)
                         
                         else:
-                            dest_root = lxml.etree.parse(dest_strings_path, parser)
+                            dest_root = lxml.etree.parse(dest_strings_path, xml_parser)
                             
                             # Iterate over the elements in the destination file
-                            it = dest_root.iter('string')
+                            it = dest_root.iter()
                             while True:
                                 try:
                                     dest_element = it.next()
@@ -70,7 +70,7 @@ def main():
                                         break
                                     
                                     # Insert the new string alphabetically
-                                    if string_to_copy < dest_element.get('name'):
+                                    if name_to_copy < dest_element.get('name'):
                                         dest_element.addprevious(source_element)
                                         # Don't process any more destination elements
                                         break
@@ -87,6 +87,33 @@ def main():
                             pretty_print=True,
                             xml_declaration=True,
                             )
+                            
+                            
+def parse_options():
+    ''' set up and parse command line arguments
+    '''
+    
+    global name_to_copy, parser
+    
+    # define a custom usage message
+    usage = ('usage: %prog ELEMENT_NAME [options]\n'
+    'Where ELEMENT_NAME = name of the element to copy')
+    
+    parser = OptionParser(usage=usage)
+    
+    # command line options to parse
+    parser.add_option('-e', '--element', dest='tag_to_copy',
+            default='string', help='Element tag to copy')
+    
+    # parse the arguments
+    (options, args) = parser.parse_args()
+    
+    if len(args) < 1:
+        parser.print_help()
+        sys.exit('Error: ELEMENT_NAME is required')
+    name_to_copy = args[0]
+    
+
 
 
 if __name__ == '__main__':
