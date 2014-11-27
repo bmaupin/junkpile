@@ -1,4 +1,4 @@
-Wrapper script for [msgconvert.pl](http://www.matijs.net/software/msgconv/)
+Wrapper script for [msgconvert.pl](http://www.matijs.net/software/msgconv/) that also fixes cp1252 (Windows latin) encoding issues
 
 To install:
 
