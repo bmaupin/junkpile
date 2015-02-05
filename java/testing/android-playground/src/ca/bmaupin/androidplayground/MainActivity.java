@@ -7,12 +7,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ToggleButton;
 
 public class MainActivity extends ActionBarActivity {
+	private static final String TAG = "MainActivity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,21 +52,17 @@ public class MainActivity extends ActionBarActivity {
 	        try {
 	            dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
 	        } catch (NoSuchMethodException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
+	            Log.e(TAG, Log.getStackTraceString(e)); 
 	        }
 	        dataMtd.setAccessible(true);
 	        try {
 	            dataMtd.invoke(dataManager, true);
 	        } catch (IllegalArgumentException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
+	        	Log.e(TAG, Log.getStackTraceString(e));
 	        } catch (IllegalAccessException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
+	        	Log.e(TAG, Log.getStackTraceString(e));
 	        } catch (InvocationTargetException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
+	        	Log.e(TAG, Log.getStackTraceString(e));
 	        }
 	    } else {
 	        // Disable data
