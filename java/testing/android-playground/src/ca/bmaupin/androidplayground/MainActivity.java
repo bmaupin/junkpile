@@ -15,11 +15,22 @@ import android.widget.ToggleButton;
 
 public class MainActivity extends ActionBarActivity {
 	private static final String TAG = "MainActivity";
+	private ConnectivityManager dataManager;
+	private Method dataMtd;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+        dataManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        dataMtd = null;
+        try {
+            dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
+        } catch (NoSuchMethodException e) {
+            Log.e(TAG, Log.getStackTraceString(e)); 
+        }
+        dataMtd.setAccessible(true);
 	}
 
 	@Override
@@ -46,15 +57,6 @@ public class MainActivity extends ActionBarActivity {
 	    boolean on = ((ToggleButton) view).isChecked();
 	    
 	    if (on) {
-	        ConnectivityManager dataManager;
-	        dataManager  = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-	        Method dataMtd = null;
-	        try {
-	            dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
-	        } catch (NoSuchMethodException e) {
-	            Log.e(TAG, Log.getStackTraceString(e)); 
-	        }
-	        dataMtd.setAccessible(true);
 	        try {
 	            dataMtd.invoke(dataManager, true);
 	        } catch (IllegalArgumentException e) {
@@ -65,7 +67,15 @@ public class MainActivity extends ActionBarActivity {
 	        	Log.e(TAG, Log.getStackTraceString(e));
 	        }
 	    } else {
-	        // Disable data
+	        try {
+	            dataMtd.invoke(dataManager, false);
+	        } catch (IllegalArgumentException e) {
+	        	Log.e(TAG, Log.getStackTraceString(e));
+	        } catch (IllegalAccessException e) {
+	        	Log.e(TAG, Log.getStackTraceString(e));
+	        } catch (InvocationTargetException e) {
+	        	Log.e(TAG, Log.getStackTraceString(e));
+	        }
 	    }
 	}
 }
