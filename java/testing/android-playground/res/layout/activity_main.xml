@@ -8,9 +8,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ca.bmaupin.androidplayground.MainActivity" >
 
-    <TextView
+    <ToggleButton 
+        android:id="@+id/togglebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:textOn="Data on"
+        android:textOff="Data off"
+        android:onClick="onToggleClicked" />
 
 </RelativeLayout>
