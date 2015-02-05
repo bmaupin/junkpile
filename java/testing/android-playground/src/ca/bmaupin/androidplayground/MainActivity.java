@@ -15,22 +15,11 @@ import android.widget.ToggleButton;
 
 public class MainActivity extends ActionBarActivity {
 	private static final String TAG = "MainActivity";
-	private ConnectivityManager dataManager;
-	private Method dataMtd;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-        dataManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        dataMtd = null;
-        try {
-            dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
-        } catch (NoSuchMethodException e) {
-            Log.e(TAG, Log.getStackTraceString(e)); 
-        }
-        dataMtd.setAccessible(true);
 	}
 
 	@Override
@@ -57,25 +46,34 @@ public class MainActivity extends ActionBarActivity {
 	    boolean on = ((ToggleButton) view).isChecked();
 	    
 	    if (on) {
-	        try {
-	            dataMtd.invoke(dataManager, true);
-	        } catch (IllegalArgumentException e) {
-	        	Log.e(TAG, Log.getStackTraceString(e));
-	        } catch (IllegalAccessException e) {
-	        	Log.e(TAG, Log.getStackTraceString(e));
-	        } catch (InvocationTargetException e) {
-	        	Log.e(TAG, Log.getStackTraceString(e));
-	        }
+	    	setMobileDataEnabled(this, true);
 	    } else {
-	        try {
-	            dataMtd.invoke(dataManager, false);
-	        } catch (IllegalArgumentException e) {
-	        	Log.e(TAG, Log.getStackTraceString(e));
-	        } catch (IllegalAccessException e) {
-	        	Log.e(TAG, Log.getStackTraceString(e));
-	        } catch (InvocationTargetException e) {
-	        	Log.e(TAG, Log.getStackTraceString(e));
-	        }
+	    	setMobileDataEnabled(this, false);
+	    }
+	}
+	
+	private void setMobileDataEnabled(Context context, boolean enabled) {
+	    ConnectivityManager dataManager;
+	    dataManager  = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+	    Method dataMtd = null;
+	    try {
+	        dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
+	    } catch (NoSuchMethodException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	    dataMtd.setAccessible(true);
+	    try {
+	        dataMtd.invoke(dataManager, enabled);
+	    } catch (IllegalArgumentException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    } catch (IllegalAccessException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    } catch (InvocationTargetException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
 	    }
 	}
 }
