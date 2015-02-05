@@ -59,21 +59,13 @@ public class MainActivity extends ActionBarActivity {
 	    try {
 	        dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
 	    } catch (NoSuchMethodException e) {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
+	    	Log.e(TAG, "setMobileDataEnabled() - get setMobileDataEnabled() method", e);
 	    }
 	    dataMtd.setAccessible(true);
 	    try {
 	        dataMtd.invoke(dataManager, enabled);
-	    } catch (IllegalArgumentException e) {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-	    } catch (IllegalAccessException e) {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-	    } catch (InvocationTargetException e) {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
+	    } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
+	    	Log.e(TAG, "setMobileDataEnabled() - dataMtd.invoke()", e);
 	    }
 	}
 }
