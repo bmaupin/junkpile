@@ -16,12 +16,16 @@ Building (Ubuntu 14.04)
 3. Install dependencies for go-qml
 
         sudo apt-get -y install libqt5opengl5-dev libqt5qml-quickcontrols qtbase5-private-dev qtdeclarative5-dev qtdeclarative5-private-dev qtdeclarative5-qtquick2-plugin
-        
-4. Install go-qml
 
-        go get gopkg.in/qml.v1
-        
-5. Download and build this
+4. Download this project and dependencies
 
-        git clone https://github.com/bmaupin/go-experiment.git $GOPATH/src/github.com/bmaupin/go-experiment
-        go build github.com/bmaupin/go-experiment
+        go get -u github.com/bmaupin/go-experiment
+
+5. Build it
+
+        cd $GOPATH/src/github.com/bmaupin/go-experiment/
+        go build
+        
+6. Run it
+
+        ./go-experiment
