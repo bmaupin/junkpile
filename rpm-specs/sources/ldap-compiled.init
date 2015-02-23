@@ -187,7 +187,7 @@ function start() {
 	# handles quoted arguments.
 	wrapper=`mktemp ${TMP:-/tmp}/start-slapd.XXXXXX`
 	harg="ldap:///"
-	if grep -q ^TLS /etc/openldap/slapd.conf || test x$SLAPD_LDAPS = xyes ; then
+	if grep -q ^TLS /usr/local/etc/openldap/slapd.conf || test x$SLAPD_LDAPS = xyes ; then
 	    harg="$harg ldaps:///"
 	fi
 	if test x$SLAPD_LDAPI = xyes ; then
@@ -217,7 +217,7 @@ function stop() {
 	killproc ${slapd}
 	RETVAL=$?
 	echo
-	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/ldap /var/run/openldap/slapd.args
+	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/ldap /var/run/openldap-compiled/slapd.args
 	return $RETVAL
 }
 
