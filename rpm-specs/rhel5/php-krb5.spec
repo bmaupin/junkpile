@@ -73,9 +73,9 @@ rm -rf %{buildroot}
 %{_prefix}
 
 %changelog
-* Fri May 10 2013 Bryan Maupin <bmaupincode@gmail.com> 20121214-2
+* Fri May 10 2013 Bryan Maupin <bmaupin@users.noreply.github.com> 20121214-2
 - Add krb5.ini
 
-* Thu May  9 2013 Bryan Maupin <bmaupincode@gmail.com> 20121214-1
+* Thu May  9 2013 Bryan Maupin <bmaupin@users.noreply.github.com> 20121214-1
 - Initial package
 
