@@ -42,4 +42,4 @@ Building OpenLDAP and dependencies (RHEL 6)
 
 6. Start the OpenLDAP service
 
-				sudo service ldap-compiled start
+        sudo service ldap-compiled start
