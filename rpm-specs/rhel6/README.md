@@ -11,10 +11,10 @@ Building OpenLDAP and dependencies (RHEL 6)
 
         cd ~/rpm/SOURCES
         wget http://download.oracle.com/berkeley-db/db-4.7.25.tar.gz
-        wget http://www.openssl.org/source/openssl-1.0.1e.tar.gz
-        wget http://www.h5l.org/dist/src/heimdal-1.5.2.tar.gz
-        wget ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/cyrus-sasl-2.1.23.tar.gz
-        wget ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-2.4.38.tgz
+        wget http://www.openssl.org/source/openssl-X.X.X.tar.gz
+        wget http://www.h5l.org/dist/src/heimdal-X.X.X.tar.gz
+        wget ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/cyrus-sasl-X.X.X.tar.gz
+        wget ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-X.X.X.tgz
 
 3. Download our sources and specs
 
@@ -31,13 +31,13 @@ Building OpenLDAP and dependencies (RHEL 6)
         rpmbuild -ba ~/rpm/SPECS/db4-compiled.spec
         sudo rpm -iv ~/rpm/RPMS/x86_64/db4-compiled-4.7.25-3.el6.x86_64.rpm
         rpmbuild -ba ~/rpm/SPECS/openssl-compiled.spec
-        sudo rpm -iv ~/rpm/RPMS/x86_64/openssl-compiled-1.0.1e-1.el6.x86_64.rpm
+        sudo rpm -iv ~/rpm/RPMS/x86_64/openssl-compiled-X.X.X-X.el6.x86_64.rpm
         rpmbuild -ba ~/rpm/SPECS/heimdal-compiled.spec
-        sudo rpm -iv ~/rpm/RPMS/x86_64/heimdal-compiled-1.5.2-2.el6.x86_64.rpm
+        sudo rpm -iv ~/rpm/RPMS/x86_64/heimdal-compiled-X.X.X-X.el6.x86_64.rpm
         rpmbuild -ba ~/rpm/SPECS/cyrus-sasl-compiled.spec
-        sudo rpm -iv ~/rpm/RPMS/x86_64/cyrus-sasl-compiled-2.1.23-4.el6.x86_64.rpm
+        sudo rpm -iv ~/rpm/RPMS/x86_64/cyrus-sasl-compiled-X.X.X-X.el6.x86_64.rpm
         rpmbuild -ba ~/rpm/SPECS/openldap-compiled.spec
-        sudo rpm -iv ~/rpm/RPMS/x86_64/openldap-compiled-2.4.38-1.el6.x86_64.rpm
+        sudo rpm -iv ~/rpm/RPMS/x86_64/openldap-compiled-X.X.X-X.el6.x86_64.rpm
 
 
 6. Start the OpenLDAP service
