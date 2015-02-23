@@ -1,0 +1,33 @@
+# For some reason lib/opt/version-script.map is missing
+# the file can be found here: https://github.com/heimdal/heimdal/raw/e3044663df2cfcafd5bf4e2ea6f2a1ba1503d8ea/lib/otp/version-script.map
+
+diff -Naur heimdal-1.4-orig/lib/otp/version-script.map heimdal-1.4/lib/otp/version-script.map
+--- heimdal-1.4-orig/lib/otp/version-script.map 1970-01-01 00:00:00.000000000 +0000
++++ heimdal-1.4/lib/otp/version-script.map  2010-12-07 14:50:41.000000000 +0000
+@@ -0,0 +1,26 @@
++HEIMDAL_OTP_1.0 {
++   global:
++       otp_challenge;
++       otp_checksum;
++       otp_db_close;
++       otp_db_open;
++       otp_delete;
++       otp_error;
++       otp_find_alg;       
++       otp_get;
++       otp_parse;
++       otp_parse_altdict;
++       otp_parse_hex;
++       otp_parse_stddict;
++       otp_print_hex;
++       otp_print_hex_extended;
++       otp_print_stddict;
++       otp_print_stddict_extended;
++       otp_put;
++       otp_simple_get;
++       otp_verify_user;
++       otp_verify_user_1;
++   local:
++       *;
++};
++
