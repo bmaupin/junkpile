@@ -1,6 +1,3 @@
-Wordpress MU has the terrible practice of storing the hostname of the server in the database, so if the site is moved to a different server, it will break.
-
-
 **Prerequisites:**
 - Python MySQLdb module
   - To install on RHEL/CentOS 6:
