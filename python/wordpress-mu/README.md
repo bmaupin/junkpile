@@ -1,10 +1,18 @@
 **Prerequisites:**
 - Python MySQLdb module
+  - To install on Ubuntu/Debian:
+
+            sudo apt-get -y install python-mysqldb
+
   - To install on RHEL/CentOS 6:
   
             sudo yum install -y MySQL-python
   
 - [Python phpserialize module](https://pypi.python.org/pypi/phpserialize)
+  - To install on Ubuntu/Debian:
+
+            sudo apt-get -y install python-pip
+            
   - To install on RHEL/CentOS 6:
 
             sudo rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
