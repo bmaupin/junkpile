@@ -12,6 +12,7 @@
   - To install on Ubuntu/Debian:
 
             sudo apt-get -y install python-pip
+            sudo pip install phpserialize
             
   - To install on RHEL/CentOS 6:
 
