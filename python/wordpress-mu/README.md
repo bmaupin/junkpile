@@ -1,3 +1,5 @@
+Various scripts for administering [WordPress MU](https://mu.wordpress.org/)
+
 **Prerequisites:**
 - Python MySQLdb module
   - To install on Ubuntu/Debian:
