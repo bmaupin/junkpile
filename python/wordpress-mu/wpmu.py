@@ -7,6 +7,7 @@
 #    modified to handle serialized PHP objects
 
 import getpass
+import posixpath
 import sys
 
 import MySQLdb
@@ -264,6 +265,30 @@ def serialized_table_replace(table, value_column, id_column, old_value, new_valu
 #        sys.exit(1)  # exit the script
         
     return records_changed
+
+
+def get_site_path():
+    try:
+        cursor.execute('SELECT domain, path FROM wp_site')
+        
+        # get the resultset as a tuple
+        result = cursor.fetchall()
+        
+        record = result[0]
+        
+        return result[0][0] + result[0][1]
+
+    except MySQLdb.Error, error:  # if there's an error
+        sys.stderr.write('ERROR:\t%s\n' % (error))
+        sys.exit( 1 )
+        
+
+def fix_joined_url(joined_url):
+    fixed_url = posixpath.normpath(joined_url)
+    fixed_url = fixed_url.replace('http:/', 'http://')
+    fixed_url = fixed_url.replace('https:/', 'https://')
+    
+    return fixed_url
 
 
 cursor = db_connect()
