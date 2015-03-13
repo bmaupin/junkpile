@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Wordpress MU Prune
-Plugin URI: https://github.com/bmaupin/graveyard/php/wpmu-prune
+Plugin URI: https://github.com/bmaupin/graveyard/tree/master/php/wpmu-prune
 Description: Cleans up Wordpress MU by removing inactive and untouched (never 
 used) blogs and associated tables and records.
 Version: 2.9.0
@@ -45,7 +45,6 @@ if ( !empty( $_GET['action'] )) {
 		$wp_the_query =& new WP_Query();
 		$wp_query     =& $wp_the_query;
 		$wp_rewrite   =& new WP_Rewrite();
-	//  $wp           =& new WP();
 		wpp_process_inactive_blogs();
 	} elseif ( 'process_orphaned_folders' == $_GET['action'] ) {
 		wpp_process_orphaned_folders();

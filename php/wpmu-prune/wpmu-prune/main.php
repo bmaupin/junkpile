@@ -48,15 +48,8 @@ function wpp_main() {
         $min_inactive = $inactive_value * $wpp_time_units[$inactive_unit];
         
         $total_blogs = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->blogs} WHERE site_id = '{$wpdb->siteid}' ");
-//      $inactive_blogs = array(
-//          '26',
-//          '28'
-//      );
         $inactive_blogs = wpp_get_inactive_blogs( $min_inactive );
         $_SESSION['inactive_blogs'] = $inactive_blogs;
-//      foreach ( $inactive_blogs as $blog_id => $values ) {
-//          echo "blog: {$blog_id}, name: {$values['name']}<br />";
-//      }
         
         if ( 'on' == $archive_blog && '' == $delete_blog ) {
             $action = 'archive';
@@ -145,10 +138,6 @@ function wpp_main() {
         </form>
         <?php 
 
-//      wpp_export_blog( '19', 'bobloblawslawblog' );
-//      wpp_export_blog( '21', 'steveholt' );
-//      wpp_export_blog( $blog_id, $blog_name );
-
     } elseif ( $_POST['process_inactive_blogs_confirmed'] ) {
         $unchecked_blogs = $_SESSION['unchecked_inactive_blogs'];
         // get all of the blogs that were checked in the previous screen
@@ -202,9 +191,6 @@ function wpp_main() {
         $untouched_blogs = wpp_get_untouched_blogs( $max_difference, $min_age );
         $_SESSION['untouched_blogs'] = $untouched_blogs;
         
-//      foreach ($untouched_blogs as $blog => $time_difference) {
-//          printf('blog: %1$s, time difference: %2$d<br />', $blog, $time_difference);
-//      }
         echo "<p>You wish to delete all blogs unmodified after ".$difference_value." ".$difference_unit." of registration and older than ".$age_value." ".$age_unit.".</p>";
         echo "<p><strong>This action will delete ".count($untouched_blogs)." (out of a total of ".$total_blogs.") blogs.</strong></p>";
         echo "</div>";
@@ -822,31 +808,6 @@ function wpp_main() {
         </form>
         
         </div>
-        
-        <!-- This option is disabled because LDAP isn't being cleaned of users and so we don't have any to remove
-        <form method="post" class="wpp_form">
-            <div class="wpp_choice" onclick="showHideElement('delete_inactive_users_options')"><strong>Delete inactive users</strong></div>
-            <div id="delete_inactive_users_options" style="display: none;">
-                <p><i>Delete users who are inactive and/or aren't in LDAP.</i><br /></p>
-                <p>Delete users:<br />
-                <input type="checkbox" name="delete_inactive_users" /> who are inactive for <input type="text" name="inactive_value" />
-                <select name="inactive_unit">
-                <?php foreach ( $wpp_time_units as $time_unit => $time_value ) {
-                    if ( 'years' == $time_unit ) {  // Sets the default value
-                        echo '<option value = "'.$time_unit.'" selected="selected">'.$time_unit.'</option>';
-                    } else {
-                        echo '<option value = "'.$time_unit.'">'.$time_unit.'</option>';
-                    } 
-                } ?>
-                </select><br />
-                <input type="checkbox" name="delete_ldap_users" /> who are no longer in LDAP (but were at one time)<br />
-                    
-                <div class="submit">
-                    <input type="submit" name="delete_users" value="<?php _e('Go'); ?> &raquo;" />
-                </div>
-            </div>
-        </form>
-        -->
         <?php
     }
 }
