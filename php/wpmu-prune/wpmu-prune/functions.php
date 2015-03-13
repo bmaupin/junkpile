@@ -131,7 +131,6 @@ function wpp_get_untouched_blogs( $max_difference, $min_age ) {
 		if ( $blog_age > $min_age ) {
 			// Get blogs unmodified after a certain amount of time after registration
 			if ( $time_difference < $max_difference ) {
-//				$untouched_blogs[ $blog[ 'blog_id' ]] = $time_difference;
 				$untouched_blogs[] = array(
 					'id' => $blog_id,
 					// For output
@@ -184,7 +183,6 @@ function wpp_get_inactive_blogs( $min_inactive ) {
 		$blog_name = substr($blog_path, 1, -1);
 		$inactive_time = $current_time - $last_updated;
 		if ( $inactive_time > $min_inactive ) {
-//			$inactive_blogs[ $blog_id ] = array(
 			$inactive_blogs[] = array(
 				'id' => $blog_id,
 				// For debugging
@@ -760,22 +758,12 @@ function wpp_process_inactive_blogs() {
 	if ( !function_exists( 'wp_get_current_user' ) ) {
 		require_once( ABSPATH . 'wp-includes/pluggable.php' );
 	}
-/*	if ( !function_exists( 'wp_revoke_user' ) ) {
-		require_once( ABSPATH . 'wp-admin/includes/user.php' );
-	}
-*/	
 	if ( !function_exists( 'wpmu_delete_blog' ) ) {
 		require_once( ABSPATH . 'wp-admin/includes/mu.php' );
 	}
     if ( !function_exists( 'create_initial_taxonomies' ) ) {
         require_once( ABSPATH . 'wp-includes/taxonomy.php' );
     }
-/*	if ( file_exists( ABSPATH . 'wp-content/plugins/podpress/podpress.php' )) {
-		if ( !class_exists( 'podPress_class' ) ) {
-			require_once(ABSPATH . 'wp-content/plugins/podpress/podpress.php');
-		}
-	}
-*/	
     
 	// Get session variables
 	$archive_blog = $_SESSION['archive_blog'];
@@ -791,18 +779,13 @@ function wpp_process_inactive_blogs() {
 		$blog_id = $current_blog['id'];
 		$blog_name = $current_blog['name'];
 		
-//		error_log( strftime( "%Y%m%d-%H%M%S" ) . ": " . __FILE__ . "(" . __LINE__ . "): DEBUG: blog_id: [{$blog_id}]  blog_name: [{$blog_name}]" );
 	} while( '0' == $blog_id or '1' == $blog_id );  // Don't delete the main site blog
 
 	$blog_attachment_dir = constant( "ABSPATH" ) . "wp-content/blogs.dir/{$blog_id}";
 	$blog_archive_dir = constant( "ABSPATH" ) . "wp-content/blogs.dir/archived/". date('Y-m-d') . "/" . $blog_name;
-
-	// Debugging: don't delete anything, just sleep for a couple of seconds
-//	sleep(2);	
+	
 	if ( 'on' == $archive_blog ) {
-//		echo 'before wpp_export_blog<br />';
 		wpp_export_blog( $blog_id, $blog_name );
-//		echo 'after wpp_export_blog<br />';
 		if ( file_exists( $blog_attachment_dir ) ) {
 			wpp_recursive_copy( $blog_attachment_dir, $blog_archive_dir );
 		}
@@ -814,16 +797,7 @@ function wpp_process_inactive_blogs() {
 		@rmdir($blog_attachment_dir);
 	}
 
-//	if( 0 == $_SESSION['processed_blogs'] ) {
-//		$_SESSION['processed_blogs'] = 1;
-//	} else {
-		$_SESSION['items_processed'] ++;
-//	}
-
-//	Debugging; process a certain amount of blogs at a time
-//	if( $_SESSION['items_processed'] >= 50) {
-//		wpp_process_done( 'processing', 'blogs' );
-//	}
+	$_SESSION['items_processed'] ++;
 
 	$time_left = wpp_process_time();
 
@@ -838,10 +812,7 @@ function wpp_delete_untouched_blogs() {
 	if ( !function_exists( 'wp_get_current_user' ) ) {
 		require_once( ABSPATH . 'wp-includes/pluggable.php' );
 	}
-/*	if ( !function_exists( 'wp_revoke_user' ) ) {
-		require_once( ABSPATH . 'wp-admin/includes/user.php' );
-	}
-*/	if ( !function_exists( 'wpmu_delete_blog' ) ) {
+    if ( !function_exists( 'wpmu_delete_blog' ) ) {
 		require_once( ABSPATH . 'wp-admin/includes/mu.php' );
 	}
 
@@ -854,9 +825,6 @@ function wpp_delete_untouched_blogs() {
 		$blog_id = $current_blog['id'];
 		$blog_name = $current_blog['name'];
 	} while( '0' == $blog_id or '1' == $blog_id );  // Don't delete the main site blog
-
-	// Debugging: don't delete anything, just sleep for a couple of seconds
-//	sleep(2);
 	
 	wpmu_delete_blog( $blog_id, true );
 	// The wpmu_delete_blog function doesn't completely remove blog attachment directories
@@ -864,11 +832,6 @@ function wpp_delete_untouched_blogs() {
 	@rmdir(constant( "ABSPATH" ) . "wp-content/blogs.dir/{$blog_id}");
 
 	$_SESSION['items_processed'] ++;
-
-	// Debugging; process a certain amount of blogs at a time
-//	if( $_SESSION['items_processed'] >= 10) {
-//		wpp_process_done( 'deleting', 'blogs' );
-//	}
 
 	$time_left = wpp_process_time();
 
@@ -931,8 +894,6 @@ function wpp_delete_orphaned_tables() {
 	//	get the next one.  We don't want to delete main site blog tables.
 	} while( preg_match( "/^{$wpdb->base_prefix}[01]_/", $current_table ) );
 
-	// Debugging: don't delete anything, just sleep for a couple of seconds
-//	sleep(2);
 	// Let the plugins know the table's being dropped in case they need to do anything
 	$current_table = apply_filters( 'wpmu_drop_tables', $current_table );
 	// Delete the table from the database
@@ -958,8 +919,6 @@ function wpp_clean_wp_blog_versions() {
 		$blog_id = array_shift( $_SESSION['blog_versions_to_delete'] );
 	} while( '0' == $blog_id or '1' == $blog_id );  // Don't delete records for the main site blog
 	
-	// Debugging: don't delete anything, just sleep for a couple of seconds
-//	sleep(2);
 	$wpdb->query( "DELETE FROM {$wpdb->base_prefix}blog_versions WHERE blog_id = '{$blog_id}'" );
 	
 	$_SESSION['items_processed'] ++;
@@ -985,9 +944,6 @@ function wpp_clean_wp_groupmeta() {
 		unset( $_SESSION['groupmeta_to_delete'][$key] );
 		
 	} while( '0' == $key or '1' == $key );  // Don't delete the main site blog group metadata
-	
-	// Debugging: don't delete anything, just sleep for a couple of seconds
-//	sleep(2);
 
 	if ( $value == 'blog' ) {
 		// delete group metadata for deleted blogs
