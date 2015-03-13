@@ -1,12 +1,12 @@
 **Note:** This plugin is quite ancient and was last working with WordPress MU 2.9.2. Use at your own risk.
 
-![screenshot-1](wpmu-prune/screenshot-1.png)
+![screenshot-1](screenshot-1.png)
 
-![screenshot-2](wpmu-prune/screenshot-2.png)
+![screenshot-2](screenshot-2.png)
 
-![screenshot-3](wpmu-prune/screenshot-3.png)
+![screenshot-3](screenshot-3.png)
 
-![screenshot-4](wpmu-prune/screenshot-4.png)
+![screenshot-4](screenshot-4.png)
 
 **Wishlist**
 - Rewrite for Wordpress Multisite (instead of Wordpress MU)
