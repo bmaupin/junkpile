@@ -1,0 +1,41 @@
+/* Format the main plugin page choices */
+div.wpp_choice {
+	background: #e5f3ff;
+	border: 1px solid #ababab;
+	border-radius: 4px;
+	color: #464646;
+	cursor: default;
+	display: inline;
+	font-size: 1.2em;
+	padding: 5px;
+	-khtml-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+div.wpp_choice:hover {
+	background: #d4f3ff;
+	border-color:#666666;
+	color:#000000;
+}
+
+/* Some spacing between main plugin page choices */
+form.wpp_form {
+	padding-top: 25px;
+}
+
+/* Allow us to make the "No" submit button bold */
+input.wpp_boldbutton {
+	font-weight: bold;
+}
+
+/* Override Wordpress 2.7 ugly default input[type=submit] buttons 
+   defined in colors-fresh.css */
+.updated input[type=submit] {
+	border-radius: 4px;
+	border-style: solid;
+	border-width: 1px;
+	-khtml-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
