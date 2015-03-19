@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 # coding=utf8
 
-from enum import Enum
 import os
 import os.path
 import re
 import sys
+
+if sys.version_info < (3, 4):
+    sys.exit('ERROR: Requires Python 3.4')
+
+from enum import Enum
 
 def main():
     VideoTypes = Enum('VideoType', 'emission film miniserie')
