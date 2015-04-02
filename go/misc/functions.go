@@ -1,9 +1,9 @@
 // Misc functions
 
-func copyFile(sourceFilePath string, destFilePath string) {
+func copyFile(sourceFilePath string, destFilePath string) error {
     r, err := os.Open(sourceFilePath)
     if err != nil {
-        log.Fatalf("os.Open error: %s", err)
+        return err
     }
     defer func() {
         if err := r.Close(); err != nil {
@@ -13,7 +13,7 @@ func copyFile(sourceFilePath string, destFilePath string) {
     
     w, err := os.Create(destFilePath)
     if err != nil {
-        log.Fatalf("os.Create error: %s", err)
+        return err
     }
     defer func() {
         if err := w.Close(); err != nil {
@@ -23,14 +23,16 @@ func copyFile(sourceFilePath string, destFilePath string) {
     
     _, err = io.Copy(w, r)
     if err != nil {
-        log.Fatalf("io.Copy error: %s", err)
+        return err
     }
+    
+    return nil
 }
 
-func zipExistingFile(sourceFilePath string, destFilePath string) {
+func zipExistingFile(sourceFilePath string, destFilePath string) error {
     r, err := os.Open(sourceFilePath)
     if err != nil {
-        log.Fatalf("os.Open error: %s", err)
+        return err
     }
     defer func() {
         if err := r.Close(); err != nil {
@@ -40,7 +42,7 @@ func zipExistingFile(sourceFilePath string, destFilePath string) {
     
     zipFile, err := os.Create(destFilePath)
     if err != nil {
-        log.Fatalf("os.Create error: %s", err)
+        return err
     }
     defer func() {
         if err := zipFile.Close(); err != nil {
@@ -57,19 +59,21 @@ func zipExistingFile(sourceFilePath string, destFilePath string) {
     
     w, err := z.Create(sourceFilePath)
     if err != nil {
-        log.Fatalf("zip.Writer.Create error: %s", err)
+        return err
     }
     
     _, err = io.Copy(w, r)
     if err != nil {
-        log.Fatalf("io.Copy error: %s", err)
+        return err
     }
+    
+    return nil
 }
 
-func zipFolder(sourceFolderPath string, destFilePath string) {
+func zipFolder(sourceFolderPath string, destFilePath string) error {
     zipFile, err := os.Create(destFilePath)
     if err != nil {
-        log.Fatalf("os.Create error: %s", err)
+        return err
     }
     defer func() {
         if err := zipFile.Close(); err != nil {
@@ -125,6 +129,8 @@ func zipFolder(sourceFolderPath string, destFilePath string) {
     
     err = filepath.Walk(sourceFolderPath, addFileToZip)
     if err != nil {
-        log.Fatalf("filepath.Walk error: %s", err)
+        return err
     }
+    
+    return nil
 }
