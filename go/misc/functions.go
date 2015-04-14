@@ -29,7 +29,7 @@ func copyFile(sourceFilePath string, destFilePath string) error {
     return nil
 }
 
-func zipExistingFile(sourceFilePath string, destFilePath string) error {
+func zipFile(sourceFilePath string, destFilePath string) error {
     r, err := os.Open(sourceFilePath)
     if err != nil {
         return err
@@ -40,17 +40,17 @@ func zipExistingFile(sourceFilePath string, destFilePath string) error {
         }
     }()
     
-    zipFile, err := os.Create(destFilePath)
+    f, err := os.Create(destFilePath)
     if err != nil {
         return err
     }
     defer func() {
-        if err := zipFile.Close(); err != nil {
+        if err := f.Close(); err != nil {
             log.Fatalf("os.File.Close error: %s", err)
         }
     }()
     
-    z := zip.NewWriter(zipFile)
+    z := zip.NewWriter(f)
     defer func() {
         if err := z.Close(); err != nil {
             log.Fatalf("zip.Writer.Close error: %s", err)
@@ -71,17 +71,17 @@ func zipExistingFile(sourceFilePath string, destFilePath string) error {
 }
 
 func zipFolder(sourceFolderPath string, destFilePath string) error {
-    zipFile, err := os.Create(destFilePath)
+    f, err := os.Create(destFilePath)
     if err != nil {
         return err
     }
     defer func() {
-        if err := zipFile.Close(); err != nil {
+        if err := f.Close(); err != nil {
             log.Fatalf("os.File.Close error: %s", err)
         }
     }()
     
-    z := zip.NewWriter(zipFile)
+    z := zip.NewWriter(f)
     defer func() {
         if err := z.Close(); err != nil {
             log.Fatalf("zip.Writer.Close error: %s", err)
