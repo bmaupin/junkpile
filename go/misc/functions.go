@@ -2,7 +2,15 @@
 
 package functions
 
-func copyFile(sourceFilePath string, destFilePath string) error {
+import (
+	"archive/zip"
+	"io"
+	"log"
+	"os"
+	"path/filepath"
+)
+
+func CopyFile(sourceFilePath string, destFilePath string) error {
 	r, err := os.Open(sourceFilePath)
 	if err != nil {
 		return err
@@ -31,7 +39,7 @@ func copyFile(sourceFilePath string, destFilePath string) error {
 	return nil
 }
 
-func zipFile(sourceFilePath string, destFilePath string) error {
+func ZipFile(sourceFilePath string, destFilePath string) error {
 	r, err := os.Open(sourceFilePath)
 	if err != nil {
 		return err
@@ -72,7 +80,7 @@ func zipFile(sourceFilePath string, destFilePath string) error {
 	return nil
 }
 
-func zipFolder(sourceFolderPath string, destFilePath string) error {
+func ZipFolder(sourceFolderPath string, destFilePath string) error {
 	f, err := os.Create(destFilePath)
 	if err != nil {
 		return err
