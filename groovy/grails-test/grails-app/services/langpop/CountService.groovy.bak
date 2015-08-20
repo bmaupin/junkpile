@@ -1,0 +1,63 @@
+package langpop
+
+import grails.transaction.Transactional
+
+@Transactional
+class CountService {
+
+    def serviceMethod() {
+        println "whatwha"
+    }
+
+    /*
+    // My arbitrary list of non-languages
+    def nonLangs = [
+        'AppleScript',
+        'ASP',
+        'Arduino',
+        'Batchfile',
+        'CMake',
+        'CSS',
+        'Cuda',
+        'HTML',
+        'HTTP',
+        'JSON',
+        'Makefile',
+        'Max',
+        'Nginx',
+        'Processing',
+        'Puppet',
+        'QML',
+        'SQL',
+        'TeX',
+        'VimL',
+        'XML',
+        'XSLT',
+    ]
+*/
+    
+    // public static Map<Lang, Integer> getTopLangCounts(Integer number) {
+    def fwoof(Integer number) {
+        def langCounts = [:]
+        Lang.list().each { lang ->
+            // Don't include non-languages
+//            if (!(lang.name in nonLangs)) {
+                def langTotalCount = 0
+
+                // Add up the counts for each site for each language
+                Site.list().each { site ->
+                    def query = Count.where {
+                        lang.id == lang.id && site.id == site.id && date == new Date().clearTime()
+                    }
+                    if (query.count() == 1) {
+                        langTotalCount += query.get().count
+                    }
+                }
+
+                langCounts[lang] = langTotalCount
+//            }
+        }
+
+        return langCounts.sort{ -it.value }.take(number)
+    }
+}
