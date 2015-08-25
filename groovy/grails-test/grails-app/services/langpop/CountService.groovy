@@ -1,10 +1,8 @@
 package langpop
 
-import grails.transaction.NotTransactional
-import grails.transaction.Transactional
-
-@Transactional
 class CountService {
+    static transactional = false
+
     // My arbitrary list of non-languages
     def nonLangs = [
         'AppleScript',
@@ -30,7 +28,6 @@ class CountService {
         'XSLT',
     ]
 
-    @NotTransactional
     Map<Lang, Integer> getTopLangCounts(int number) {
         def langCounts = [:]
         Lang.list().each { lang ->
