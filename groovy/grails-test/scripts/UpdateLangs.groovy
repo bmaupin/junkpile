@@ -128,16 +128,22 @@ Map<Lang, Integer> getStackoverflowTagCount(ArrayList<Lang> langs) {
 Integer getGithubRepoCount(String langName) {
     // Spaces must be replaced with dashes for github language names
     def conn = new URL(GITHUB_BASE_URL + java.net.URLEncoder.encode(langName.replaceAll(' ', '-'))).openConnection()
-    if (conn.getResponseCode() == 403) {
-        log.warn 'Exceeded Github API request limit'
-        sleep(GITHUB_API_TIME_LIMIT)
-        return getGithubRepoCount(langName)
-    } else if (conn.getResponseCode() == 422) {
-        log.warn "Github API request empty for lang: ${langName}"
-        return 0
-    } else {
-        return new groovy.json.JsonSlurper().parseText(conn.getURL().getText())['total_count']
+    int totalCount
+
+    try {
+        totalCount = new groovy.json.JsonSlurper().parseText(conn.getURL().getText())['total_count']
+    } catch (java.io.IOException e) {
+        if (conn.getResponseCode() == 403) {
+            log.warn 'Exceeded Github API request limit'
+            sleep(GITHUB_API_TIME_LIMIT)
+            return getGithubRepoCount(langName)
+        } else if (conn.getResponseCode() == 422) {
+            log.warn "Github API request empty for lang: ${langName}"
+            return 0
+        }        
     }
+
+    return totalCount
 }
 
 
