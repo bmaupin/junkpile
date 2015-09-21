@@ -19,7 +19,20 @@ class CountController {
         respond Site.list()
     }
 
+    def countService
+
     def testpage2() {
+        render "<h3>Overall:</h3>"
+        render "<ol>"
+        countService.getTopLangCounts(20).each { lang, count ->
+            render "<li>${lang.name}: ${count}</li>"
+        }
+        render "</ol>"
+
+//        render {
+
+//        }
+
 //        respond Count.getTopLangs(20)
 
         //respond Site.list()
@@ -43,9 +56,10 @@ class CountController {
         }
 */
 
-        
+
+/*        
 def site = Site.findByName('stackoverflow')
-def lang = Lang.findByName('Go')
+def lang = Lang.findByName('C')
 
 render "${lang.name}: ${lang.altNames}"
 /*

@@ -1,5 +1,15 @@
 import langpop.*
 
+def conn = new URL('http://localhost:8999').getText()
+
+/*
+def countService = ctx.countService
+
+countService.getTopLangCounts(20).each { lang, count ->
+    println "${lang.name}: ${count}"
+}
+*/
+
 /*
 site = Site.findByName('stackoverflow')
 lang = Lang.findByName('Go')
@@ -20,7 +30,7 @@ Count.list().each { c ->
 }
 */
 
-
+/*
 def site = Site.findByName('stackoverflow')
 def lang = Lang.findByName('Go')
 def query = Count.where {
@@ -78,3 +88,5 @@ println "<h4>Top languages overall:</h4>"
 langCounts.sort{ -it.value }.take(20).each{ lang, count ->
     println "${lang.name}: ${count}<br>"
 }
+*/
+
