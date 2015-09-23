@@ -56,7 +56,8 @@ def main():
     print('Exif DateTimeDigitized is {}'.format(exif_dtd))
     print('Exif DateTimeOriginal is {}'.format(exif_dto))
 
-    if infile_mtime != exif_dt or infile_mtime != exif_dtd or infile_mtime != exif_dto:
+    if exif_dt == EXIF_UNSET or exif_dtd == EXIF_UNSET or exif_dto == EXIF_UNSET or \
+            infile_mtime < exif_dt or infile_mtime < exif_dtd or infile_mtime < exif_dto:
         response = input('Mismatch between mtime and Exif data. Update Exif (y/n)? ')
         
         if response.lower() == 'y':
