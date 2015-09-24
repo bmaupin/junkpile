@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import datetime
+import optparse
 import os
 import os.path
 import struct
@@ -28,11 +29,7 @@ def main():
     EXIF_TIME_FORMAT = '%Y:%m:%d %H:%M:%S'
     EXIF_UNSET = 'unset'
     
-    if len(sys.argv) < 2:
-        sys.stderr.write('ERROR: Must provide a file to remove EXIF tags from\n')
-        sys.exit('Usage: {} FILE'.format(sys.argv[0]))
-    
-    infile_name = sys.argv[1]
+    infile_name = parse_options()
 
     # Get the mtime of the file
     infile_mtime_original = os.path.getmtime(infile_name)
@@ -70,7 +67,8 @@ def main():
     print('Exif DateTimeDigitized is {}'.format(exif_dtd))
     print('Exif DateTimeOriginal is {}'.format(exif_dto))
 
-    if exif_dt == EXIF_UNSET or exif_dtd == EXIF_UNSET or exif_dto == EXIF_UNSET or \
+    if parser.values.force == True or \
+            exif_dt == EXIF_UNSET or exif_dtd == EXIF_UNSET or exif_dto == EXIF_UNSET or \
             infile_mtime < exif_dt or infile_mtime < exif_dtd or infile_mtime < exif_dto:
         response = input('Mismatch between mtime and Exif data.\n'
             '\t1. Set Exif timestamp to mtime\n'
@@ -85,6 +83,31 @@ def main():
             user_dt = datetime.datetime.strptime(user_dt_string, '%Y-%m-%d %H:%M:%S')
             
             set_exif_timestamp(user_dt)
+
+
+def parse_options():
+    ''' set up and parse command line arguments
+    '''
+
+    global parser
+    
+    usage = ('Usage: %prog FILE [options]\n'
+            'Where FILE = full path to jpeg file to remove EXIF tags from')
+    
+    parser = optparse.OptionParser(usage=usage)
+    
+    # command line options to parse
+    parser.add_option('--force', action='store_true', dest='force',
+            default=False, help='Force update of Exif timestamp')
+    
+    # parse the arguments
+    (options, args) = parser.parse_args()
+
+    if len(args) < 1:
+        parser.print_help()
+        sys.exit('Error: FILE is required')
+    
+    return args[0]
 
 
 if __name__ == '__main__':
