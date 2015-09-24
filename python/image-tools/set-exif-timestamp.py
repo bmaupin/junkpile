@@ -11,6 +11,20 @@ import piexif
 
 
 def main():
+    def set_exif_timestamp(dt_to_set):
+        print('Setting Exif timestamp to {}'.format(dt_to_set))
+        
+        exif_data[exif_dt_location][piexif.ImageIFD.DateTime] = dt_to_set.strftime(EXIF_TIME_FORMAT).encode('utf8')
+        exif_data['Exif'][piexif.ExifIFD.DateTimeDigitized] = dt_to_set.strftime(EXIF_TIME_FORMAT).encode('utf8')
+        exif_data['Exif'][piexif.ExifIFD.DateTimeOriginal] = dt_to_set.strftime(EXIF_TIME_FORMAT).encode('utf8')
+        
+        # Write the changes to the file
+        piexif.insert(piexif.dump(exif_data), infile_name)
+
+        # Set the atime and mtime of the file back to their original values
+        os.utime(infile_name, (infile_mtime_original, infile_mtime_original))
+    
+    
     EXIF_TIME_FORMAT = '%Y:%m:%d %H:%M:%S'
     EXIF_UNSET = 'unset'
     
@@ -58,18 +72,19 @@ def main():
 
     if exif_dt == EXIF_UNSET or exif_dtd == EXIF_UNSET or exif_dto == EXIF_UNSET or \
             infile_mtime < exif_dt or infile_mtime < exif_dtd or infile_mtime < exif_dto:
-        response = input('Mismatch between mtime and Exif data. Update Exif (y/n)? ')
+        response = input('Mismatch between mtime and Exif data.\n'
+            '\t1. Set Exif timestamp to mtime\n'
+            '\t2. Specify date/time\n'
+            '\tChoice? ')
         
-        if response.lower() == 'y':
-            exif_data[exif_dt_location][piexif.ImageIFD.DateTime] = infile_mtime.strftime(EXIF_TIME_FORMAT).encode('utf8')
-            exif_data['Exif'][piexif.ExifIFD.DateTimeDigitized] = infile_mtime.strftime(EXIF_TIME_FORMAT).encode('utf8')
-            exif_data['Exif'][piexif.ExifIFD.DateTimeOriginal] = infile_mtime.strftime(EXIF_TIME_FORMAT).encode('utf8')
+        if response == '1':
+            set_exif_timestamp(infile_mtime)
             
-            # Write the changes to the file
-            piexif.insert(piexif.dump(exif_data), infile_name)
-
-            # Set the atime and mtime of the file back to their original values
-            os.utime(infile_name, (infile_mtime_original, infile_mtime_original))
+        elif response == '2':
+            user_dt_string = input('Please enter a timestamp (YYYY-mm-dd HH:MM:SS): ')
+            user_dt = datetime.datetime.strptime(user_dt_string, '%Y-%m-%d %H:%M:%S')
+            
+            set_exif_timestamp(user_dt)
 
 
 if __name__ == '__main__':
