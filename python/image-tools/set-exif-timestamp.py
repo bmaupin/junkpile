@@ -70,10 +70,12 @@ def main():
     if parser.values.force == True or \
             exif_dt == EXIF_UNSET or exif_dtd == EXIF_UNSET or exif_dto == EXIF_UNSET or \
             infile_mtime < exif_dt or infile_mtime < exif_dtd or infile_mtime < exif_dto:
-        response = input('Mismatch between mtime and Exif data.\n'
-            '\t1. Set Exif timestamp to mtime\n'
+        if parser.values.force == False:
+            print('Mismatch between mtime and Exif data.')
+        
+        response = input('\t1. Set Exif timestamp to mtime\n'
             '\t2. Specify date/time\n'
-            '\tChoice? ')
+            '\tChoice? (press Enter to do nothing) ')
         
         if response == '1':
             set_exif_timestamp(infile_mtime)
