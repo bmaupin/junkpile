@@ -73,9 +73,18 @@ def main():
         if parser.values.force == False:
             print('Mismatch between mtime and Exif data.')
         
-        response = input('\t1. Set Exif timestamp to mtime\n'
-            '\t2. Specify date/time\n'
-            '\tChoice? (press Enter to do nothing) ')
+        print('\t1. Set Exif timestamp to mtime\n'
+            '\t2. Specify date/time')
+        
+        # If any of the Exif timestamps aren't set
+        for exif_timestamp in [exif_dt, exif_dtd, exif_dto]:
+            if exif_timestamp != EXIF_UNSET:
+                break
+
+        if exif_timestamp != EXIF_UNSET:
+            print('\t3. Set all Exif timestamps to {}'.format(exif_timestamp))
+            
+        response = input('\tChoice? (press Enter to do nothing) ')
         
         if response == '1':
             set_exif_timestamp(infile_mtime)
@@ -85,6 +94,10 @@ def main():
             user_dt = datetime.datetime.strptime(user_dt_string, '%Y-%m-%d %H:%M:%S')
             
             set_exif_timestamp(user_dt)
+        
+        elif response == '3':
+            if exif_timestamp != EXIF_UNSET:
+                set_exif_timestamp(exif_timestamp)
 
 
 def parse_options():
