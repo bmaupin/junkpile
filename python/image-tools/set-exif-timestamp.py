@@ -63,6 +63,11 @@ def main():
     if piexif.ExifIFD.DateTimeOriginal in exif_data['Exif']:
         exif_dto = datetime.datetime.strptime(exif_data['Exif'][piexif.ExifIFD.DateTimeOriginal].decode('utf8'), EXIF_TIME_FORMAT)
     
+    # If only the Exif DateTime isn't set, set it based on DateTimeOriginal
+    if exif_dt == EXIF_UNSET and exif_dtd != EXIF_UNSET and exif_dto != EXIF_UNSET and exif_dtd == exif_dto:
+        set_exif_timestamp(exif_dto)
+        exif_dt = exif_dto
+    
     print('Exif DateTime is {}'.format(exif_dt))
     print('Exif DateTimeDigitized is {}'.format(exif_dtd))
     print('Exif DateTimeOriginal is {}'.format(exif_dto))
