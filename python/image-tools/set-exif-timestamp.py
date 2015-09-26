@@ -50,16 +50,19 @@ def main():
     elif piexif.ImageIFD.DateTime in exif_data['1st']:
         exif_dt_location = '1st'
     
+    # DateTime is when the image was last changed
     exif_dt = EXIF_UNSET
     if exif_dt_location != None:
         exif_dt = datetime.datetime.strptime(exif_data[exif_dt_location][piexif.ImageIFD.DateTime].decode('utf8'), EXIF_TIME_FORMAT)
     else:
         exif_dt_location = '0th'
     
+    # DateTimeDigitized is when the image was stored digitally (may be different from DateTimeOriginal if image was scanned)
     exif_dtd = EXIF_UNSET
     if piexif.ExifIFD.DateTimeDigitized in exif_data['Exif']:
         exif_dtd = datetime.datetime.strptime(exif_data['Exif'][piexif.ExifIFD.DateTimeDigitized].decode('utf8'), EXIF_TIME_FORMAT)
     
+    # DateTimeOriginal is when the image was taken
     exif_dto = EXIF_UNSET
     if piexif.ExifIFD.DateTimeOriginal in exif_data['Exif']:
         exif_dto = datetime.datetime.strptime(exif_data['Exif'][piexif.ExifIFD.DateTimeOriginal].decode('utf8'), EXIF_TIME_FORMAT)
