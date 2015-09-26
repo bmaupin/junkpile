@@ -82,7 +82,7 @@ def main():
             '\t2. Specify date/time')
         
         # If any of the Exif timestamps aren't set
-        for exif_timestamp in [exif_dt, exif_dtd, exif_dto]:
+        for exif_timestamp in [exif_dto, exif_dt, exif_dtd]:
             if exif_timestamp != EXIF_UNSET:
                 break
 
