@@ -78,7 +78,8 @@ def main():
 
     # If all the Exif values are set and the only thing that differs with mtime is the hour, don't do anything
     if exif_dt != EXIF_UNSET and exif_dt == exif_dtd and exif_dtd == exif_dto and \
-        infile_mtime.year == exif_dt.year and infile_mtime.month == exif_dt.month and infile_mtime.day == exif_dt.day and \
+        infile_mtime.year == exif_dt.year and infile_mtime.month == exif_dt.month and \
+        math.fabs(infile_mtime.day - exif_dt.day) <= 1 and \
         infile_mtime.minute == exif_dt.minute and math.fabs(infile_mtime.second - exif_dt.second) <= 1:
             sys.exit()
 
