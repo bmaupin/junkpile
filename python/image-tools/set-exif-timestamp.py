@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import datetime
-import math
 import optparse
 import os
 import os.path
@@ -76,11 +75,9 @@ def main():
     print('Exif DateTimeDigitized is {}'.format(exif_dtd))
     print('Exif DateTimeOriginal is {}'.format(exif_dto))
 
-    # If all the Exif values are set and the only thing that differs with mtime is the hour, don't do anything
-    if exif_dt != EXIF_UNSET and exif_dt == exif_dtd and exif_dtd == exif_dto and \
-        infile_mtime.year == exif_dt.year and infile_mtime.month == exif_dt.month and \
-        math.fabs(infile_mtime.day - exif_dt.day) <= 1 and \
-        infile_mtime.minute == exif_dt.minute and math.fabs(infile_mtime.second - exif_dt.second) <= 1:
+    # If all the Exif values are the same and the mtime difference is within a day, don't do anything
+    if exif_dto != EXIF_UNSET and exif_dt == exif_dtd and exif_dtd == exif_dto and \
+        abs((infile_mtime - exif_dto).total_seconds()) < 86400:
             sys.exit()
 
     if parser.values.force == True or \
