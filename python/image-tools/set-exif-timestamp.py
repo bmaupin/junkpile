@@ -75,10 +75,11 @@ def main():
     print('Exif DateTimeDigitized is {}'.format(exif_dtd))
     print('Exif DateTimeOriginal is {}'.format(exif_dto))
 
-    # If all the Exif values are the same and the mtime difference is within a day, don't do anything
-    if exif_dto != EXIF_UNSET and exif_dt == exif_dtd and exif_dtd == exif_dto and \
-        abs((infile_mtime - exif_dto).total_seconds()) < 86400:
-            sys.exit()
+    if parser.values.force == False:
+        # If all the Exif values are the same and the mtime difference is within a day, don't do anything
+        if exif_dto != EXIF_UNSET and exif_dt == exif_dtd and exif_dtd == exif_dto and \
+            abs((infile_mtime - exif_dto).total_seconds()) < 86400:
+                sys.exit()
 
     if parser.values.force == True or \
             exif_dt == EXIF_UNSET or exif_dtd == EXIF_UNSET or exif_dto == EXIF_UNSET or \
