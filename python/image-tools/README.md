@@ -10,7 +10,7 @@
           python3 remove-all-exif-data.py /path/to/file.jpg
   - To run on a folder and its subfolders:
   
-          for file in /path/to/files/*.@(jpg|jpeg); do echo $file; python3 remove-all-exif-data.py "$file"; done
+          for file in /path/to/files/*.@([jJ][pP]*([eE])[gG]); do echo $file; python3 remove-all-exif-data.py "$file"; done
     
 - set-exif-timestamp.py
   - Set the EXIF timestamps of a jpeg image file
@@ -24,4 +24,4 @@
           python3 set-exif-timestamp.py /path/to/file.jpg
   - To run on a folder and its subfolders:
   
-          for file in /path/to/files/*.@(jpg|jpeg); do echo $file; python3 set-exif-timestamp.py "$file"; done
+          for file in /path/to/files/*.@([jJ][pP]*([eE])[gG]); do echo $file; python3 set-exif-timestamp.py "$file"; done
