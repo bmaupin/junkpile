@@ -52,19 +52,32 @@ def main():
     # DateTime is when the image was last changed
     exif_dt = EXIF_UNSET
     if exif_dt_location != None:
-        exif_dt = datetime.datetime.strptime(exif_data[exif_dt_location][piexif.ImageIFD.DateTime].decode('utf8'), EXIF_TIME_FORMAT)
+        # I've seen timestamp values that look like this: '    :  :     :  :  '
+        try:
+            exif_dt = datetime.datetime.strptime(exif_data[exif_dt_location][piexif.ImageIFD.DateTime].decode('utf8'), EXIF_TIME_FORMAT)
+        except ValueError as e:
+            sys.stderr.write('WARNING: Malformed DateTime\n')
+            sys.stderr.write('\tValueError: {}\n'.format(e))
     else:
         exif_dt_location = '0th'
     
     # DateTimeDigitized is when the image was stored digitally (may be different from DateTimeOriginal if image was scanned)
     exif_dtd = EXIF_UNSET
     if piexif.ExifIFD.DateTimeDigitized in exif_data['Exif']:
-        exif_dtd = datetime.datetime.strptime(exif_data['Exif'][piexif.ExifIFD.DateTimeDigitized].decode('utf8'), EXIF_TIME_FORMAT)
+        try:
+            exif_dtd = datetime.datetime.strptime(exif_data['Exif'][piexif.ExifIFD.DateTimeDigitized].decode('utf8'), EXIF_TIME_FORMAT)
+        except ValueError as e:
+            sys.stderr.write('WARNING: Malformed DateTimeDigitized\n')
+            sys.stderr.write('\tValueError: {}\n'.format(e))
     
     # DateTimeOriginal is when the image was taken
     exif_dto = EXIF_UNSET
     if piexif.ExifIFD.DateTimeOriginal in exif_data['Exif']:
-        exif_dto = datetime.datetime.strptime(exif_data['Exif'][piexif.ExifIFD.DateTimeOriginal].decode('utf8'), EXIF_TIME_FORMAT)
+        try:
+            exif_dto = datetime.datetime.strptime(exif_data['Exif'][piexif.ExifIFD.DateTimeOriginal].decode('utf8'), EXIF_TIME_FORMAT)
+        except ValueError as e:
+            sys.stderr.write('WARNING: Malformed DateTimeOriginal\n')
+            sys.stderr.write('\tValueError: {}\n'.format(e))
     
     # If only the Exif DateTime isn't set, set it based on DateTimeOriginal
     if exif_dt == EXIF_UNSET and exif_dtd != EXIF_UNSET and exif_dto != EXIF_UNSET and exif_dtd == exif_dto:
