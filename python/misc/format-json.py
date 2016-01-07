@@ -16,7 +16,8 @@ def main():
                     infile.read()
                 ),
                 sort_keys=True,
-                indent=4
+                indent=4,
+                ensure_ascii=False,
             )
         )
 
