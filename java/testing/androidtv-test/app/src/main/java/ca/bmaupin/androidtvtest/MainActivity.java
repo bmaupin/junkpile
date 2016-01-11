@@ -42,6 +42,18 @@ public class MainActivity extends Activity {
             }
         }
         tv4.setText("Current preferred mode: \n" + preferredMode);
+
+        // Set preferred refresh rate (Lollipop)
+        /*
+        params.preferredRefreshRate = 60;
+        getWindow().setAttributes(params);
+        */
+
+        // Set preferred mode (Marshmallow)
+        /*
+        params.preferredDisplayModeId = modes[0].getModeId();
+        getWindow().setAttributes(params);
+        */
     }
 
 }
