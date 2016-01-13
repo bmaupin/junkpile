@@ -45,12 +45,14 @@ public class MainActivity extends Activity {
 
         // Set preferred refresh rate (Lollipop)
         /*
+        params = getWindow().getAttributes();
         params.preferredRefreshRate = 60;
         getWindow().setAttributes(params);
         */
 
         // Set preferred mode (Marshmallow)
         /*
+        params = getWindow().getAttributes();
         params.preferredDisplayModeId = modes[0].getModeId();
         getWindow().setAttributes(params);
         */
