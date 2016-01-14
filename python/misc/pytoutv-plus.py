@@ -71,7 +71,7 @@ def write_data(data):
     
 
 def command_list():
-    print('Please wait...')
+    print('Please wait...\n')
     
     app = toutvcli.app.App(None)
     client = app._build_toutv_client(no_cache=False)
@@ -108,10 +108,6 @@ def command_list():
             data[DATA_LAST_RUN] = today
             data[DATA_EMISSIONS] = {}
         
-        # If this is the first run of the day
-    #        else:
-    #            pass
-        
         # Start with a fresh list of new emissions
         data[DATA_NEW_EMISSIONS] = []
         
@@ -137,6 +133,7 @@ def command_list():
             
             data[DATA_EMISSIONS][emission_id][DATA_LAST_SEEN] = today
             
+            # Basic sanity check if title of an emission has changed
             if repertoire_emissions[emission_id].Title != \
                     data[DATA_EMISSIONS][emission_id][DATA_TITLE]:
                 sys.stderr.write(
@@ -160,116 +157,21 @@ def command_list():
         
         write_data(data)
     
-    '''
-    # Make an initial pass to get max string length for formatting
-    max_title = 0
-    max_genre = 0
-    max_country = 0
-    #max_url = 0
-    
-    for emission_id in data[DATA_NEW_EMISSIONS]:
-        emission = repertoire_emissions[emission_id]
-        if emission.Country is None:
-            emission.Country = ''
-        if len(emission.Country) > max_country:
-            max_country = len(emission.Country)
-        if len(emission.Genre.Title) > max_genre:
-            max_genre = len(emission.Genre.Title)
-        #if len(emission.Title) > max_title:
-        #    max_title = len(emission.Title)
-        #if len(emission.get_url()) > max_url:
-        #    max_url = len(emission.get_url())
-    '''
-    
-    for emission_id in data[DATA_NEW_EMISSIONS]:
-        emission = repertoire_emissions[emission_id]
-        emission_string = ('{}\n\t{}\n\t{}'.format(
-            emission.Title,
-            emission.get_url(),
-            emission.Genre.Title,
-        ))
-        if emission.Country is not None:
-            emission_string += '\n\t{}'.format(emission.Country)
-        print(emission_string)
-    
-    # Get current shows
-    # If it's already been run today
-        # In the data, get the list of ids from new_last_run
-        # Show them
-    # Else
-        # If first run
-            # Build minimal data set
-    
-    
-        # Get the list of shows where last_run = last_seen
-        # Compare current to last_seen
-        # For all new shows
-            # Add to new_last_run
-            # Update new_count
-            # Print them
-        # For each show in current shows
-            # Update last_seen
-            # Update info (title, etc)
-            # If first_seen is blank, update it
-            # Check for duplicate names with different IDs
+    if len(data[DATA_NEW_EMISSIONS]) == 0:
+        print('No new emissions since last run')
+        
+    else:
+        for emission_id in data[DATA_NEW_EMISSIONS]:
+            emission = repertoire_emissions[emission_id]
+            emission_string = ('{}\n\t{}\n\t{}'.format(
+                emission.Title,
+                emission.get_url(),
+                emission.Genre.Title,
+            ))
+            if emission.Country is not None:
+                emission_string += '\n\t{}'.format(emission.Country)
+            print(emission_string)
 
 
 if __name__ == '__main__':
     main()
-
-
-'''
-client = toutv.client.Client(cache=toutv.cache.EmptyCache())
-
-
-app = toutvcli.app.App(['list'])
-
-args = app._argparser.parse_args(app._args)
-
-
-client = app._build_toutv_client(no_cache=False)
-
-
-
-
-app = toutvcli.app.App(None)
-cache = app._build_cache()
-client = toutv.client.Client(cache=cache)
-
-
-
-repertoire = client.get_page_repertoire()
-repertoire_emissions = repertoire.get_emissions()
-
-
-
-
-
-import toutvcli.app
-#app = toutvcli.app.App(['list'])
-#args = app._argparser.parse_args(app._args)
-app = toutvcli.app.App(None)
-client = app._build_toutv_client(no_cache=False)
-
-
-
-
-import toutv.client
-client = toutv.client.Client()
-
-
-
-
-import toutv
-import toutvcli.app
-MAX_TIMEOUTS = 10
-app = toutvcli.app.App(None)
-client = app._build_toutv_client(no_cache=False)
-for n in range(MAX_TIMEOUTS):
-    try:
-        repertoire = client.get_page_repertoire()
-        repertoire_emissions = repertoire.get_emissions()
-        break
-    except toutv.exceptions.RequestTimeout:
-        pass
-'''
