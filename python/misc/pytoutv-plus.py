@@ -27,6 +27,9 @@ DATA_TITLE = 'title'
 
 
 def main():
+    # Set the locale for improved sorting of non-ASCII characters
+    locale.setlocale(locale.LC_ALL, "")
+    
     args = parse_args()
     args.func(args)
 
@@ -35,8 +38,14 @@ def parse_args():
     p = argparse.ArgumentParser()
     sp = p.add_subparsers(dest='command', help='Commands help')
     
-    pl = sp.add_parser('list',
-                       help='List emissions or episodes of an emission')
+    pl = sp.add_parser(
+        'list', 
+        help='List new emissions or episodes since last run')
+    pl.add_argument(
+        '-a', 
+        '--all', 
+        action='store_true', 
+        help='List all emissions or episodes')
     pl.set_defaults(func=command_list)
     
     args = p.parse_args()
@@ -82,9 +91,12 @@ def write_data(data):
         data_file.write(
             json.dumps(data, sort_keys=True, indent=4, ensure_ascii=False)
         )
-    
+
 
 def command_list(args):
+    def title_sort_func(ekey):
+        return locale.strxfrm(repertoire_emissions[ekey].get_title())
+    
     print('Please wait...\n')
     
     app = toutvcli.app.App(None)
@@ -162,29 +174,39 @@ def command_list(args):
                     )
         
         # Sort the list of new emissions alphabetically
-        locale.setlocale(locale.LC_ALL, "")
-        def title_func(ekey):
-            return locale.strxfrm(repertoire_emissions[ekey].get_title())
-        data[DATA_NEW_EMISSIONS].sort(key=title_func)
+        data[DATA_NEW_EMISSIONS].sort(key=title_sort_func)
 
         data[DATA_LAST_RUN] = today
         
         write_data(data)
     
-    if len(data[DATA_NEW_EMISSIONS]) == 0:
-        print('No new emissions since last run')
+    # List all emissions
+    if args.all:
+        emissions_keys = list(repertoire_emissions.keys())
+        emissions_keys.sort(key=title_sort_func)
         
+        list_emissions(repertoire_emissions, emissions_keys)
+        
+    # List only new emissions
     else:
-        for emission_id in data[DATA_NEW_EMISSIONS]:
-            emission = repertoire_emissions[emission_id]
-            emission_string = ('{}\n\t{}\n\t{}'.format(
-                emission.Title,
-                emission.get_url(),
-                emission.Genre.Title,
-            ))
-            if emission.Country is not None:
-                emission_string += '\n\t{}'.format(emission.Country)
-            print(emission_string)
+        if len(data[DATA_NEW_EMISSIONS]) == 0:
+            print('No new emissions since last run')
+            
+        else:
+            list_emissions(repertoire_emissions, data[DATA_NEW_EMISSIONS])
+
+
+def list_emissions(all_emissions, emissions_to_list):
+    for emission_id in emissions_to_list:
+        emission = all_emissions[emission_id]
+        emission_string = ('{}\n\t{}\n\t{}'.format(
+            emission.Title,
+            emission.get_url(),
+            emission.Genre.Title,
+        ))
+        if emission.Country is not None:
+            emission_string += '\n\t{}'.format(emission.Country)
+        print(emission_string)
 
 
 if __name__ == '__main__':
