@@ -71,10 +71,10 @@ def write_data(data):
     
 
 def command_list():
+    print('Please wait...')
+    
     app = toutvcli.app.App(None)
     client = app._build_toutv_client(no_cache=False)
-
-    print('Please wait...')
 
     # The name of this exception was changed
     if hasattr(toutv.exceptions, 'RequestTimeout'):
