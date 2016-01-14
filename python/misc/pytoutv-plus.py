@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import argparse
 import datetime
 import json
 import locale
@@ -26,12 +27,25 @@ DATA_TITLE = 'title'
 
 
 def main():
-    if len(sys.argv) < 2:
-        print('Usage: {} {{list}}'.format(sys.argv[0]))
+    args = parse_args()
+    args.func(args)
+
+
+def parse_args():
+    p = argparse.ArgumentParser()
+    sp = p.add_subparsers(dest='command', help='Commands help')
+    
+    pl = sp.add_parser('list',
+                       help='List emissions or episodes of an emission')
+    pl.set_defaults(func=command_list)
+    
+    args = p.parse_args()
+    
+    if args.command is None:
+        p.print_help()
         sys.exit()
     
-    if sys.argv[1] == 'list':
-        command_list()
+    return args
 
 
 def get_data_file_path():
@@ -70,7 +84,7 @@ def write_data(data):
         )
     
 
-def command_list():
+def command_list(args):
     print('Please wait...\n')
     
     app = toutvcli.app.App(None)
