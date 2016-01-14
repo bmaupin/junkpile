@@ -7,7 +7,7 @@ import os
 import platform
 import sys
 
-import toutv
+import toutv.exceptions
 import toutvcli.app
 
 
@@ -17,7 +17,6 @@ MAX_TIMEOUTS = 10
 
 # Don't change these
 DATA_EMISSIONS = 'emissions'
-DATA_FILE_NAME = 'toutv_data.json'
 DATA_FIRST_SEEN = 'first_seen'
 DATA_LAST_RUN = 'last_run'
 DATA_LAST_SEEN = 'last_seen'
@@ -36,6 +35,8 @@ def main():
 
 
 def get_data_file_path():
+    DATA_FILE_NAME = 'toutv_data.json'
+    
     if 'XDG_DATA_HOME' in os.environ:
         data_dir = os.environ['XDG_DATA_HOME']
         xdg_data_path = os.path.join(data_dir, 'toutv')
@@ -64,28 +65,42 @@ def get_data():
 def write_data(data):
     data_path = get_data_file_path()
     with open(data_path, 'w') as data_file:
-        data_file.write(json.dumps(data))
+        data_file.write(
+            json.dumps(data, sort_keys=True, indent=4, ensure_ascii=False)
+        )
     
 
-def command_list():    
+def command_list():
     app = toutvcli.app.App(None)
     client = app._build_toutv_client(no_cache=False)
-    
+
+    print('Please wait...')
+
+    # The name of this exception was changed
+    if hasattr(toutv.exceptions, 'RequestTimeout'):
+        toutv_requesttimeout = toutv.exceptions.RequestTimeout
+    else:
+        toutv_requesttimeout = toutv.exceptions.RequestTimeoutError
+
     # Get the list of current emissions
     for n in range(MAX_TIMEOUTS):
         try:
             repertoire = client.get_page_repertoire()
             repertoire_emissions = repertoire.get_emissions()
             break
-        except toutv.exceptions.RequestTimeout:
+        except toutv_requesttimeout:
             pass
         
         if n == MAX_TIMEOUTS - 1:
             sys.exit('Error: max timeout attempts reached getting emissions\n')
-    
+
+    # For some reason the emission ID is an int, but JSON converts int keys to
+    # strings, so just make them strings so we don't have to worry about it
+    repertoire_emissions = {str(k):v for k, v in repertoire_emissions.items()}
+
     today = datetime.datetime.now().strftime('%Y-%m-%d')
     data = get_data()
-    
+
     # If this is the first run ever or the first run of the day
     if DATA_LAST_RUN not in data or data[DATA_LAST_RUN] != today:
         # If this is the first run ever
@@ -94,8 +109,8 @@ def command_list():
             data[DATA_EMISSIONS] = {}
         
         # If this is the first run of the day
-#        else:
-#            pass
+    #        else:
+    #            pass
         
         # Start with a fresh list of new emissions
         data[DATA_NEW_EMISSIONS] = []
@@ -140,7 +155,9 @@ def command_list():
         def title_func(ekey):
             return locale.strxfrm(repertoire_emissions[ekey].get_title())
         data[DATA_NEW_EMISSIONS].sort(key=title_func)
-    
+
+        data[DATA_LAST_RUN] = today
+        
         write_data(data)
     
     '''
