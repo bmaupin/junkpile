@@ -191,6 +191,9 @@ def command_list(args):
     else:
         if len(data[DATA_NEW_EMISSIONS]) == 0:
             print('No new emissions since last run')
+            print('To list all emissions, see: {} {} --help\n'.format(
+                sys.argv[0],
+                args.command))
             
         else:
             list_emissions(repertoire_emissions, data[DATA_NEW_EMISSIONS])
