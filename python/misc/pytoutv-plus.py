@@ -160,13 +160,13 @@ def command_list(args):
             data[DATA_EMISSIONS][emission_id][DATA_LAST_SEEN] = today
             
             # Basic sanity check if title of an emission has changed
-            if repertoire_emissions[emission_id].Title != \
-                    data[DATA_EMISSIONS][emission_id][DATA_TITLE]:
+            if repertoire_emissions[emission_id].Title.lower() != \
+                    data[DATA_EMISSIONS][emission_id][DATA_TITLE].lower():
                 sys.stderr.write(
                     'Warning: title mismatch\n'
-                    '\tId: {}'
-                    '\tTou.tv title: {}'
-                    '\tData file title: {}'.format(
+                    '\tId: {}\n'
+                    '\tTou.tv title: {}\n'
+                    '\tData file title: {}\n'.format(
                         emission_id,
                         repertoire_emissions[emission_id].Title,
                         data[DATA_EMISSIONS][emission_id][DATA_TITLE]
