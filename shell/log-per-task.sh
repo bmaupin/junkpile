@@ -4,8 +4,8 @@ export LOG_FILE=log.txt
 
 
 # Script that logs per task
-# - Console sees stdout and stderr
-# - Log file only sees stderr and task/success failure. Ex:
+# - Console sees stdout, stderr, and task success/failure
+# - Log file only sees stderr and task success/failure. Ex:
 #
 # $ cat log.txt
 # log-per-task.sh:
