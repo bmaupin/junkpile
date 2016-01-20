@@ -53,7 +53,8 @@ begin "Install prerequisite packages"
 # In the standard RHEL repos
 yum -y install libselinux-python
 # In the RHEL Supplementary repos
-yum -y install java-1.7.0-oracle.x86_64 java-1.7.0-oracle-devel.x86_64
+yum -y install java-1.7.0-oracle.x86_64
+yum -y install java-1.7.0-oracle-devel.x86_64
 
 
 begin "Configure Oracle Instant Client"
