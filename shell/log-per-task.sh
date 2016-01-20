@@ -3,6 +3,20 @@
 export LOG_FILE=log.txt
 
 
+# Script that logs per task
+# - Console sees stdout and stderr
+# - Log file only sees stderr and task/success failure. Ex:
+#
+# $ cat log.txt
+# log-per-task.sh:
+# This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.
+# This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.
+#  [X] Install prerequisite packages
+#      ERROR running command: test
+#  [ ] ERROR completing task: Configure Oracle Instant Client
+#  [X] Install UnlimitedJCEPolicyJDK7.zip
+
+
 # Set up logging
 # Log success/failure for each task
 begin() {
