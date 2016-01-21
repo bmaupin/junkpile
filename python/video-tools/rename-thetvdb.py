@@ -13,6 +13,12 @@ import sys
 
 
 def main():
+    def depunctuate(s):
+        punctuation = [',', '.', "'", '!', '?', '-', ':']
+        for symbol in punctuation:
+            s = s.replace(symbol, '')
+        return s
+    
     args = parse_args()
     
     # Get episode names, numbers, seasons
@@ -32,7 +38,7 @@ def main():
         if filenames != []:
             for filename in filenames:
                 for episode_name in episodes:
-                    if filename.lower().find(episode_name.lower()) != -1:
+                    if depunctuate(filename).lower().find(depunctuate(episode_name).lower()) != -1:
                         basename, extension = os.path.splitext(filename)
                         newpath = os.path.join(
                             args.video_path,
