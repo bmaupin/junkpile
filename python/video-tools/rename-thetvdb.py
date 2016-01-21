@@ -51,7 +51,7 @@ def main():
                                 ),
                             os.path.join(
                                 newpath,
-                                'S{:02d}E{:02d} - {}.{}'.format(
+                                'S{:02d}E{:02d} - {}{}'.format(
                                     int(episodes[episode_name]['season']),
                                     int(episodes[episode_name]['episode_number']),
                                     episode_name,
