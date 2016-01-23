@@ -19,13 +19,18 @@ def main():
     
     args = parse_args()
     
-    episodes = parse_html(args.url)
+    episodes, episodes_ordered = parse_html(args.url)
+    
+    # Go through the episodes in reverse order so we can better handle multi-part episodes
+    episodes_ordered.reverse()
     
     # Rename local episodes and move them into season subfolders
     for (dirpath, dirnames, filenames) in os.walk(args.video_path):
         if filenames != []:
+            # Go through the filenames in reverse order as well
+            filenames.sort(reverse=True)
             for filename in filenames:
-                for episode_name in episodes:
+                for episode_name in episodes_ordered:
                     if depunctuate(filename).lower().find(depunctuate(episode_name).lower()) != -1:
                         basename, extension = os.path.splitext(filename)
                         newpath = os.path.join(
@@ -92,6 +97,7 @@ def parse_html(url):
                 break
     
     episodes = {}
+    episodes_ordered = []
     # Iterate through each episode
     for tr in table.iter('tr'):
         if 'class' in tr[0].attrib and tr[0].attrib['class'] == 'head':
@@ -108,8 +114,10 @@ def parse_html(url):
         episodes[episode_name] = {}
         episodes[episode_name]['season'] = season
         episodes[episode_name]['episode_number'] = episode_number
+        
+        episodes_ordered.append(episode_name)
 
-    return episodes
+    return episodes, episodes_ordered
 
 
 if __name__ == '__main__':
