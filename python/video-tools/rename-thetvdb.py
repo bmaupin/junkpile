@@ -52,17 +52,25 @@ def main():
                                 )
                             )
                         
-                        if newname in files_to_rename.values():
-                            sys.stderr.write('Warning: not renaming file to avoid duplicate\n'
+                        if os.path.exists(newname):
+                            sys.stderr.write('Warning: file already exists. Not overwriting:\n'
                                 '\tOld name: {}\n'
                                 '\tProposed new name: {}\n'.format(
                                     os.path.basename(oldname),
                                     os.path.basename(newname)))
                             
                         else:
-                            print(os.path.basename(oldname))
-                            print('\t{}'.format(os.path.basename(newname)))
-                            files_to_rename[oldname] = newname
+                            if newname in files_to_rename.values():
+                                sys.stderr.write('Warning: not renaming file to avoid duplicate\n'
+                                    '\tOld name: {}\n'
+                                    '\tProposed new name: {}\n'.format(
+                                        os.path.basename(oldname),
+                                        os.path.basename(newname)))
+                                
+                            else:
+                                print(os.path.basename(oldname))
+                                print('\t{}'.format(os.path.basename(newname)))
+                                files_to_rename[oldname] = newname
 
     response = input('Rename files? (y/n) ')
     if response == 'y':
