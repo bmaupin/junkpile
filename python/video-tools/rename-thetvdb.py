@@ -51,14 +51,14 @@ def main():
                         if os.path.exists(newname):
                             sys.stderr.write('Warning: file already exists. Not overwriting:\n'
                                 '\t{}\n'.format(newname))
-                        
-                        os.rename(
-                            os.path.join(
-                                dirpath,
-                                filename
-                                ),
-                            newname
-                            )
+                        else:
+                            os.rename(
+                                os.path.join(
+                                    dirpath,
+                                    filename
+                                    ),
+                                newname
+                                )
 
 
 def parse_args():
