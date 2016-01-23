@@ -7,12 +7,12 @@ import re
 import sys
 
 if sys.version_info < (3, 4):
-    sys.exit('ERROR: Requires Python 3.4')
+    sys.exit('ERROR: Requires Python 3.4 or higher')
 
 from enum import Enum
 
 def main():
-    VideoTypes = Enum('VideoType', 'emission film miniserie')
+    VideoTypes = Enum('VideoType', 'emission film')
     filename_chars = 'àÀâÂçÇéÉèÈêÊëîÎôÔ\w\-\'\.\(\)'
     pattern = re.compile('([{0}]+)\.(S([\d]+)E[\d]+)\.([{0}]+)\.[\d]+kbps\.ts'.format(filename_chars))
 #    pattern = re.compile('([{0}]+)\.(S[\d]+E[\d]+)\.([{0}]+)'.format(filename_chars))
@@ -32,19 +32,8 @@ def main():
             
             if show.lower() == title.lower():
                 video_type = VideoTypes.film
-            
-            if (len(season) == 4) and (video_type != VideoTypes.film):
-                while True:
-                    response = input('Is this a miniseries? (y/n) ')
-                    if response.lower() == 'y':
-                        video_type = VideoTypes.miniserie
-                        break
-                    elif response.lower() == 'n':
-                        video_type = VideoTypes.film
-                        break
-            
-            if video_type == VideoTypes.miniserie:
-                episode = 'Partie {0}'.format(episode[episode.find('E') + 1:])
+            else:
+                video_type = VideoTypes.emission
 
             return show, episode, season, title
         else:
