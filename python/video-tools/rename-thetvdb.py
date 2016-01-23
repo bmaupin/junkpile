@@ -25,6 +25,7 @@ def main():
     episodes_ordered.reverse()
     
     # Rename local episodes and move them into season subfolders
+    files_to_rename = {}
     for (dirpath, dirnames, filenames) in os.walk(args.video_path):
         if filenames != []:
             # Go through the filenames in reverse order as well
@@ -43,6 +44,7 @@ def main():
                         if not os.path.exists(newpath):
                             os.makedirs(newpath)
                         
+                        oldname = os.path.join(dirpath, filename)
                         newname = os.path.join(
                             newpath,
                             'S{:02d}E{:02d} - {}{}'.format(
@@ -53,17 +55,22 @@ def main():
                                 )
                             )
                         
-                        if os.path.exists(newname):
-                            sys.stderr.write('Warning: file already exists. Not overwriting:\n'
-                                '\t{}\n'.format(newname))
+                        if newname in files_to_rename.values():
+                            sys.stderr.write('Warning: not renaming file to avoid duplicate\n'
+                                '\tOld name: {}\n'
+                                '\tProposed new name: {}\n'.format(
+                                    os.path.basename(oldname),
+                                    os.path.basename(newname)))
+                            
                         else:
-                            os.rename(
-                                os.path.join(
-                                    dirpath,
-                                    filename
-                                    ),
-                                newname
-                                )
+                            print(os.path.basename(oldname))
+                            print('\t{}'.format(os.path.basename(newname)))
+                            files_to_rename[oldname] = newname
+
+    response = input('Rename files? (y/n) ')
+    if response == 'y':
+        for oldname in files_to_rename:
+            os.rename(oldname, files_to_rename[oldname])
 
 
 def parse_args():
@@ -105,7 +112,7 @@ def parse_html(url):
         
         if tr[0][0].text == 'Special':
             # TODO
-            sys.stderr.write('Warning: special episodes not yet implemented')
+            sys.stderr.write('Warning: special episodes not yet implemented\n')
             continue
         
         episode_name = tr[1][0].text
