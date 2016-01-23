@@ -3,6 +3,7 @@
 import argparse
 import os
 import os.path
+import re
 import sys
 import urllib.request
 
@@ -29,12 +30,19 @@ def main():
                     )
                 
                 oldname = os.path.join(dirpath, filename)
+                if args.overwrite == True:
+                    new_episode_name = episode_name
+                else:
+                    match = pattern.search(filename)
+                    if match:
+                        new_episode_name = match.group(3)
+
                 newname = os.path.join(
                     newpath,
                     'S{:02d}E{:02d} - {}{}'.format(
                         int(episodes[episode_name]['season']),
                         int(episodes[episode_name]['episode_number']),
-                        episode_name,
+                        new_episode_name,
                         extension
                         )
                     )
@@ -66,6 +74,9 @@ def main():
                         return
     
     args = parse_args()
+    
+    filename_chars = 'àÀâÂçÇéÉèÈêÊëîÎôÔ\w\-\'\.\(\)\s'
+    pattern = re.compile('([{0}]+) - (S[\d]+E[\d]+) - ([{0}]+)\.mp4'.format(filename_chars))
     
     episodes, episodes_ordered = parse_html(args.url)
     
@@ -100,6 +111,11 @@ def parse_args():
         'url',
         help='URL to All Seasons page on thetvdb.com',
         )
+    p.add_argument(
+        '-o', 
+        '--overwrite', 
+        action='store_true',
+        help='Overwrite the title as well as the season/number')
     
     args = p.parse_args()
     
