@@ -81,10 +81,13 @@ def main():
             for filename in filenames:
                 match_filename(filename)
 
-    response = input('Rename files? (y/n) ')
-    if response == 'y':
-        for oldname in files_to_rename:
-            os.renames(oldname, files_to_rename[oldname])
+    if len(files_to_rename) == 0:
+        print('No matches found or all files already renamed')
+    else:
+        response = input('Rename files? (y/n) ')
+        if response == 'y':
+            for oldname in files_to_rename:
+                os.renames(oldname, files_to_rename[oldname])
 
 
 def parse_args():
