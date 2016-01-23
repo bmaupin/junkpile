@@ -37,11 +37,15 @@ def main():
                     if match:
                         new_episode_name = match.group(3)
 
+                new_season_episode = 'S{:02d}E{:02d}'.format(
+                    int(episodes[episode_name]['season']),
+                    int(episodes[episode_name]['episode_number']),
+                    )
+                
                 newname = os.path.join(
                     newpath,
-                    'S{:02d}E{:02d} - {}{}'.format(
-                        int(episodes[episode_name]['season']),
-                        int(episodes[episode_name]['episode_number']),
+                    '{} - {}{}'.format(
+                        new_season_episode,
                         new_episode_name,
                         extension
                         )
@@ -59,7 +63,7 @@ def main():
                     return
                     
                 else:
-                    if newname in files_to_rename.values():
+                    if new_season_episode in files_to_rename:
                         sys.stderr.write('Warning: not renaming file to avoid duplicate\n'
                             '\tOld name: {}\n'
                             '\tProposed new name: {}\n'.format(
@@ -70,12 +74,14 @@ def main():
                     else:
                         print(os.path.basename(oldname))
                         print('\t{}'.format(os.path.basename(newname)))
-                        files_to_rename[oldname] = newname
+                        files_to_rename[new_season_episode] = {}
+                        files_to_rename[new_season_episode]['oldname'] = oldname
+                        files_to_rename[new_season_episode]['newname'] = newname
                         return
     
     args = parse_args()
     
-    filename_chars = 'àÀâÂçÇéÉèÈêÊëîÎôÔ\w\-\'\.\(\)\s'
+    filename_chars = 'àÀâÂçÇéÉèÈêÊëîÎôÔ\w\-\'\.\(\)\s\[\]'
     pattern = re.compile('([{0}]+) - (S[\d]+E[\d]+) - ([{0}]+)\.mp4'.format(filename_chars))
     
     episodes, episodes_ordered = parse_html(args.url)
@@ -97,8 +103,8 @@ def main():
     else:
         response = input('Rename files? (y/n) ')
         if response == 'y':
-            for oldname in files_to_rename:
-                os.renames(oldname, files_to_rename[oldname])
+            for season_episode in files_to_rename:
+                os.renames(files_to_rename[season_episode]['oldname'], files_to_rename[season_episode]['newname'])
 
 
 def parse_args():
