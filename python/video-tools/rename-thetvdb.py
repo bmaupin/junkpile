@@ -52,6 +52,9 @@ def main():
                                 )
                             )
                         
+                        if oldname == newname:
+                            continue
+                        
                         if os.path.exists(newname):
                             sys.stderr.write('Warning: file already exists. Not overwriting:\n'
                                 '\tOld name: {}\n'
