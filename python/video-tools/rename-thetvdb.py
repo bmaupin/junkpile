@@ -15,7 +15,7 @@ def main():
         punctuation = [',', '.', "'", '!', '?', '-', ':']
         for symbol in punctuation:
             s = s.replace(symbol, '')
-        return s
+        return ' '.join(s.split())
     
     args = parse_args()
     
