@@ -41,9 +41,6 @@ def main():
                                 )
                             )
                         
-                        if not os.path.exists(newpath):
-                            os.makedirs(newpath)
-                        
                         oldname = os.path.join(dirpath, filename)
                         newname = os.path.join(
                             newpath,
@@ -70,7 +67,7 @@ def main():
     response = input('Rename files? (y/n) ')
     if response == 'y':
         for oldname in files_to_rename:
-            os.rename(oldname, files_to_rename[oldname])
+            os.renames(oldname, files_to_rename[oldname])
 
 
 def parse_args():
