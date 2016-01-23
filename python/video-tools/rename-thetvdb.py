@@ -17,6 +17,54 @@ def main():
             s = s.replace(symbol, '')
         return ' '.join(s.split())
     
+    def match_filename(filename):
+        for episode_name in episodes_ordered:
+            if depunctuate(filename).lower().find(depunctuate(episode_name).lower()) != -1:
+                basename, extension = os.path.splitext(filename)
+                newpath = os.path.join(
+                    args.video_path,
+                    'Season {:02d}'.format(
+                        int(episodes[episode_name]['season'])
+                        )
+                    )
+                
+                oldname = os.path.join(dirpath, filename)
+                newname = os.path.join(
+                    newpath,
+                    'S{:02d}E{:02d} - {}{}'.format(
+                        int(episodes[episode_name]['season']),
+                        int(episodes[episode_name]['episode_number']),
+                        episode_name,
+                        extension
+                        )
+                    )
+                
+                if oldname == newname:
+                    return
+                
+                if os.path.exists(newname):
+                    sys.stderr.write('Warning: file already exists. Not overwriting:\n'
+                        '\tOld name: {}\n'
+                        '\tProposed new name: {}\n'.format(
+                            os.path.basename(oldname),
+                            os.path.basename(newname)))
+                    return
+                    
+                else:
+                    if newname in files_to_rename.values():
+                        sys.stderr.write('Warning: not renaming file to avoid duplicate\n'
+                            '\tOld name: {}\n'
+                            '\tProposed new name: {}\n'.format(
+                                os.path.basename(oldname),
+                                os.path.basename(newname)))
+                        return
+                        
+                    else:
+                        print(os.path.basename(oldname))
+                        print('\t{}'.format(os.path.basename(newname)))
+                        files_to_rename[oldname] = newname
+                        return
+    
     args = parse_args()
     
     episodes, episodes_ordered = parse_html(args.url)
@@ -31,49 +79,7 @@ def main():
             # Go through the filenames in reverse order as well
             filenames.sort(reverse=True)
             for filename in filenames:
-                for episode_name in episodes_ordered:
-                    if depunctuate(filename).lower().find(depunctuate(episode_name).lower()) != -1:
-                        basename, extension = os.path.splitext(filename)
-                        newpath = os.path.join(
-                            args.video_path,
-                            'Season {:02d}'.format(
-                                int(episodes[episode_name]['season'])
-                                )
-                            )
-                        
-                        oldname = os.path.join(dirpath, filename)
-                        newname = os.path.join(
-                            newpath,
-                            'S{:02d}E{:02d} - {}{}'.format(
-                                int(episodes[episode_name]['season']),
-                                int(episodes[episode_name]['episode_number']),
-                                episode_name,
-                                extension
-                                )
-                            )
-                        
-                        if oldname == newname:
-                            continue
-                        
-                        if os.path.exists(newname):
-                            sys.stderr.write('Warning: file already exists. Not overwriting:\n'
-                                '\tOld name: {}\n'
-                                '\tProposed new name: {}\n'.format(
-                                    os.path.basename(oldname),
-                                    os.path.basename(newname)))
-                            
-                        else:
-                            if newname in files_to_rename.values():
-                                sys.stderr.write('Warning: not renaming file to avoid duplicate\n'
-                                    '\tOld name: {}\n'
-                                    '\tProposed new name: {}\n'.format(
-                                        os.path.basename(oldname),
-                                        os.path.basename(newname)))
-                                
-                            else:
-                                print(os.path.basename(oldname))
-                                print('\t{}'.format(os.path.basename(newname)))
-                                files_to_rename[oldname] = newname
+                match_filename(filename)
 
     response = input('Rename files? (y/n) ')
     if response == 'y':
