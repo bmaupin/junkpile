@@ -38,20 +38,26 @@ def main():
                         if not os.path.exists(newpath):
                             os.makedirs(newpath)
                         
+                        newname = os.path.join(
+                            newpath,
+                            'S{:02d}E{:02d} - {}{}'.format(
+                                int(episodes[episode_name]['season']),
+                                int(episodes[episode_name]['episode_number']),
+                                episode_name,
+                                extension
+                                )
+                            )
+                        
+                        if os.path.exists(newname):
+                            sys.stderr.write('Warning: file already exists. Not overwriting:\n'
+                                '\t{}\n'.format(newname))
+                        
                         os.rename(
                             os.path.join(
                                 dirpath,
                                 filename
                                 ),
-                            os.path.join(
-                                newpath,
-                                'S{:02d}E{:02d} - {}{}'.format(
-                                    int(episodes[episode_name]['season']),
-                                    int(episodes[episode_name]['episode_number']),
-                                    episode_name,
-                                    extension
-                                    )
-                                )
+                            newname
                             )
 
 
