@@ -1,15 +1,13 @@
 #!/usr/bin/env python
 
-'''
-TODO: 
-- Get episode names, numbers, seasons from URL
-- Get thetvdb url from stdin
-'''
-
 import argparse
 import os
 import os.path
 import sys
+import urllib.request
+
+import lxml.etree
+import lxml.html
 
 
 def main():
@@ -21,17 +19,7 @@ def main():
     
     args = parse_args()
     
-    # Get episode names, numbers, seasons
-    episodes = {}
-    with open(args.input_path) as infile:
-        for line in infile:
-            episode_name = line.split('\t')[1]
-            season = line.split('\t')[0].split()[0]
-            episode_number = line.split('\t')[0].split()[2]
-            
-            episodes[episode_name] = {}
-            episodes[episode_name]['season'] = season
-            episodes[episode_name]['episode_number'] = episode_number
+    episodes = parse_html(args.url)
     
     # Rename local episodes and move them into season subfolders
     for (dirpath, dirnames, filenames) in os.walk(args.video_path):
@@ -74,13 +62,48 @@ def parse_args():
         help='Full path to video files to rename',
         )
     p.add_argument(
-        'input_path',
-        help='Full path to thetvdb.com input file',
+        'url',
+        help='URL to All Seasons page on thetvdb.com',
         )
     
     args = p.parse_args()
     
     return args
+
+
+def parse_html(url):
+    if url.find('seasonall') == -1:
+        sys.exit('Error: please provide the URL to the All Seasons page on thetvdb. Ex: http://thetvdb.com/?tab=seasonall&id=72668&lid=17\n')
+    
+    parser = lxml.etree.HTMLParser()
+    with urllib.request.urlopen(url) as f:
+        page = lxml.html.parse(f, parser)
+    
+    # Get the table containing the list of episodes
+    for table in page.iter('table'):
+        if 'id' in table.attrib:
+            if table.attrib['id'] == 'listtable':
+                break
+    
+    episodes = {}
+    # Iterate through each episode
+    for tr in table.iter('tr'):
+        if 'class' in tr[0].attrib and tr[0].attrib['class'] == 'head':
+            continue
+        
+        if tr[0][0].text == 'Special':
+            # TODO
+            sys.stderr.write('Warning: special episodes not yet implemented')
+            continue
+        
+        episode_name = tr[1][0].text
+        season, episode_number = tr[0][0].text.split(' x ')
+        
+        episodes[episode_name] = {}
+        episodes[episode_name]['season'] = season
+        episodes[episode_name]['episode_number'] = episode_number
+
+    return episodes
 
 
 if __name__ == '__main__':
