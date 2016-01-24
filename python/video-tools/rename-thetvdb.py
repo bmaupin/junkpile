@@ -5,6 +5,7 @@ import os
 import os.path
 import re
 import sys
+import unicodedata
 import urllib.request
 
 import lxml.etree
@@ -12,15 +13,9 @@ import lxml.html
 
 
 def main():
-    def depunctuate(s):
-        punctuation = [',', '.', "'", '!', '?', '-', ':']
-        for symbol in punctuation:
-            s = s.replace(symbol, '')
-        return ' '.join(s.split())
-    
     def match_filename(filename):
         for episode_name in episodes_ordered:
-            if depunctuate(filename).lower().find(depunctuate(episode_name).lower()) != -1:
+            if prep_for_compare(filename).lower().find(prep_for_compare(episode_name).lower()) != -1:
                 basename, extension = os.path.splitext(filename)
                 newpath = os.path.join(
                     args.video_path,
@@ -164,6 +159,25 @@ def parse_html(url):
         episodes_ordered.append(episode_name)
 
     return episodes, episodes_ordered
+
+
+def prep_for_compare(s):
+    # Remove puncuation
+    punctuation = [',', '.', "'", '!', '?', '-', ':']
+    for symbol in punctuation:
+        s = s.replace(symbol, '')
+    
+    # Compress whitespace
+    s = ' '.join(s.split())
+    
+    # Remove accents
+    # http://stackoverflow.com/a/518232/399105
+    stripped_string = ''
+    for c in unicodedata.normalize('NFD', s):
+        if unicodedata.category(c) != 'Mn':
+            stripped_string += c
+    
+    return stripped_string
 
 
 if __name__ == '__main__':
