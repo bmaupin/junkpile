@@ -14,6 +14,16 @@ import lxml.html
 
 def main():
     def match_filename(filename):
+        def matched_file_output():
+            return str(
+                'File: {}\n'
+                '\tMatch: {}\n'
+                '\tProposed new name: {}'.format(
+                    os.path.basename(oldname),
+                    episode_name,
+                    os.path.basename(newname)),
+                )
+        
         for episode_name in episodes_ordered:
             if prep_for_compare(filename).lower().find(prep_for_compare(episode_name).lower()) != -1:
                 basename, extension = os.path.splitext(filename)
@@ -50,25 +60,20 @@ def main():
                     return
                 
                 if os.path.exists(newname):
-                    sys.stderr.write('Warning: file already exists. Not overwriting:\n'
-                        '\tOld name: {}\n'
-                        '\tProposed new name: {}\n'.format(
-                            os.path.basename(oldname),
-                            os.path.basename(newname)))
+                    sys.stderr.write(
+                        'Warning: file already exists. Not overwriting:\n\t{}\n'.format(
+                            matched_file_output()))
                     return
                     
                 else:
                     if new_season_episode in files_to_rename:
-                        sys.stderr.write('Warning: not renaming file to avoid duplicate\n'
-                            '\tOld name: {}\n'
-                            '\tProposed new name: {}\n'.format(
-                                os.path.basename(oldname),
-                                os.path.basename(newname)))
+                        sys.stderr.write(
+                            'Warning: not renaming file to avoid duplicate:\n\t{}\n'.format(
+                                matched_file_output()))
                         return
                         
                     else:
-                        print(os.path.basename(oldname))
-                        print('\t{}'.format(os.path.basename(newname)))
+                        print(matched_file_output())
                         files_to_rename[new_season_episode] = {}
                         files_to_rename[new_season_episode]['oldname'] = oldname
                         files_to_rename[new_season_episode]['newname'] = newname
