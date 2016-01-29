@@ -38,9 +38,7 @@ def main():
                 if args.overwrite == True:
                     new_episode_name = episode_name
                 else:
-                    match = pattern.search(filename)
-                    if match:
-                        new_episode_name = match.group(2)
+                    new_episode_name = basename.split('-')[-1].strip()
 
                 new_season_episode = 'S{:02d}E{:02d}'.format(
                     int(episodes[episode_name]['season']),
@@ -80,9 +78,6 @@ def main():
                         return
     
     args = parse_args()
-    
-    filename_chars = 'àÀâÂçÇéÉèÈêÊëîÎôÔ\w\-\'\.\(\)\s\[\],'
-    pattern = re.compile('.*(S[\d]+E[\d]+) - ([{}]+)\.mp4'.format(filename_chars))
     
     episodes, episodes_ordered = parse_html(args.url)
     
