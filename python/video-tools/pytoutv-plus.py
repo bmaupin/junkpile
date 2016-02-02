@@ -134,16 +134,8 @@ def command_list(args):
     client = get_client_with_cache()
 
     # Get the list of current emissions
-    for n in range(MAX_TIMEOUTS):
-        try:
-            repertoire = client.get_page_repertoire()
-            repertoire_emissions = repertoire.get_emissions()
-            break
-        except TOUTV_REQUESTTIMEOUT:
-            pass
-        
-        if n == MAX_TIMEOUTS - 1:
-            sys.exit('Error: max timeout attempts reached getting emissions\n')
+    repertoire = retry_function(client.get_page_repertoire)
+    repertoire_emissions = retry_function(repertoire.get_emissions)
 
     # For some reason the emission ID is an int, but JSON converts int keys to
     # strings, so just make them strings so we don't have to worry about it
@@ -226,8 +218,8 @@ def command_list(args):
 
 def command_fetch(args):
     client = get_client_with_cache()
-    emission = client.get_emission_by_name(args.emission)
-    episodes = client.get_emission_episodes(emission)
+    emission = retry_function(client.get_emission_by_name, args.emission)
+    episodes = retry_function(client.get_emission_episodes, emission)
     
     data = get_data()
     
@@ -259,6 +251,20 @@ def list_emissions(all_emissions, emissions_to_list):
         if emission.Country is not None:
             emission_string += '\n\t{}'.format(emission.Country)
         print(emission_string)
+
+
+def retry_function(function, *parameters):
+    for n in range(MAX_TIMEOUTS):
+        try:
+            result = function(*parameters)
+            break
+        except TOUTV_REQUESTTIMEOUT:
+            pass
+        
+        if n == MAX_TIMEOUTS - 1:
+            sys.exit('Error: max timeout attempts reached\n')
+    
+    return result
 
 
 if __name__ == '__main__':
