@@ -17,6 +17,7 @@ MAX_NEW_COUNT = 3
 MAX_TIMEOUTS = 10
 
 # Don't change these
+DATA_DOWNLOADED = 'downloaded'
 DATA_EMISSIONS = 'emissions'
 DATA_FIRST_SEEN = 'first_seen'
 DATA_LAST_RUN = 'last_run'
@@ -24,6 +25,12 @@ DATA_LAST_SEEN = 'last_seen'
 DATA_NEW_EMISSIONS = 'new_emissions'
 DATA_NEW_COUNT = 'new_count'
 DATA_TITLE = 'title'
+
+# The name of this exception was changed
+if hasattr(toutv.exceptions, 'RequestTimeout'):
+    TOUTV_REQUESTTIMEOUT = toutv.exceptions.RequestTimeout
+else:
+    TOUTV_REQUESTTIMEOUT = toutv.exceptions.RequestTimeoutError
 
 
 def main():
@@ -37,6 +44,26 @@ def main():
 def parse_args():
     p = argparse.ArgumentParser()
     sp = p.add_subparsers(dest='command', help='Commands help')
+    
+    # fetch command
+    pf = sp.add_parser('fetch',
+                       help='Fetch one or all episodes of an emission')
+    quality_choices = [
+        toutvcli.app.App.QUALITY_MIN,
+        toutvcli.app.App.QUALITY_AVG,
+        toutvcli.app.App.QUALITY_MAX
+    ]
+    pf.add_argument('emission', action='store', type=str,
+                    help='Emission name to fetch')
+    pf.add_argument('episode', action='store', nargs='?', type=str,
+                    help='Episode name to fetch')
+    pf.add_argument('-d', '--directory', action='store',
+                    default=os.getcwd(),
+                    help='Output directory (default: CWD)')
+    pf.add_argument('-q', '--quality', action='store',
+                    default=toutvcli.app.App.QUALITY_AVG, choices=quality_choices,
+                    help='Video quality (default: {})'.format(toutvcli.app.App.QUALITY_AVG))
+    pf.set_defaults(func=command_fetch)
     
     pl = sp.add_parser(
         'list', 
@@ -55,6 +82,13 @@ def parse_args():
         sys.exit()
     
     return args
+
+
+def get_client_with_cache():
+    print('Please wait...\n')
+    
+    app = toutvcli.app.App(None)
+    return app._build_toutv_client(no_cache=False)
 
 
 def get_data_file_path():
@@ -97,16 +131,7 @@ def command_list(args):
     def title_sort_func(ekey):
         return locale.strxfrm(repertoire_emissions[ekey].get_title())
     
-    print('Please wait...\n')
-    
-    app = toutvcli.app.App(None)
-    client = app._build_toutv_client(no_cache=False)
-
-    # The name of this exception was changed
-    if hasattr(toutv.exceptions, 'RequestTimeout'):
-        toutv_requesttimeout = toutv.exceptions.RequestTimeout
-    else:
-        toutv_requesttimeout = toutv.exceptions.RequestTimeoutError
+    client = get_client_with_cache()
 
     # Get the list of current emissions
     for n in range(MAX_TIMEOUTS):
@@ -114,7 +139,7 @@ def command_list(args):
             repertoire = client.get_page_repertoire()
             repertoire_emissions = repertoire.get_emissions()
             break
-        except toutv_requesttimeout:
+        except TOUTV_REQUESTTIMEOUT:
             pass
         
         if n == MAX_TIMEOUTS - 1:
@@ -197,6 +222,30 @@ def command_list(args):
             
         else:
             list_emissions(repertoire_emissions, data[DATA_NEW_EMISSIONS])
+
+
+def command_fetch(args):
+    client = get_client_with_cache()
+    emission = client.get_emission_by_name(args.emission)
+    episodes = client.get_emission_episodes(emission)
+    
+    data = get_data()
+    
+    # Download single episode
+    if args.episode is not None:
+        # TODO
+        sys.exit('Error: downloading single episode not yet implemented')
+    
+    # Download all episodes
+    else:
+        for episode_id in eposides:
+            if (emission.Id in data[DATA_EMISSIONS] and
+                    DATA_DOWNLOADED in data[DATA_EMISSIONS][emission.Id]):
+                # TODO: do the comparison
+                sys.exit('Error: not yet implemented')
+            
+            else:
+                sys.exit('Error: not yet implemented')
 
 
 def list_emissions(all_emissions, emissions_to_list):
