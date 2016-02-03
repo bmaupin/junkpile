@@ -26,12 +26,6 @@ DATA_NEW_EMISSIONS = 'new_emissions'
 DATA_NEW_COUNT = 'new_count'
 DATA_TITLE = 'title'
 
-# The name of this exception was changed
-if hasattr(toutv.exceptions, 'RequestTimeout'):
-    TOUTV_REQUESTTIMEOUT = toutv.exceptions.RequestTimeout
-else:
-    TOUTV_REQUESTTIMEOUT = toutv.exceptions.RequestTimeoutError
-
 
 def main():
     # Set the locale for improved sorting of non-ASCII characters
@@ -254,6 +248,12 @@ def list_emissions(all_emissions, emissions_to_list):
 
 
 def retry_function(function, *parameters):
+    # The name of this exception was changed at some point
+    if hasattr(toutv.exceptions, 'RequestTimeout'):
+        TOUTV_REQUESTTIMEOUT = toutv.exceptions.RequestTimeout
+    else:
+        TOUTV_REQUESTTIMEOUT = toutv.exceptions.RequestTimeoutError
+    
     for n in range(MAX_TIMEOUTS):
         try:
             result = function(*parameters)
