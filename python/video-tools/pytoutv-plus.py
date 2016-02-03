@@ -315,7 +315,7 @@ def list_emissions(all_emissions, emissions_to_list):
         print(emission_string)
 
 
-def retry_function(function, *parameters):
+def retry_function(function, *args, **kwargs):
     # The name of this exception was changed at some point
     if hasattr(toutv.exceptions, 'RequestTimeout'):
         TOUTV_REQUESTTIMEOUT = toutv.exceptions.RequestTimeout
@@ -324,7 +324,7 @@ def retry_function(function, *parameters):
     
     for n in range(MAX_TIMEOUTS):
         try:
-            result = function(*parameters)
+            result = function(*args, **kwargs)
             break
         except TOUTV_REQUESTTIMEOUT:
             pass
