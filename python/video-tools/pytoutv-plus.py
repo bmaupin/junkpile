@@ -41,6 +41,7 @@ import os
 import platform
 import sys
 
+import toutv.dl
 import toutv.exceptions
 import toutvcli.app
 
@@ -289,7 +290,7 @@ def fetch_episode(app, episode, output_dir, bitrate, quality):
 
     # Create downloader
     opu = app._on_dl_progress_update
-    app._dl = toutv.dl.Downloader(episode, bitrate=bitrate,
+    app._dl = DownloaderPlus(episode, bitrate=bitrate,
                                    output_dir=output_dir,
                                    on_dl_start=app._on_dl_start,
                                    on_progress_update=opu)
@@ -336,3 +337,7 @@ def retry_function(function, *parameters):
 
 if __name__ == '__main__':
     main()
+
+
+class DownloaderPlus(toutv.dl.Downloader):
+    pass
