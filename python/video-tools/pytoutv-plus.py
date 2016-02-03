@@ -51,6 +51,8 @@ def parse_args():
                     help='Emission name to fetch')
     pf.add_argument('episode', action='store', nargs='?', type=str,
                     help='Episode name to fetch')
+    pf.add_argument('-b', '--bitrate', action='store', type=int,
+                    help='Video bitrate (default: use default quality)')
     pf.add_argument('-d', '--directory', action='store',
                     default=os.getcwd(),
                     help='Output directory (default: CWD)')
@@ -212,18 +214,23 @@ def command_list(args):
 
 def command_fetch(args):
     client = get_client_with_cache()
-    emission = retry_function(client.get_emission_by_name, args.emission)
-    episodes = retry_function(client.get_emission_episodes, emission)
+    if args.emission is not None:
+        emission = retry_function(client.get_emission_by_name, args.emission)
+    else:
+        sys.exit('Error: please provide name of emission to download')
+    app = toutvcli.app.App(None)
+    app._verbose = False
     
     data = get_data()
     
     # Download single episode
     if args.episode is not None:
-        # TODO
-        sys.exit('Error: downloading single episode not yet implemented')
+        episode = retry_function(client.get_episode_by_name, emission, args.episode)
+        fetch_episode(app, episode, output_dir=args.directory, bitrate=args.bitrate, quality=args.quality)
     
     # Download all episodes
     else:
+        episodes = retry_function(client.get_emission_episodes, emission)
         for episode_id in eposides:
             if (emission.Id in data[DATA_EMISSIONS] and
                     DATA_DOWNLOADED in data[DATA_EMISSIONS][emission.Id]):
@@ -232,6 +239,33 @@ def command_fetch(args):
             
             else:
                 sys.exit('Error: not yet implemented')
+
+
+def fetch_episode(app, episode, output_dir, bitrate, quality):
+    # Get available bitrates for episode
+    qualities = retry_function(episode.get_available_qualities)
+
+    # Choose bitrate
+    if bitrate is None:
+        if quality == toutvcli.app.App.QUALITY_MIN:
+            bitrate = qualities[0].bitrate
+        elif quality == toutvcli.app.App.QUALITY_MAX:
+            bitrate = qualities[-1].bitrate
+        elif quality == toutvcli.app.App.QUALITY_AVG:
+            bitrate = toutvcli.app.App._get_average_bitrate(qualities)
+
+    # Create downloader
+    opu = app._on_dl_progress_update
+    app._dl = toutv.dl.Downloader(episode, bitrate=bitrate,
+                                   output_dir=output_dir,
+                                   on_dl_start=app._on_dl_start,
+                                   on_progress_update=opu)
+
+    # Start download
+    app._dl.download()
+
+    # Finished
+    app._dl = None
 
 
 def list_emissions(all_emissions, emissions_to_list):
