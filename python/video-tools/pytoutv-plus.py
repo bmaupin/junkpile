@@ -50,25 +50,27 @@ import toutvcli.app
 MAX_NEW_COUNT = 3
 MAX_TIMEOUTS = 10
 
-# Don't change these
-DATA_DOWNLOADED = 'downloaded'
-DATA_EMISSIONS = 'emissions'
-DATA_FIRST_SEEN = 'first_seen'
-DATA_LAST_RUN = 'last_run'
-DATA_LAST_SEEN = 'last_seen'
-DATA_NEW_EMISSIONS = 'new_emissions'
-DATA_NEW_COUNT = 'new_count'
-DATA_TITLE = 'title'
-
 
 def main():
+    app = AppPlus(sys.argv[1:])
+    app.run()
+
+'''
     # Set the locale for improved sorting of non-ASCII characters
     locale.setlocale(locale.LC_ALL, "")
     
-    args = parse_args()
+    app = AppPlus(sys.argv[1:])
+    args = app._argparser.parse_args(app._args)
+    
+#    args = parse_args()
+
+    if args.build_client:
+        self._toutvclient = self._build_toutv_client(no_cache)
+
     args.func(args)
+'''
 
-
+'''
 def parse_args():
     p = argparse.ArgumentParser()
     sp = p.add_subparsers(dest='command', help='Commands help')
@@ -112,181 +114,15 @@ def parse_args():
         sys.exit()
     
     return args
+'''
 
-
+'''
 def get_client_with_cache():
     print('Please wait...\n')
     
     app = toutvcli.app.App(None)
     return app._build_toutv_client(no_cache=False)
-
-
-def get_data_file_path():
-    DATA_FILE_NAME = 'toutv_data.json'
-    
-    if 'XDG_DATA_HOME' in os.environ:
-        data_dir = os.environ['XDG_DATA_HOME']
-        xdg_data_path = os.path.join(data_dir, 'toutv')
-        if not os.path.exists(xdg_data_path):
-            os.makedirs(xdg_data_path)
-        data_path = os.path.join(xdg_data_path, DATA_FILE_NAME)
-    else:
-        home_dir = os.environ['HOME']
-        home_data_path = os.path.join(home_dir, '.local', 'share', 'toutv')
-        if not os.path.exists(home_data_path):
-            os.makedirs(home_data_path)
-        data_path = os.path.join(home_data_path, DATA_FILE_NAME)
-        
-    return data_path
-
-
-def get_data():
-    data_path = get_data_file_path()
-    if not os.path.exists(data_path):
-        return {}
-    else:
-        with open(data_path, 'r') as data_file:
-            return json.loads(data_file.read())
-
-
-def write_data(data):
-    data_path = get_data_file_path()
-    with open(data_path, 'w') as data_file:
-        data_file.write(
-            json.dumps(data, sort_keys=True, indent=4, ensure_ascii=False)
-        )
-
-
-def command_list(args):
-    def title_sort_func(ekey):
-        return locale.strxfrm(repertoire_emissions[ekey].get_title())
-    
-    client = get_client_with_cache()
-
-    # Get the list of current emissions
-    repertoire = retry_function(client.get_page_repertoire)
-    repertoire_emissions = retry_function(repertoire.get_emissions)
-
-    # For some reason the emission ID is an int, but JSON converts int keys to
-    # strings, so just make them strings so we don't have to worry about it
-    repertoire_emissions = {str(k):v for k, v in repertoire_emissions.items()}
-
-    today = datetime.datetime.now().strftime('%Y-%m-%d')
-    data = get_data()
-
-    # If this is the first run ever or the first run of the day
-    if DATA_LAST_RUN not in data or data[DATA_LAST_RUN] != today:
-        # If this is the first run ever
-        if DATA_LAST_RUN not in data:
-            data[DATA_LAST_RUN] = today
-            data[DATA_EMISSIONS] = {}
-        
-        # Start with a fresh list of new emissions
-        data[DATA_NEW_EMISSIONS] = []
-        
-        for emission_id in repertoire_emissions:
-            # If this is a completely new emission
-            if emission_id not in data[DATA_EMISSIONS]:
-                data[DATA_NEW_EMISSIONS].append(emission_id)
-                
-                data[DATA_EMISSIONS][emission_id] = {}
-                data[DATA_EMISSIONS][emission_id][DATA_TITLE] = repertoire_emissions[emission_id].Title
-                data[DATA_EMISSIONS][emission_id][DATA_FIRST_SEEN] = today
-                data[DATA_EMISSIONS][emission_id][DATA_NEW_COUNT] = 1
-            
-            # If this is a new emission since the last run
-            if DATA_LAST_SEEN in data[DATA_EMISSIONS][emission_id] and \
-                    data[DATA_EMISSIONS][emission_id][DATA_LAST_SEEN] != \
-                    data[DATA_LAST_RUN]:
-                data[DATA_EMISSIONS][emission_id][DATA_NEW_COUNT] += 1
-                
-                if data[DATA_EMISSIONS][emission_id][DATA_NEW_COUNT] <= \
-                        MAX_NEW_COUNT:
-                    data[DATA_NEW_EMISSIONS].append(emission_id)
-            
-            data[DATA_EMISSIONS][emission_id][DATA_LAST_SEEN] = today
-            
-            # Basic sanity check if title of an emission has changed
-            if repertoire_emissions[emission_id].Title.lower() != \
-                    data[DATA_EMISSIONS][emission_id][DATA_TITLE].lower():
-                sys.stderr.write(
-                    'Warning: title mismatch\n'
-                    '\tId: {}\n'
-                    '\tTou.tv title: {}\n'
-                    '\tData file title: {}\n'.format(
-                        emission_id,
-                        repertoire_emissions[emission_id].Title,
-                        data[DATA_EMISSIONS][emission_id][DATA_TITLE]
-                        )
-                    )
-        
-        # Sort the list of new emissions alphabetically
-        data[DATA_NEW_EMISSIONS].sort(key=title_sort_func)
-
-        data[DATA_LAST_RUN] = today
-        
-        write_data(data)
-    
-    # List all emissions
-    if args.all:
-        emissions_keys = list(repertoire_emissions.keys())
-        emissions_keys.sort(key=title_sort_func)
-        
-        list_emissions(repertoire_emissions, emissions_keys)
-        
-    # List only new emissions
-    else:
-        if len(data[DATA_NEW_EMISSIONS]) == 0:
-            print('No new emissions since last run')
-            print('To list all emissions, see: {} {} --help\n'.format(
-                sys.argv[0],
-                args.command))
-            
-        else:
-            list_emissions(repertoire_emissions, data[DATA_NEW_EMISSIONS])
-
-
-def command_fetch(args):
-    client = get_client_with_cache()
-    if args.emission is not None:
-        emission = retry_function(client.get_emission_by_name, args.emission)
-    else:
-        sys.exit('Error: please provide name of emission to download')
-    app = AppPlus(None)
-    app._verbose = False
-    
-    data = get_data()
-    
-    # Download single episode
-    if args.episode is not None:
-        episode = retry_function(client.get_episode_by_name, emission, args.episode)
-        app._fetch_episode(episode, output_dir=args.directory, bitrate=args.bitrate, quality=args.quality, overwrite=False)
-    
-    # Download all episodes
-    else:
-        episodes = retry_function(client.get_emission_episodes, emission)
-        for episode_id in eposides:
-            if (emission.Id in data[DATA_EMISSIONS] and
-                    DATA_DOWNLOADED in data[DATA_EMISSIONS][emission.Id]):
-                # TODO: do the comparison
-                sys.exit('Error: not yet implemented')
-            
-            else:
-                sys.exit('Error: not yet implemented')
-
-
-def list_emissions(all_emissions, emissions_to_list):
-    for emission_id in emissions_to_list:
-        emission = all_emissions[emission_id]
-        emission_string = ('{}\n\t{}\n\t{}'.format(
-            emission.Title,
-            emission.get_url(),
-            emission.Genre.Title,
-        ))
-        if emission.Country is not None:
-            emission_string += '\n\t{}'.format(emission.Country)
-        print(emission_string)
-
+'''
 
 def retry_function(function, *args, **kwargs):
     # The name of this exception was changed at some point
@@ -308,7 +144,177 @@ def retry_function(function, *args, **kwargs):
     return result
 
 
+class CliError(RuntimeError):
+    pass
+
+
 class AppPlus(toutvcli.app.App):
+    DATA_DOWNLOADED = 'downloaded'
+    DATA_EMISSIONS = 'emissions'
+    DATA_FIRST_SEEN = 'first_seen'
+    DATA_LAST_RUN = 'last_run'
+    DATA_LAST_SEEN = 'last_seen'
+    DATA_NEW_EMISSIONS = 'new_emissions'
+    DATA_NEW_COUNT = 'new_count'
+    DATA_TITLE = 'title'
+    
+    def run(self):
+        locale.setlocale(locale.LC_ALL, '')
+
+        # Errors are catched here and a corresponding error code is
+        # returned. The codes are:
+        #
+        #   * 0: all okay
+        #   * 1: client error
+        #   * 2: download error (cancelled, file exists, no space left, etc.)
+        #   * 3: network error (timeout, bad HTTP request, etc.)
+        #   * 10: bad argument
+        #   * 100: unknown error
+        if not self._args:
+            self._argparser.print_help()
+            return 10
+
+        args = self._argparser.parse_args(self._args)
+        self._verbose = args.verbose
+
+        if 'no_cache' not in args:
+            args.no_cache = False
+
+        no_cache = args.no_cache_global or args.no_cache
+
+        if self._verbose:
+            logging.basicConfig(level=logging.DEBUG)
+
+        if args.build_client:
+            self._toutvclient = self._build_toutv_client(no_cache)
+
+        try:
+            args.func(args)
+        except toutv.client.ClientError as e:
+            print('Client error: {}'.format(e), file=sys.stderr)
+            return 1
+        except toutv.dl.CancelledByUserError as e:
+            print('Download cancelled by user', file=sys.stderr)
+            return 2
+        except toutv.dl.FileExistsError as e:
+            msg = 'Destination file exists (use -f to force)'
+            print(msg, file=sys.stderr)
+            return 2
+        except toutv.dl.NoSpaceLeftError:
+            print('No space left on device while downloading', file=sys.stderr)
+            return 2
+        except toutv.dl.DownloadError as e:
+            print('Download error: {}'.format(e), file=sys.stderr)
+            return 2
+        except toutv.exceptions.RequestTimeoutError as e:
+            tmpl = 'Timeout error ({} s for "{}")'
+            print(tmpl.format(e.timeout, e.url), file=sys.stderr)
+            return 3
+        except toutv.exceptions.UnexpectedHttpStatusCodeError as e:
+            tmpl = 'Bad HTTP status code ({}) for "{}"'
+            print(tmpl.format(e.status_code, e.url), file=sys.stderr)
+            return 3
+        except toutv.exceptions.NetworkError as e:
+            print('Network error: {}'.format(e), file=sys.stderr)
+            return 3
+        except CliError as e:
+            print('Command line error: {}'.format(e), file=sys.stderr)
+            return 1
+        except Exception as e:
+            print('Unknown exception: {}: {}'.format(type(e), e),
+                  file=sys.stderr)
+            return 100
+
+        return 0
+        
+    def _print_list_emissions(self, all=False):
+        def title_sort_func(ekey):
+            return locale.strxfrm(repertoire_emissions[ekey].get_title())
+        
+        client = get_client_with_cache()
+
+        # Get the list of current emissions
+        repertoire = retry_function(client.get_page_repertoire)
+        repertoire_emissions = retry_function(repertoire.get_emissions)
+
+        # For some reason the emission ID is an int, but JSON converts int keys to
+        # strings, so just make them strings so we don't have to worry about it
+        repertoire_emissions = {str(k):v for k, v in repertoire_emissions.items()}
+
+        today = datetime.datetime.now().strftime('%Y-%m-%d')
+        data = get_data()
+
+        # If this is the first run ever or the first run of the day
+        if DATA_LAST_RUN not in data or data[DATA_LAST_RUN] != today:
+            # If this is the first run ever
+            if DATA_LAST_RUN not in data:
+                data[DATA_LAST_RUN] = today
+                data[DATA_EMISSIONS] = {}
+            
+            # Start with a fresh list of new emissions
+            data[DATA_NEW_EMISSIONS] = []
+            
+            for emission_id in repertoire_emissions:
+                # If this is a completely new emission
+                if emission_id not in data[DATA_EMISSIONS]:
+                    data[DATA_NEW_EMISSIONS].append(emission_id)
+                    
+                    data[DATA_EMISSIONS][emission_id] = {}
+                    data[DATA_EMISSIONS][emission_id][DATA_TITLE] = repertoire_emissions[emission_id].Title
+                    data[DATA_EMISSIONS][emission_id][DATA_FIRST_SEEN] = today
+                    data[DATA_EMISSIONS][emission_id][DATA_NEW_COUNT] = 1
+                
+                # If this is a new emission since the last run
+                if DATA_LAST_SEEN in data[DATA_EMISSIONS][emission_id] and \
+                        data[DATA_EMISSIONS][emission_id][DATA_LAST_SEEN] != \
+                        data[DATA_LAST_RUN]:
+                    data[DATA_EMISSIONS][emission_id][DATA_NEW_COUNT] += 1
+                    
+                    if data[DATA_EMISSIONS][emission_id][DATA_NEW_COUNT] <= \
+                            MAX_NEW_COUNT:
+                        data[DATA_NEW_EMISSIONS].append(emission_id)
+                
+                data[DATA_EMISSIONS][emission_id][DATA_LAST_SEEN] = today
+                
+                # Basic sanity check if title of an emission has changed
+                if repertoire_emissions[emission_id].Title.lower() != \
+                        data[DATA_EMISSIONS][emission_id][DATA_TITLE].lower():
+                    sys.stderr.write(
+                        'Warning: title mismatch\n'
+                        '\tId: {}\n'
+                        '\tTou.tv title: {}\n'
+                        '\tData file title: {}\n'.format(
+                            emission_id,
+                            repertoire_emissions[emission_id].Title,
+                            data[DATA_EMISSIONS][emission_id][DATA_TITLE]
+                            )
+                        )
+            
+            # Sort the list of new emissions alphabetically
+            data[DATA_NEW_EMISSIONS].sort(key=title_sort_func)
+
+            data[DATA_LAST_RUN] = today
+            
+            write_data(data)
+        
+        # List all emissions
+        if args.all:
+            emissions_keys = list(repertoire_emissions.keys())
+            emissions_keys.sort(key=title_sort_func)
+            
+            list_emissions(repertoire_emissions, emissions_keys)
+            
+        # List only new emissions
+        else:
+            if len(data[DATA_NEW_EMISSIONS]) == 0:
+                print('No new emissions since last run')
+                print('To list all emissions, see: {} {} --help\n'.format(
+                    sys.argv[0],
+                    args.command))
+                
+            else:
+                list_emissions(repertoire_emissions, data[DATA_NEW_EMISSIONS])
+    
     def _fetch_episode(self, episode, output_dir, bitrate, quality, overwrite):
         # Get available bitrates for episode
         qualities = retry_function(episode.get_available_qualities)
@@ -335,6 +341,80 @@ class AppPlus(toutvcli.app.App):
 
         # Finished
         self._dl = None
+
+    def get_data_file_path():
+        DATA_FILE_NAME = 'toutv_data.json'
+        
+        if 'XDG_DATA_HOME' in os.environ:
+            data_dir = os.environ['XDG_DATA_HOME']
+            xdg_data_path = os.path.join(data_dir, 'toutv')
+            if not os.path.exists(xdg_data_path):
+                os.makedirs(xdg_data_path)
+            data_path = os.path.join(xdg_data_path, DATA_FILE_NAME)
+        else:
+            home_dir = os.environ['HOME']
+            home_data_path = os.path.join(home_dir, '.local', 'share', 'toutv')
+            if not os.path.exists(home_data_path):
+                os.makedirs(home_data_path)
+            data_path = os.path.join(home_data_path, DATA_FILE_NAME)
+            
+        return data_path
+
+    def get_data():
+        data_path = get_data_file_path()
+        if not os.path.exists(data_path):
+            return {}
+        else:
+            with open(data_path, 'r') as data_file:
+                return json.loads(data_file.read())
+
+    def write_data(data):
+        data_path = get_data_file_path()
+        with open(data_path, 'w') as data_file:
+            data_file.write(
+                json.dumps(data, sort_keys=True, indent=4, ensure_ascii=False)
+            )
+
+    def command_fetch(args):
+        client = get_client_with_cache()
+        if args.emission is not None:
+            emission = retry_function(client.get_emission_by_name, args.emission)
+        else:
+            sys.exit('Error: please provide name of emission to download')
+        app = AppPlus(None)
+        app._verbose = False
+        
+        data = get_data()
+        
+        # Download single episode
+        if args.episode is not None:
+            episode = retry_function(client.get_episode_by_name, emission, args.episode)
+            app._fetch_episode(episode, output_dir=args.directory, bitrate=args.bitrate, quality=args.quality, overwrite=False)
+        
+        # Download all episodes
+        else:
+            episodes = retry_function(client.get_emission_episodes, emission)
+            for episode_id in eposides:
+                if (emission.Id in data[DATA_EMISSIONS] and
+                        DATA_DOWNLOADED in data[DATA_EMISSIONS][emission.Id]):
+                    # TODO: do the comparison
+                    sys.exit('Error: not yet implemented')
+                
+                else:
+                    sys.exit('Error: not yet implemented')
+
+
+    def list_emissions(all_emissions, emissions_to_list):
+        for emission_id in emissions_to_list:
+            emission = all_emissions[emission_id]
+            emission_string = ('{}\n\t{}\n\t{}'.format(
+                emission.Title,
+                emission.get_url(),
+                emission.Genre.Title,
+            ))
+            if emission.Country is not None:
+                emission_string += '\n\t{}'.format(emission.Country)
+            print(emission_string)
 
 
 class DownloaderPlus(toutv.dl.Downloader):
