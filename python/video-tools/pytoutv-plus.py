@@ -335,9 +335,10 @@ def retry_function(function, *args, **kwargs):
     return result
 
 
+class DownloaderPlus(toutv.dl.Downloader):
+    def _do_request(self, *args, **kwargs):
+        return retry_function(super()._do_request, *args, **kwargs)
+
+
 if __name__ == '__main__':
     main()
-
-
-class DownloaderPlus(toutv.dl.Downloader):
-    pass
