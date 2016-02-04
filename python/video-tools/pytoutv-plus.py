@@ -176,6 +176,18 @@ class AppPlus(toutvcli.app.App):
     
     # Override
     def _print_list_emissions(self, arg_all=False):
+        def list_emissions(all_emissions, emissions_to_list):
+            for emission_id in emissions_to_list:
+                emission = all_emissions[emission_id]
+                emission_string = ('{}\n\t{}\n\t{}'.format(
+                    emission.Title,
+                    emission.get_url(),
+                    emission.Genre.Title,
+                ))
+                if emission.Country is not None:
+                    emission_string += '\n\t{}'.format(emission.Country)
+                print(emission_string)
+        
         def title_sort_func(ekey):
             return locale.strxfrm(repertoire_emissions[ekey].get_title())
 
@@ -188,7 +200,7 @@ class AppPlus(toutvcli.app.App):
         repertoire_emissions = {str(k):v for k, v in repertoire_emissions.items()}
 
         today = datetime.datetime.now().strftime('%Y-%m-%d')
-        data = self.get_data()
+        data = self._get_data()
 
         # If this is the first run ever or the first run of the day
         if self.DATA_LAST_RUN not in data or data[self.DATA_LAST_RUN] != today:
@@ -241,14 +253,14 @@ class AppPlus(toutvcli.app.App):
 
             data[self.DATA_LAST_RUN] = today
             
-            self.write_data(data)
+            self._write_data(data)
         
         # List all emissions
         if arg_all:
             emissions_keys = list(repertoire_emissions.keys())
             emissions_keys.sort(key=title_sort_func)
             
-            self.list_emissions(repertoire_emissions, emissions_keys)
+            list_emissions(repertoire_emissions, emissions_keys)
             
         # List only new emissions
         else:
@@ -258,7 +270,7 @@ class AppPlus(toutvcli.app.App):
                     sys.argv[0]))
                 
             else:
-                self.list_emissions(repertoire_emissions, data[self.DATA_NEW_EMISSIONS])
+                list_emissions(repertoire_emissions, data[self.DATA_NEW_EMISSIONS])
     
     # Override
     def _fetch_episode(self, episode, output_dir, bitrate, quality, overwrite):
@@ -288,7 +300,7 @@ class AppPlus(toutvcli.app.App):
         # Finished
         self._dl = None
 
-    def get_data_file_path(self):
+    def _get_data_file_path(self):
         DATA_FILE_NAME = 'toutv_data.json'
         
         if 'XDG_DATA_HOME' in os.environ:
@@ -306,16 +318,16 @@ class AppPlus(toutvcli.app.App):
             
         return data_path
 
-    def get_data(self):
-        data_path = self.get_data_file_path()
+    def _get_data(self):
+        data_path = self._get_data_file_path()
         if not os.path.exists(data_path):
             return {}
         else:
             with open(data_path, 'r') as data_file:
                 return json.loads(data_file.read())
 
-    def write_data(self, data):
-        data_path = self.get_data_file_path()
+    def _write_data(self, data):
+        data_path = self._get_data_file_path()
         with open(data_path, 'w') as data_file:
             data_file.write(
                 json.dumps(data, sort_keys=True, indent=4, ensure_ascii=False)
@@ -330,7 +342,7 @@ class AppPlus(toutvcli.app.App):
         app = AppPlus(None)
         app._verbose = False
         
-        data = self.get_data()
+        data = self._get_data()
         
         # Download single episode
         if args.episode is not None:
@@ -348,18 +360,6 @@ class AppPlus(toutvcli.app.App):
                 
                 else:
                     sys.exit('Error: not yet implemented')
-
-    def list_emissions(self, all_emissions, emissions_to_list):
-        for emission_id in emissions_to_list:
-            emission = all_emissions[emission_id]
-            emission_string = ('{}\n\t{}\n\t{}'.format(
-                emission.Title,
-                emission.get_url(),
-                emission.Genre.Title,
-            ))
-            if emission.Country is not None:
-                emission_string += '\n\t{}'.format(emission.Country)
-            print(emission_string)
 
 
 class DownloaderPlus(toutv.dl.Downloader):
