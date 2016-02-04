@@ -252,7 +252,7 @@ def command_fetch(args):
         emission = retry_function(client.get_emission_by_name, args.emission)
     else:
         sys.exit('Error: please provide name of emission to download')
-    app = toutvcli.app.App(None)
+    app = AppPlus(None)
     app._verbose = False
     
     data = get_data()
@@ -260,7 +260,7 @@ def command_fetch(args):
     # Download single episode
     if args.episode is not None:
         episode = retry_function(client.get_episode_by_name, emission, args.episode)
-        fetch_episode(app, episode, output_dir=args.directory, bitrate=args.bitrate, quality=args.quality)
+        app._fetch_episode(episode, output_dir=args.directory, bitrate=args.bitrate, quality=args.quality, overwrite=False)
     
     # Download all episodes
     else:
@@ -273,33 +273,6 @@ def command_fetch(args):
             
             else:
                 sys.exit('Error: not yet implemented')
-
-
-def fetch_episode(app, episode, output_dir, bitrate, quality):
-    # Get available bitrates for episode
-    qualities = retry_function(episode.get_available_qualities)
-
-    # Choose bitrate
-    if bitrate is None:
-        if quality == toutvcli.app.App.QUALITY_MIN:
-            bitrate = qualities[0].bitrate
-        elif quality == toutvcli.app.App.QUALITY_MAX:
-            bitrate = qualities[-1].bitrate
-        elif quality == toutvcli.app.App.QUALITY_AVG:
-            bitrate = toutvcli.app.App._get_average_bitrate(qualities)
-
-    # Create downloader
-    opu = app._on_dl_progress_update
-    app._dl = DownloaderPlus(episode, bitrate=bitrate,
-                                   output_dir=output_dir,
-                                   on_dl_start=app._on_dl_start,
-                                   on_progress_update=opu)
-
-    # Start download
-    app._dl.download()
-
-    # Finished
-    app._dl = None
 
 
 def list_emissions(all_emissions, emissions_to_list):
@@ -333,6 +306,35 @@ def retry_function(function, *args, **kwargs):
             sys.exit('Error: max timeout attempts reached\n')
     
     return result
+
+
+class AppPlus(toutvcli.app.App):
+    def _fetch_episode(self, episode, output_dir, bitrate, quality, overwrite):
+        # Get available bitrates for episode
+        qualities = retry_function(episode.get_available_qualities)
+
+        # Choose bitrate
+        if bitrate is None:
+            if quality == toutvcli.app.App.QUALITY_MIN:
+                bitrate = qualities[0].bitrate
+            elif quality == toutvcli.app.App.QUALITY_MAX:
+                bitrate = qualities[-1].bitrate
+            elif quality == toutvcli.app.App.QUALITY_AVG:
+                bitrate = toutvcli.app.App._get_average_bitrate(qualities)
+
+        # Create downloader
+        opu = self._on_dl_progress_update
+        self._dl = DownloaderPlus(episode, bitrate=bitrate,
+                                       output_dir=output_dir,
+                                       on_dl_start=self._on_dl_start,
+                                       on_progress_update=opu,
+                                       overwrite=overwrite)
+
+        # Start download
+        self._dl.download()
+
+        # Finished
+        self._dl = None
 
 
 class DownloaderPlus(toutv.dl.Downloader):
