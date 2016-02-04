@@ -159,6 +159,7 @@ class AppPlus(toutvcli.app.App):
     DATA_NEW_COUNT = 'new_count'
     DATA_TITLE = 'title'
     
+    # Override
     def run(self):
         locale.setlocale(locale.LC_ALL, '')
         
@@ -172,7 +173,8 @@ class AppPlus(toutvcli.app.App):
                 action.help = 'List all emissions or episodes'
         
         super().run()
-        
+    
+    # Override
     def _print_list_emissions(self, arg_all=False):
         def title_sort_func(ekey):
             return locale.strxfrm(repertoire_emissions[ekey].get_title())
@@ -258,6 +260,7 @@ class AppPlus(toutvcli.app.App):
             else:
                 self.list_emissions(repertoire_emissions, data[self.DATA_NEW_EMISSIONS])
     
+    # Override
     def _fetch_episode(self, episode, output_dir, bitrate, quality, overwrite):
         # Get available bitrates for episode
         qualities = retry_function(episode.get_available_qualities)
@@ -360,6 +363,7 @@ class AppPlus(toutvcli.app.App):
 
 
 class DownloaderPlus(toutv.dl.Downloader):
+    # Override
     def _do_request(self, *args, **kwargs):
         return retry_function(super()._do_request, *args, **kwargs)
 
