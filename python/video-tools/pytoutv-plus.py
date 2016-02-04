@@ -170,72 +170,8 @@ class AppPlus(toutvcli.app.App):
         for action in self._argparser._actions[1].choices['list']._actions:
             if action.dest == 'all':
                 action.help = 'List all emissions or episodes'
-
-        # Errors are catched here and a corresponding error code is
-        # returned. The codes are:
-        #
-        #   * 0: all okay
-        #   * 1: client error
-        #   * 2: download error (cancelled, file exists, no space left, etc.)
-        #   * 3: network error (timeout, bad HTTP request, etc.)
-        #   * 10: bad argument
-        #   * 100: unknown error
-        if not self._args:
-            self._argparser.print_help()
-            return 10
-
-        args = self._argparser.parse_args(self._args)
-        self._verbose = args.verbose
-
-        if 'no_cache' not in args:
-            args.no_cache = False
-
-        no_cache = args.no_cache_global or args.no_cache
-
-        if self._verbose:
-            logging.basicConfig(level=logging.DEBUG)
-
-        if args.build_client:
-            self._toutvclient = self._build_toutv_client(no_cache)
-
-        try:
-            args.func(args)
-        except toutv.client.ClientError as e:
-            print('Client error: {}'.format(e), file=sys.stderr)
-            return 1
-        except toutv.dl.CancelledByUserError as e:
-            print('Download cancelled by user', file=sys.stderr)
-            return 2
-        except toutv.dl.FileExistsError as e:
-            msg = 'Destination file exists (use -f to force)'
-            print(msg, file=sys.stderr)
-            return 2
-        except toutv.dl.NoSpaceLeftError:
-            print('No space left on device while downloading', file=sys.stderr)
-            return 2
-        except toutv.dl.DownloadError as e:
-            print('Download error: {}'.format(e), file=sys.stderr)
-            return 2
-        except toutv.exceptions.RequestTimeoutError as e:
-            tmpl = 'Timeout error ({} s for "{}")'
-            print(tmpl.format(e.timeout, e.url), file=sys.stderr)
-            return 3
-        except toutv.exceptions.UnexpectedHttpStatusCodeError as e:
-            tmpl = 'Bad HTTP status code ({}) for "{}"'
-            print(tmpl.format(e.status_code, e.url), file=sys.stderr)
-            return 3
-        except toutv.exceptions.NetworkError as e:
-            print('Network error: {}'.format(e), file=sys.stderr)
-            return 3
-        except CliError as e:
-            print('Command line error: {}'.format(e), file=sys.stderr)
-            return 1
-        except Exception as e:
-            print('Unknown exception: {}: {}'.format(type(e), e),
-                  file=sys.stderr)
-            return 100
-
-        return 0
+        
+        super().run()
         
     def _print_list_emissions(self, arg_all=False):
         def title_sort_func(ekey):
