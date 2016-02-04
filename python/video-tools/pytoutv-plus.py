@@ -48,81 +48,13 @@ import toutvcli.app
 
 # The maximum number of times an emission will be listed as new
 MAX_NEW_COUNT = 3
+# The maximum number of times timeout errors will be ignored
 MAX_TIMEOUTS = 10
 
 
 def main():
     app = AppPlus(sys.argv[1:])
     app.run()
-
-'''
-    # Set the locale for improved sorting of non-ASCII characters
-    locale.setlocale(locale.LC_ALL, "")
-    
-    app = AppPlus(sys.argv[1:])
-    args = app._argparser.parse_args(app._args)
-    
-#    args = parse_args()
-
-    if args.build_client:
-        self._toutvclient = self._build_toutv_client(no_cache)
-
-    args.func(args)
-'''
-
-'''
-def parse_args():
-    p = argparse.ArgumentParser()
-    sp = p.add_subparsers(dest='command', help='Commands help')
-    
-    # fetch command
-    pf = sp.add_parser('fetch',
-                       help='Fetch one or all episodes of an emission')
-    quality_choices = [
-        toutvcli.app.App.QUALITY_MIN,
-        toutvcli.app.App.QUALITY_AVG,
-        toutvcli.app.App.QUALITY_MAX
-    ]
-    pf.add_argument('emission', action='store', type=str,
-                    help='Emission name to fetch')
-    pf.add_argument('episode', action='store', nargs='?', type=str,
-                    help='Episode name to fetch')
-    pf.add_argument('-b', '--bitrate', action='store', type=int,
-                    help='Video bitrate (default: use default quality)')
-    pf.add_argument('-d', '--directory', action='store',
-                    default=os.getcwd(),
-                    help='Output directory (default: CWD)')
-    pf.add_argument('-q', '--quality', action='store',
-                    default=toutvcli.app.App.QUALITY_AVG, choices=quality_choices,
-                    help='Video quality (default: {})'.format(toutvcli.app.App.QUALITY_AVG))
-    pf.set_defaults(func=command_fetch)
-    
-    pl = sp.add_parser(
-        'list', 
-        help='List new emissions or episodes since last run')
-    pl.add_argument(
-        '-a', 
-        '--all', 
-        action='store_true', 
-        help='List all emissions or episodes')
-    pl.set_defaults(func=command_list)
-    
-    args = p.parse_args()
-    
-    if args.command is None:
-        p.print_help()
-        sys.exit()
-    
-    return args
-'''
-
-'''
-def get_client_with_cache():
-    print('Please wait...\n')
-    
-    app = toutvcli.app.App(None)
-    return app._build_toutv_client(no_cache=False)
-'''
 
 def retry_function(function, *args, **kwargs):
     # The name of this exception was changed at some point
@@ -142,10 +74,6 @@ def retry_function(function, *args, **kwargs):
             sys.exit('Error: max timeout attempts reached\n')
     
     return result
-
-
-class CliError(RuntimeError):
-    pass
 
 
 class AppPlus(toutvcli.app.App):
@@ -173,6 +101,60 @@ class AppPlus(toutvcli.app.App):
                 action.help = 'List all emissions or episodes'
         
         super().run()
+    
+    # Override
+    def _command_fetch(self, args):
+        if args.emission is not None:
+            emission = retry_function(self._toutvclient.get_emission_by_name, args.emission)
+        else:
+            sys.exit('Error: please provide name of emission to download')
+        
+        data = self._get_data()
+        
+        # Download single episode
+        if args.episode is not None:
+            episode = retry_function(self._toutvclient.get_episode_by_name, emission, args.episode)
+            self._fetch_episode(episode, output_dir=args.directory, bitrate=args.bitrate, quality=args.quality, overwrite=False)
+        
+        # Download all episodes
+        else:
+            episodes = retry_function(self._toutvclient.get_emission_episodes, emission)
+            for episode_id in eposides:
+                if (emission.Id in data[self.DATA_EMISSIONS] and
+                        self.DATA_DOWNLOADED in data[self.DATA_EMISSIONS][emission.Id]):
+                    # TODO: do the comparison
+                    sys.exit('Error: not yet implemented')
+                
+                else:
+                    sys.exit('Error: not yet implemented')
+    
+    # Override
+    def _fetch_episode(self, episode, output_dir, bitrate, quality, overwrite):
+        # Get available bitrates for episode
+        qualities = retry_function(episode.get_available_qualities)
+
+        # Choose bitrate
+        if bitrate is None:
+            if quality == toutvcli.app.App.QUALITY_MIN:
+                bitrate = qualities[0].bitrate
+            elif quality == toutvcli.app.App.QUALITY_MAX:
+                bitrate = qualities[-1].bitrate
+            elif quality == toutvcli.app.App.QUALITY_AVG:
+                bitrate = toutvcli.app.App._get_average_bitrate(qualities)
+
+        # Create downloader
+        opu = self._on_dl_progress_update
+        self._dl = DownloaderPlus(episode, bitrate=bitrate,
+                                       output_dir=output_dir,
+                                       on_dl_start=self._on_dl_start,
+                                       on_progress_update=opu,
+                                       overwrite=overwrite)
+
+        # Start download
+        self._dl.download()
+
+        # Finished
+        self._dl = None
     
     # Override
     def _print_list_emissions(self, arg_all=False):
@@ -272,33 +254,13 @@ class AppPlus(toutvcli.app.App):
             else:
                 list_emissions(repertoire_emissions, data[self.DATA_NEW_EMISSIONS])
     
-    # Override
-    def _fetch_episode(self, episode, output_dir, bitrate, quality, overwrite):
-        # Get available bitrates for episode
-        qualities = retry_function(episode.get_available_qualities)
-
-        # Choose bitrate
-        if bitrate is None:
-            if quality == toutvcli.app.App.QUALITY_MIN:
-                bitrate = qualities[0].bitrate
-            elif quality == toutvcli.app.App.QUALITY_MAX:
-                bitrate = qualities[-1].bitrate
-            elif quality == toutvcli.app.App.QUALITY_AVG:
-                bitrate = toutvcli.app.App._get_average_bitrate(qualities)
-
-        # Create downloader
-        opu = self._on_dl_progress_update
-        self._dl = DownloaderPlus(episode, bitrate=bitrate,
-                                       output_dir=output_dir,
-                                       on_dl_start=self._on_dl_start,
-                                       on_progress_update=opu,
-                                       overwrite=overwrite)
-
-        # Start download
-        self._dl.download()
-
-        # Finished
-        self._dl = None
+    def _get_data(self):
+        data_path = self._get_data_file_path()
+        if not os.path.exists(data_path):
+            return {}
+        else:
+            with open(data_path, 'r') as data_file:
+                return json.loads(data_file.read())
 
     def _get_data_file_path(self):
         DATA_FILE_NAME = 'toutv_data.json'
@@ -318,46 +280,12 @@ class AppPlus(toutvcli.app.App):
             
         return data_path
 
-    def _get_data(self):
-        data_path = self._get_data_file_path()
-        if not os.path.exists(data_path):
-            return {}
-        else:
-            with open(data_path, 'r') as data_file:
-                return json.loads(data_file.read())
-
     def _write_data(self, data):
         data_path = self._get_data_file_path()
         with open(data_path, 'w') as data_file:
             data_file.write(
                 json.dumps(data, sort_keys=True, indent=4, ensure_ascii=False)
             )
-
-    # Override
-    def _command_fetch(self, args):
-        if args.emission is not None:
-            emission = retry_function(self._toutvclient.get_emission_by_name, args.emission)
-        else:
-            sys.exit('Error: please provide name of emission to download')
-        
-        data = self._get_data()
-        
-        # Download single episode
-        if args.episode is not None:
-            episode = retry_function(self._toutvclient.get_episode_by_name, emission, args.episode)
-            self._fetch_episode(episode, output_dir=args.directory, bitrate=args.bitrate, quality=args.quality, overwrite=False)
-        
-        # Download all episodes
-        else:
-            episodes = retry_function(self._toutvclient.get_emission_episodes, emission)
-            for episode_id in eposides:
-                if (emission.Id in data[self.DATA_EMISSIONS] and
-                        self.DATA_DOWNLOADED in data[self.DATA_EMISSIONS][emission.Id]):
-                    # TODO: do the comparison
-                    sys.exit('Error: not yet implemented')
-                
-                else:
-                    sys.exit('Error: not yet implemented')
 
 
 class DownloaderPlus(toutv.dl.Downloader):
