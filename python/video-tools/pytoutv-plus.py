@@ -237,7 +237,7 @@ class AppPlus(toutvcli.app.App):
 
         return 0
         
-    def _print_list_emissions(self, all=False):
+    def _print_list_emissions(self, arg_all=False):
         def title_sort_func(ekey):
             return locale.strxfrm(repertoire_emissions[ekey].get_title())
 
@@ -306,7 +306,7 @@ class AppPlus(toutvcli.app.App):
             self.write_data(data)
         
         # List all emissions
-        if all:
+        if arg_all:
             emissions_keys = list(repertoire_emissions.keys())
             emissions_keys.sort(key=title_sort_func)
             
