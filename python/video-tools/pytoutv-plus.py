@@ -333,25 +333,23 @@ class AppPlus(toutvcli.app.App):
                 json.dumps(data, sort_keys=True, indent=4, ensure_ascii=False)
             )
 
-    def command_fetch(self, args):
-        client = get_client_with_cache()
+    # Override
+    def _command_fetch(self, args):
         if args.emission is not None:
-            emission = retry_function(client.get_emission_by_name, args.emission)
+            emission = retry_function(self._toutvclient.get_emission_by_name, args.emission)
         else:
             sys.exit('Error: please provide name of emission to download')
-        app = AppPlus(None)
-        app._verbose = False
         
         data = self._get_data()
         
         # Download single episode
         if args.episode is not None:
-            episode = retry_function(client.get_episode_by_name, emission, args.episode)
-            app._fetch_episode(episode, output_dir=args.directory, bitrate=args.bitrate, quality=args.quality, overwrite=False)
+            episode = retry_function(self._toutvclient.get_episode_by_name, emission, args.episode)
+            self._fetch_episode(episode, output_dir=args.directory, bitrate=args.bitrate, quality=args.quality, overwrite=False)
         
         # Download all episodes
         else:
-            episodes = retry_function(client.get_emission_episodes, emission)
+            episodes = retry_function(self._toutvclient.get_emission_episodes, emission)
             for episode_id in eposides:
                 if (emission.Id in data[self.DATA_EMISSIONS] and
                         self.DATA_DOWNLOADED in data[self.DATA_EMISSIONS][emission.Id]):
