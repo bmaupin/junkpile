@@ -160,6 +160,15 @@ class AppPlus(toutvcli.app.App):
     
     def run(self):
         locale.setlocale(locale.LC_ALL, '')
+        
+        # Override help messages
+        for action in self._argparser._actions[1]._choices_actions:
+            if action.dest == 'list':
+                action.help = 'List new emissions or episodes since last run'
+        
+        for action in self._argparser._actions[1].choices['list']._actions:
+            if action.dest == 'all':
+                action.help = 'List all emissions or episodes'
 
         # Errors are catched here and a corresponding error code is
         # returned. The codes are:
