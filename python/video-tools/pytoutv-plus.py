@@ -105,18 +105,11 @@ class AppPlus(toutvcli.app.App):
         super().run()
     
     # Override
-    def _build_toutv_client(self, no_cache):
-        if no_cache:
-            cache = toutv.cache.EmptyCache()
-        else:
-            try:
-                cache = App._build_cache()
-            except:
-                print('Warning: not using cache (multiple instances of toutv?)',
-                      file=sys.stderr)
-                cache = toutv.cache.EmptyCache()
-
-        return toutv.client.Client(transport=TransportPlus(), cache=cache)
+    def _build_toutv_client(self, *args, **kwargs):
+        client = super()._build_toutv_client(*args, **kwargs)
+        client._transport = TransportPlus()
+        
+        return client
     
     # Override
     def _command_fetch(self, args):
