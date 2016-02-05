@@ -41,14 +41,16 @@ import os
 import platform
 import sys
 
+import toutv.client
 import toutv.dl
 import toutv.exceptions
+import toutv.transport
 import toutvcli.app
 
 
 # The maximum number of times an emission will be listed as new
 MAX_NEW_COUNT = 3
-# The maximum number of times timeout errors will be ignored
+# The maximum number of times per operation timeout errors will be ignored
 MAX_TIMEOUTS = 10
 
 
@@ -103,9 +105,23 @@ class AppPlus(toutvcli.app.App):
         super().run()
     
     # Override
+    def _build_toutv_client(self, no_cache):
+        if no_cache:
+            cache = toutv.cache.EmptyCache()
+        else:
+            try:
+                cache = App._build_cache()
+            except:
+                print('Warning: not using cache (multiple instances of toutv?)',
+                      file=sys.stderr)
+                cache = toutv.cache.EmptyCache()
+
+        return toutv.client.Client(transport=TransportPlus(), cache=cache)
+    
+    # Override
     def _command_fetch(self, args):
         if args.emission is not None:
-            emission = retry_function(self._toutvclient.get_emission_by_name, args.emission)
+            emission = self._toutvclient.get_emission_by_name(args.emission)
         else:
             sys.exit('Error: please provide name of emission to download')
         
@@ -113,12 +129,12 @@ class AppPlus(toutvcli.app.App):
         
         # Download single episode
         if args.episode is not None:
-            episode = retry_function(self._toutvclient.get_episode_by_name, emission, args.episode)
+            episode = self._toutvclient.get_episode_by_name(emission, args.episode)
             self._fetch_episode(episode, output_dir=args.directory, bitrate=args.bitrate, quality=args.quality, overwrite=False)
         
         # Download all episodes
         else:
-            episodes = retry_function(self._toutvclient.get_emission_episodes, emission)
+            episodes = self._toutvclient.get_emission_episodes(emission)
             for episode_id in eposides:
                 if (emission.Id in data[self.DATA_EMISSIONS] and
                         self.DATA_DOWNLOADED in data[self.DATA_EMISSIONS][emission.Id]):
@@ -174,8 +190,8 @@ class AppPlus(toutvcli.app.App):
             return locale.strxfrm(repertoire_emissions[ekey].get_title())
 
         # Get the list of current emissions
-        repertoire = retry_function(self._toutvclient.get_page_repertoire)
-        repertoire_emissions = retry_function(repertoire.get_emissions)
+        repertoire = self._toutvclient.get_page_repertoire()
+        repertoire_emissions = repertoire.get_emissions()
 
         # For some reason the emission ID is an int, but JSON converts int keys to
         # strings, so just make them strings so we don't have to worry about it
@@ -292,6 +308,12 @@ class DownloaderPlus(toutv.dl.Downloader):
     # Override
     def _do_request(self, *args, **kwargs):
         return retry_function(super()._do_request, *args, **kwargs)
+
+
+class TransportPlus(toutv.transport.JsonTransport):
+    # Override
+    def _do_query(self, *args, **kwargs):
+        return retry_function(super()._do_query, *args, **kwargs)
 
 
 if __name__ == '__main__':
