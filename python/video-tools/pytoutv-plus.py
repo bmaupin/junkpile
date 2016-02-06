@@ -41,7 +41,6 @@ import os
 import platform
 import sys
 
-import toutv.client
 import toutv.dl
 import toutv.exceptions
 import toutv.transport
@@ -79,16 +78,6 @@ def retry_function(function, *args, **kwargs):
 
 
 class AppPlus(toutvcli.app.App):
-    # TODO: put data in its own class
-    DATA_DOWNLOADED = 'downloaded'
-    DATA_EMISSIONS = 'emissions'
-    DATA_FIRST_SEEN = 'first_seen'
-    DATA_LAST_RUN = 'last_run'
-    DATA_LAST_SEEN = 'last_seen'
-    DATA_NEW_EMISSIONS = 'new_emissions'
-    DATA_NEW_COUNT = 'new_count'
-    DATA_TITLE = 'title'
-    
     # Override
     def run(self):
         locale.setlocale(locale.LC_ALL, '')
@@ -107,7 +96,7 @@ class AppPlus(toutvcli.app.App):
     # Override
     def _build_toutv_client(self, *args, **kwargs):
         client = super()._build_toutv_client(*args, **kwargs)
-        client._transport = TransportPlus()
+        client._transport = JsonTransportPlus()
         
         return client
     
@@ -128,7 +117,8 @@ class AppPlus(toutvcli.app.App):
         # Download all episodes
         else:
             episodes = self._toutvclient.get_emission_episodes(emission)
-            for episode_id in eposides:
+            for episode_id in episodes:
+#                if not any(e for e in data.emissions if e.id == emission.Id):
                 if (emission.Id in data[self.DATA_EMISSIONS] and
                         self.DATA_DOWNLOADED in data[self.DATA_EMISSIONS][emission.Id]):
                     # TODO: do the comparison
@@ -194,40 +184,49 @@ class AppPlus(toutvcli.app.App):
         data = self._get_data()
 
         # If this is the first run ever or the first run of the day
-        if self.DATA_LAST_RUN not in data or data[self.DATA_LAST_RUN] != today:
+        if data.last_run != today:
             # If this is the first run ever
-            if self.DATA_LAST_RUN not in data:
-                data[self.DATA_LAST_RUN] = today
-                data[self.DATA_EMISSIONS] = {}
+            if data.last_run is None:
+                data.last_run = today
             
             # Start with a fresh list of new emissions
-            data[self.DATA_NEW_EMISSIONS] = []
+            data.new_emissions = []
             
             for emission_id in repertoire_emissions:
+                emission = None
+                
+                # Get the emission from the data
+                for e in data.emissions:
+                    if e.id == emission_id:
+                        if emission is not None:
+                            sys.stderr.write('Warning: duplicate emission exists in data with id {}\n'.format(emission_id))
+                        else:
+                            emission = e
+                
                 # If this is a completely new emission
-                if emission_id not in data[self.DATA_EMISSIONS]:
-                    data[self.DATA_NEW_EMISSIONS].append(emission_id)
+                if emission is None:
+                    data.new_emissions.append(emission_id)
                     
-                    data[self.DATA_EMISSIONS][emission_id] = {}
-                    data[self.DATA_EMISSIONS][emission_id][self.DATA_TITLE] = repertoire_emissions[emission_id].Title
-                    data[self.DATA_EMISSIONS][emission_id][self.DATA_FIRST_SEEN] = today
-                    data[self.DATA_EMISSIONS][emission_id][self.DATA_NEW_COUNT] = 1
+                    emission = Emission()
+                    emission.id = emission_id
+                    emission.title = repertoire_emissions[emission_id].Title
+                    emission.first_seen = today
+                    emission.new_count = 1
+                    
+                    data.emissions.append(emission)
                 
                 # If this is a new emission since the last run
-                if self.DATA_LAST_SEEN in data[self.DATA_EMISSIONS][emission_id] and \
-                        data[self.DATA_EMISSIONS][emission_id][self.DATA_LAST_SEEN] != \
-                        data[self.DATA_LAST_RUN]:
-                    data[self.DATA_EMISSIONS][emission_id][self.DATA_NEW_COUNT] += 1
+                if emission.last_seen != data.last_run:
+                    emission.new_count += 1
                     
-                    if data[self.DATA_EMISSIONS][emission_id][self.DATA_NEW_COUNT] <= \
-                            MAX_NEW_COUNT:
-                        data[self.DATA_NEW_EMISSIONS].append(emission_id)
+                    if emission.new_count <= MAX_NEW_COUNT:
+                        data.new_emissions.append(emission_id)
                 
-                data[self.DATA_EMISSIONS][emission_id][self.DATA_LAST_SEEN] = today
+                emission.last_seen = today
                 
                 # Basic sanity check if title of an emission has changed
                 if repertoire_emissions[emission_id].Title.lower() != \
-                        data[self.DATA_EMISSIONS][emission_id][self.DATA_TITLE].lower():
+                        emission.title.lower():
                     sys.stderr.write(
                         'Warning: title mismatch\n'
                         '\tId: {}\n'
@@ -235,14 +234,14 @@ class AppPlus(toutvcli.app.App):
                         '\tData file title: {}\n'.format(
                             emission_id,
                             repertoire_emissions[emission_id].Title,
-                            data[self.DATA_EMISSIONS][emission_id][self.DATA_TITLE]
+                            emission.title
                             )
                         )
             
             # Sort the list of new emissions alphabetically
-            data[self.DATA_NEW_EMISSIONS].sort(key=title_sort_func)
+            data.new_emissions.sort(key=title_sort_func)
 
-            data[self.DATA_LAST_RUN] = today
+            data.last_run = today
             
             self._write_data(data)
         
@@ -255,24 +254,49 @@ class AppPlus(toutvcli.app.App):
             
         # List only new emissions
         else:
-            if len(data[self.DATA_NEW_EMISSIONS]) == 0:
+            if len(data.new_emissions) == 0:
                 print('No new emissions since last run')
                 print('To list all emissions, see: {} list --help\n'.format(
                     sys.argv[0]))
                 
             else:
-                list_emissions(repertoire_emissions, data[self.DATA_NEW_EMISSIONS])
+                list_emissions(repertoire_emissions, data.new_emissions)
     
     def _get_data(self):
+        DATA_DOWNLOADED = 'downloaded'
+        DATA_EMISSIONS = 'emissions'
+        DATA_FIRST_SEEN = 'first_seen'
+        DATA_ID = 'id'
+        DATA_LAST_RUN = 'last_run'
+        DATA_LAST_SEEN = 'last_seen'
+        DATA_NEW_EMISSIONS = 'new_emissions'
+        DATA_NEW_COUNT = 'new_count'
+        DATA_TITLE = 'title'
+        
         data_path = self._get_data_file_path()
         if not os.path.exists(data_path):
-            return {}
+            return Data()
+            
         else:
             with open(data_path, 'r') as data_file:
-                return json.loads(data_file.read())
+                json_data = json.loads(data_file.read())
+                data = Data()
+                data.last_run = json_data[DATA_LAST_RUN]
+                data.new_emissions = json_data[DATA_NEW_EMISSIONS]
+                for json_emission in json_data[DATA_EMISSIONS]:
+                    emission = Emission()
+                    emission.first_seen = json_emission[DATA_FIRST_SEEN]
+                    emission.id = json_emission[DATA_ID]
+                    emission.last_seen = json_emission[DATA_LAST_SEEN]
+                    emission.new_count = json_emission[DATA_NEW_COUNT]
+                    emission.title = json_emission[DATA_TITLE]
+                    
+                    data.emissions.append(emission)
+                
+                return data
 
     def _get_data_file_path(self):
-        DATA_FILE_NAME = 'toutv_data.json'
+        DATA_FILE_NAME = 'toutv_data-test.json'
         
         if 'XDG_DATA_HOME' in os.environ:
             data_dir = os.environ['XDG_DATA_HOME']
@@ -293,8 +317,20 @@ class AppPlus(toutvcli.app.App):
         data_path = self._get_data_file_path()
         with open(data_path, 'w') as data_file:
             data_file.write(
-                json.dumps(data, sort_keys=True, indent=4, ensure_ascii=False)
+                json.dumps(
+                    data, 
+                    cls=JsonObjectEncoder,
+                    sort_keys=True, 
+                    indent=4, 
+                    ensure_ascii=False,
+                )
             )
+
+
+class Data():
+    def __init__(self):
+        self.emissions = []
+        self.last_run = None
 
 
 class DownloaderPlus(toutv.dl.Downloader):
@@ -303,7 +339,17 @@ class DownloaderPlus(toutv.dl.Downloader):
         return retry_function(super()._do_request, *args, **kwargs)
 
 
-class TransportPlus(toutv.transport.JsonTransport):
+class Emission:
+    def __init__(self):
+        self.last_seen = None
+
+
+class JsonObjectEncoder(json.JSONEncoder):
+    def default(self, o):
+        return o.__dict__
+
+
+class JsonTransportPlus(toutv.transport.JsonTransport):
     # Override
     def _do_query(self, *args, **kwargs):
         return retry_function(super()._do_query, *args, **kwargs)
