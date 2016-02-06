@@ -265,13 +265,8 @@ class AppPlus(toutvcli.app.App):
     def _get_data(self):
         DATA_DOWNLOADED = 'downloaded'
         DATA_EMISSIONS = 'emissions'
-        DATA_FIRST_SEEN = 'first_seen'
-        DATA_ID = 'id'
         DATA_LAST_RUN = 'last_run'
-        DATA_LAST_SEEN = 'last_seen'
         DATA_NEW_EMISSIONS = 'new_emissions'
-        DATA_NEW_COUNT = 'new_count'
-        DATA_TITLE = 'title'
         
         data_path = self._get_data_file_path()
         if not os.path.exists(data_path):
@@ -283,13 +278,11 @@ class AppPlus(toutvcli.app.App):
                 data = Data()
                 data.last_run = json_data[DATA_LAST_RUN]
                 data.new_emissions = json_data[DATA_NEW_EMISSIONS]
+                
                 for json_emission in json_data[DATA_EMISSIONS]:
                     emission = Emission()
-                    emission.first_seen = json_emission[DATA_FIRST_SEEN]
-                    emission.id = json_emission[DATA_ID]
-                    emission.last_seen = json_emission[DATA_LAST_SEEN]
-                    emission.new_count = json_emission[DATA_NEW_COUNT]
-                    emission.title = json_emission[DATA_TITLE]
+                    for key in json_emission.keys():
+                        emission.__setattr__(key, json_emission[key])
                     
                     data.emissions.append(emission)
                 
