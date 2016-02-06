@@ -216,7 +216,7 @@ class AppPlus(toutvcli.app.App):
                     data.emissions.append(emission)
                 
                 # If this is a new emission since the last run
-                if emission.last_seen != data.last_run:
+                if emission.last_seen != None and emission.last_seen != data.last_run:
                     emission.new_count += 1
                     
                     if emission.new_count <= MAX_NEW_COUNT:
