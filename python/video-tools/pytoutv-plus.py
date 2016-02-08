@@ -190,17 +190,32 @@ class AppPlus(toutvcli.app.App):
         # Prompt if episode already downloaded
         # TODO
         
-        # Get available bitrates for episode
-        qualities = retry_function(episode.get_available_qualities)
-
-        # Choose bitrate
-        if bitrate is None:
-            if quality == toutvcli.app.App.QUALITY_MIN:
-                bitrate = qualities[0].bitrate
-            elif quality == toutvcli.app.App.QUALITY_MAX:
-                bitrate = qualities[-1].bitrate
-            elif quality == toutvcli.app.App.QUALITY_AVG:
-                bitrate = toutvcli.app.App._get_average_bitrate(qualities)
+        # Handle API change
+        if hasattr(episode, 'get_available_qualities'):
+            # Get available bitrates for episode
+            qualities = retry_function(episode.get_available_qualities)
+            
+            # Choose bitrate
+            if bitrate is None:
+                if quality == toutvcli.app.App.QUALITY_MIN:
+                    bitrate = qualities[0].bitrate
+                elif quality == toutvcli.app.App.QUALITY_MAX:
+                    bitrate = qualities[-1].bitrate
+                elif quality == toutvcli.app.App.QUALITY_AVG:
+                    bitrate = toutvcli.app.App._get_average_bitrate(qualities)
+        
+        else:
+            # Get available bitrates for episode
+            bitrates = retry_function(episode.get_available_bitrates)
+            
+            # Choose bitrate
+            if bitrate is None:
+                if quality == toutvcli.app.App.QUALITY_MIN:
+                    bitrate = bitrates[0]
+                elif quality == toutvcli.app.App.QUALITY_MAX:
+                    bitrate = bitrates[-1]
+                elif quality == toutvcli.app.App.QUALITY_AVG:
+                    bitrate = toutvcli.app.App._get_average_bitrate(bitrates)
 
         # Create downloader
         opu = self._on_dl_progress_update
