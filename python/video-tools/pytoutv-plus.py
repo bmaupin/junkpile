@@ -100,8 +100,16 @@ class AppPlus(toutvcli.app.App):
         
         return client
     
+    
     # Override
-    def _command_fetch(self, args):
+    def _command_fetch(self, *args, **kwargs):
+        self._data = self._get_data()
+        
+        super()._command_fetch(*args, **kwargs)
+        
+        self._write_data(self._data)
+    
+    '''
         if args.emission is not None:
             emission = self._toutvclient.get_emission_by_name(args.emission)
         else:
@@ -126,9 +134,62 @@ class AppPlus(toutvcli.app.App):
                 
                 else:
                     sys.exit('Error: not yet implemented')
+    '''
     
     # Override
     def _fetch_episode(self, episode, output_dir, bitrate, quality, overwrite):
+        # Match the emission from the data file
+        data_emission = None
+        for em in self._data.emissions:
+            if em.id == episode._emission.Id:
+                data_emission = em
+                break
+            
+            elif em.title.lower() == episode._emission.Title.lower():
+                data_emission = em
+                break
+        
+        # See if the episode has already been downloaded
+        data_episode = None
+        if data_emission is not None:
+            for ep in data_emission.episodes:
+                # Match first by title
+                if ep.id == episode.Id:
+                    if ep.title.lower != episode.Title.lower():
+                        sys.stderr.write(
+                            'Warning: Episode title mismatch\n'
+                            '\tId: {}\n'
+                            '\tTou.tv title: {}\n'
+                            '\tData file title: {}\n'.format(
+                                episode.Id,
+                                episode.Title,
+                                ep.title
+                            )
+                        )
+                    
+                    data_episode = ep
+                    break
+                
+                # Otherwise match by Id
+                elif ep.title.lower() == episode.Title.lower():
+                    if ep.id != episode.Id:
+                        sys.stderr.write(
+                            'Warning: Episode Id mismatch\n'
+                            '\tTitle: {}\n'
+                            '\tTou.tv Id: {}\n'
+                            '\tData file Id: {}\n'.format(
+                                episode.Title,
+                                episode.Id,
+                                ep.id
+                            )
+                        )
+                    
+                    data_episode = ep
+                    break
+                
+        # Prompt if episode already downloaded
+        # TODO
+        
         # Get available bitrates for episode
         qualities = retry_function(episode.get_available_qualities)
 
@@ -154,6 +215,19 @@ class AppPlus(toutvcli.app.App):
 
         # Finished
         self._dl = None
+        
+        # Save the emission info to the data file if it doesn't exist
+        # TODO
+        
+        # Save the downloaded episode info to the data file
+        if data_episode is None:
+            data_episode = Episode()
+            data_episode.bitrate = bitrate
+            data_episode.id = episode.Id
+            data_episode.title = episode.Title
+            
+            data_emission.episodes.append(data_episode)
+        
     
     # Override
     def _print_list_emissions(self, arg_all=False):
