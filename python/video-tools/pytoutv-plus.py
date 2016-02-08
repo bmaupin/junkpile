@@ -349,7 +349,7 @@ class AppPlus(toutvcli.app.App):
                             
                             for emission_key in json_emission.keys():
                                 if emission_key == 'episodes':
-                                    for json_episode in json_emission[emission_keys]:
+                                    for json_episode in json_emission[emission_key]:
                                         episode = Episode()
                                     
                                         for episode_key in json_episode.keys():
