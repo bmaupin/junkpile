@@ -268,16 +268,27 @@ class AppPlus(toutvcli.app.App):
                 json_data = json.loads(data_file.read())
                 data = Data()
                 
-                for key in json_data.keys():
-                    if key == 'emissions':
-                        for json_emission in json_data[key]:
+                for data_key in json_data.keys():
+                    if data_key == 'emissions':
+                        for json_emission in json_data[data_key]:
                             emission = Emission()
-                            for key in json_emission.keys():
-                                emission.__setattr__(key, json_emission[key])
+                            
+                            for emission_key in json_emission.keys():
+                                if emission_key == 'episodes':
+                                    for json_episode in json_emission[emission_keys]:
+                                        episode = Episode()
+                                    
+                                        for episode_key in json_episode.keys():
+                                            episode.__setattr__(episode_key, json_episode[episode_key])
+                                            
+                                        emission.episodes.append(episode)
+                                
+                                else:
+                                    emission.__setattr__(emission_key, json_emission[emission_key])
                             
                             data.emissions.append(emission)
                     else:
-                        data.__setattr__(key, json_data[key])
+                        data.__setattr__(data_key, json_data[data_key])
 
                 return data
 
@@ -327,7 +338,12 @@ class DownloaderPlus(toutv.dl.Downloader):
 
 class Emission:
     def __init__(self):
+        self.episodes = []
         self.last_seen = None
+
+
+class Episode:
+    pass
 
 
 class JsonObjectEncoder(json.JSONEncoder):
