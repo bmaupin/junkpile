@@ -176,10 +176,6 @@ class AppPlus(toutvcli.app.App):
         repertoire = self._toutvclient.get_page_repertoire()
         repertoire_emissions = repertoire.get_emissions()
 
-        # For some reason the emission ID is an int, but JSON converts int keys to
-        # strings, so just make them strings so we don't have to worry about it
-        repertoire_emissions = {str(k):v for k, v in repertoire_emissions.items()}
-
         today = datetime.datetime.now().strftime('%Y-%m-%d')
         data = self._get_data()
 
