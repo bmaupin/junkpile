@@ -140,8 +140,8 @@ class AppPlus(toutvcli.app.App):
     def _fetch_episode(self, episode, output_dir, bitrate, quality, overwrite):
         def download_episode():
             # TODO: reenable downloads
-            return
             
+            '''
             # Create downloader
             opu = self._on_dl_progress_update
             self._dl = DownloaderPlus(episode, bitrate=bitrate,
@@ -155,6 +155,16 @@ class AppPlus(toutvcli.app.App):
 
             # Finished
             self._dl = None
+            '''
+            
+            # Save the downloaded episode info to the data file
+            if data_episode is None:
+                data_episode = Episode()
+                data_episode.bitrate = bitrate
+                data_episode.id = episode.Id
+                data_episode.title = episode.Title
+                
+                data_emission.episodes.append(data_episode)
         
         
         # Match the emission from the data file
@@ -192,43 +202,51 @@ class AppPlus(toutvcli.app.App):
                 data_emission = em
                 break
         
+        # Save the emission info to the data file if it doesn't exist
+        if data_emission is None:
+            data_emission = Emission()
+            data_emission.id = episode._emission.Id
+            data_emission.last_seen = None
+            data_emission.title = episode._emission.Title
+            
+            self._data.emissions.append(data_emission)
+        
         # See if the episode has already been downloaded
         data_episode = None
-        if data_emission is not None:
-            for ep in data_emission.episodes:
-                # Match first by title
-                if ep.id == episode.Id:
-                    if ep.title.lower() != episode.Title.lower():
-                        sys.stderr.write(
-                            'Warning: episode title mismatch\n'
-                            '\tId: {}\n'
-                            '\tTou.tv title: {}\n'
-                            '\tData file title: {}\n'.format(
-                                episode.Id,
-                                episode.Title,
-                                ep.title
-                            )
+        for ep in data_emission.episodes:
+            # Match first by title
+            if ep.id == episode.Id:
+                if ep.title.lower() != episode.Title.lower():
+                    sys.stderr.write(
+                        'Warning: episode title mismatch\n'
+                        '\tId: {}\n'
+                        '\tTou.tv title: {}\n'
+                        '\tData file title: {}\n'.format(
+                            episode.Id,
+                            episode.Title,
+                            ep.title
                         )
-                    
-                    data_episode = ep
-                    break
+                    )
                 
-                # Otherwise match by Id
-                elif ep.title.lower() == episode.Title.lower():
-                    if ep.id != episode.Id:
-                        sys.stderr.write(
-                            'Warning: episode Id mismatch\n'
-                            '\tTitle: {}\n'
-                            '\tTou.tv Id: {}\n'
-                            '\tData file Id: {}\n'.format(
-                                episode.Title,
-                                episode.Id,
-                                ep.id
-                            )
+                data_episode = ep
+                break
+            
+            # Otherwise match by Id
+            elif ep.title.lower() == episode.Title.lower():
+                if ep.id != episode.Id:
+                    sys.stderr.write(
+                        'Warning: episode Id mismatch\n'
+                        '\tTitle: {}\n'
+                        '\tTou.tv Id: {}\n'
+                        '\tData file Id: {}\n'.format(
+                            episode.Title,
+                            episode.Id,
+                            ep.id
                         )
-                    
-                    data_episode = ep
-                    break
+                    )
+                
+                data_episode = ep
+                break
                 
         # Handle API change
         if hasattr(episode, 'get_available_qualities'):
@@ -278,25 +296,6 @@ class AppPlus(toutvcli.app.App):
             
         else:
             download_episode()
-        
-        # Save the emission info to the data file if it doesn't exist
-        if data_emission is None:
-            data_emission = Emission()
-            data_emission.id = episode._emission.Id
-            data_emission.last_seen = None
-            data_emission.title = episode._emission.Title
-            
-            self._data.emissions.append(data_emission)
-        
-        # Save the downloaded episode info to the data file
-        if data_episode is None:
-            data_episode = Episode()
-            data_episode.bitrate = bitrate
-            data_episode.id = episode.Id
-            data_episode.title = episode.Title
-            
-            data_emission.episodes.append(data_episode)
-        
     
     # Override
     def _print_list_emissions(self, arg_all=False):
