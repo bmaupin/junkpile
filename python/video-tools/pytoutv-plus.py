@@ -142,10 +142,34 @@ class AppPlus(toutvcli.app.App):
         data_emission = None
         for em in self._data.emissions:
             if em.id == episode._emission.Id:
+                if em.title.lower() != episode._emission.Title.lower():
+                    sys.stderr.write(
+                        'Warning: Emission title mismatch\n'
+                        '\tId: {}\n'
+                        '\tTou.tv title: {}\n'
+                        '\tData file title: {}\n'.format(
+                            episode._emission.Id,
+                            episode._emission.Title,
+                            em.title
+                        )
+                    )
+                
                 data_emission = em
                 break
             
             elif em.title.lower() == episode._emission.Title.lower():
+                if em.id != episode._emission.Id:
+                    sys.stderr.write(
+                        'Warning: Emission Id mismatch\n'
+                        '\tTitle: {}\n'
+                        '\tTou.tv Id: {}\n'
+                        '\tData file Id: {}\n'.format(
+                            episode._emission.Title,
+                            episode._emission.Id,
+                            em.id
+                        )
+                    )
+                
                 data_emission = em
                 break
         
