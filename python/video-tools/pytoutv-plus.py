@@ -155,7 +155,7 @@ class AppPlus(toutvcli.app.App):
             for ep in data_emission.episodes:
                 # Match first by title
                 if ep.id == episode.Id:
-                    if ep.title.lower != episode.Title.lower():
+                    if ep.title.lower() != episode.Title.lower():
                         sys.stderr.write(
                             'Warning: Episode title mismatch\n'
                             '\tId: {}\n'
