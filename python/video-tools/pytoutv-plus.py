@@ -139,6 +139,8 @@ class AppPlus(toutvcli.app.App):
     # Override
     def _fetch_episode(self, episode, output_dir, bitrate, quality, overwrite):
         def download_episode():
+            nonlocal data_episode
+            
             # TODO: reenable downloads
             
             '''
@@ -292,6 +294,7 @@ class AppPlus(toutvcli.app.App):
                 response = input('Do you wish to download with bitrate {}? (y/n) '.format(
                     bitrate))
                 if response.lower() == 'y':
+                    data_episode.bitrate = bitrate
                     download_episode()
             
         else:
