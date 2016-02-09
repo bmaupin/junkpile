@@ -268,6 +268,8 @@ class AppPlus(toutvcli.app.App):
             data_emission.id = episode._emission.Id
             data_emission.last_seen = None
             data_emission.title = episode._emission.Title
+            
+            self._data.emissions.append(data_emission)
         
         # Save the downloaded episode info to the data file
         if data_episode is None:
