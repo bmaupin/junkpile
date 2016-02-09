@@ -167,6 +167,9 @@ class AppPlus(toutvcli.app.App):
                 data_episode.title = episode.Title
                 
                 data_emission.episodes.append(data_episode)
+            
+            else:
+                data_episode.bitrate = bitrate
         
         
         # Match the emission from the data file
@@ -278,7 +281,7 @@ class AppPlus(toutvcli.app.App):
                     bitrate = toutvcli.app.App._get_average_bitrate(bitrates)
                 
         # Don't download if episode already downloaded
-        if data_episode is not None:
+        if data_episode is not None and not overwrite:
             if data_episode.bitrate == bitrate:
                 print('Already downloaded (use -f to download anyway): {} - {} - {}'.format(
                     episode._emission.Title,
@@ -294,7 +297,6 @@ class AppPlus(toutvcli.app.App):
                 response = input('Do you wish to download with bitrate {}? (y/n) '.format(
                     bitrate))
                 if response.lower() == 'y':
-                    data_episode.bitrate = bitrate
                     download_episode()
             
         else:
