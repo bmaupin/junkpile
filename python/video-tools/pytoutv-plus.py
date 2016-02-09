@@ -144,7 +144,7 @@ class AppPlus(toutvcli.app.App):
             if em.id == episode._emission.Id:
                 if em.title.lower() != episode._emission.Title.lower():
                     sys.stderr.write(
-                        'Warning: Emission title mismatch\n'
+                        'Warning: emission title mismatch\n'
                         '\tId: {}\n'
                         '\tTou.tv title: {}\n'
                         '\tData file title: {}\n'.format(
@@ -160,7 +160,7 @@ class AppPlus(toutvcli.app.App):
             elif em.title.lower() == episode._emission.Title.lower():
                 if em.id != episode._emission.Id:
                     sys.stderr.write(
-                        'Warning: Emission Id mismatch\n'
+                        'Warning: emission Id mismatch\n'
                         '\tTitle: {}\n'
                         '\tTou.tv Id: {}\n'
                         '\tData file Id: {}\n'.format(
@@ -181,7 +181,7 @@ class AppPlus(toutvcli.app.App):
                 if ep.id == episode.Id:
                     if ep.title.lower() != episode.Title.lower():
                         sys.stderr.write(
-                            'Warning: Episode title mismatch\n'
+                            'Warning: episode title mismatch\n'
                             '\tId: {}\n'
                             '\tTou.tv title: {}\n'
                             '\tData file title: {}\n'.format(
@@ -198,7 +198,7 @@ class AppPlus(toutvcli.app.App):
                 elif ep.title.lower() == episode.Title.lower():
                     if ep.id != episode.Id:
                         sys.stderr.write(
-                            'Warning: Episode Id mismatch\n'
+                            'Warning: episode Id mismatch\n'
                             '\tTitle: {}\n'
                             '\tTou.tv Id: {}\n'
                             '\tData file Id: {}\n'.format(
@@ -263,7 +263,10 @@ class AppPlus(toutvcli.app.App):
             '''
         
         # Save the emission info to the data file if it doesn't exist
-        # TODO
+        if data_emission is None:
+            data_emission = Emission()
+            data_emission.id = episode._emission.Id
+            data_emission.title = episode._emission.Title
         
         # Save the downloaded episode info to the data file
         if data_episode is None:
@@ -321,15 +324,18 @@ class AppPlus(toutvcli.app.App):
                 
                 # If this is a completely new emission
                 if emission is None:
-                    data.new_emissions.append(emission_id)
-                    
                     emission = Emission()
                     emission.id = emission_id
                     emission.title = repertoire_emissions[emission_id].Title
+                    
+                    data.emissions.append(emission)
+                
+                # If this is a completely new emission or an emission added by _fetch_episode()
+                if emission.last_seen == None:
                     emission.first_seen = today
                     emission.new_count = 1
                     
-                    data.emissions.append(emission)
+                    data.new_emissions.append(emission.id)
                 
                 # If this is a new emission since the last run
                 if emission.last_seen != None and emission.last_seen != data.last_run:
@@ -340,11 +346,11 @@ class AppPlus(toutvcli.app.App):
                 
                 emission.last_seen = today
                 
-                # Basic sanity check if title of an emission has changed
+                # Check data integrity
                 if repertoire_emissions[emission_id].Title.lower() != \
                         emission.title.lower():
                     sys.stderr.write(
-                        'Warning: title mismatch\n'
+                        'Warning: emission title mismatch\n'
                         '\tId: {}\n'
                         '\tTou.tv title: {}\n'
                         '\tData file title: {}\n'.format(
