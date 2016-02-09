@@ -187,49 +187,56 @@ class AppPlus(toutvcli.app.App):
                     data_episode = ep
                     break
                 
-        # Prompt if episode already downloaded
-        # TODO
-        
-        # Handle API change
-        if hasattr(episode, 'get_available_qualities'):
-            # Get available bitrates for episode
-            qualities = retry_function(episode.get_available_qualities)
+        # Don't download if episode already downloaded
+        if data_episode is not None:
+            print('Already downloaded (use -f to download anyway): {} - {} - {}'.format(
+                episode._emission.Title,
+                episode.SeasonAndEpisode,
+                episode.Title))
             
-            # Choose bitrate
-            if bitrate is None:
-                if quality == toutvcli.app.App.QUALITY_MIN:
-                    bitrate = qualities[0].bitrate
-                elif quality == toutvcli.app.App.QUALITY_MAX:
-                    bitrate = qualities[-1].bitrate
-                elif quality == toutvcli.app.App.QUALITY_AVG:
-                    bitrate = toutvcli.app.App._get_average_bitrate(qualities)
-        
         else:
-            # Get available bitrates for episode
-            bitrates = retry_function(episode.get_available_bitrates)
+            # Handle API change
+            if hasattr(episode, 'get_available_qualities'):
+                # Get available bitrates for episode
+                qualities = retry_function(episode.get_available_qualities)
+                
+                # Choose bitrate
+                if bitrate is None:
+                    if quality == toutvcli.app.App.QUALITY_MIN:
+                        bitrate = qualities[0].bitrate
+                    elif quality == toutvcli.app.App.QUALITY_MAX:
+                        bitrate = qualities[-1].bitrate
+                    elif quality == toutvcli.app.App.QUALITY_AVG:
+                        bitrate = toutvcli.app.App._get_average_bitrate(qualities)
             
-            # Choose bitrate
-            if bitrate is None:
-                if quality == toutvcli.app.App.QUALITY_MIN:
-                    bitrate = bitrates[0]
-                elif quality == toutvcli.app.App.QUALITY_MAX:
-                    bitrate = bitrates[-1]
-                elif quality == toutvcli.app.App.QUALITY_AVG:
-                    bitrate = toutvcli.app.App._get_average_bitrate(bitrates)
+            else:
+                # Get available bitrates for episode
+                bitrates = retry_function(episode.get_available_bitrates)
+                
+                # Choose bitrate
+                if bitrate is None:
+                    if quality == toutvcli.app.App.QUALITY_MIN:
+                        bitrate = bitrates[0]
+                    elif quality == toutvcli.app.App.QUALITY_MAX:
+                        bitrate = bitrates[-1]
+                    elif quality == toutvcli.app.App.QUALITY_AVG:
+                        bitrate = toutvcli.app.App._get_average_bitrate(bitrates)
 
-        # Create downloader
-        opu = self._on_dl_progress_update
-        self._dl = DownloaderPlus(episode, bitrate=bitrate,
-                                       output_dir=output_dir,
-                                       on_dl_start=self._on_dl_start,
-                                       on_progress_update=opu,
-                                       overwrite=overwrite)
+            '''
+            # Create downloader
+            opu = self._on_dl_progress_update
+            self._dl = DownloaderPlus(episode, bitrate=bitrate,
+                                           output_dir=output_dir,
+                                           on_dl_start=self._on_dl_start,
+                                           on_progress_update=opu,
+                                           overwrite=overwrite)
 
-        # Start download
-        self._dl.download()
+            # Start download
+            self._dl.download()
 
-        # Finished
-        self._dl = None
+            # Finished
+            self._dl = None
+            '''
         
         # Save the emission info to the data file if it doesn't exist
         # TODO
