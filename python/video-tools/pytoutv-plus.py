@@ -266,6 +266,7 @@ class AppPlus(toutvcli.app.App):
         if data_emission is None:
             data_emission = Emission()
             data_emission.id = episode._emission.Id
+            data_emission.last_seen = None
             data_emission.title = episode._emission.Title
         
         # Save the downloaded episode info to the data file
@@ -326,6 +327,7 @@ class AppPlus(toutvcli.app.App):
                 if emission is None:
                     emission = Emission()
                     emission.id = emission_id
+                    emission.last_seen = None
                     emission.title = repertoire_emissions[emission_id].Title
                     
                     data.emissions.append(emission)
