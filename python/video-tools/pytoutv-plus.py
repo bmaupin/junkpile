@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Much of this is from here:
+# Some of this is from here:
 # https://github.com/bvanheu/pytoutv/blob/master/toutvcli/app.py
 
 # Copyright (c) 2012, Benjamin Vanheuverzwijn <bvanheu@gmail.com>
@@ -35,9 +35,11 @@
 
 import argparse
 import datetime
+import distutils.version
 import json
 import locale
 import os
+import os.path
 import platform
 import sys
 
@@ -137,13 +139,65 @@ class AppPlus(toutvcli.app.App):
     '''
     
     # Override
+    def _fetch_emission_episodes(self, emission, output_dir, bitrate, quality,
+                                 overwrite):
+        episodes = self._toutvclient.get_emission_episodes(emission)
+
+        if not episodes:
+            title = emission.get_title()
+            print('No episodes available for emission "{}"'.format(title))
+            return
+
+        # Sort episodes by season and episode so they're downloaded in order
+        def episode_sort_func(episode_id):
+            return distutils.version.LooseVersion(episodes[episode_id].SeasonAndEpisode)
+
+        episode_ids = list(episodes.keys())
+        episode_ids.sort(key=episode_sort_func)
+
+        for episode_id in episode_ids:
+            episode = episodes[episode_id]
+            title = episode.get_title()
+
+            if self._stop:
+                raise toutv.dl.CancelledByUserError()
+            try:
+                self._fetch_episode(episode, output_dir, bitrate, quality,
+                                    overwrite)
+                sys.stdout.write('\n')
+                sys.stdout.flush()
+            except toutv.exceptions.RequestTimeoutError:
+                tmpl = 'Error: cannot fetch "{}": request timeout'
+                print(tmpl.format(title), file=sys.stderr)
+            except toutv.exceptions.UnexpectedHttpStatusCodeError:
+                tmpl = 'Error: cannot fetch "{}": unexpected HTTP status code'
+                print(tmpl.format(title), file=sys.stderr)
+            except toutv.exceptions.NetworkError as e:
+                tmpl = 'Error: cannot fetch "{}": {}'
+                print(tmpl.format(title, e), file=sys.stderr)
+            except toutv.dl.FileExistsError as e:
+                tmpl = 'Error: cannot fetch "{}": destination file exists'
+                print(tmpl.format(title), file=sys.stderr)
+            except toutv.dl.CancelledByUserError as e:
+                raise e
+            except toutv.dl.DownloadError as e:
+                tmpl = 'Error: cannot fetch "{}": {}'
+                print(tmpl.format(title, e), file=sys.stderr)
+            except Exception as e:
+                tmpl = 'Error: cannot fetch "{}": {}'
+                print(tmpl.format(title, e), file=sys.stderr)
+    
+    # Override
     def _fetch_episode(self, episode, output_dir, bitrate, quality, overwrite):
         def download_episode():
             nonlocal data_episode
             
             # TODO: reenable downloads
-            
-            '''
+            print('Debug: download {} - {} - {}'.format(
+                episode._emission.Title,
+                episode.SeasonAndEpisode,
+                episode.Title))
+
             # Create downloader
             opu = self._on_dl_progress_update
             self._dl = DownloaderPlus(episode, bitrate=bitrate,
@@ -151,13 +205,49 @@ class AppPlus(toutvcli.app.App):
                                            on_dl_start=self._on_dl_start,
                                            on_progress_update=opu,
                                            overwrite=overwrite)
-
+            
+            '''
             # Start download
             self._dl.download()
 
             # Finished
             self._dl = None
             '''
+            
+            # TODO: remove this
+            filepath = os.path.join(output_dir, self._dl.filename)
+            open(filepath, 'w').close()
+            
+            # Rename downloaded file
+            filepath = os.path.join(output_dir, self._dl.filename)
+            if os.path.isfile(filepath):
+                # Base new filename on whether it's a film/documentary or not
+                if episode._emission.Genre.Title == 'Films et documentaires':
+                    new_filepath = os.path.join(
+                        output_dir,
+                        '{} ({}).mp4'.format(
+                            episode.Title, 
+                            episode.Year
+                        )
+                    )
+                    
+                else:
+                    new_filepath = os.path.join(
+                        output_dir,
+                        '{} - {} - {}.mp4'.format(
+                            episode._emission.Title,
+                            episode.SeasonAndEpisode,
+                            episode.Title
+                        )
+                    )
+                
+                if os.path.isfile(new_filepath) and not overwrite:
+                    sys.stderr.write(
+                        'Warning: file already exists (use -f to override): {}'.format(
+                            new_filepath))
+                
+                else:
+                    os.replace(filepath, new_filepath)
             
             # Save the downloaded episode info to the data file
             if data_episode is None:
@@ -170,7 +260,6 @@ class AppPlus(toutvcli.app.App):
             
             else:
                 data_episode.bitrate = bitrate
-        
         
         # Match the emission from the data file
         data_emission = None
@@ -402,9 +491,7 @@ class AppPlus(toutvcli.app.App):
         # List only new emissions
         else:
             if len(data.new_emissions) == 0:
-                print('No new emissions since last run')
-                print('To list all emissions, see: {} list --help\n'.format(
-                    sys.argv[0]))
+                print('No new emissions since last run (use -a to list all emissions)')
                 
             else:
                 list_emissions(repertoire_emissions, data.new_emissions)
