@@ -98,11 +98,11 @@ class AppPlus(toutvcli.app.App):
     
     # Override
     def _command_fetch(self, *args, **kwargs):
-        self._data = self._get_data()
+        self._data = Data()
         
         super()._command_fetch(*args, **kwargs)
         
-        self._write_data(self._data)
+        self._data.write()
     
     # Override
     def _fetch_emission_episodes(self, emission, output_dir, bitrate, quality,
@@ -359,7 +359,7 @@ class AppPlus(toutvcli.app.App):
         repertoire_emissions = repertoire.get_emissions()
 
         today = datetime.datetime.now().strftime('%Y-%m-%d')
-        data = self._get_data()
+        data = Data()
 
         # If this is the first run ever or the first run of the day
         if data.last_run != today:
@@ -425,7 +425,7 @@ class AppPlus(toutvcli.app.App):
 
             data.last_run = today
             
-            self._write_data(data)
+            data.write()
         
         # List all emissions
         if arg_all:
@@ -441,16 +441,17 @@ class AppPlus(toutvcli.app.App):
                 
             else:
                 list_emissions(repertoire_emissions, data.new_emissions)
-    
-    def _get_data(self):
+
+
+class Data():
+    def __init__(self):
+        self.emissions = []
+        self.last_run = None
+        
         data_path = self._get_data_file_path()
-        if not os.path.exists(data_path):
-            return Data()
-            
-        else:
+        if os.path.exists(data_path):
             with open(data_path, 'r') as data_file:
                 json_data = json.loads(data_file.read())
-                data = Data()
                 
                 for data_key in json_data.keys():
                     if data_key == 'emissions':
@@ -470,11 +471,9 @@ class AppPlus(toutvcli.app.App):
                                 else:
                                     emission.__setattr__(emission_key, json_emission[emission_key])
                             
-                            data.emissions.append(emission)
+                            self.emissions.append(emission)
                     else:
-                        data.__setattr__(data_key, json_data[data_key])
-
-                return data
+                        self.__setattr__(data_key, json_data[data_key])
 
     def _get_data_file_path(self):
         DATA_FILE_NAME = 'toutv_data.json'
@@ -494,24 +493,18 @@ class AppPlus(toutvcli.app.App):
             
         return data_path
 
-    def _write_data(self, data):
+    def write(self):
         data_path = self._get_data_file_path()
         with open(data_path, 'w') as data_file:
             data_file.write(
                 json.dumps(
-                    data, 
+                    self, 
                     cls=JsonObjectEncoder,
                     sort_keys=True, 
                     indent=4, 
                     ensure_ascii=False,
                 )
             )
-
-
-class Data():
-    def __init__(self):
-        self.emissions = []
-        self.last_run = None
 
 
 class DownloaderPlus(toutv.dl.Downloader):
