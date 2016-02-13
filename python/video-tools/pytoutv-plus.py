@@ -60,17 +60,11 @@ def main():
     app.run()
 
 def retry_function(function, *args, **kwargs):
-    # The name of this exception was changed at some point
-    if hasattr(toutv.exceptions, 'RequestTimeout'):
-        TOUTV_REQUESTTIMEOUT = toutv.exceptions.RequestTimeout
-    else:
-        TOUTV_REQUESTTIMEOUT = toutv.exceptions.RequestTimeoutError
-    
     for n in range(MAX_TIMEOUTS):
         try:
             result = function(*args, **kwargs)
             break
-        except TOUTV_REQUESTTIMEOUT:
+        except toutv.exceptions.RequestTimeoutError:
             pass
         
         if n == MAX_TIMEOUTS - 1:
@@ -191,12 +185,6 @@ class AppPlus(toutvcli.app.App):
     def _fetch_episode(self, episode, output_dir, bitrate, quality, overwrite):
         def download_episode():
             nonlocal data_episode
-            
-            # TODO: reenable downloads
-            print('Debug: download {} - {} - {}'.format(
-                episode._emission.Title,
-                episode.SeasonAndEpisode,
-                episode.Title))
 
             # Create downloader
             opu = self._on_dl_progress_update
@@ -206,17 +194,11 @@ class AppPlus(toutvcli.app.App):
                                            on_progress_update=opu,
                                            overwrite=overwrite)
             
-            '''
             # Start download
             self._dl.download()
 
             # Finished
             self._dl = None
-            '''
-            
-            # TODO: remove this
-            filepath = os.path.join(output_dir, self._dl.filename)
-            open(filepath, 'w').close()
             
             # Rename downloaded file
             filepath = os.path.join(output_dir, self._dl.filename)
@@ -342,32 +324,17 @@ class AppPlus(toutvcli.app.App):
                 data_episode = ep
                 break
                 
-        # Handle API change
-        if hasattr(episode, 'get_available_qualities'):
-            # Get available bitrates for episode
-            qualities = retry_function(episode.get_available_qualities)
-            
-            # Choose bitrate
-            if bitrate is None:
-                if quality == toutvcli.app.App.QUALITY_MIN:
-                    bitrate = qualities[0].bitrate
-                elif quality == toutvcli.app.App.QUALITY_MAX:
-                    bitrate = qualities[-1].bitrate
-                elif quality == toutvcli.app.App.QUALITY_AVG:
-                    bitrate = toutvcli.app.App._get_average_bitrate(qualities)
+        # Get available bitrates for episode
+        qualities = retry_function(episode.get_available_qualities)
         
-        else:
-            # Get available bitrates for episode
-            bitrates = retry_function(episode.get_available_bitrates)
-            
-            # Choose bitrate
-            if bitrate is None:
-                if quality == toutvcli.app.App.QUALITY_MIN:
-                    bitrate = bitrates[0]
-                elif quality == toutvcli.app.App.QUALITY_MAX:
-                    bitrate = bitrates[-1]
-                elif quality == toutvcli.app.App.QUALITY_AVG:
-                    bitrate = toutvcli.app.App._get_average_bitrate(bitrates)
+        # Choose bitrate
+        if bitrate is None:
+            if quality == toutvcli.app.App.QUALITY_MIN:
+                bitrate = qualities[0].bitrate
+            elif quality == toutvcli.app.App.QUALITY_MAX:
+                bitrate = qualities[-1].bitrate
+            elif quality == toutvcli.app.App.QUALITY_AVG:
+                bitrate = toutvcli.app.App._get_average_bitrate(qualities)
                 
         # Don't download if episode already downloaded
         if data_episode is not None and not overwrite:
