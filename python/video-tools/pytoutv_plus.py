@@ -157,7 +157,7 @@ class AppPlus(toutvcli.app.App):
     def _fetch_episode(self, episode, output_dir, bitrate, quality, overwrite):
         def download_episode():
             nonlocal data_episode
-            '''
+
             # Create downloader
             opu = self._on_dl_progress_update
             self._dl = DownloaderPlus(episode, bitrate=bitrate,
@@ -165,8 +165,6 @@ class AppPlus(toutvcli.app.App):
                                            on_dl_start=self._on_dl_start,
                                            on_progress_update=opu,
                                            overwrite=overwrite)
-            
-            # START BLOCK COMMENT HERE
             
             # Start download
             self._dl.download()
@@ -205,11 +203,6 @@ class AppPlus(toutvcli.app.App):
                 else:
                     os.replace(filepath, new_filepath)
             
-            # END BLOCK COMMENT HERE
-            
-            # TODO: remove this
-            # os.remove(os.path.join(output_dir, self._dl.filename))
-            '''
             # Save the downloaded episode info to the data file
             if data_episode is None:
                 data_episode = Episode()
@@ -269,8 +262,8 @@ class AppPlus(toutvcli.app.App):
         # See if the episode has already been downloaded
         data_episode = None
         for ep in data_emission.episodes:
-            # Match first by title
-            if ep.id == episode.Id:
+            # Match first by Id
+            if hasattr(ep, 'id') and ep.id == episode.Id:
                 if ep.title.lower() != episode.Title.lower():
                     sys.stderr.write(
                         'Warning: episode title mismatch\n'
@@ -286,19 +279,23 @@ class AppPlus(toutvcli.app.App):
                 data_episode = ep
                 break
             
-            # Otherwise match by Id
-            elif ep.title.lower() == episode.Title.lower():
-                if ep.id != episode.Id:
-                    sys.stderr.write(
-                        'Warning: episode Id mismatch\n'
-                        '\tTitle: {}\n'
-                        '\tTou.tv Id: {}\n'
-                        '\tData file Id: {}\n'.format(
-                            episode.Title,
-                            episode.Id,
-                            ep.id
+            # Otherwise match by title
+            if ep.title.lower() == episode.Title.lower():
+                if hasattr(ep, 'id'):
+                    if ep.id != episode.Id:
+                        sys.stderr.write(
+                            'Warning: episode Id mismatch\n'
+                            '\tTitle: {}\n'
+                            '\tTou.tv Id: {}\n'
+                            '\tData file Id: {}\n'.format(
+                                episode.Title,
+                                episode.Id,
+                                ep.id
+                            )
                         )
-                    )
+                else:
+                    # Imported episodes may not have Ids; add them
+                    ep.id = episode.Id
                 
                 data_episode = ep
                 break
