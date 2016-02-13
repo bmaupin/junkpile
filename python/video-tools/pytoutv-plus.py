@@ -33,14 +33,12 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-import argparse
 import datetime
 import distutils.version
 import json
 import locale
 import os
 import os.path
-import platform
 import sys
 
 import toutv.dl
@@ -91,11 +89,12 @@ class AppPlus(toutvcli.app.App):
     
     # Override
     def _build_toutv_client(self, *args, **kwargs):
+        print('Please wait...\n')
+        
         client = super()._build_toutv_client(*args, **kwargs)
         client._transport = JsonTransportPlus()
         
         return client
-    
     
     # Override
     def _command_fetch(self, *args, **kwargs):
@@ -104,33 +103,6 @@ class AppPlus(toutvcli.app.App):
         super()._command_fetch(*args, **kwargs)
         
         self._write_data(self._data)
-    
-    '''
-        if args.emission is not None:
-            emission = self._toutvclient.get_emission_by_name(args.emission)
-        else:
-            sys.exit('Error: please provide name of emission to download')
-        
-        data = self._get_data()
-        
-        # Download single episode
-        if args.episode is not None:
-            episode = self._toutvclient.get_episode_by_name(emission, args.episode)
-            self._fetch_episode(episode, output_dir=args.directory, bitrate=args.bitrate, quality=args.quality, overwrite=False)
-        
-        # Download all episodes
-        else:
-            episodes = self._toutvclient.get_emission_episodes(emission)
-            for episode_id in episodes:
-#                if not any(e for e in data.emissions if e.id == emission.Id):
-                if (emission.Id in data[self.DATA_EMISSIONS] and
-                        self.DATA_DOWNLOADED in data[self.DATA_EMISSIONS][emission.Id]):
-                    # TODO: do the comparison
-                    sys.exit('Error: not yet implemented')
-                
-                else:
-                    sys.exit('Error: not yet implemented')
-    '''
     
     # Override
     def _fetch_emission_episodes(self, emission, output_dir, bitrate, quality,
