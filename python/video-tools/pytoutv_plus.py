@@ -328,7 +328,7 @@ class AppPlus(toutvcli.app.App):
                                                on_progress_update=opu,
                                                overwrite=overwrite)
                 filepath = os.path.join(output_dir, self._dl.filename)
-                if os.path.isfile(filepath) and os.stat(filepath).st_size == 0:
+                if os.path.isfile(filepath) and os.path.getsize(filepath) == 0:
                     os.remove(filepath)
                 self._dl = None
             
