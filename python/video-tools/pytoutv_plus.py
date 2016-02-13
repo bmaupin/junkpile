@@ -168,9 +168,6 @@ class AppPlus(toutvcli.app.App):
             
             # Start download
             self._dl.download()
-
-            # Finished
-            self._dl = None
             
             # Rename downloaded file
             filepath = os.path.join(output_dir, self._dl.filename)
@@ -202,6 +199,9 @@ class AppPlus(toutvcli.app.App):
                 
                 else:
                     os.replace(filepath, new_filepath)
+                    
+            # Finished
+            self._dl = None
             
             # Save the downloaded episode info to the data file
             if data_episode is None:
@@ -319,6 +319,18 @@ class AppPlus(toutvcli.app.App):
                     episode._emission.Title,
                     episode.SeasonAndEpisode,
                     episode.Title))
+                
+                # TODO: temporary cleanup code; remove eventually
+                opu = self._on_dl_progress_update
+                self._dl = DownloaderPlus(episode, bitrate=bitrate,
+                                               output_dir=output_dir,
+                                               on_dl_start=self._on_dl_start,
+                                               on_progress_update=opu,
+                                               overwrite=overwrite)
+                filepath = os.path.join(output_dir, self._dl.filename)
+                if os.path.isfile(filepath) and os.stat(filepath).st_size == 0:
+                    os.remove(filepath)
+                self._dl = None
             
             else:
                 print('Already downloaded with bitrate {}: {} - {} - {}'.format(
