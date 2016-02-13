@@ -157,7 +157,7 @@ class AppPlus(toutvcli.app.App):
     def _fetch_episode(self, episode, output_dir, bitrate, quality, overwrite):
         def download_episode():
             nonlocal data_episode
-
+            '''
             # Create downloader
             opu = self._on_dl_progress_update
             self._dl = DownloaderPlus(episode, bitrate=bitrate,
@@ -165,6 +165,8 @@ class AppPlus(toutvcli.app.App):
                                            on_dl_start=self._on_dl_start,
                                            on_progress_update=opu,
                                            overwrite=overwrite)
+            
+            # START BLOCK COMMENT HERE
             
             # Start download
             self._dl.download()
@@ -203,6 +205,11 @@ class AppPlus(toutvcli.app.App):
                 else:
                     os.replace(filepath, new_filepath)
             
+            # END BLOCK COMMENT HERE
+            
+            # TODO: remove this
+            # os.remove(os.path.join(output_dir, self._dl.filename))
+            '''
             # Save the downloaded episode info to the data file
             if data_episode is None:
                 data_episode = Episode()
