@@ -130,8 +130,6 @@ class AppPlus(toutvcli.app.App):
             try:
                 self._fetch_episode(episode, output_dir, bitrate, quality,
                                     overwrite)
-                sys.stdout.write('\n')
-                sys.stdout.flush()
             except toutv.exceptions.RequestTimeoutError:
                 tmpl = 'Error: cannot fetch "{}": request timeout'
                 print(tmpl.format(title), file=sys.stderr)
@@ -158,6 +156,8 @@ class AppPlus(toutvcli.app.App):
         def download_episode():
             nonlocal data_episode
 
+            sys.stdout.write('\n')
+
             # Create downloader
             opu = self._on_dl_progress_update
             self._dl = DownloaderPlus(episode, bitrate=bitrate,
@@ -168,6 +168,8 @@ class AppPlus(toutvcli.app.App):
             
             # Start download
             self._dl.download()
+            
+            sys.stdout.flush()
             
             # Rename downloaded file
             filepath = os.path.join(output_dir, self._dl.filename)
