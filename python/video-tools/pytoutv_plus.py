@@ -218,7 +218,8 @@ class AppPlus(toutvcli.app.App):
         # Match the emission from the data file
         data_emission = None
         for em in self._data.emissions:
-            if em.id == episode._emission.Id:
+            # Match first by Id
+            if hasattr(em, 'id') and em.id == episode._emission.Id:
                 if em.title.lower() != episode._emission.Title.lower():
                     sys.stderr.write(
                         'Warning: emission title mismatch\n'
@@ -234,18 +235,23 @@ class AppPlus(toutvcli.app.App):
                 data_emission = em
                 break
             
-            elif em.title.lower() == episode._emission.Title.lower():
-                if em.id != episode._emission.Id:
-                    sys.stderr.write(
-                        'Warning: emission Id mismatch\n'
-                        '\tTitle: {}\n'
-                        '\tTou.tv Id: {}\n'
-                        '\tData file Id: {}\n'.format(
-                            episode._emission.Title,
-                            episode._emission.Id,
-                            em.id
+            if em.title.lower() == episode._emission.Title.lower():
+                if hasattr(em, 'id'):
+                    if em.id != episode._emission.Id:
+                        sys.stderr.write(
+                            'Warning: emission Id mismatch\n'
+                            '\tTitle: {}\n'
+                            '\tTou.tv Id: {}\n'
+                            '\tData file Id: {}\n'.format(
+                                episode._emission.Title,
+                                episode._emission.Id,
+                                em.id
+                            )
                         )
-                    )
+                        
+                else:
+                    # Imported emissions may not have Ids; add them
+                    em.id = episode._emission.Id
                 
                 data_emission = em
                 break
@@ -383,12 +389,48 @@ class AppPlus(toutvcli.app.App):
                 emission = None
                 
                 # Get the emission from the data
-                for e in data.emissions:
-                    if e.id == emission_id:
+                for em in data.emissions:
+                    # Match first by Id
+                    if hasattr(em, 'id') and em.id == emission_id:
+                        if em.title.lower() != repertoire_emissions[emission_id].Title.lower():
+                            sys.stderr.write(
+                                'Warning: emission title mismatch\n'
+                                '\tId: {}\n'
+                                '\tTou.tv title: {}\n'
+                                '\tData file title: {}\n'.format(
+                                    emission_id,
+                                    repertoire_emissions[emission_id].Title,
+                                    em.title
+                                )
+                            )
+
                         if emission is not None:
-                            sys.stderr.write('Warning: duplicate emission exists in data with id {}\n'.format(emission_id))
+                            sys.stderr.write('Warning: duplicate emission exists in data with Id {}\n'.format(emission_id))
                         else:
-                            emission = e
+                            emission = em
+                    
+                    elif em.title.lower() == repertoire_emissions[emission_id].Title.lower():
+                        if hasattr(em, 'id'):
+                            if em.id != emission_id:
+                                sys.stderr.write(
+                                    'Warning: emission Id mismatch\n'
+                                    '\tTitle: {}\n'
+                                    '\tTou.tv Id: {}\n'
+                                    '\tData file Id: {}\n'.format(
+                                        repertoire_emissions[emission_id].Title,
+                                        emission_id,
+                                        em.id
+                                    )
+                                )
+                        else:
+                            # Imported emissions may not have Ids; add them
+                            em.id = episode._emission.Id
+                        
+                        if emission is not None:
+                            sys.stderr.write('Warning: duplicate emission exists in data with title {}\n'.format(
+                                repertoire_emissions[emission_id].Title))
+                        else:
+                            emission = em
                 
                 # If this is a completely new emission
                 if emission is None:
@@ -414,20 +456,6 @@ class AppPlus(toutvcli.app.App):
                         data.new_emissions.append(emission_id)
                 
                 emission.last_seen = today
-                
-                # Check data integrity
-                if repertoire_emissions[emission_id].Title.lower() != \
-                        emission.title.lower():
-                    sys.stderr.write(
-                        'Warning: emission title mismatch\n'
-                        '\tId: {}\n'
-                        '\tTou.tv title: {}\n'
-                        '\tData file title: {}\n'.format(
-                            emission_id,
-                            repertoire_emissions[emission_id].Title,
-                            emission.title
-                            )
-                        )
             
             # Sort the list of new emissions alphabetically
             data.new_emissions.sort(key=title_sort_func)
