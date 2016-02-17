@@ -43,8 +43,7 @@ else
     exit 1
 fi
 
-#/opt/Levelator-1.3.0-Python2.5/levelator "$inwavpath" "$outwavpath"
-cp "$inwavpath" "$outwavpath"
+/opt/Levelator-1.3.0-Python2.5/levelator "$inwavpath" "$outwavpath"
 
 if [ "$inextension" == "mp3" ]; then
     # Create a temp file
