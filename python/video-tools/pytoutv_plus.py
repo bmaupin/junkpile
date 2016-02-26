@@ -153,6 +153,14 @@ class AppPlus(toutvcli.app.App):
     
     # Override
     def _fetch_episode(self, episode, output_dir, bitrate, quality, overwrite):
+        def remove_special_chars(s):
+            # http://superuser.com/a/358861/93066
+            special_chars = ['\\', '/', ':', '*', '?', '"', '<', '>', '|']
+            for c in special_chars:
+                s = s.replace(c, '') 
+            
+            return s
+        
         def download_episode():
             nonlocal data_episode
 
@@ -179,8 +187,8 @@ class AppPlus(toutvcli.app.App):
                     new_filepath = os.path.join(
                         output_dir,
                         '{} ({}).mp4'.format(
-                            episode.Title, 
-                            episode.Year
+                            remove_special_chars(episode.Title), 
+                            remove_special_chars(episode.Year),
                         )
                     )
                     
@@ -188,9 +196,9 @@ class AppPlus(toutvcli.app.App):
                     new_filepath = os.path.join(
                         output_dir,
                         '{} - {} - {}.mp4'.format(
-                            episode._emission.Title,
-                            episode.SeasonAndEpisode,
-                            episode.Title
+                            remove_special_chars(episode._emission.Title),
+                            remove_special_chars(episode.SeasonAndEpisode),
+                            remove_special_chars(episode.Title),
                         )
                     )
                 
