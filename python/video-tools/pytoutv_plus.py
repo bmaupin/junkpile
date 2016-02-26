@@ -98,11 +98,11 @@ class App(toutvcli.app.App):
     
     # Override
     def _command_fetch(self, *args, **kwargs):
-        self._data = Data()
+        self._store = DataStore()
         
         super()._command_fetch(*args, **kwargs)
         
-        self._data.write()
+        self._store.write()
     
     # Override
     def _fetch_emission_episodes(self, emission, output_dir, bitrate, quality,
@@ -162,7 +162,7 @@ class App(toutvcli.app.App):
             return s
         
         def download_episode():
-            nonlocal data_episode
+            nonlocal store_episode
 
             sys.stdout.write('\n')
 
@@ -213,21 +213,21 @@ class App(toutvcli.app.App):
             # Finished
             self._dl = None
             
-            # Save the downloaded episode info to the data file
-            if data_episode is None:
-                data_episode = Episode()
-                data_episode.bitrate = bitrate
-                data_episode.id = episode.Id
-                data_episode.title = episode.Title
+            # Save the downloaded episode info to the datastore file
+            if store_episode is None:
+                store_episode = Episode()
+                store_episode.bitrate = bitrate
+                store_episode.id = episode.Id
+                store_episode.title = episode.Title
                 
-                data_emission.episodes.append(data_episode)
+                store_emission.episodes.append(store_episode)
             
             else:
-                data_episode.bitrate = bitrate
+                store_episode.bitrate = bitrate
         
-        # Match the emission from the data file
-        data_emission = None
-        for em in self._data.emissions:
+        # Match the emission from the datastore file
+        store_emission = None
+        for em in self._store.emissions:
             # Match first by Id
             if hasattr(em, 'id') and em.id == episode._emission.Id:
                 if em.title.lower() != episode._emission.Title.lower():
@@ -242,7 +242,7 @@ class App(toutvcli.app.App):
                         )
                     )
                 
-                data_emission = em
+                store_emission = em
                 break
             
             if em.title.lower() == episode._emission.Title.lower():
@@ -263,21 +263,21 @@ class App(toutvcli.app.App):
                     # Imported emissions may not have Ids; add them
                     em.id = episode._emission.Id
                 
-                data_emission = em
+                store_emission = em
                 break
         
-        # Save the emission info to the data file if it doesn't exist
-        if data_emission is None:
-            data_emission = Emission()
-            data_emission.id = episode._emission.Id
-            data_emission.last_seen = None
-            data_emission.title = episode._emission.Title
+        # Save the emission info to the datastore file if it doesn't exist
+        if store_emission is None:
+            store_emission = Emission()
+            store_emission.id = episode._emission.Id
+            store_emission.last_seen = None
+            store_emission.title = episode._emission.Title
             
-            self._data.emissions.append(data_emission)
+            self._store.emissions.append(store_emission)
         
         # See if the episode has already been downloaded
-        data_episode = None
-        for ep in data_emission.episodes:
+        store_episode = None
+        for ep in store_emission.episodes:
             # Match first by Id
             if hasattr(ep, 'id') and ep.id == episode.Id:
                 if ep.title.lower() != episode.Title.lower():
@@ -292,7 +292,7 @@ class App(toutvcli.app.App):
                         )
                     )
                 
-                data_episode = ep
+                store_episode = ep
                 break
             
             # Otherwise match by title
@@ -313,7 +313,7 @@ class App(toutvcli.app.App):
                     # Imported episodes may not have Ids; add them
                     ep.id = episode.Id
                 
-                data_episode = ep
+                store_episode = ep
                 break
                 
         # Get available bitrates for episode
@@ -329,8 +329,8 @@ class App(toutvcli.app.App):
                 bitrate = toutvcli.app.App._get_average_bitrate(qualities)
                 
         # Don't download if episode already downloaded
-        if data_episode is not None and not overwrite:
-            if data_episode.bitrate == bitrate:
+        if store_episode is not None and not overwrite:
+            if store_episode.bitrate == bitrate:
                 print('Already downloaded (use -f to download anyway): {} - {} - {}'.format(
                     episode._emission.Title,
                     episode.SeasonAndEpisode,
@@ -350,7 +350,7 @@ class App(toutvcli.app.App):
             
             else:
                 print('Already downloaded with bitrate {}: {} - {} - {}'.format(
-                    data_episode.bitrate,
+                    store_episode.bitrate,
                     episode._emission.Title,
                     episode.SeasonAndEpisode,
                     episode.Title))
@@ -384,22 +384,22 @@ class App(toutvcli.app.App):
         repertoire_emissions = repertoire.get_emissions()
 
         today = datetime.datetime.now().strftime('%Y-%m-%d')
-        data = Data()
+        store = DataStore()
 
         # If this is the first run ever or the first run of the day
-        if data.last_run != today:
+        if store.last_run != today:
             # If this is the first run ever
-            if data.last_run is None:
-                data.last_run = today
+            if store.last_run is None:
+                store.last_run = today
             
             # Start with a fresh list of new emissions
-            data.new_emissions = []
+            store.new_emissions = []
             
             for emission_id in repertoire_emissions:
                 emission = None
                 
-                # Get the emission from the data
-                for em in data.emissions:
+                # Get the emission from the datastore
+                for em in store.emissions:
                     # Match first by Id
                     if hasattr(em, 'id') and em.id == emission_id:
                         if em.title.lower() != repertoire_emissions[emission_id].Title.lower():
@@ -415,7 +415,7 @@ class App(toutvcli.app.App):
                             )
 
                         if emission is not None:
-                            sys.stderr.write('Warning: duplicate emission exists in data with Id {}\n'.format(emission_id))
+                            sys.stderr.write('Warning: duplicate emission exists in datastore with Id {}\n'.format(emission_id))
                         else:
                             emission = em
                     
@@ -437,7 +437,7 @@ class App(toutvcli.app.App):
                             em.id = episode._emission.Id
                         
                         if emission is not None:
-                            sys.stderr.write('Warning: duplicate emission exists in data with title {}\n'.format(
+                            sys.stderr.write('Warning: duplicate emission exists in datastore with title {}\n'.format(
                                 repertoire_emissions[emission_id].Title))
                         else:
                             emission = em
@@ -449,30 +449,30 @@ class App(toutvcli.app.App):
                     emission.last_seen = None
                     emission.title = repertoire_emissions[emission_id].Title
                     
-                    data.emissions.append(emission)
+                    store.emissions.append(emission)
                 
                 # If this is a completely new emission or an emission added by _fetch_episode()
                 if emission.last_seen == None:
                     emission.first_seen = today
                     emission.new_count = 1
                     
-                    data.new_emissions.append(emission.id)
+                    store.new_emissions.append(emission.id)
                 
                 # If this is a new emission since the last run
-                if emission.last_seen != None and emission.last_seen != data.last_run:
+                if emission.last_seen != None and emission.last_seen != store.last_run:
                     emission.new_count += 1
                     
                     if emission.new_count <= MAX_NEW_COUNT:
-                        data.new_emissions.append(emission_id)
+                        store.new_emissions.append(emission_id)
                 
                 emission.last_seen = today
             
             # Sort the list of new emissions alphabetically
-            data.new_emissions.sort(key=title_sort_func)
+            store.new_emissions.sort(key=title_sort_func)
 
-            data.last_run = today
+            store.last_run = today
             
-            data.write()
+            store.write()
         
         # List all emissions
         if arg_all:
@@ -483,14 +483,14 @@ class App(toutvcli.app.App):
             
         # List only new emissions
         else:
-            if len(data.new_emissions) == 0:
+            if len(store.new_emissions) == 0:
                 print('No new emissions since last run (use -a to list all emissions)')
                 
             else:
-                list_emissions(repertoire_emissions, data.new_emissions)
+                list_emissions(repertoire_emissions, store.new_emissions)
 
 
-class Data():
+class DataStore():
     def __init__(self):
         self.emissions = []
         self.last_run = None
