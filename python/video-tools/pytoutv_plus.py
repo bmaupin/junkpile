@@ -54,7 +54,7 @@ MAX_TIMEOUTS = 10
 
 
 def main():
-    app = AppPlus(sys.argv[1:])
+    app = App(sys.argv[1:])
     app.run()
 
 def retry_function(function, *args, **kwargs):
@@ -71,7 +71,7 @@ def retry_function(function, *args, **kwargs):
     return result
 
 
-class AppPlus(toutvcli.app.App):
+class App(toutvcli.app.App):
     # Override
     def run(self):
         locale.setlocale(locale.LC_ALL, '')
@@ -92,7 +92,7 @@ class AppPlus(toutvcli.app.App):
         print('Please wait...\n')
         
         client = super()._build_toutv_client(*args, **kwargs)
-        client._transport = JsonTransportPlus()
+        client._transport = JsonTransport()
         
         return client
     
@@ -168,11 +168,11 @@ class AppPlus(toutvcli.app.App):
 
             # Create downloader
             opu = self._on_dl_progress_update
-            self._dl = DownloaderPlus(episode, bitrate=bitrate,
-                                           output_dir=output_dir,
-                                           on_dl_start=self._on_dl_start,
-                                           on_progress_update=opu,
-                                           overwrite=overwrite)
+            self._dl = Downloader(episode, bitrate=bitrate,
+                                  output_dir=output_dir,
+                                  on_dl_start=self._on_dl_start,
+                                  on_progress_update=opu,
+                                  overwrite=overwrite)
             
             # Start download
             self._dl.download()
@@ -338,11 +338,11 @@ class AppPlus(toutvcli.app.App):
                 
                 # TODO: temporary cleanup code; remove eventually
                 opu = self._on_dl_progress_update
-                self._dl = DownloaderPlus(episode, bitrate=bitrate,
-                                               output_dir=output_dir,
-                                               on_dl_start=self._on_dl_start,
-                                               on_progress_update=opu,
-                                               overwrite=overwrite)
+                self._dl = Downloader(episode, bitrate=bitrate,
+                                      output_dir=output_dir,
+                                      on_dl_start=self._on_dl_start,
+                                      on_progress_update=opu,
+                                      overwrite=overwrite)
                 filepath = os.path.join(output_dir, self._dl.filename)
                 if os.path.isfile(filepath) and os.path.getsize(filepath) == 0:
                     os.remove(filepath)
@@ -554,7 +554,7 @@ class Data():
             )
 
 
-class DownloaderPlus(toutv.dl.Downloader):
+class Downloader(toutv.dl.Downloader):
     # Override
     def _do_request(self, *args, **kwargs):
         return retry_function(super()._do_request, *args, **kwargs)
@@ -575,7 +575,7 @@ class JsonObjectEncoder(json.JSONEncoder):
         return o.__dict__
 
 
-class JsonTransportPlus(toutv.transport.JsonTransport):
+class JsonTransport(toutv.transport.JsonTransport):
     # Override
     def _do_query(self, *args, **kwargs):
         return retry_function(super()._do_query, *args, **kwargs)
