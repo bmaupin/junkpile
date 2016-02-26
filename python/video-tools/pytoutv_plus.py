@@ -224,6 +224,8 @@ class App(toutvcli.app.App):
             
             else:
                 store_episode.bitrate = bitrate
+            
+            self._store.write()
         
         # Match the emission from the datastore file
         store_emission = None
