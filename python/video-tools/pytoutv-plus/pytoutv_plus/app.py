@@ -556,12 +556,6 @@ class Downloader(toutv.dl.Downloader):
     # Override
     def _do_request(self, *args, **kwargs):
         return retry_function(super()._do_request, *args, **kwargs)
-    
-    # DEBUG
-    def _download_segment(self, segindex):
-        segpath = self._get_segment_file_path(segindex)
-        with open(segpath, 'w') as segpathfile:
-            pass
 
 
 class Emission:
