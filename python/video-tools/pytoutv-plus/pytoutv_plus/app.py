@@ -432,7 +432,7 @@ class App(toutvcli.app.App):
                                 )
                         else:
                             # Imported emissions may not have Ids; add them
-                            em.id = episode._emission.Id
+                            em.id = emission_id
                         
                         if emission is not None:
                             sys.stderr.write('Warning: duplicate emission exists in datastore with title {}\n'.format(
