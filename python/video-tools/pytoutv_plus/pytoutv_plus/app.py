@@ -53,10 +53,6 @@ MAX_NEW_COUNT = 3
 MAX_TIMEOUTS = 10
 
 
-def main():
-    app = App(sys.argv[1:])
-    app.run()
-
 def retry_function(function, *args, **kwargs):
     for n in range(MAX_TIMEOUTS):
         try:
@@ -560,6 +556,12 @@ class Downloader(toutv.dl.Downloader):
     # Override
     def _do_request(self, *args, **kwargs):
         return retry_function(super()._do_request, *args, **kwargs)
+    
+    # DEBUG
+    def _download_segment(self, segindex):
+        segpath = self._get_segment_file_path(segindex)
+        with open(segpath, 'w') as segpathfile:
+            pass
 
 
 class Emission:
@@ -583,5 +585,7 @@ class JsonTransport(toutv.transport.JsonTransport):
         return retry_function(super()._do_query, *args, **kwargs)
 
 
-if __name__ == '__main__':
-    main()
+def run():
+    app = App(sys.argv[1:])
+    
+    return app.run()
