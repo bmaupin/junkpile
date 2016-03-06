@@ -88,6 +88,11 @@ def main():
     print('Exif DateTimeDigitized is {}'.format(exif_dtd))
     print('Exif DateTimeOriginal is {}'.format(exif_dto))
 
+    if parser.values.set is not None:
+        user_dt = datetime.datetime.strptime(parser.values.set, '%Y-%m-%d %H:%M:%S')
+        set_exif_timestamp(user_dt)
+        sys.exit()
+
     if parser.values.force == False:
         # If all the Exif values are the same and the mtime difference is within a day, don't do anything
         if exif_dto != EXIF_UNSET and exif_dt == exif_dtd and exif_dtd == exif_dto and \
@@ -141,6 +146,8 @@ def parse_options():
     # command line options to parse
     parser.add_option('--force', action='store_true', dest='force',
             default=False, help='Force update of Exif timestamp')
+    parser.add_option('-s', '--set', dest='set',
+            help='Set Exif timestamps to a specific time (YYYY-mm-dd HH:MM:SS)')
     
     # parse the arguments
     (options, args) = parser.parse_args()
