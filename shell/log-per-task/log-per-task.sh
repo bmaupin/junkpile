@@ -1,6 +1,3 @@
-log_file=log.txt
-
-
 # Script that logs per task
 # - Console sees stdout, stderr, and task success/failure
 # - Log file only sees stderr and task success/failure. Ex:
@@ -14,6 +11,13 @@ log_file=log.txt
 #  [ ] ERROR completing task: Configure Oracle Instant Client
 #  [X] Install UnlimitedJCEPolicyJDK7.zip
 
+# Set a log file in case one isn't set
+if [ -z "$log_file" ]; then
+    log_file=/tmp/log.txt
+fi
+
+# Setting the full path to the log file prevents things from breaking if we change folders
+log_file=`readlink -f $log_file`
 
 # Log success/failure for each task
 begin() {
@@ -33,10 +37,8 @@ begin() {
     error_count=0
 }
 
-
 # Make sure the last task gets logged
 trap begin EXIT
-
 
 # Log specific commands that return errors
 log_failure() {
@@ -46,7 +48,6 @@ log_failure() {
 }
 set -o history
 trap log_failure ERR
-
 
 # Send STDERR to log file
 exec 2>> $log_file
