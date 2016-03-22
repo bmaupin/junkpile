@@ -1,0 +1,2 @@
+- fix-cp1252-encoding.py
+  - Fix instances in which cp1252 encoding is mistakenly decoded as utf8. For instance, `’` will show up as `â€™`. 
