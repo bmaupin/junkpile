@@ -1,0 +1,8 @@
+#!/bin/bash
+perl /usr/local/bin/msgconvert.pl "$@"
+
+for arg; do
+    python /usr/local/bin/fix-cp1252-encoding.py "${arg%.*}.msg.eml" "${arg%.*}.eml"
+    rm "${arg%.*}.msg.eml"
+done
+
