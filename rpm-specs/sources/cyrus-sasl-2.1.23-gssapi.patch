@@ -1,0 +1,23 @@
+# Patch based on info from here:
+# http://lists.freebsd.org/pipermail/freebsd-questions/2011-February/227044.html
+
+--- configure.dist	2011-04-06 10:30:07.000000000 -0500
++++ configure	2011-04-06 11:25:17.000000000 -0500
+@@ -11119,7 +11119,7 @@
+ # in gssapi\rfckrb5.h
+ #
+ if test "$gssapi" != "no"; then
+-  if test "$gss_impl" = "cybersafe" -o "$gss_impl" = "cybersafe03"; then
++  if test "$gss_impl" = "cybersafe" -o "$gss_impl" = "cybersafe03" -o "$gss_impl" = "heimdal"; then
+     cat >conftest.$ac_ext <<_ACEOF
+ #line $LINENO "configure"
+ /* confdefs.h.  */
+@@ -11190,7 +11190,7 @@
+ 
+   fi
+ 
+-  if test "$gss_impl" = "cybersafe" -o "$gss_impl" = "cybersafe03"; then
++  if test "$gss_impl" = "cybersafe" -o "$gss_impl" = "cybersafe03" -o "$gss_impl" = "heimdal"; then
+     cat >conftest.$ac_ext <<_ACEOF
+ #line $LINENO "configure"
+ /* confdefs.h.  */

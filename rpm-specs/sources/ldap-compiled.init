@@ -1,0 +1,257 @@
+#!/bin/bash
+#
+# ldap	This shell script takes care of starting and stopping
+#	ldap servers (slapd).
+#
+# chkconfig: - 27 73
+# description: LDAP stands for Lightweight Directory Access Protocol, used \
+#              for implementing the industry standard directory services.
+# processname: slapd
+# config: /usr/local/etc/openldap/slapd.conf
+# pidfile: /var/run/openldap/slapd.pid
+
+# This is the ldap init script that comes with the openldap-2.3.43-3.el5.src.rpm 
+# package provided by Red Hat, which can be obtained from here: 
+# http://ftp.redhat.com/pub/redhat/linux/enterprise/5Server/en/os/SRPMS/
+#
+# It has been modified to remove slurpd (not present in OpenLDAP 2.4.x), 
+# the locations of files have been corrected to reflect their placement in
+# /usr/local, and the Kerberos-related parts have been adjusted to account for 
+# Heimdal Kerberos, as opposed to MIT Kerberos.  All else has been left 
+# untouched.  -bmaupin 20100125
+
+# Source function library.
+. /etc/init.d/functions
+
+# Source networking configuration and check that networking is up.
+if [ -r /etc/sysconfig/network ] ; then
+	. /etc/sysconfig/network
+	[ ${NETWORKING} = "no" ] && exit 1
+fi
+
+# Source an auxiliary options file if we have one, and pick up OPTIONS,
+# SLAPD_OPTIONS, SLAPD_LDAPS, SLAPD_LDAPI, and maybe KRB5_KTNAME.
+if [ -r /etc/sysconfig/ldap ] ; then
+	. /etc/sysconfig/ldap
+fi
+
+slapd=/usr/local/libexec/slapd
+slaptest=/usr/local/sbin/slaptest
+[ -x ${slapd} ] || exit 1
+
+RETVAL=0
+
+#
+# Pass commands given in $2 and later to "test" run as user given in $1.
+#
+function testasuser() {
+    local user= cmd=
+    user="$1"
+    shift
+    cmd="$@"
+    if test x"$user" != x ; then
+	if test x"$cmd" != x ; then
+	    /sbin/runuser -f -m -s /bin/sh -c "test $cmd" -- "$user"
+	else
+	    false
+	fi
+    else
+	false
+    fi
+}
+
+#
+# Check for read-access errors for the user given in $1 for a service named $2.
+# If $3 is specified, the command is run if "klist" can't be found.
+#
+function checkkeytab() {
+    local user= service= klist= default=
+    user="$1"
+    service="$2"
+    default="${3:-false}"
+    if test -x /usr/kerberos/bin/klist ; then
+	klist=/usr/kerberos/bin/klist
+    elif test -x /usr/bin/klist ; then
+	klist=/usr/bin/klist
+    fi
+    KRB5_KTNAME="${KRB5_KTNAME:-/usr/local/etc/krb5.keytab}"
+    export KRB5_KTNAME
+    if test -s "$KRB5_KTNAME" ; then
+	if test x"$klist" != x ; then
+	    if LANG=C $klist -k "$KRB5_KTNAME" | tail -n 4 | awk '{print $2}' | grep -q ^"$service"/ ; then
+		if ! testasuser "$user" -r ${KRB5_KTNAME:-/usr/local/etc/krb5.keytab} ; then
+		    true
+		else
+		    false
+		fi
+	    else
+		false
+	    fi
+	else
+	    $default
+	fi
+    else
+	false
+    fi
+}
+
+# Modified version of checkkeytab() to work with Heimdal
+#
+# Check for read-access errors for the user given in $1 for a service named $2.
+# If $3 is specified, the command is run if "klist" can't be found.
+#
+function checkkeytab_heimdal() {
+    local user= service= ktutil= default=
+    user="$1"
+    service="$2"
+    default="${3:-false}"
+    if test -x /usr/local/sbin/ktutil ; then
+        ktutil=/usr/local/sbin/ktutil
+    fi
+    KRB5_KTNAME="${KRB5_KTNAME:-/usr/local/etc/krb5.keytab}"
+    export KRB5_KTNAME
+    if test -s "$KRB5_KTNAME" ; then
+	if test x"$ktutil" != x ; then
+		# Test for the existence of a keytab for the specified service (ldap)
+	    if LANG=C $ktutil --keytab="$KRB5_KTNAME" list --keys | tail -n 4 | awk '{print $3}' | grep -q ^"$service"/ ; then
+	    # Make sure the keytab file is readable by the $user user (ldap)
+		if ! testasuser "$user" -r ${KRB5_KTNAME:-/usr/local/etc/krb5.keytab} ; then
+		    true
+		else
+		    false
+		fi
+	    else
+		false
+	    fi
+	else
+	    $default
+	fi
+    else
+	false
+    fi
+}
+
+function configtest() {
+	local user= ldapuid= dbdir= file=
+	# Check for simple-but-common errors.
+	user=ldap
+	prog=`basename ${slapd}`
+	ldapuid=`id -u $user`
+	# Unaccessible database files.
+	slaptestflags=
+	for dbdir in `LANG=C egrep '^directory[[:space:]]+[[:print:]]+$' /usr/local/etc/openldap/slapd.conf | sed s,^directory,,` ; do
+		for file in `find ${dbdir}/ -not -uid $ldapuid -and \( -name "*.dbb" -or -name "*.gdbm" -or -name "*.bdb" -or -name "__db.*" \)` ; do
+			echo -n $"$file is not owned by \"$user\"" ; warning ; echo
+		done
+		if ! test -s ${dbdir}/id2entry.dbb ; then
+			if ! test -s ${dbdir}/id2entry.gdbm ; then
+				if ! test -s ${dbdir}/id2entry.bdb ; then
+					slaptestflags=-u
+				fi
+			fi
+		fi
+	done
+	# Unaccessible keytab with an "ldap" key.
+	if checkkeytab_heimdal $user ldap ; then
+		file=${KRB5_KTNAME:-/usr/local/etc/krb5.keytab}
+		echo -n $"$file is not readable by \"$user\"" ; warning ; echo
+	fi
+	# Unaccessible TLS configuration files.
+	tlsconfigs=`LANG=C egrep '^(TLS_CACERT|TLSCACertificateFile|TLSCertificateFile|TLSCertificateKeyFile)[[:space:]]' /usr/local/etc/openldap/slapd.conf /usr/local/etc/openldap/ldap.conf | awk '{print $2}'`
+	for file in $tlsconfigs ; do
+		if ! testasuser $user -r $file ; then
+			echo -n $"$file is not readable by \"$user\"" ; warning ; echo
+		fi
+	done
+	# Check the configuration file.
+	if ! action $"Checking configuration files for $prog: " /sbin/runuser -m -s "$slaptest" -- "$user" $slaptestflags; then
+		if /sbin/runuser -m -s "$slaptest" -- "$user" "-u" > /dev/null 2> /dev/null ; then
+			dirs=`LANG=C egrep '^directory[[:space:]]+[[:print:]]+$' /usr/local/etc/openldap/slapd.conf | awk '{print $2}'`
+			for directory in $dirs ; do
+				if test -r $directory/__db.001 ; then
+					echo -n $"stale lock files may be present in $directory" ; warning ; echo
+				fi
+			done
+		fi
+		exit 1
+	fi
+}
+
+function start() {
+	configtest
+	# Define a couple of local variables which we'll need. Maybe.
+	user=ldap
+	prog=`basename ${slapd}`
+	# Build a wrapper script to exec slapd with the right arguments, to
+	# avoid being tripped out by changes or weirdness in how daemon()
+	# handles quoted arguments.
+	wrapper=`mktemp ${TMP:-/tmp}/start-slapd.XXXXXX`
+	harg="ldap:///"
+	if grep -q ^TLS /usr/local/etc/openldap/slapd.conf || test x$SLAPD_LDAPS = xyes ; then
+	    harg="$harg ldaps:///"
+	fi
+	if test x$SLAPD_LDAPI = xyes ; then
+	    harg="$harg ldapi:///"
+	fi
+	if test -z "$wrapper" ; then
+	    return 1
+	fi
+	cat >> $wrapper <<- EOF
+	exec ${slapd} -h "$harg" -u ${user} $OPTIONS $SLAPD_OPTIONS
+	EOF
+	chmod u+x $wrapper
+	trap "rm -f $wrapper" EXIT
+	# Start daemons.
+	echo -n $"Starting $prog: "
+	daemon --check=$prog $wrapper
+	RETVAL=$?
+	echo
+	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/ldap
+	return $RETVAL
+}
+
+function stop() {
+	# Stop daemons.
+	prog=`basename ${slapd}`
+	echo -n $"Stopping $prog: "
+	killproc ${slapd}
+	RETVAL=$?
+	echo
+	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/ldap /var/run/openldap-compiled/slapd.args
+	return $RETVAL
+}
+
+# See how we were called.
+case "$1" in
+    configtest)
+	configtest
+	;;
+    start)
+	start
+	RETVAL=$?
+	;;
+    stop)
+	stop
+	RETVAL=$?
+	;;
+    status)
+	status ${slapd}
+	RETVAL=$?
+	;;
+    restart)
+	stop
+	start
+	;;
+    condrestart)
+	if [ -f /var/lock/subsys/ldap ] ; then
+	    stop
+ 	    start
+	    RETVAL=$?
+	fi
+	;;
+    *)
+	echo $"Usage: $0 {start|stop|restart|status|condrestart}"
+	RETVAL=1
+esac
+
+exit $RETVAL
