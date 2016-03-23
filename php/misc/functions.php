@@ -40,4 +40,17 @@ function convert_generalizedtime_to_epoch($gt) {
     }
 }
 
+/**
+ * Checks the provided oracle password to make sure it doesn't include any 
+ * invalid characters, returning true if it doesn't and false if it does.  
+ * Oracle passwords can only contain letters, numbers, and these three 
+ * characters: _#$
+ * 
+ * @param unknown $password
+ * @return boolean
+ */
+function is_oracle_db_password_valid($password) {
+    return !(preg_match('/[^A-Za-z0-9_#$]/', $password));
+}
+
 ?>
