@@ -20,51 +20,17 @@ def main():
                 '\tMatch: {}\n'
                 '\tProposed new name: {}'.format(
                     os.path.basename(oldname),
-                    episode_name,
+                    thetvdb_episode_name,
                     os.path.basename(newname)),
                 )
         
-        for episode_name in episodes_ordered:
-            if prep_for_compare(filename).lower().find(prep_for_compare(episode_name).lower()) != -1:
-                basename, extension = os.path.splitext(filename)
-                newpath = os.path.join(
-                    args.video_path,
-                    'Season {:02d}'.format(
-                        int(episodes[episode_name]['season'])
-                        )
-                    )
-                
+        for thetvdb_episode_name in episodes_ordered:
+            if prep_for_compare(filename).lower().find(prep_for_compare(thetvdb_episode_name).lower()) != -1:
                 oldname = os.path.join(dirpath, filename)
-                if args.overwrite == True:
-                    new_episode_name = episode_name
-                else:
-                    new_episode_name = basename.split('-')[-1].strip()
-
-                new_season_episode = 'S{:02d}E{:02d}'.format(
-                    int(episodes[episode_name]['season']),
-                    int(episodes[episode_name]['episode_number']),
-                    )
+                newname = construct_newname(args, filename, thetvdb_episode_name, episodes)
                 
-                newname = os.path.join(
-                    newpath,
-                    '{} - {}{}'.format(
-                        new_season_episode,
-                        new_episode_name,
-                        extension
-                        )
-                    )
-                
-                if oldname == newname:
-                    return
-                
-                if os.path.exists(newname):
-                    sys.stderr.write(
-                        'Warning: file already exists. Not overwriting:\n\t{}\n'.format(
-                            matched_file_output()))
-                    return
-                    
-                else:
-                    if new_season_episode in files_to_rename:
+                if verify_rename(oldname, newname):
+                    if oldname in files_to_rename:
                         sys.stderr.write(
                             'Warning: not renaming file to avoid duplicate:\n\t{}\n'.format(
                                 matched_file_output()))
@@ -72,10 +38,25 @@ def main():
                         
                     else:
                         print(matched_file_output())
-                        files_to_rename[new_season_episode] = {}
-                        files_to_rename[new_season_episode]['oldname'] = oldname
-                        files_to_rename[new_season_episode]['newname'] = newname
+                        files_to_rename[oldname] = newname
                         return
+                        
+    '''                        
+    def find_close_matches(filename):
+        basename, extension = os.path.splitext(filename)
+        if basename.find('-') == -1:
+            print('Warning: "-" not found in file name. Skipping: {}'.format(filename))
+            return
+        
+        for thetvdb_episode_name in episodes_ordered:
+            file_episode_name = basename.split('-')[-1].strip()
+            
+            if prep_for_compare(filename).lower().find(prep_for_compare(thetvdb_episode_name).lower()) != -1:
+            
+            
+
+            if len(difflib.get_close_matches(file_episode_name, [thetvdb_episode_name])) == 1:
+    '''
     
     args = parse_args()
     
@@ -98,8 +79,46 @@ def main():
     else:
         response = input('Rename files? (y/n) ')
         if response == 'y':
-            for season_episode in files_to_rename:
-                os.renames(files_to_rename[season_episode]['oldname'], files_to_rename[season_episode]['newname'])
+            for oldname in files_to_rename:
+                os.renames(oldname, files_to_rename[oldname])
+                filenames.remove(os.path.basename(oldname))
+    
+    '''
+    for filename in filenames:
+        find_close_matches(filename)
+    '''
+
+
+def construct_newname(args, filename, thetvdb_episode_name, episodes):
+    basename, extension = os.path.splitext(filename)
+    newpath = os.path.join(
+        args.video_path,
+        'Season {:02d}'.format(
+            int(episodes[thetvdb_episode_name]['season'])
+            )
+        )
+    
+    
+    if args.overwrite == True:
+        new_episode_name = thetvdb_episode_name
+    else:
+        new_episode_name = basename.split('-')[-1].strip()
+
+    new_season_episode = 'S{:02d}E{:02d}'.format(
+        int(episodes[thetvdb_episode_name]['season']),
+        int(episodes[thetvdb_episode_name]['episode_number']),
+        )
+    
+    newname = os.path.join(
+        newpath,
+        '{} - {}{}'.format(
+            new_season_episode,
+            new_episode_name,
+            extension
+            )
+        )
+    
+    return newname
 
 
 def parse_args():
@@ -178,6 +197,19 @@ def prep_for_compare(s):
             stripped_string += c
     
     return stripped_string
+
+
+def verify_rename(oldname, newname):
+    if oldname == newname:
+        return False
+    
+    if os.path.exists(newname):
+        sys.stderr.write(
+            'Warning: file already exists. Not overwriting:\n\t{}\n'.format(
+                matched_file_output()))
+        return False
+    
+    return True
 
 
 if __name__ == '__main__':
