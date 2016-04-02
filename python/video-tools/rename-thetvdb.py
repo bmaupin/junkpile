@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+import difflib
 import os
 import os.path
 import re
@@ -23,37 +24,14 @@ def main():
     print(len(thetvdb_episodes))
     
     # Rename local episodes and move them into season subfolders
-    files_to_rename = {}
     for (dirpath, dirnames, filenames) in os.walk(args.video_path):
         if filenames != []:
             # Go through the filenames in reverse order as well
             filenames.sort(reverse=True)
             for filename in filenames:
-                thetvdb_episodes, thetvdb_episodes_ordered = match_filename(args, filename, dirpath, thetvdb_episodes, thetvdb_episodes_ordered)
+                match_filename(args, filename, dirpath, thetvdb_episodes, thetvdb_episodes_ordered)
     
     print(len(thetvdb_episodes))
-    
-    '''
-    for filename in filenames:
-        find_close_matches(filename)
-    '''
-    
-    '''                        
-    def find_close_matches(filename):
-        basename, extension = os.path.splitext(filename)
-        if basename.find('-') == -1:
-            print('Warning: "-" not found in file name. Skipping: {}'.format(filename))
-            return
-        
-        for thetvdb_episode_name in thetvdb_episodes_ordered:
-            file_episode_name = basename.split('-')[-1].strip()
-            
-            if prep_for_compare(filename).lower().find(prep_for_compare(thetvdb_episode_name).lower()) != -1:
-            
-            
-
-            if len(difflib.get_close_matches(file_episode_name, [thetvdb_episode_name])) == 1:
-    '''
 
 
 def construct_newname(args, filename, thetvdb_episode_name, thetvdb_episodes):
@@ -91,18 +69,28 @@ def construct_newname(args, filename, thetvdb_episode_name, thetvdb_episodes):
 
 
 def match_filename(args, filename, dirpath, thetvdb_episodes, thetvdb_episodes_ordered):
+    basename, extension = os.path.splitext(filename)
+    if basename.find('-') == -1:
+        print('Warning: "-" not found in file name. Skipping: {}'.format(filename))
+        return
+    
+    # First try to find a match using prep_for_compare()
     for thetvdb_episode_name in thetvdb_episodes_ordered:
         if prep_for_compare(filename).lower().find(prep_for_compare(thetvdb_episode_name).lower()) != -1:
-            oldname = os.path.join(dirpath, filename)
-            newname = construct_newname(args, filename, thetvdb_episode_name, thetvdb_episodes)
-            
-            if verify_rename(oldname, newname, thetvdb_episode_name):
-                if rename_file(oldname, newname, thetvdb_episode_name):
-                    del thetvdb_episodes[thetvdb_episode_name]
-                    thetvdb_episodes_ordered.remove(thetvdb_episode_name)
-                    break
+            if rename_file(args, filename, dirpath, thetvdb_episode_name, thetvdb_episodes):
+                del thetvdb_episodes[thetvdb_episode_name]
+                thetvdb_episodes_ordered.remove(thetvdb_episode_name)
+                return
     
-    return thetvdb_episodes, thetvdb_episodes_ordered
+    # If no matches found, try difflib.get_close_matches()
+    file_episode_name = basename.split('-')[-1].strip()
+    
+    for thetvdb_episode_name in thetvdb_episodes_ordered:
+        if len(difflib.get_close_matches(file_episode_name, [thetvdb_episode_name])) == 1:
+            if rename_file(args, filename, dirpath, thetvdb_episode_name, thetvdb_episodes):
+                del thetvdb_episodes[thetvdb_episode_name]
+                thetvdb_episodes_ordered.remove(thetvdb_episode_name)
+                return
 
 
 def matched_file_output(oldname, newname, thetvdb_episode_name):
@@ -194,19 +182,12 @@ def prep_for_compare(s):
     return stripped_string
 
 
-def rename_file(oldname, newname, thetvdb_episode_name):
-    print(matched_file_output(oldname, newname, thetvdb_episode_name))
-    response = input('Rename files? (y/n) ')
-    if response == 'y':
-        os.renames(oldname, newname)
-        return True
+def rename_file(args, filename, dirpath, thetvdb_episode_name, thetvdb_episodes):
+    oldname = os.path.join(dirpath, filename)
+    newname = construct_newname(args, filename, thetvdb_episode_name, thetvdb_episodes)
     
-    return False
-
-
-def verify_rename(oldname, newname, thetvdb_episode_name):
     if oldname == newname:
-        return False
+        return True
     
     if os.path.exists(newname):
         sys.stderr.write(
@@ -214,7 +195,13 @@ def verify_rename(oldname, newname, thetvdb_episode_name):
                 matched_file_output(oldname, newname, thetvdb_episode_name)))
         return False
     
-    return True
+    print(matched_file_output(oldname, newname, thetvdb_episode_name))
+    response = input('Rename files? (y/n) ')
+    if response == 'y':
+        os.renames(oldname, newname)
+        return True
+    
+    return False
 
 
 if __name__ == '__main__':
