@@ -26,7 +26,10 @@ def main():
 
 
 def construct_newname(args, filename, thetvdb_episode_name, thetvdb_episodes):
-    basename, extension = os.path.splitext(filename)
+    match = re.search('S\d+E\d+', filename)
+    if not match:
+        return None
+        
     newpath = os.path.join(
         args.video_path,
         'Season {:02d}'.format(
@@ -34,37 +37,19 @@ def construct_newname(args, filename, thetvdb_episode_name, thetvdb_episodes):
             )
         )
     
-    show_name = basename.split('-')[0].strip()
+    old_season_episode = match.group()
     
-    if args.overwrite == True:
-        new_episode_name = thetvdb_episode_name
-    else:
-        new_episode_name = basename.split('-')[-1].strip()
-
     new_season_episode = 'S{:02d}E{:02d}'.format(
         int(thetvdb_episodes[thetvdb_episode_name]['season']),
         int(thetvdb_episodes[thetvdb_episode_name]['episode_number']),
         )
     
-    newname = os.path.join(
-        newpath,
-        '{} - {} - {}{}'.format(
-            show_name,
-            new_season_episode,
-            new_episode_name,
-            extension
-            )
-        )
+    newname = filename.replace(old_season_episode, new_season_episode)
     
-    return newname
+    return os.path.join(newpath, newname)
 
 
 def match_filename(args, filename, dirpath, thetvdb_episodes):
-    basename, extension = os.path.splitext(filename)
-    if basename.find('-') == -1:
-        print('Warning: "-" not found in file name. Skipping: {}'.format(filename))
-        return
-    
     # First try to find a match using prep_for_compare()
     for thetvdb_episode_name in thetvdb_episodes:
         if prep_for_compare(filename).lower().find(prep_for_compare(thetvdb_episode_name).lower()) != -1:
@@ -73,6 +58,9 @@ def match_filename(args, filename, dirpath, thetvdb_episodes):
                 return
     
     # If no matches found, try difflib.get_close_matches()
+    basename, extension = os.path.splitext(filename)
+    if basename.find('-') == -1:
+        print('Warning: "-" not found in file name. Results may be incomplete: {}'.format(filename))
     file_episode_name = basename.split('-')[-1].strip()
     
     for thetvdb_episode_name in thetvdb_episodes:
@@ -103,11 +91,6 @@ def parse_args():
         'url',
         help='URL to All Seasons page on thetvdb.com',
         )
-    p.add_argument(
-        '-o', 
-        '--overwrite', 
-        action='store_true',
-        help='Overwrite the title as well as the season/number')
     
     args = p.parse_args()
     
@@ -174,6 +157,12 @@ def prep_for_compare(s):
 def rename_file(args, filename, dirpath, thetvdb_episode_name, thetvdb_episodes):
     oldname = os.path.join(dirpath, filename)
     newname = construct_newname(args, filename, thetvdb_episode_name, thetvdb_episodes)
+    
+    if newname == None:
+        sys.stderr.write(
+            'Warning: unable to find season and episode in filename: {}\n'.format(
+                oldname))
+        return False
     
     if oldname == newname:
         return True
