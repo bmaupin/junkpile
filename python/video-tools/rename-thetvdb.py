@@ -134,6 +134,9 @@ def parse_html(url):
         if 'class' in tr[0].attrib and tr[0].attrib['class'] == 'head':
             continue
         
+        if len(tr[0]) == 0:
+            sys.exit('Error: no episodes found. Try escaping any special characters or quoting the URL.')
+        
         if tr[0][0].text == 'Special':
             # TODO
             sys.stderr.write('Warning: special episodes not yet implemented\n')
