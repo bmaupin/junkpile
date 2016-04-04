@@ -16,22 +16,13 @@ import lxml.html
 def main():
     args = parse_args()
     
-    thetvdb_episodes, thetvdb_episodes_ordered = parse_html(args.url)
-    
-    # Go through the episodes in reverse order so we can better handle multi-part episodes
-    thetvdb_episodes_ordered.reverse()
-    
-    print(len(thetvdb_episodes))
+    thetvdb_episodes = parse_html(args.url)
     
     # Rename local episodes and move them into season subfolders
     for (dirpath, dirnames, filenames) in os.walk(args.video_path):
         if filenames != []:
-            # Go through the filenames in reverse order as well
-            filenames.sort(reverse=True)
             for filename in filenames:
-                match_filename(args, filename, dirpath, thetvdb_episodes, thetvdb_episodes_ordered)
-    
-    print(len(thetvdb_episodes))
+                match_filename(args, filename, dirpath, thetvdb_episodes)
 
 
 def construct_newname(args, filename, thetvdb_episode_name, thetvdb_episodes):
@@ -68,28 +59,26 @@ def construct_newname(args, filename, thetvdb_episode_name, thetvdb_episodes):
     return newname
 
 
-def match_filename(args, filename, dirpath, thetvdb_episodes, thetvdb_episodes_ordered):
+def match_filename(args, filename, dirpath, thetvdb_episodes):
     basename, extension = os.path.splitext(filename)
     if basename.find('-') == -1:
         print('Warning: "-" not found in file name. Skipping: {}'.format(filename))
         return
     
     # First try to find a match using prep_for_compare()
-    for thetvdb_episode_name in thetvdb_episodes_ordered:
+    for thetvdb_episode_name in thetvdb_episodes:
         if prep_for_compare(filename).lower().find(prep_for_compare(thetvdb_episode_name).lower()) != -1:
             if rename_file(args, filename, dirpath, thetvdb_episode_name, thetvdb_episodes):
                 del thetvdb_episodes[thetvdb_episode_name]
-                thetvdb_episodes_ordered.remove(thetvdb_episode_name)
                 return
     
     # If no matches found, try difflib.get_close_matches()
     file_episode_name = basename.split('-')[-1].strip()
     
-    for thetvdb_episode_name in thetvdb_episodes_ordered:
+    for thetvdb_episode_name in thetvdb_episodes:
         if len(difflib.get_close_matches(file_episode_name, [thetvdb_episode_name])) == 1:
             if rename_file(args, filename, dirpath, thetvdb_episode_name, thetvdb_episodes):
                 del thetvdb_episodes[thetvdb_episode_name]
-                thetvdb_episodes_ordered.remove(thetvdb_episode_name)
                 return
 
 
@@ -140,7 +129,6 @@ def parse_html(url):
                 break
     
     episodes = {}
-    episodes_ordered = []
     # Iterate through each episode
     for tr in table.iter('tr'):
         if 'class' in tr[0].attrib and tr[0].attrib['class'] == 'head':
@@ -158,9 +146,7 @@ def parse_html(url):
         episodes[episode_name]['season'] = season
         episodes[episode_name]['episode_number'] = episode_number
         
-        episodes_ordered.append(episode_name)
-
-    return episodes, episodes_ordered
+    return episodes
 
 
 def prep_for_compare(s):
