@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" xmlns:android="http://schemas.android.com/apk/res/android">
+  <string name="loading_conversations" msgid="5510430408235967094">"Учитавање преписки."</string>
+  <string name="low_memory" product="tablet" msgid="6494019234102154896">"Меморија таблета је пуна! Избришите неке датотеке да бисте ослободили простор."</string>
+  <string name="low_memory" product="default" msgid="3475999286680000541">"Складиште телефона је пуно! Избришите неке датотеке како бисте ослободили простор."</string>
+  <string name="message_count_format" msgid="4434763220590778012">" <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+  <string name="messagelist_sender_self" msgid="3579016854116401602">"Ја"</string>
+  <string name="no_conversations" msgid="6773767655149258445">"Нема преписки."</string>
+  <string name="no_subject_view" msgid="7795086723069563537">"(Без наслова)"</string>
+  <plurals name="recipient_count">
+    <item quantity="other" msgid="7338580381574463136">"Особа: <xliff:g id="NUMBER">%1$s</xliff:g>"</item>
+  </plurals>
+</resources>

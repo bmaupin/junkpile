@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * Derived from com.android.mms/res/layout/compose_message_activity.xml
+ * (tag android-4.4.4_r2.0.1)
+ */
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="bottom">
+    
+    <view class="com.android.mms.ui.MessageListView"
+        style="?android:attr/listViewWhiteStyle"
+        android:id="@+id/history"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1.0"
+        android:transcriptMode="disabled"
+        android:smoothScrollbar="false"
+        android:stackFromBottom="true"
+        android:visibility="gone"
+        android:fadingEdge="none"
+        android:layout_marginBottom="1dip"
+        android:cacheColorHint="@android:color/white"
+        android:scrollbarAlwaysDrawVerticalTrack="false"
+        android:scrollbarStyle="insideOverlay"
+    />
+</LinearLayout>

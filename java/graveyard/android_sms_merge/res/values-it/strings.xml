@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" xmlns:android="http://schemas.android.com/apk/res/android">
+  <string name="loading_conversations" msgid="5510430408235967094">"Caricamento conversazioni..."</string>
+  <string name="low_memory" product="tablet" msgid="6494019234102154896">"Spazio di archiviazione del tablet esaurito. Elimina alcuni file per liberare spazio."</string>
+  <string name="low_memory" product="default" msgid="3475999286680000541">"Spazio di archiviazione del telefono esaurito. Elimina alcuni file per liberare spazio."</string>
+  <string name="message_count_format" msgid="4434763220590778012">" <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+  <string name="messagelist_sender_self" msgid="3579016854116401602">"Io"</string>
+  <string name="no_conversations" msgid="6773767655149258445">"Nessuna conversazione."</string>
+  <string name="no_subject_view" msgid="7795086723069563537">"(Nessun oggetto)"</string>
+  <plurals name="recipient_count">
+    <item quantity="other" msgid="7338580381574463136">"<xliff:g id="NUMBER">%1$s</xliff:g> persone"</item>
+  </plurals>
+</resources>
