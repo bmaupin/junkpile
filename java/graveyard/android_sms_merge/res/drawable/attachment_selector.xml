@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * Derived from com.android.mms/res/drawable/attachment_selector.xml
+ * (tag android-4.4.4_r2.0.1)
+ */
+-->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_pressed="false"
+        android:drawable="@android:drawable/picture_frame" />
+
+    <item
+        android:state_pressed="true"
+        android:drawable="@drawable/list_pressed_holo_light" />
+</selector>
