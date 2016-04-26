@@ -2,11 +2,17 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/satori/go.uuid"
+	"io/ioutil"
 )
 
 func main() {
-	u := uuid.NewV4()
-	fmt.Println(u)
+	if err := ioutil.WriteFile("/tmp/tmp/tmp/tmp", []byte(""), 0644); err != nil {
+		panic(fmt.Sprintf("Error writing file: %s", err))
+	}
+
+	/*
+		    // import "github.com/satori/go.uuid"
+			u := uuid.NewV4()
+			fmt.Println(u)
+	*/
 }
