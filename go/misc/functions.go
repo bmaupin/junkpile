@@ -4,6 +4,7 @@ package functions
 
 import (
 	"archive/zip"
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -32,6 +33,62 @@ func CopyFile(sourceFilePath string, destFilePath string) error {
 	}
 
 	return err
+}
+
+func UnzipFile(sourceFilePath string, destDirPath string) error {
+	// First, make sure the destination exists and is a directory
+	info, err := os.Stat(destDirPath)
+	if err != nil {
+		return err
+	}
+	if !info.Mode().IsDir() {
+		return fmt.Errorf("Destination is not a directory: %s", destDirPath)
+	}
+
+	r, err := zip.OpenReader(sourceFilePath)
+	defer func() {
+		if err := r.Close(); err != nil {
+			panic(err)
+		}
+	}()
+
+	// Iterate through each file in the archive
+	for _, f := range r.File {
+		rc, err := f.Open()
+		if err != nil {
+			return err
+		}
+		defer func() {
+			if err := rc.Close(); err != nil {
+				panic(err)
+			}
+		}()
+
+		destFilePath := filepath.Join(destDirPath, f.Name)
+
+		// Create destination subdirectories if necessary
+		destBaseDirPath, _ := filepath.Split(destFilePath)
+		os.MkdirAll(destBaseDirPath, testDirPerm)
+
+		// Create the destination file
+		w, err := os.Create(destFilePath)
+		if err != nil {
+			return err
+		}
+		defer func() {
+			if err := w.Close(); err != nil {
+				panic(err)
+			}
+		}()
+
+		// Copy the contents of the source file
+		_, err = io.Copy(w, rc)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 func ZipFile(sourceFilePath string, destFilePath string) error {
