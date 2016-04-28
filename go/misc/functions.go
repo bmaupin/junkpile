@@ -16,7 +16,9 @@ func CopyFile(sourceFilePath string, destFilePath string) error {
 		return err
 	}
 	defer func() {
-		err = r.Close()
+		if err := r.Close(); err != nil {
+			panic(err)
+		}
 	}()
 
 	w, err := os.Create(destFilePath)
@@ -24,7 +26,9 @@ func CopyFile(sourceFilePath string, destFilePath string) error {
 		return err
 	}
 	defer func() {
-		err = w.Close()
+		if err := w.Close(); err != nil {
+			panic(err)
+		}
 	}()
 
 	_, err = io.Copy(w, r)
@@ -32,7 +36,7 @@ func CopyFile(sourceFilePath string, destFilePath string) error {
 		return err
 	}
 
-	return err
+	return nil
 }
 
 func UnzipFile(sourceFilePath string, destDirPath string) error {
@@ -91,53 +95,22 @@ func UnzipFile(sourceFilePath string, destDirPath string) error {
 	return nil
 }
 
-func ZipFile(sourceFilePath string, destFilePath string) error {
-	r, err := os.Open(sourceFilePath)
-	if err != nil {
-		return err
-	}
-	defer func() {
-		err = r.Close()
-	}()
-
+func ZipDir(sourceDirPath string, destFilePath string) error {
 	f, err := os.Create(destFilePath)
 	if err != nil {
 		return err
 	}
 	defer func() {
-		err = f.Close()
+		if err := f.Close(); err != nil {
+			panic(err)
+		}
 	}()
 
 	z := zip.NewWriter(f)
 	defer func() {
-		err = z.Close()
-	}()
-
-	w, err := z.Create(sourceFilePath)
-	if err != nil {
-		return err
-	}
-
-	_, err = io.Copy(w, r)
-	if err != nil {
-		return err
-	}
-
-	return err
-}
-
-func ZipFolder(sourceFolderPath string, destFilePath string) error {
-	f, err := os.Create(destFilePath)
-	if err != nil {
-		return err
-	}
-	defer func() {
-		err = f.Close()
-	}()
-
-	z := zip.NewWriter(f)
-	defer func() {
-		err = z.Close()
+		if err := z.Close(); err != nil {
+			panic(err)
+		}
 	}()
 
 	var addFileToZip = func(path string, info os.FileInfo, err error) error {
@@ -145,8 +118,8 @@ func ZipFolder(sourceFolderPath string, destFilePath string) error {
 			return err
 		}
 
-		// Get the path of the file relative to the folder we're zipping
-		relativePath, err := filepath.Rel(sourceFolderPath, path)
+		// Get the path of the file relative to the directory we're zipping
+		relativePath, err := filepath.Rel(sourceDirPath, path)
 		if err != nil {
 			return err
 		}
@@ -161,7 +134,9 @@ func ZipFolder(sourceFolderPath string, destFilePath string) error {
 			return err
 		}
 		defer func() {
-			err = r.Close()
+			if err := r.Close(); err != nil {
+				panic(err)
+			}
 		}()
 
 		w, err := z.Create(relativePath)
@@ -177,10 +152,51 @@ func ZipFolder(sourceFolderPath string, destFilePath string) error {
 		return err
 	}
 
-	err = filepath.Walk(sourceFolderPath, addFileToZip)
+	err = filepath.Walk(sourceDirPath, addFileToZip)
 	if err != nil {
 		return err
 	}
 
 	return err
+}
+
+func ZipFile(sourceFilePath string, destFilePath string) error {
+	r, err := os.Open(sourceFilePath)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if err := r.Close(); err != nil {
+			panic(err)
+		}
+	}()
+
+	f, err := os.Create(destFilePath)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if err := f.Close(); err != nil {
+			panic(err)
+		}
+	}()
+
+	z := zip.NewWriter(f)
+	defer func() {
+		if err := z.Close(); err != nil {
+			panic(err)
+		}
+	}()
+
+	w, err := z.Create(sourceFilePath)
+	if err != nil {
+		return err
+	}
+
+	_, err = io.Copy(w, r)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
