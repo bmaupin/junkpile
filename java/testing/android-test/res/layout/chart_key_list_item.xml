@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Source originally from the chartdroid project, revision 299
+ * http://code.google.com/p/chartdroid/
+ * 
+ * This file has been modified from the original source by bmaupin:
+ * - link to android white color instead of custom color
+ * - rename resource IDs
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+
+    android:padding="6dip">
+
+    <ImageView
+        android:id="@+id/chart_swatch_holder"
+
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="6dip"
+	/>
+        
+    <LinearLayout
+    	android:orientation="vertical"
+    	android:layout_weight="1"
+        android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+    >
+
+	    <TextView
+	        android:id="@+id/chart_label_holder"
+	
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+        	android:textAppearance="?android:attr/textAppearanceSmall"
+	
+			android:textStyle="bold"
+	        android:gravity="center_vertical"
+	        android:text="Label" />
+	        
+	    <TextView
+	        android:id="@+id/chart_datum_holder"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+        	android:textAppearance="?android:attr/textAppearanceSmall" 
+			android:textColor="@android:color/white"
+	        android:text="Datum" />
+	
+
+	</LinearLayout>
+
+</LinearLayout>
