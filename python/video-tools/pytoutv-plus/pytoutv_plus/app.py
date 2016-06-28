@@ -452,12 +452,9 @@ class App(toutvcli.app.App):
                 # If this is a completely new emission or an emission added by _fetch_episode()
                 if emission.last_seen == None:
                     emission.first_seen = today
-                    emission.new_count = 1
-
-                    store.new_emissions.append(emission.id)
 
                 # If this is a new emission since the last run
-                if emission.last_seen != None and emission.last_seen != store.last_run:
+                if emission.last_seen != store.last_run:
                     emission.new_count += 1
 
                     if emission.new_count <= MAX_NEW_COUNT:
@@ -562,6 +559,7 @@ class Emission:
     def __init__(self):
         self.episodes = []
         self.last_seen = None
+        self.new_count = 0
 
 
 class Episode:
