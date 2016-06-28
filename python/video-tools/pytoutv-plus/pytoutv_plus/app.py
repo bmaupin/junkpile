@@ -60,10 +60,10 @@ def retry_function(function, *args, **kwargs):
             break
         except toutv.exceptions.RequestTimeoutError:
             pass
-        
+
         if n == MAX_TIMEOUTS - 1:
             sys.exit('Error: max timeout attempts reached\n')
-    
+
     return result
 
 
@@ -71,35 +71,35 @@ class App(toutvcli.app.App):
     # Override
     def run(self):
         locale.setlocale(locale.LC_ALL, '')
-        
+
         # Override help messages
         for action in self._argparser._actions[1]._choices_actions:
             if action.dest == 'list':
                 action.help = 'List new emissions or episodes since last run'
-        
+
         for action in self._argparser._actions[1].choices['list']._actions:
             if action.dest == 'all':
                 action.help = 'List all emissions or episodes'
-        
+
         super().run()
-    
+
     # Override
     def _build_toutv_client(self, *args, **kwargs):
         print('Please wait...\n')
-        
+
         client = super()._build_toutv_client(*args, **kwargs)
         client._transport = JsonTransport()
-        
+
         return client
-    
+
     # Override
     def _command_fetch(self, *args, **kwargs):
         self._store = DataStore()
-        
+
         super()._command_fetch(*args, **kwargs)
-        
+
         self._store.write()
-    
+
     # Override
     def _fetch_emission_episodes(self, emission, output_dir, bitrate, quality,
                                  overwrite):
@@ -146,17 +146,17 @@ class App(toutvcli.app.App):
             except Exception as e:
                 tmpl = 'Error: cannot fetch "{}": {}'
                 print(tmpl.format(title, e), file=sys.stderr)
-    
+
     # Override
     def _fetch_episode(self, episode, output_dir, bitrate, quality, overwrite):
         def remove_special_chars(s):
             # http://superuser.com/a/358861/93066
             special_chars = ['\\', '/', ':', '*', '?', '"', '<', '>', '|']
             for c in special_chars:
-                s = s.replace(c, '') 
-            
+                s = s.replace(c, '')
+
             return s
-        
+
         def download_episode():
             nonlocal store_episode
 
@@ -169,12 +169,12 @@ class App(toutvcli.app.App):
                                   on_dl_start=self._on_dl_start,
                                   on_progress_update=opu,
                                   overwrite=overwrite)
-            
+
             # Start download
             self._dl.download()
-            
+
             sys.stdout.flush()
-            
+
             # Rename downloaded file
             filepath = os.path.join(output_dir, self._dl.filename)
             if os.path.isfile(filepath):
@@ -183,11 +183,11 @@ class App(toutvcli.app.App):
                     new_filepath = os.path.join(
                         output_dir,
                         '{} ({}).mp4'.format(
-                            remove_special_chars(episode.Title), 
+                            remove_special_chars(episode.Title),
                             remove_special_chars(episode.Year),
                         )
                     )
-                    
+
                 else:
                     new_filepath = os.path.join(
                         output_dir,
@@ -197,32 +197,32 @@ class App(toutvcli.app.App):
                             remove_special_chars(episode.Title),
                         )
                     )
-                
+
                 if os.path.isfile(new_filepath) and not overwrite:
                     sys.stderr.write(
                         'Warning: file already exists (use -f to override): {}'.format(
                             new_filepath))
-                
+
                 else:
                     os.replace(filepath, new_filepath)
-                    
+
             # Finished
             self._dl = None
-            
+
             # Save the downloaded episode info to the datastore file
             if store_episode is None:
                 store_episode = Episode()
                 store_episode.bitrate = bitrate
                 store_episode.id = episode.Id
                 store_episode.title = episode.Title
-                
+
                 store_emission.episodes.append(store_episode)
-            
+
             else:
                 store_episode.bitrate = bitrate
-            
+
             self._store.write()
-        
+
         # Match the emission from the datastore file
         store_emission = None
         for em in self._store.emissions:
@@ -239,10 +239,10 @@ class App(toutvcli.app.App):
                             em.title
                         )
                     )
-                
+
                 store_emission = em
                 break
-            
+
             if em.title.lower() == episode._emission.Title.lower():
                 if hasattr(em, 'id'):
                     if em.id != episode._emission.Id:
@@ -256,23 +256,23 @@ class App(toutvcli.app.App):
                                 em.id
                             )
                         )
-                        
+
                 else:
                     # Imported emissions may not have Ids; add them
                     em.id = episode._emission.Id
-                
+
                 store_emission = em
                 break
-        
+
         # Save the emission info to the datastore file if it doesn't exist
         if store_emission is None:
             store_emission = Emission()
             store_emission.id = episode._emission.Id
             store_emission.last_seen = None
             store_emission.title = episode._emission.Title
-            
+
             self._store.emissions.append(store_emission)
-        
+
         # See if the episode has already been downloaded
         store_episode = None
         for ep in store_emission.episodes:
@@ -289,10 +289,10 @@ class App(toutvcli.app.App):
                             ep.title
                         )
                     )
-                
+
                 store_episode = ep
                 break
-            
+
             # Otherwise match by title
             if ep.title.lower() == episode.Title.lower():
                 if hasattr(ep, 'id'):
@@ -310,13 +310,13 @@ class App(toutvcli.app.App):
                 else:
                     # Imported episodes may not have Ids; add them
                     ep.id = episode.Id
-                
+
                 store_episode = ep
                 break
-                
+
         # Get available bitrates for episode
         qualities = retry_function(episode.get_available_qualities)
-        
+
         # Choose bitrate
         if bitrate is None:
             if quality == toutvcli.app.App.QUALITY_MIN:
@@ -325,7 +325,7 @@ class App(toutvcli.app.App):
                 bitrate = qualities[-1].bitrate
             elif quality == toutvcli.app.App.QUALITY_AVG:
                 bitrate = toutvcli.app.App._get_average_bitrate(qualities)
-                
+
         # Don't download if episode already downloaded
         if store_episode is not None and not overwrite:
             if store_episode.bitrate == bitrate:
@@ -333,7 +333,7 @@ class App(toutvcli.app.App):
                     episode._emission.Title,
                     episode.SeasonAndEpisode,
                     episode.Title))
-                
+
                 # TODO: temporary cleanup code; remove eventually
                 opu = self._on_dl_progress_update
                 self._dl = Downloader(episode, bitrate=bitrate,
@@ -345,7 +345,7 @@ class App(toutvcli.app.App):
                 if os.path.isfile(filepath) and os.path.getsize(filepath) == 0:
                     os.remove(filepath)
                 self._dl = None
-            
+
             else:
                 print('Already downloaded with bitrate {}: {} - {} - {}'.format(
                     store_episode.bitrate,
@@ -356,10 +356,10 @@ class App(toutvcli.app.App):
                     bitrate))
                 if response.lower() == 'y':
                     download_episode()
-            
+
         else:
             download_episode()
-    
+
     # Override
     def _print_list_emissions(self, arg_all=False):
         def list_emissions(all_emissions, emissions_to_list):
@@ -373,7 +373,7 @@ class App(toutvcli.app.App):
                 if emission.Country is not None:
                     emission_string += '\n\t{}'.format(emission.Country)
                 print(emission_string)
-        
+
         def title_sort_func(ekey):
             return locale.strxfrm(repertoire_emissions[ekey].get_title())
 
@@ -389,13 +389,13 @@ class App(toutvcli.app.App):
             # If this is the first run ever
             if store.last_run is None:
                 store.last_run = today
-            
+
             # Start with a fresh list of new emissions
             store.new_emissions = []
-            
+
             for emission_id in repertoire_emissions:
                 emission = None
-                
+
                 # Get the emission from the datastore
                 for em in store.emissions:
                     # Match first by Id
@@ -416,7 +416,7 @@ class App(toutvcli.app.App):
                             sys.stderr.write('Warning: duplicate emission exists in datastore with Id {}\n'.format(emission_id))
                         else:
                             emission = em
-                    
+
                     elif em.title.lower() == repertoire_emissions[emission_id].Title.lower():
                         if hasattr(em, 'id'):
                             if em.id != emission_id:
@@ -433,57 +433,57 @@ class App(toutvcli.app.App):
                         else:
                             # Imported emissions may not have Ids; add them
                             em.id = emission_id
-                        
+
                         if emission is not None:
                             sys.stderr.write('Warning: duplicate emission exists in datastore with title {}\n'.format(
                                 repertoire_emissions[emission_id].Title))
                         else:
                             emission = em
-                
+
                 # If this is a completely new emission
                 if emission is None:
                     emission = Emission()
                     emission.id = emission_id
                     emission.last_seen = None
                     emission.title = repertoire_emissions[emission_id].Title
-                    
+
                     store.emissions.append(emission)
-                
+
                 # If this is a completely new emission or an emission added by _fetch_episode()
                 if emission.last_seen == None:
                     emission.first_seen = today
                     emission.new_count = 1
-                    
+
                     store.new_emissions.append(emission.id)
-                
+
                 # If this is a new emission since the last run
                 if emission.last_seen != None and emission.last_seen != store.last_run:
                     emission.new_count += 1
-                    
+
                     if emission.new_count <= MAX_NEW_COUNT:
                         store.new_emissions.append(emission_id)
-                
+
                 emission.last_seen = today
-            
+
             # Sort the list of new emissions alphabetically
             store.new_emissions.sort(key=title_sort_func)
 
             store.last_run = today
-            
+
             store.write()
-        
+
         # List all emissions
         if arg_all:
             emissions_keys = list(repertoire_emissions.keys())
             emissions_keys.sort(key=title_sort_func)
-            
+
             list_emissions(repertoire_emissions, emissions_keys)
-            
+
         # List only new emissions
         else:
             if len(store.new_emissions) == 0:
                 print('No new emissions since last run (use -a to list all emissions)')
-                
+
             else:
                 list_emissions(repertoire_emissions, store.new_emissions)
 
@@ -492,37 +492,37 @@ class DataStore():
     def __init__(self):
         self.emissions = []
         self.last_run = None
-        
+
         data_path = self._get_data_file_path()
         if os.path.exists(data_path):
             with open(data_path, 'r') as data_file:
                 json_data = json.loads(data_file.read())
-                
+
                 for data_key in json_data.keys():
                     if data_key == 'emissions':
                         for json_emission in json_data[data_key]:
                             emission = Emission()
-                            
+
                             for emission_key in json_emission.keys():
                                 if emission_key == 'episodes':
                                     for json_episode in json_emission[emission_key]:
                                         episode = Episode()
-                                    
+
                                         for episode_key in json_episode.keys():
                                             episode.__setattr__(episode_key, json_episode[episode_key])
-                                            
+
                                         emission.episodes.append(episode)
-                                
+
                                 else:
                                     emission.__setattr__(emission_key, json_emission[emission_key])
-                            
+
                             self.emissions.append(emission)
                     else:
                         self.__setattr__(data_key, json_data[data_key])
 
     def _get_data_file_path(self):
         DATA_FILE_NAME = 'toutv_data.json'
-        
+
         if 'XDG_DATA_HOME' in os.environ:
             data_dir = os.environ['XDG_DATA_HOME']
             xdg_data_path = os.path.join(data_dir, 'toutv')
@@ -535,7 +535,7 @@ class DataStore():
             if not os.path.exists(home_data_path):
                 os.makedirs(home_data_path)
             data_path = os.path.join(home_data_path, DATA_FILE_NAME)
-            
+
         return data_path
 
     def write(self):
@@ -543,10 +543,10 @@ class DataStore():
         with open(data_path, 'w') as data_file:
             data_file.write(
                 json.dumps(
-                    self, 
+                    self,
                     cls=JsonObjectEncoder,
-                    sort_keys=True, 
-                    indent=4, 
+                    sort_keys=True,
+                    indent=4,
                     ensure_ascii=False,
                 )
             )
@@ -581,5 +581,5 @@ class JsonTransport(toutv.transport.JsonTransport):
 
 def run():
     app = App(sys.argv[1:])
-    
+
     return app.run()
