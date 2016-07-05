@@ -28,6 +28,7 @@ final Map STACKOVERFLOW_ALT_NAMES = [
     'ColdFusion CFC': 'cfc',
     'Darcs Patch': 'darcs',
     'DIGITAL Command Language': 'dcl',
+    'ECLiPSe': 'eclipse-clp',
     'Emacs Lisp': 'elisp',
     'Factor': 'factor-lang',
     'GAMS': 'gams-math',
@@ -99,7 +100,7 @@ Map<Lang, Integer> getStackoverflowTagCount(ArrayList<Lang> langs) {
 
     def jsonResult = new groovy.json.JsonSlurper().parseText(sb.toString())
 
-    // For now stay under the limit rather than worrying about handling paged results 
+    // For now stay under the limit rather than worrying about handling paged results
     if (jsonResult['has_more'] == true) {
         log.error 'Exceeded number of results per single StackExchange API call'
     }
@@ -140,7 +141,7 @@ Integer getGithubRepoCount(String langName) {
         } else if (conn.getResponseCode() == 422) {
             log.warn "Github API request empty for lang: ${langName}"
             return 0
-        }        
+        }
     }
 
     return totalCount
