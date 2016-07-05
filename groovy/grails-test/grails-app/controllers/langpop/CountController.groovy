@@ -21,10 +21,11 @@ class CountController {
 
     def countService
 
-    def testpage2() {
-        render "<h3>Overall:</h3>"
+    def testtoday() {
+        def queryDate = new Date().clearTime()
+        render "<h3>${queryDate}</h3>"
         render "<ol>"
-        countService.getTopLangCounts(20).each { lang, count ->
+        countService.getTopLangCounts(20, queryDate).each { lang, count ->
             render "<li>${lang.name}: ${count}</li>"
         }
         render "</ol>"

@@ -28,7 +28,7 @@ class CountService {
         'XSLT',
     ]
 
-    Map<Lang, Integer> getTopLangCounts(int number) {
+    Map<Lang, Integer> getTopLangCounts(int numLangs, Date queryDate) {
         def langCounts = [:]
         Lang.list().each { lang ->
             // Don't include non-languages
@@ -38,7 +38,7 @@ class CountService {
                 // Add up the counts for each site for each language
                 Site.list().each { site ->
                     def query = Count.where {
-                        lang.id == lang.id && site.id == site.id && date == new Date().clearTime()
+                        lang.id == lang.id && site.id == site.id && date == queryDate
                     }
                     if (query.count() == 1) {
                         langTotalCount += query.get().count
@@ -50,7 +50,7 @@ class CountService {
         }
 
         // Do a reverse (descending) sort and return the top n results
-        return langCounts.sort{ -it.value }.take(number)
+        return langCounts.sort{ -it.value }.take(numLangs)
     }
 }
 
