@@ -19,6 +19,10 @@ class CountController {
         respond Site.list()
     }
 
+    def testchart() {}
+
+    def testpage3() {}
+
     def countService
 
     def testtoday() {
