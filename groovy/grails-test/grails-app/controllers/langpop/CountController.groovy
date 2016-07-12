@@ -21,9 +21,9 @@ class CountController {
 
     def testchart() {}
 
-    def testpage3() {}
-
     def countService
+
+    def testtop5() {}
 
     def testtoday() {
         def queryDate = new Date().clearTime()
