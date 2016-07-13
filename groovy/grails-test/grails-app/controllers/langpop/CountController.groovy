@@ -15,8 +15,34 @@ class CountController {
         respond Count.list(params), model:[countInstanceCount: Count.count()]
     }
 
-    def testpage() {
+    def test1() {
         respond Site.list()
+    }
+
+    def test2() {
+        (0..4).each{
+            def queryDate = new Date().clearTime() - (it * 7)
+
+            def langCounts = [:]
+
+            langCounts[queryDate.format('yyyy-MM-dd')] = countService.getTopLangCounts(5, queryDate)
+            render langCounts
+
+            render "<br>"
+        }
+
+        /*
+        def langCounts = [:]
+
+        langCounts[queryDate.format('yyyy-MM-dd')] = countService.getTopLangCounts(5, queryDate)
+        render langCounts
+        */
+
+        /*
+        langCounts = {}
+        langCounts[date] = {}
+        langCounts[date][]
+        */
     }
 
     def testchart() {}
