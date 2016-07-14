@@ -4,11 +4,14 @@ package langpop
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import groovy.time.TimeCategory
 
 @Transactional(readOnly = true)
 class CountController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+
+    def countService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -20,6 +23,18 @@ class CountController {
     }
 
     def test2() {
+        /*
+        render countService.getTopLangCounts2(5, new Date().clearTime())
+        render "<br>"
+        */
+
+        countService.getTopLangCounts2(5, new Date().clearTime()).each{
+            render "${Lang.findById(it[0]).name}: ${it[1]}<br>"
+        }
+
+
+
+        /*
         (0..4).each{
             def queryDate = new Date().clearTime() - (it * 7)
 
@@ -30,6 +45,7 @@ class CountController {
 
             render "<br>"
         }
+        */
 
         /*
         def langCounts = [:]
@@ -45,9 +61,20 @@ class CountController {
         */
     }
 
-    def testchart() {}
+    def testtime() {
+        def startTime = new Date()
 
-    def countService
+        (0..4).each{
+            countService.getTopLangCounts(5, new Date().clearTime())
+            def endTime = new Date()
+            def elapsedTime = TimeCategory.minus(endTime, startTime)
+            startTime = endTime
+
+            render "${elapsedTime}<br>"
+        }
+    }
+
+    def testchart() {}
 
     def testtop5() {}
 

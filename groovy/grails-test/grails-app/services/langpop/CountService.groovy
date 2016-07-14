@@ -52,6 +52,25 @@ class CountService {
         // Do a reverse (descending) sort and return the top n results
         return langCounts.sort{ -it.value }.take(numLangs)
     }
+
+    def getTopLangCounts2(int numLangs, Date queryDate) {
+        def results = Count.createCriteria().list {
+            eq("date", queryDate)
+            projections{
+                // SQL: group by lang_id
+                lang {
+                    groupProperty("id")
+                }
+                // Calculate the sum of the count column and alias it as sumCount
+                // SQL: select sum(count) as sumCount
+                sum("count", "sumCount")
+            }
+            order("sumCount", "desc")
+            maxResults(numLangs)
+        }
+
+        return results
+    }
 }
 
 /*
