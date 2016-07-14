@@ -23,14 +23,89 @@ class CountController {
     }
 
     def test2() {
+        // Use 5 dates, 90 day increments, and 20 languages for interesting results
+
+        def dateLabels = []
+        def langCounts = [:]
+        def langs = []
+        // Keep track of how many dates we get data for
+        def dateCount = 0
+
+
+        langs.add("test")
+        langCounts["test"] = []
+
+        (0..4).each{ dateIndex ->
+            dateCount ++
+            def queryDate = new Date().clearTime() - (dateIndex * 7)
+            def formattedDate = queryDate.format('yyyy-MM-dd')
+            dateLabels.add(formattedDate)
+
+            countService.getTopLangCounts2(5, queryDate).each{
+                def langName = Lang.findById(it[0]).name
+                if (!(langName in langs)) {
+                    langs.add(langName)
+                }
+                if (!(langName in langCounts)) {
+                    langCounts[langName] = []
+                }
+
+                // Use the specific dateIndex so missing dates will be filled with nulls
+                langCounts[langName][dateIndex] = it[1]
+            }
+
+            if (dateIndex == 1 || dateIndex == 3) {
+                langCounts["test"][dateIndex] = 555
+            }
+        }
+
+        langs.each{ langName ->
+            // Replace all null elements with 0
+            Collections.replaceAll(langCounts[langName], null, 0)
+
+            // Fill missing language data with 0
+            while (langCounts[langName].size() != dateCount) {
+                langCounts[langName].add(0)
+            }
+        }
+
+        render dateLabels
+        render "<br>"
+        render langCounts
+
+
+        /*
+        langCounts = {
+            '2016-07-14': {
+                'Javascript': 555,
+                'somethineelse': 444,
+    
+        }
+        */
+
+        /*
+        dates = ['2016-07-14', ...]
+        langCoounts = {
+            'Javascript': [555, 555, 555]
+        }
+        */
+
+
         /*
         render countService.getTopLangCounts2(5, new Date().clearTime())
         render "<br>"
         */
 
+        /*
         countService.getTopLangCounts2(5, new Date().clearTime()).each{
             render "${Lang.findById(it[0]).name}: ${it[1]}<br>"
         }
+        */
+
+        /*
+        1. Get counts
+        2. Put in map
+        */
 
 
 
