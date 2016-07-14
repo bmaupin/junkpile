@@ -31,10 +31,6 @@ class CountController {
         // Keep track of how many dates we get data for
         def dateCount = 0
 
-
-        langs.add("test")
-        langCounts["test"] = []
-
         (0..4).each{ dateIndex ->
             dateCount ++
             def queryDate = new Date().clearTime() - (dateIndex * 7)
@@ -52,10 +48,6 @@ class CountController {
 
                 // Use the specific dateIndex so missing dates will be filled with nulls
                 langCounts[langName][dateIndex] = it[1]
-            }
-
-            if (dateIndex == 1 || dateIndex == 3) {
-                langCounts["test"][dateIndex] = 555
             }
         }
 
