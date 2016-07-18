@@ -33,7 +33,7 @@ class CountController {
 
         (0..4).each{ dateIndex ->
             dateCount ++
-            def queryDate = new Date().clearTime() - (dateIndex * 7)
+            def queryDate = new Date().clearTime() - (dateIndex * 90)
             def formattedDate = queryDate.format('yyyy-MM-dd')
             dateLabels.add(formattedDate)
 
@@ -61,9 +61,34 @@ class CountController {
             }
         }
 
-        render dateLabels
+/*
+        render dateLabels.reverse()
         render "<br>"
-        render langCounts
+
+        langCounts.each{ langName, counts ->
+            render langName
+            render "<br>"
+            render counts.reverse()
+            render "<br>"
+        }
+        //render langCounts
+*/
+
+//        render "'" + dateLabels.join("', '") + "'"
+
+
+        render(
+            view: "testtop5",
+            model: [
+                dataLabels: ("'" + dateLabels.reverse().join("', '") + "'"),
+                dataSetLabels: langs,
+                data1: langCounts[langs[0]].reverse(),
+                data2: langCounts[langs[1]].reverse(),
+                data3: langCounts[langs[2]].reverse(),
+                data4: langCounts[langs[3]].reverse(),
+                data5: langCounts[langs[4]].reverse()
+            ])
+
 
 
         /*

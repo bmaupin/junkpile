@@ -9,47 +9,47 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: [${raw(dataLabels)}],
             datasets: [
                 {
-                    label: "One",
+                    label: "${dataSetLabels[0]}",
                     fill: false,
                     lineTension: 0.1,
                     backgroundColor: "rgba(63,81,181,0.4)",
                     borderColor: "rgba(63,81,181,1)",
-                    data: [40, 55, 56, 59, 65, 80, 81],
+                    data: ${data1},
                 },
                 {
-                    label: "Two",
+                    label: "${dataSetLabels[1]}",
                     fill: false,
                     lineTension: 0.1,
                     backgroundColor: "rgba(3,169,244,0.4)",
                     borderColor: "rgba(3,169,244,1)",
-                    data: [41, 49, 57, 70, 72, 79, 79],
+                    data: ${data2},
                 },
                 {
-                    label: "Three",
+                    label: "${dataSetLabels[2]}",
                     fill: false,
                     lineTension: 0.1,
                     backgroundColor: "rgba(0,150,136,0.4)",
                     borderColor: "rgba(0,150,136,1)",
-                    data: [36, 45, 50, 71, 88, 93, 97],
+                    data: ${data3},
                 },
                 {
-                    label: "Four",
+                    label: "${dataSetLabels[3]}",
                     fill: false,
                     lineTension: 0.1,
                     backgroundColor: "rgba(139,195,74,0.4)",
                     borderColor: "rgba(139,195,74,1)",
-                    data: [35, 51, 71, 72, 80, 96, 99],
+                    data: ${data4},
                 },
                 {
-                    label: "Five",
+                    label: "${dataSetLabels[4]}",
                     fill: false,
                     lineTension: 0.1,
                     backgroundColor: "rgba(255,235,59,0.4)",
                     borderColor: "rgba(255,235,59,1)",
-                    data: [25, 35, 41, 47, 51, 54, 60],
+                    data: ${data5},
                 }
             ]
         }
