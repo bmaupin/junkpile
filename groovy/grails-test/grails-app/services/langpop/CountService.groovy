@@ -71,6 +71,26 @@ class CountService {
 
         return results
     }
+
+    def getLangCount(String langName, Date queryDate) {
+        def results = Count.createCriteria().list {
+            eq("date", queryDate)
+            projections{
+                lang {
+                    // SQL: where lang_id = (select id from lang where name = 'JavaScript')
+                    eq("name", langName)
+                    // SQL: group by lang_id
+                    groupProperty("id")
+                }
+                // Calculate the sum of the count column
+                // SQL: select sum(count)
+                sum("count")
+            }
+        }
+
+        // Return just the count ([1]). There should only be one result (results[0])
+        return results[0][1]
+    }
 }
 
 /*
