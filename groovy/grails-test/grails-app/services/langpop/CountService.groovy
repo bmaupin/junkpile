@@ -97,12 +97,17 @@ class CountService {
             }
         }
 
-        if (results.size() > 1) {
-            log.warn "getLangCount found more than one result"
-        }
+        if (results.size() == 0) {
+            return 0
+            
+        } else {
+            if (results.size() > 1) {
+                log.warn "getLangCount found more than one result"
+            }
 
-        // Return just the count ([1]). There should only be one result (results[0])
-        return results[0][1]
+            // Return just the count ([1]). There should only be one result (results[0])
+            return results[0][1]
+        }
     }
 }
 
