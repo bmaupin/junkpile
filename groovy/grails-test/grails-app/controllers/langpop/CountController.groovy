@@ -48,39 +48,26 @@ class CountController {
         def chartData = [:]
         def labelsKey = 'labels'
         chartData[labelsKey] = []
-
         def langCounts = [:]
-        def langs = []
-        // Keep track of how many dates we get data for
-        def dateCount = 0
 
         (0..4).each{ dateIndex ->
-            dateCount ++
             def queryDate = new Date().clearTime() - (dateIndex * 90)
             def formattedDate = queryDate.format('yyyy-MM-dd')
             chartData[labelsKey].add(formattedDate)
 
-            countService.getTopLangCounts(5, queryDate).each{
-                def langName = Lang.findById(it[countService.langId]).name
-                if (!(langName in langs)) {
-                    langs.add(langName)
+            if (dateIndex == 0) {
+                countService.getTopLangCounts(5, queryDate).each{
+                    def langName = Lang.findById(it[countService.langId]).name
+                    if (!(langName in langCounts)) {
+                        langCounts[langName] = []
+                    }
+                    langCounts[langName].add(it[countService.sumCount])
                 }
-                if (!(langName in langCounts)) {
-                    langCounts[langName] = []
+
+            } else {
+                langCounts.keySet().each{ langName ->
+                    langCounts[langName].add(countService.getLangCount(langName, queryDate))
                 }
-
-                // Use the specific dateIndex so missing dates will be filled with nulls
-                langCounts[langName][dateIndex] = it[countService.sumCount]
-            }
-        }
-
-        langs.each{ langName ->
-            // Replace all null elements with 0
-            Collections.replaceAll(langCounts[langName], null, 0)
-
-            // Fill missing language data with 0
-            while (langCounts[langName].size() != dateCount) {
-                langCounts[langName].add(0)
             }
         }
 
