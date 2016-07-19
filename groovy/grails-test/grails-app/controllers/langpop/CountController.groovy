@@ -51,22 +51,25 @@ class CountController {
         def langCounts = [:]
 
         (0..4).each{ dateIndex ->
-            def queryDate = new Date().clearTime() - (dateIndex * 90)
+            def queryDate = new Date().clearTime() - (dateIndex * 80)
             def formattedDate = queryDate.format('yyyy-MM-dd')
-            chartData[labelsKey].add(formattedDate)
+            // Add date to front of list since we want to show oldest first
+            chartData[labelsKey].add(0, formattedDate)
 
             if (dateIndex == 0) {
-                countService.getTopLangCounts(5, queryDate).each{
+                countService.getTopLangCounts(15, queryDate).each{
                     def langName = Lang.findById(it[countService.langId]).name
                     if (!(langName in langCounts)) {
                         langCounts[langName] = []
                     }
-                    langCounts[langName].add(it[countService.sumCount])
+                    // Add language count in reverse order to show oldest first
+                    langCounts[langName].add(0, it[countService.sumCount])
                 }
 
             } else {
                 langCounts.keySet().each{ langName ->
-                    langCounts[langName].add(countService.getLangCount(langName, queryDate))
+                    // Add language count in reverse order to show oldest first
+                    langCounts[langName].add(0, countService.getLangCount(langName, queryDate))
                 }
             }
         }
