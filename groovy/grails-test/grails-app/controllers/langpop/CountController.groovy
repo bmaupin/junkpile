@@ -60,8 +60,8 @@ class CountController {
             def formattedDate = queryDate.format('yyyy-MM-dd')
             chartData[labelsKey].add(formattedDate)
 
-            countService.getTopLangCounts2(5, queryDate).each{
-                def langName = Lang.findById(it[0]).name
+            countService.getTopLangCounts(5, queryDate).each{
+                def langName = Lang.findById(it[countService.langId]).name
                 if (!(langName in langs)) {
                     langs.add(langName)
                 }
@@ -70,7 +70,7 @@ class CountController {
                 }
 
                 // Use the specific dateIndex so missing dates will be filled with nulls
-                langCounts[langName][dateIndex] = it[1]
+                langCounts[langName][dateIndex] = it[countService.sumCount]
             }
         }
 
@@ -215,7 +215,7 @@ class CountController {
             def formattedDate = queryDate.format('yyyy-MM-dd')
             dateLabels.add(formattedDate)
 
-            countService.getTopLangCounts2(5, queryDate).each{
+            countService.getTopLangCounts(5, queryDate).each{
                 def langName = Lang.findById(it[0]).name
                 if (!(langName in langs)) {
                     langs.add(langName)
@@ -329,6 +329,27 @@ class CountController {
         langCounts[date] = {}
         langCounts[date][]
         */
+    }
+
+    def test3() {
+        def queryDate = new Date().clearTime()
+
+        //render countService.getLangCount("JavaScript", queryDate)
+
+        render countService.getTopLangCounts(5, queryDate)
+        /*.each{
+                def langName = Lang.findById(it[0]).name
+                if (!(langName in langs)) {
+                    langs.add(langName)
+                }
+                if (!(langName in langCounts)) {
+                    langCounts[langName] = []
+                }
+
+                // Use the specific dateIndex so missing dates will be filled with nulls
+                langCounts[langName][dateIndex] = it[1]
+            }
+            */
     }
 
     def testtime() {

@@ -3,6 +3,9 @@ package langpop
 class CountService {
     static transactional = false
 
+    static final langId = 'langId'
+    static final sumCount = 'sumCount'
+
     // My arbitrary list of non-languages
     def nonLangs = [
         'AppleScript',
@@ -28,7 +31,7 @@ class CountService {
         'XSLT',
     ]
 
-    Map<Lang, Integer> getTopLangCounts(int numLangs, Date queryDate) {
+    Map<Lang, Integer> getTopLangCountsOld(int numLangs, Date queryDate) {
         def langCounts = [:]
         Lang.list().each { lang ->
             // Don't include non-languages
@@ -53,7 +56,7 @@ class CountService {
         return langCounts.sort{ -it.value }.take(numLangs)
     }
 
-    def getTopLangCounts2(int numLangs, Date queryDate) {
+    def getTopLangCounts(int numLangs, Date queryDate) {
         def results = Count.createCriteria().list {
             eq("date", queryDate)
             projections{
@@ -67,6 +70,12 @@ class CountService {
             }
             order("sumCount", "desc")
             maxResults(numLangs)
+        // Map the results for easier reference
+        }.collect {
+            [
+                (langId): it[0],
+                (sumCount): it[1]
+            ]
         }
 
         return results
@@ -86,6 +95,10 @@ class CountService {
                 // SQL: select sum(count)
                 sum("count")
             }
+        }
+
+        if (results.size() > 1) {
+            log.warn "getLangCount found more than one result"
         }
 
         // Return just the count ([1]). There should only be one result (results[0])
