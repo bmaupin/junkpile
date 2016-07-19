@@ -3,6 +3,7 @@ package langpop
 
 
 import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 import grails.transaction.Transactional
 import groovy.time.TimeCategory
 
@@ -16,6 +17,183 @@ class CountController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Count.list(params), model:[countInstanceCount: Count.count()]
+    }
+
+    def ajaxGetTopLangs = {
+        def chartColors = [
+            [63,81,181],
+            [3,169,244],
+            [0,150,136],
+            [139,195,74],
+            [255,235,59],
+            [255,152,0],
+            [233,30,99],
+            [103,58,183],
+            [33,150,243],
+            [0,188,212],
+            [76,175,80],
+            [205,220,57],
+            [255,193,7],
+            [255,87,34],
+            [244,67,54],
+            [156,39,176],
+            [121,85,72],
+            [158,158,158],
+            [96,125,139],
+            [0,0,0]
+        ]
+
+        // Use 5 dates, 90 day increments, and 20 languages for interesting results
+
+        def chartData = [:]
+        def labelsKey = 'labels'
+        chartData[labelsKey] = []
+
+        def langCounts = [:]
+        def langs = []
+        // Keep track of how many dates we get data for
+        def dateCount = 0
+
+        (0..4).each{ dateIndex ->
+            dateCount ++
+            def queryDate = new Date().clearTime() - (dateIndex * 90)
+            def formattedDate = queryDate.format('yyyy-MM-dd')
+            chartData[labelsKey].add(formattedDate)
+
+            countService.getTopLangCounts2(5, queryDate).each{
+                def langName = Lang.findById(it[0]).name
+                if (!(langName in langs)) {
+                    langs.add(langName)
+                }
+                if (!(langName in langCounts)) {
+                    langCounts[langName] = []
+                }
+
+                // Use the specific dateIndex so missing dates will be filled with nulls
+                langCounts[langName][dateIndex] = it[1]
+            }
+        }
+
+        langs.each{ langName ->
+            // Replace all null elements with 0
+            Collections.replaceAll(langCounts[langName], null, 0)
+
+            // Fill missing language data with 0
+            while (langCounts[langName].size() != dateCount) {
+                langCounts[langName].add(0)
+            }
+        }
+
+
+
+/*
+        render dateLabels.reverse()
+        render "<br>"
+
+        langCounts.each{ langName, counts ->
+            render langName
+            render "<br>"
+            render counts.reverse()
+            render "<br>"
+        }
+        //render langCounts
+*/
+
+//        render "'" + dateLabels.join("', '") + "'"
+
+/*
+        render(
+            view: "testtop5",
+            model: [
+                dataLabels: ("'" + dateLabels.reverse().join("', '") + "'"),
+                dataSetLabels: langs,
+                data1: langCounts[langs[0]].reverse(),
+                data2: langCounts[langs[1]].reverse(),
+                data3: langCounts[langs[2]].reverse(),
+                data4: langCounts[langs[3]].reverse(),
+                data5: langCounts[langs[4]].reverse()
+            ])
+*/
+
+/*
+        render(contentType: "application/json") {
+            model: [
+                dateLabels,
+                langCounts
+            ]
+        }
+*/
+
+
+
+        def datasetsKey = 'datasets'
+        chartData[datasetsKey] = []
+        def colorIndex = 0
+
+        langCounts.each{ langName, counts ->
+            def dataset = [:]
+            dataset['label'] = langName
+            dataset['fill'] = false
+            dataset['lineTension'] = 0.1
+            dataset['backgroundColor'] = "rgba(${chartColors[colorIndex].join(',')},0.4)"
+            dataset['borderColor'] = "rgba(${chartColors[colorIndex].join(',')},1)"
+            dataset['data'] = counts
+
+            chartData[datasetsKey].add(dataset)
+
+            colorIndex ++
+        }
+
+        render chartData as JSON
+
+
+/*
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+                {
+                    label: "One",
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(63,81,181,0.4)",
+                    borderColor: "rgba(63,81,181,1)",
+                    data: [40, 55, 56, 59, 65, 80, 81],
+                },
+                {
+                    label: "Two",
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(3,169,244,0.4)",
+                    borderColor: "rgba(3,169,244,1)",
+                    data: [41, 49, 57, 70, 72, 79, 79],
+                },
+                {
+                    label: "Three",
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(0,150,136,0.4)",
+                    borderColor: "rgba(0,150,136,1)",
+                    data: [36, 45, 50, 71, 88, 93, 97],
+                },
+                {
+                    label: "Four",
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(139,195,74,0.4)",
+                    borderColor: "rgba(139,195,74,1)",
+                    data: [35, 51, 71, 72, 80, 96, 99],
+                },
+                {
+                    label: "Five",
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(255,235,59,0.4)",
+                    borderColor: "rgba(255,235,59,1)",
+                    data: [25, 35, 41, 47, 51, 54, 60],
+                }
+            ]
+        }
+*/
+
     }
 
     def test1() {
