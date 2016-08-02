@@ -4,7 +4,7 @@ import groovy.transform.Field
 import org.apache.log4j.Logger
 
 
-final int GITHUB_API_REQ_LIMIT = 5
+final int GITHUB_API_REQ_LIMIT = 10
 @Field final int GITHUB_API_TIME_LIMIT = 60000
 @Field final String GITHUB_BASE_URL = 'https://api.github.com/search/repositories?q=language:'
 final String GITHUB_SITE_NAME = 'github'
