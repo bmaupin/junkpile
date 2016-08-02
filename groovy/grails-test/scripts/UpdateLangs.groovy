@@ -144,8 +144,8 @@ Integer getGithubRepoCount(String langName) {
             return 0
         }
 
-    } catch (java.net.UnknownHostException e) {
-        log.warn "java.net.UnknownHostException: ${e}"
+    } catch (java.net.ConnectException | java.net.UnknownHostException e) {
+        log.warn e
         sleep(GITHUB_API_TIME_LIMIT)
         return getGithubRepoCount(langName)
     }
