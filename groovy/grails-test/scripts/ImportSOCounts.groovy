@@ -7,7 +7,10 @@ import org.xml.sax.helpers.DefaultHandler
 import org.xml.sax.*
 
 class MyHandler extends DefaultHandler {
+    // This is the last date of data that isn't in the DB already
     def lastDate = Date.parse('yyyy-MM-dd', '2015-07-15')
+
+    def stackoverflowLangNames = ImportUtil.getStackoverflowLangNames()
 
     void startElement(String ns, String localName, String qName, Attributes atts) {
         switch (qName) {
@@ -17,6 +20,16 @@ class MyHandler extends DefaultHandler {
 
                 if (creationDate <= lastDate) {
                     println creationDate
+                    // Check for null as well as empty
+                    if (atts.getValue('Tags')) {
+                        atts.getValue('Tags').replaceAll('<', ' ').replaceAll('>', ' ').split().each { tag ->
+                            if (tag in stackoverflowLangNames) {
+                                println tag
+                            }
+                        }
+                    }
+
+                    System.exit(0)
                 }
 
                 break
