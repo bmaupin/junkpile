@@ -1,6 +1,14 @@
 import langpop.*
 
-def conn = new URL('http://localhost:8999').getText()
+println ImportUtil.getStackoverflowLangNames()
+
+println ImportUtil.getStackoverflowLangNames().size()
+
+//println ImportUtil.STACKOVERFLOW_ALT_NAMES
+
+//println ImportUtil.getGithubLangs()
+
+//def conn = new URL('http://localhost:8999').getText()
 
 /*
 def countService = ctx.countService
