@@ -1,26 +1,5 @@
 import langpop.*
 
-/* Out of memory
-def posts = new XmlSlurper().parse('/home/bmaupin/Desktop/temp-so/Posts.xml')
-def posts = new XmlParser().parse('/home/bmaupin/Desktop/temp-so/Posts.xml')
-
-posts.row.each{
-    println it.@CreationDate
-}
-*/
-
-/*
-import javax.xml.parsers.SAXParserFactory
-import org.xml.sax.helpers.DefaultHandler
-import org.xml.sax.*
-
-def handler = new DefaultHandler()
-def reader = SAXParserFactory.newInstance().newSAXParser().XMLReader
-reader.setContentHandler(handler)
-def inputStream = new ByteArrayInputStream(XmlExamples.CAR_RECORDS.getBytes("UTF-8"))
-reader.parse(new InputSource(inputStream))
-*/
-
 import groovy.transform.Field
 import javax.xml.parsers.SAXParser
 import javax.xml.parsers.SAXParserFactory
@@ -43,23 +22,9 @@ class MyHandler extends DefaultHandler {
                 break
         }
     }
-    /*
-    void characters(char[] chars, int offset, int length) {
-       if (countryFlag) {
-           currentMessage += new String(chars, offset, length)
-       }
-    }
-    void endElement(String ns, String localName, String qName) {
-        switch (qName) {
-           case 'car':
-               messages << currentMessage; break
-           case 'country':
-               currentMessage += ' has a '; countryFlag = false; break
-        }
-    }
-    */
 }
 
+// XmlParser and XmlSlurper read the whole file into memory, so we have to use SAXParser instead
 SAXParserFactory factory = SAXParserFactory.newInstance()
 SAXParser parser = factory.newSAXParser()
 File file = new File('/home/bmaupin/Desktop/temp-so/Posts-head.xml')
