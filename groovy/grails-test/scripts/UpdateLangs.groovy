@@ -50,6 +50,7 @@ final Map STACKOVERFLOW_ALT_NAMES = [
     'Mathematica': 'wolfram-mathematica',
     'OpenEdge ABL': 'openedge',
     'PigLatin': 'apache-pig',
+    'POV-Ray SDL': 'povray',
     'Protocol Buffer': 'protocol-buffers',
     'SaltStack': 'salt-stack',
     'SQLPL': 'db2',
