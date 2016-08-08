@@ -135,19 +135,21 @@ Integer getGithubRepoCount(String langName) {
         totalCount = new groovy.json.JsonSlurper().parseText(conn.getURL().getText())['total_count']
 
     } catch (java.io.IOException e) {
-        if (conn.getResponseCode() == 403) {
-            log.warn 'Exceeded Github API request limit'
+        try {
+            if (conn.getResponseCode() == 403) {
+                log.warn 'Exceeded Github API request limit'
+                sleep(GITHUB_API_TIME_LIMIT)
+                return getGithubRepoCount(langName)
+            } else if (conn.getResponseCode() == 422) {
+                log.warn "Github API request empty for lang: ${langName}"
+                return 0
+            }
+
+        } catch (java.net.ConnectException | java.net.UnknownHostException e2) {
+            log.warn e2
             sleep(GITHUB_API_TIME_LIMIT)
             return getGithubRepoCount(langName)
-        } else if (conn.getResponseCode() == 422) {
-            log.warn "Github API request empty for lang: ${langName}"
-            return 0
         }
-
-    } catch (java.net.ConnectException | java.net.UnknownHostException e) {
-        log.warn e
-        sleep(GITHUB_API_TIME_LIMIT)
-        return getGithubRepoCount(langName)
     }
 
     return totalCount
