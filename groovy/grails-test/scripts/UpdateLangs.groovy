@@ -1,4 +1,5 @@
 import langpop.*
+
 import grails.util.Metadata
 import groovy.transform.Field
 import org.apache.log4j.Logger
@@ -76,21 +77,8 @@ List<String> getGithubLangs() {
     return select.optgroup.option.collect { it.text() }
 }
 
-
-String getStackoverflowLangName(Lang l) {
-    def a = LangAltName.find {
-        lang.id == l.id && site.id == Site.findByName(STACKOVERFLOW_SITE_NAME).id
-    }
-
-    if (a == null) {
-        return l.name.toLowerCase().replaceAll(' ', '-')
-    }
-
-    return a.altName
-}
-
 Map<Lang, Integer> getStackoverflowTagCount(ArrayList<Lang> langs) {
-    def conn =  String.format(STACKOVERFLOW_BASE_URL, java.net.URLEncoder.encode((langs.collect{ return getStackoverflowLangName(it) }.join(';')), 'UTF-8')).toURL().openConnection()
+    def conn =  String.format(STACKOVERFLOW_BASE_URL, java.net.URLEncoder.encode((langs.collect{ return ImportUtil.getStackoverflowLangName(it) }.join(';')), 'UTF-8')).toURL().openConnection()
     def reader = new BufferedReader(new InputStreamReader(new java.util.zip.GZIPInputStream(conn.getInputStream())))
 
     def sb = new StringBuilder()
@@ -111,7 +99,7 @@ Map<Lang, Integer> getStackoverflowTagCount(ArrayList<Lang> langs) {
     langs.each { lang ->
         // Use find{} since we can't break fom each{}
         jsonResult['items'].find { item ->
-            if (getStackoverflowLangName(lang) == item['name']) {
+            if (ImportUtil.getStackoverflowLangName(lang) == item['name']) {
                 soTagCount[lang] = item['count']
                 // Break
                 return true
