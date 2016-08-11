@@ -5,17 +5,11 @@ import groovy.transform.Field
 import org.apache.log4j.Logger
 
 
-final int GITHUB_API_REQ_LIMIT = 10
-@Field final int GITHUB_API_TIME_LIMIT = 60000
-@Field final String GITHUB_BASE_URL = 'https://api.github.com/search/repositories?q=language:'
-final String GITHUB_SITE_NAME = 'github'
-
 @Field final String STACKOVERFLOW_BASE_URL = 'https://api.stackexchange.com/2.2/tags/%s/info?order=desc&sort=popular&site=stackoverflow'
 final int STACKOVERFLOW_BATCH_API_LIMIT = 20
-@Field final String STACKOVERFLOW_SITE_NAME = 'stackoverflow'
 final String[] SITES = [
-    GITHUB_SITE_NAME,
-    STACKOVERFLOW_SITE_NAME,
+    ImportUtil.GITHUB_SITE_NAME,
+    ImportUtil.STACKOVERFLOW_SITE_NAME,
 ]
 
 final Map STACKOVERFLOW_ALT_NAMES = [
@@ -65,19 +59,6 @@ final Map STACKOVERFLOW_ALT_NAMES = [
 @Field Logger log = Logger.getLogger(Metadata.current.getApplicationName())
 
 
-List<String> getGithubLangs() {
-    githubLanguagesUrl = "https://github.com/search/advanced"
-
-    // Use a TagSoup parser because of malformed XML
-    def parser = new XmlSlurper(new org.ccil.cowan.tagsoup.Parser())
-    def doc = parser.parse(githubLanguagesUrl)
-    // Get the select element with id search_language
-    def select = doc.depthFirst().find { it.name() == 'select' && it.@id == 'search_language' }
-
-    // Return the text of each option sub-element in a list
-    return select.optgroup.option.collect { it.text() }
-}
-
 Map<Lang, Integer> getStackoverflowTagCount(ArrayList<Lang> langs) {
     def conn =  String.format(STACKOVERFLOW_BASE_URL, java.net.URLEncoder.encode((langs.collect{ return ImportUtil.getStackoverflowLangName(it) }.join(';')), 'UTF-8')).toURL().openConnection()
     def reader = new BufferedReader(new InputStreamReader(new java.util.zip.GZIPInputStream(conn.getInputStream())))
@@ -115,36 +96,6 @@ Map<Lang, Integer> getStackoverflowTagCount(ArrayList<Lang> langs) {
     return soTagCount
 }
 
-Integer getGithubRepoCount(String langName) {
-    // Spaces must be replaced with dashes for github language names
-    def conn = new URL(GITHUB_BASE_URL + java.net.URLEncoder.encode(langName.replaceAll(' ', '-'))).openConnection()
-    int totalCount
-
-    try {
-        totalCount = new groovy.json.JsonSlurper().parseText(conn.getURL().getText())['total_count']
-
-    } catch (java.io.IOException e) {
-        try {
-            if (conn.getResponseCode() == 403) {
-                log.warn 'Exceeded Github API request limit'
-                sleep(GITHUB_API_TIME_LIMIT)
-                return getGithubRepoCount(langName)
-            } else if (conn.getResponseCode() == 422) {
-                log.warn "Github API request empty for lang: ${langName}"
-                return 0
-            }
-
-        } catch (java.net.ConnectException | java.net.UnknownHostException e2) {
-            log.warn e2
-            sleep(GITHUB_API_TIME_LIMIT)
-            return getGithubRepoCount(langName)
-        }
-    }
-
-    return totalCount
-}
-
-
 // Populate the sites table
 SITES.each {
     if (!Site.findByName(it)) {
@@ -154,7 +105,7 @@ SITES.each {
 
 
 // Populate the lang table
-getGithubLangs().each {
+ImportUtil.getGithubLangs().each {
     if (!Lang.findByName(it)) {
         new Lang(name: it).save()
     }
@@ -162,7 +113,7 @@ getGithubLangs().each {
 
 
 // Populate the LangAltName table
-def soSite = Site.findByName(STACKOVERFLOW_SITE_NAME)
+def soSite = Site.findByName(ImportUtil.STACKOVERFLOW_SITE_NAME)
 
 STACKOVERFLOW_ALT_NAMES.each { langName, langAltName ->
     def lang = Lang.findByName(langName)
@@ -207,10 +158,10 @@ Lang.list().collate(STACKOVERFLOW_BATCH_API_LIMIT).each {
 
 
 // Add counts for github
-def ghSite = Site.findByName(GITHUB_SITE_NAME)
+def ghSite = Site.findByName(ImportUtil.GITHUB_SITE_NAME)
 
 Lang.list().eachWithIndex { lang, ghApiReqCount ->
-    def ghRepoCount = getGithubRepoCount(lang.name)
+    def ghRepoCount = ImportUtil.getGithubRepoCount(lang.name)
 
     new Count(
         // We only want the date, not the time
@@ -220,8 +171,8 @@ Lang.list().eachWithIndex { lang, ghApiReqCount ->
         site: ghSite
     ).save()
 
-    if ((ghApiReqCount + 1) % GITHUB_API_REQ_LIMIT == 0) {
-        sleep(GITHUB_API_TIME_LIMIT)
+    if ((ghApiReqCount + 1) % ImportUtil.GITHUB_API_REQ_LIMIT == 0) {
+        sleep(ImportUtil.GITHUB_API_TIME_LIMIT)
     }
 
 /*
