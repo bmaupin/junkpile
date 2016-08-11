@@ -1,11 +1,20 @@
 import langpop.*
 
+def startDate = Date.parse('yyyy-MM-dd', '2008-10-29')
+
+(0..10).each{
+    println ImportUtil.getGithubRepoCount('ruby', startDate + it)
+}
+
+
+/*
 ImportUtil.getStackoverflowLangNames().each {
     println it
     println ImportUtil.getGitHubLangName(it)
 }
 
 println ImportUtil.getStackoverflowLangNames().size()
+*/
 
 //println ImportUtil.STACKOVERFLOW_ALT_NAMES
 

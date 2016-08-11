@@ -7,7 +7,7 @@ import org.apache.log4j.Logger
 public class ImportUtil {
     static final int GITHUB_API_REQ_LIMIT = 10
     static final int GITHUB_API_TIME_LIMIT = 60000
-    static final String GITHUB_BASE_URL = 'https://api.github.com/search/repositories?q=language:'
+    static final String GITHUB_REPO_URL = 'https://api.github.com/search/repositories?q=language:'
     static final String GITHUB_SITE_NAME = 'github'
 
     static final String STACKOVERFLOW_SITE_NAME = 'stackoverflow'
@@ -28,8 +28,18 @@ public class ImportUtil {
     }
 
     static Integer getGithubRepoCount(String langName) {
+        return getGithubRepoCount(langName, null)
+    }
+
+    static Integer getGithubRepoCount(String langName, Date dateCreated) {
         // Spaces must be replaced with dashes for github language names
-        def conn = new URL(GITHUB_BASE_URL + java.net.URLEncoder.encode(langName.replaceAll(' ', '-'))).openConnection()
+        def searchURL = GITHUB_REPO_URL + java.net.URLEncoder.encode(langName.replaceAll(' ', '-'))
+
+        if (dateCreated != null) {
+            searchURL += '+created:' + dateCreated.format('yyyy-MM-dd')
+        }
+
+        def conn = new URL(searchURL).openConnection()
         int totalCount
 
         try {
@@ -40,7 +50,7 @@ public class ImportUtil {
                 if (conn.getResponseCode() == 403) {
                     log.warn 'Exceeded Github API request limit'
                     sleep(GITHUB_API_TIME_LIMIT)
-                    return getGithubRepoCount(langName)
+                    return getGithubRepoCount(langName, dateCreated)
                 } else if (conn.getResponseCode() == 422) {
                     log.warn "Github API request empty for lang: ${langName}"
                     return 0
@@ -49,7 +59,7 @@ public class ImportUtil {
             } catch (java.net.ConnectException | java.net.UnknownHostException e2) {
                 log.warn e2
                 sleep(GITHUB_API_TIME_LIMIT)
-                return getGithubRepoCount(langName)
+                return getGithubRepoCount(langName, dateCreated)
             }
         }
 
