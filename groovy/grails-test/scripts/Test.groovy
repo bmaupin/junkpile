@@ -1,6 +1,9 @@
 import langpop.*
 
-println ImportUtil.getStackoverflowLangNames()
+ImportUtil.getStackoverflowLangNames().each {
+    println it
+    println ImportUtil.getGitHubLangName(it)
+}
 
 println ImportUtil.getStackoverflowLangNames().size()
 

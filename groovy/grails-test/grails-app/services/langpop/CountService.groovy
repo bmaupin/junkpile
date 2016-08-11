@@ -99,7 +99,7 @@ class CountService {
 
         if (results.size() == 0) {
             return 0
-            
+
         } else {
             if (results.size() > 1) {
                 log.warn "getLangCount found more than one result"

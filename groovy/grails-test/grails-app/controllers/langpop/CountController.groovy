@@ -57,7 +57,7 @@ class CountController {
             chartData[labelsKey].add(0, formattedDate)
 
             if (dateIndex == 0) {
-                countService.getTopLangCounts(15, queryDate).each{
+                countService.getTopLangCounts(10, queryDate).each{
                     def langName = Lang.findById(it[countService.langId]).name
                     if (!(langName in langCounts)) {
                         langCounts[langName] = []
