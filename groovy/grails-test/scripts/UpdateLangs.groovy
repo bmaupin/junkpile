@@ -105,7 +105,7 @@ SITES.each {
 
 
 // Populate the lang table
-ImportUtil.getGithubLangs().each {
+ImportUtil.getGithubLangNames().each {
     if (!Lang.findByName(it)) {
         new Lang(name: it).save()
     }

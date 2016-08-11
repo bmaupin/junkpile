@@ -32,7 +32,7 @@ public class ImportUtil {
         }
     }
 
-    static List<String> getGithubLangs() {
+    static List<String> getGithubLangNames() {
         def githubLanguagesUrl = "https://github.com/search/advanced"
 
         // Use a TagSoup parser because of malformed XML
