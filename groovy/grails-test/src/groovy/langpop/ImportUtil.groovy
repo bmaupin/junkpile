@@ -14,6 +14,24 @@ public class ImportUtil {
 
     static Logger log = Logger.getLogger(Metadata.current.getApplicationName())
 
+    static String getGitHubLangName(String name) {
+        def a = LangAltName.find {
+            altName == name && site.id == Site.findByName(STACKOVERFLOW_SITE_NAME).id
+        }
+
+        if (a != null) {
+            return Lang.findById(a.lang.id).name
+
+        } else {
+            def gitHubLangName = Lang.findByNameIlike(name)?.name
+            if (gitHubLangName != null) {
+                return gitHubLangName
+            } else {
+                return Lang.findByNameIlike(name.replaceAll('-', ' '))?.name
+            }
+        }
+    }
+
     static List<String> getGithubLangs() {
         def githubLanguagesUrl = "https://github.com/search/advanced"
 
@@ -80,23 +98,5 @@ public class ImportUtil {
 
     static List<String> getStackoverflowLangNames() {
         return Lang.list().collect { getStackoverflowLangName(it) }
-    }
-
-    static String getGitHubLangName(String name) {
-        def a = LangAltName.find {
-            altName == name && site.id == Site.findByName(STACKOVERFLOW_SITE_NAME).id
-        }
-
-        if (a != null) {
-            return Lang.findById(a.lang.id).name
-
-        } else {
-            def gitHubLangName = Lang.findByNameIlike(name)?.name
-            if (gitHubLangName != null) {
-                return gitHubLangName
-            } else {
-                return Lang.findByNameIlike(name.replaceAll('-', ' '))?.name
-            }
-        }
     }
 }
