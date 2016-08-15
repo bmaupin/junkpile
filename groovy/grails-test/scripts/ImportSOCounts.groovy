@@ -50,7 +50,8 @@ class MyHandler extends DefaultHandler {
                 count: 1,
                 lang: lang,
                 site: site
-            ).save()
+            // TODO: this save doesn't get persisted without flush: true...
+            ).save(flush: true)
 
         } else {
             count.count ++
