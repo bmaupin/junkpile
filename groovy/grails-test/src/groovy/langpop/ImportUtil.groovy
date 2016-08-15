@@ -7,6 +7,8 @@ import org.apache.log4j.Logger
 public class ImportUtil {
     static final int GITHUB_API_REQ_LIMIT = 10
     static final int GITHUB_API_TIME_LIMIT = 60000
+    // This is the date of the oldest data in github
+    static final String GITHUB_OLDEST_DATE = '2007-10-29'
     static final String GITHUB_REPO_URL = 'https://api.github.com/search/repositories?q=language:'
     static final String GITHUB_SITE_NAME = 'github'
 
@@ -55,6 +57,11 @@ public class ImportUtil {
 
         if (dateCreated != null) {
             searchURL += '+created:' + dateCreated.format('yyyy-MM-dd')
+        }
+
+        def githubAuthToken = System.getenv("GITHUB_AUTH_TOKEN")
+        if (githubAuthToken != null) {
+            searchURL += '&access_token=' + githubAuthToken
         }
 
         def conn = new URL(searchURL).openConnection()
