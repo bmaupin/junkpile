@@ -12,6 +12,7 @@ public class ImportUtil {
     static final String GITHUB_REPO_URL = 'https://api.github.com/search/repositories?q=language:'
     static final String GITHUB_SITE_NAME = 'github'
 
+    static final String STACKOVERFLOW_OLDEST_DATE = '2008-07-31'
     static final String STACKOVERFLOW_SITE_NAME = 'stackoverflow'
 
     static Logger log = Logger.getLogger(Metadata.current.getApplicationName())
