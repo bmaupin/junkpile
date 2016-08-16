@@ -35,10 +35,10 @@ while (searchDate <= lastDate) {
             def count = query.find()
 
             if (count == null) {
-                count = 0
+                totalCounts[lang.name] = 0
+            } else {
+                totalCounts[lang.name] = count.count
             }
-
-            totalCounts[lang.name] = count
         }
 
         totalCounts[lang.name] += ImportUtil.getGithubRepoCount(lang.name, searchDate)
