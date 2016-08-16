@@ -1,11 +1,53 @@
 import langpop.*
 
+import javax.xml.parsers.SAXParser
+import javax.xml.parsers.SAXParserFactory
+import org.xml.sax.helpers.DefaultHandler
+import org.xml.sax.*
+
+
+class MyHandler extends DefaultHandler {
+    Date lastDate
+
+    void startElement(String ns, String localName, String qName, Attributes atts) {
+        if (qName == 'row') {
+            // Parse the date, dropping the time
+            def creationDate = Date.parse('yyyy-MM-dd', atts.getValue('CreationDate'))
+
+            if (creationDate > lastDate) {
+                lastDate = creationDate
+
+            } else if (creationDate < lastDate) {
+                println "ERROR: CreationDate ${creationDate} is older than previous date ${lastDate}"
+            }
+        }
+    }
+}
+
+// XmlParser and XmlSlurper read the whole file into memory, so we have to use SAXParser instead
+SAXParserFactory factory = SAXParserFactory.newInstance()
+SAXParser parser = factory.newSAXParser()
+File file = new File('/home/bmaupin/Desktop/temp-so/Posts.xml')
+DefaultHandler handler = new MyHandler()
+parser.parse(file, handler)
+
+
+/*
+println ImportUtil.getGithubLangNames().size()
+*/
+
+/*
+def githubAuthToken = System.getenv("GITHUB_AUTH_TOKEN")
+println githubAuthToken
+*/
+
+/*
 def startDate = Date.parse('yyyy-MM-dd', '2008-10-29')
 
 (0..10).each{
     println ImportUtil.getGithubRepoCount('ruby', startDate + it)
 }
-
+*/
 
 /*
 ImportUtil.getStackoverflowLangNames().each {
