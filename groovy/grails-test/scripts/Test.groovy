@@ -1,5 +1,62 @@
 import langpop.*
 
+
+// Replace imported Stackoverflow data with totals
+def FIRST_DATE = ImportUtil.STACKOVERFLOW_OLDEST_DATE
+// This is the last date of data that isn't in the DB already
+def LAST_DATE = '2015-07-15'
+
+def firstDate = Date.parse('yyyy-MM-dd', FIRST_DATE)
+def searchDate = firstDate
+def lastDate = Date.parse('yyyy-MM-dd', LAST_DATE)
+
+def soSite = Site.findByName(ImportUtil.STACKOVERFLOW_SITE_NAME)
+
+// This will hold the running total count for each language
+def totalCounts = [:]
+
+while (searchDate <= lastDate) {
+    Lang.list().each { lang ->
+        // Be verbose in case we have to abort the script
+        println "${searchDate}\t${lang.name}"
+
+        // Get today's count
+        def query = Count.where {
+            date == searchDate && lang.id == lang.id && site.id == soSite.id
+        }
+        def count = query.find()
+
+        if (count == null) {
+            if (lang.name in totalCounts && totalCounts[lang.name] != 0) {
+                new Count(
+                    // Remove the time component of the date just to be safe
+                    date: date.clearTime(),
+                    count: totalCounts[lang.name],
+                    lang: lang,
+                    site: site
+                // TODO: this save doesn't get persisted without flush: true...
+                ).save(flush: true)
+            }
+
+        } else {
+            if (!(lang.name in totalCounts)) {
+                totalCounts[lang.name] = count.count
+
+            } else {
+                totalCounts[lang.name] += count.count
+                count.count = totalCounts[lang.name]
+                // TODO: this save doesn't get persisted without flush: true...
+                count.save(flush: true)
+            }
+        }
+    }
+
+    searchDate += 1
+}
+
+
+/*
+// Get an idea of how many times dates in stackoverflow dump are out of order
 import javax.xml.parsers.SAXParser
 import javax.xml.parsers.SAXParserFactory
 import org.xml.sax.helpers.DefaultHandler
@@ -30,7 +87,7 @@ SAXParser parser = factory.newSAXParser()
 File file = new File('/home/bmaupin/Desktop/temp-so/Posts.xml')
 DefaultHandler handler = new MyHandler()
 parser.parse(file, handler)
-
+*/
 
 /*
 println ImportUtil.getGithubLangNames().size()
