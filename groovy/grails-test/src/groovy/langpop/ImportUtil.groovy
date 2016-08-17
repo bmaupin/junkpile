@@ -6,7 +6,7 @@ import org.apache.log4j.Logger
 
 public class ImportUtil {
     // Try this many times on API failures before giving up
-    static final int MAX_API_TRIES = 100
+    static final int MAX_API_TRIES = 20
 
     static final int GITHUB_API_REQ_LIMIT = 10
     static final int GITHUB_API_TIME_LIMIT = 60000
@@ -71,26 +71,31 @@ public class ImportUtil {
         }
 
         def conn = new URL(searchURL).openConnection()
+        int apiCount = 0
         int totalCount
 
-        try {
-            totalCount = new groovy.json.JsonSlurper().parseText(conn.getURL().getText())['total_count']
-
-        } catch (java.io.IOException e) {
+        while (true) {
             try {
-                if (conn.getResponseCode() == 403) {
-                    log.warn 'Exceeded Github API request limit'
-                    sleep(GITHUB_API_TIME_LIMIT)
-                    return getGithubRepoCount(langName, dateCreated)
-                } else if (conn.getResponseCode() == 422) {
-                    log.warn "Github API request empty for lang: ${langName}"
-                    return 0
-                }
+                totalCount = new groovy.json.JsonSlurper().parseText(conn.getURL().getText())['total_count']
+                break
 
-            } catch (java.net.ConnectException | java.net.UnknownHostException e2) {
-                log.warn e2
-                sleep(GITHUB_API_TIME_LIMIT)
-                return getGithubRepoCount(langName, dateCreated)
+            } catch (java.io.IOException e) {
+                try {
+                    if (conn.getResponseCode() == 403) {
+                        log.warn 'Exceeded Github API request limit'
+                        sleep(GITHUB_API_TIME_LIMIT)
+                    } else if (conn.getResponseCode() == 422) {
+                        log.warn "Github API request empty for lang: ${langName}"
+                        return 0
+                    }
+
+                } catch (java.net.ConnectException | java.net.UnknownHostException e2) {
+                    if (++apiCount == MAX_API_TRIES) {
+                        throw e2
+                    }
+                    log.warn e2
+                    sleep(GITHUB_API_TIME_LIMIT)
+                }
             }
         }
 

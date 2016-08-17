@@ -62,13 +62,13 @@ final Map STACKOVERFLOW_ALT_NAMES = [
 Map<Lang, Integer> getStackoverflowTagCount(ArrayList<Lang> langs) {
     def conn =  String.format(STACKOVERFLOW_BASE_URL, java.net.URLEncoder.encode((langs.collect{ return ImportUtil.getStackoverflowLangName(it) }.join(';')), 'UTF-8')).toURL().openConnection()
     BufferedReader reader
-    int count = 0
+    int apiCount = 0
     while (true) {
         try {
             reader = new BufferedReader(new InputStreamReader(new java.util.zip.GZIPInputStream(conn.getInputStream())))
             break
         } catch (java.net.ConnectException | java.net.UnknownHostException e) {
-            if (++count == ImportUtil.MAX_API_TRIES) {
+            if (++apiCount == ImportUtil.MAX_API_TRIES) {
                 throw e
             }
             log.warn e
