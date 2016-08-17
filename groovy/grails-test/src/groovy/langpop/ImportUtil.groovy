@@ -5,6 +5,9 @@ import org.apache.log4j.Logger
 
 
 public class ImportUtil {
+    // Try this many times on API failures before giving up
+    static final int MAX_API_TRIES = 100
+
     static final int GITHUB_API_REQ_LIMIT = 10
     static final int GITHUB_API_TIME_LIMIT = 60000
     // This is the date of the oldest data in github
@@ -12,6 +15,8 @@ public class ImportUtil {
     static final String GITHUB_REPO_URL = 'https://api.github.com/search/repositories?q=language:'
     static final String GITHUB_SITE_NAME = 'github'
 
+    // The amount of time to wait in between failed requests
+    static final String STACKOVERFLOW_API_SLEEP_TIME = 60000
     static final String STACKOVERFLOW_OLDEST_DATE = '2008-07-31'
     static final String STACKOVERFLOW_SITE_NAME = 'stackoverflow'
 
