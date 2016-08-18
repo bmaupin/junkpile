@@ -5,7 +5,7 @@ import groovy.transform.Field
 import org.apache.log4j.Logger
 
 
-@Field final String STACKOVERFLOW_BASE_URL = 'https://api.stackexchange.com/2.2/tags/%s/info?order=desc&sort=popular&site=stackoverflow'
+@Field final String STACKOVERFLOW_BASE_URL = 'https://api.stackexchange.com/2.2/tags/%s/info?site=stackoverflow'
 final int STACKOVERFLOW_BATCH_API_LIMIT = 20
 final String[] SITES = [
     ImportUtil.GITHUB_SITE_NAME,
