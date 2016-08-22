@@ -49,9 +49,30 @@ class CountController {
         def labelsKey = 'labels'
         chartData[labelsKey] = []
         def langCounts = [:]
+        // TESTING
+        
+        def queryDates = [
+            '2016-07-18',
+            '2015-07-18',
+            '2014-07-18',
+            '2013-07-18',
+            '2012-07-18'
+        ]
+        
+        /*
+        def queryDates = [
+            '2016-07-20',
+            '2014-07-20',
+            '2012-07-20',
+            '2010-07-20',
+            '2008-07-20'
+        ]
+        */
 
         (0..4).each{ dateIndex ->
-            def queryDate = new Date().clearTime() - (dateIndex * 80)
+            //def queryDate = new Date().clearTime() - (dateIndex * 80)
+            // TESTING
+            def queryDate = Date.parse('yyyy-MM-dd', queryDates[dateIndex])
             def formattedDate = queryDate.format('yyyy-MM-dd')
             // Add date to front of list since we want to show oldest first
             chartData[labelsKey].add(0, formattedDate)
