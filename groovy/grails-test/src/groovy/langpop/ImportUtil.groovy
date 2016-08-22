@@ -117,4 +117,30 @@ public class ImportUtil {
     static List<String> getStackoverflowLangNames() {
         return Lang.list().collect { getStackoverflowLangName(it) }
     }
+
+    // Adds a new count to the database
+    static void newCount(Date date, int count, Lang lang, Site site) {
+        // Don't waste DB space by adding a count of 0
+        if (count == 0) {
+            return
+        }
+
+        // Don't add duplicate counts
+        def query = Count.where {
+            date == date && lang.id == lang.id && site.id == site.id
+        }
+        if (query.find() != null) {
+            log.warn "Count already exists for date: ${date} lang: ${lang.name} site: ${site.name}"
+            return
+        }
+
+        new Count(
+            // Remove the time component of the date just to be safe
+            date: date.clearTime(),
+            count: count,
+            lang: lang,
+            site: site
+        // TODO: this save doesn't get persisted without flush: true...
+        ).save(flush: true)
+    }
 }

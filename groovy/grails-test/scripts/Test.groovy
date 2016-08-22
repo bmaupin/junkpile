@@ -1,6 +1,13 @@
 import langpop.*
 
 
+Date prevDate
+
+def currentDate = Date.parse('yyyy-MM-dd', '2015-07-15')
+println currentDate > prevDate
+
+
+/*
 // Replace imported Stackoverflow data with totals
 def FIRST_DATE = ImportUtil.STACKOVERFLOW_OLDEST_DATE
 // This is the last date of data that isn't in the DB already
@@ -53,7 +60,7 @@ while (searchDate <= lastDate) {
 
     searchDate += 1
 }
-
+*/
 
 /*
 // Get an idea of how many times dates in stackoverflow dump are out of order

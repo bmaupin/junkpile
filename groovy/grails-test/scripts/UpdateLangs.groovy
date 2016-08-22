@@ -154,13 +154,7 @@ Lang.list().collate(STACKOVERFLOW_BATCH_API_LIMIT).each {
     def soTagCount = getStackoverflowTagCount(it.each{})
 
     soTagCount.each{ lang, tagCount ->
-        new Count(
-            // We only want the date, not the time
-            date: new Date().clearTime(),
-            count: tagCount,
-            lang: lang,
-            site: soSite
-        ).save()
+        ImportUtil.newCount(new Date().clearTime(), tagCount, lang, soSite)
     }
 
 //    debugCount ++
@@ -175,13 +169,7 @@ def ghSite = Site.findByName(ImportUtil.GITHUB_SITE_NAME)
 Lang.list().eachWithIndex { lang, ghApiReqCount ->
     def ghRepoCount = ImportUtil.getGithubRepoCount(lang.name)
 
-    new Count(
-        // We only want the date, not the time
-        date: new Date().clearTime(),
-        count: ghRepoCount,
-        lang: lang,
-        site: ghSite
-    ).save()
+    ImportUtil.newCount(new Date().clearTime(), ghRepoCount, lang, ghSite)
 
     if ((ghApiReqCount + 1) % ImportUtil.GITHUB_API_REQ_LIMIT == 0) {
         sleep(ImportUtil.GITHUB_API_TIME_LIMIT)

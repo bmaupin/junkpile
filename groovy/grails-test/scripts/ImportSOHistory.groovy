@@ -34,16 +34,12 @@ class MyHandler extends DefaultHandler {
                 // currentDate will be null the first time we get here
                 if (currentDate != null) {
                     soLangNames.each { langName ->
-                        if (totalCounts[langName] != 0) {
-                            new Count(
-                                // Remove the time component of the date just to be safe
-                                date: currentDate.clearTime(),
-                                count: totalCounts[langName],
-                                lang: Lang.findByName(ImportUtil.getGitHubLangName(langName)),
-                                site: soSite
-                            // TODO: this save doesn't get persisted without flush: true...
-                            ).save(flush: true)
-                        }
+                        ImportUtil.newCount(
+                            currentDate.clearTime(),
+                            totalCounts[langName],
+                            Lang.findByName(ImportUtil.getGitHubLangName(langName)),
+                            soSite
+                        )
                     }
                 }
 

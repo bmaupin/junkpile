@@ -43,16 +43,7 @@ while (searchDate <= lastDate) {
 
         totalCounts[lang.name] += ImportUtil.getGithubRepoCount(lang.name, searchDate)
 
-        if (totalCounts[lang.name] != 0) {
-            new Count(
-                // Remove the time component of the date just to be safe
-                date: searchDate.clearTime(),
-                count: totalCounts[lang.name],
-                lang: lang,
-                site: ghSite
-            // TODO: this save doesn't get persisted without flush: true...
-            ).save(flush: true)
-        }
+        ImportUtil.newCount(searchDate.clearTime(), totalCounts[lang.name], lang, ghSite)
     }
 
     searchDate += 1
