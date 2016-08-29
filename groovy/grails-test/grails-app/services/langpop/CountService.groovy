@@ -98,7 +98,7 @@ class CountService {
         }
 
         if (results.size() == 0) {
-            return 0
+            return null
 
         } else {
             if (results.size() > 1) {
