@@ -1,4 +1,7 @@
 struct Epub {
+    var title: String
 
-    var text = "Hello, World!"
+    init(title: String) {
+        self.title = title
+    }
 }
