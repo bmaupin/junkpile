@@ -2,7 +2,7 @@ import XCTest
 @testable import Epub
 
 class EpubTests: XCTestCase {
-    var epub: Epub?
+    var epub: Epub!
     var epubTitle = "My title"
 
     override func setUp() {

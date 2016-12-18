@@ -1,4 +1,4 @@
-struct Epub {
+public struct Epub {
     var title: String
 
     init(title: String) {
