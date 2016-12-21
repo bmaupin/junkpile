@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
-''' Converts list of attributes in Shibboleth IdP attribute-resolver.xml to list
-of attributes for Shibboleth IdP attribute-filter.xml and Shibboleth SP
-attribute-map.xml
+''' Extracts attributes from Shibboleth IdP attribute-resolver.xml and formats
+them for Shibboleth IdP attribute-filter.xml and Shibboleth SP attribute-map.xml
 '''
 
 import lxml.etree
