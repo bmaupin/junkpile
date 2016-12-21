@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
 ''' Converts list of attributes in Shibboleth IdP attribute-resolver.xml to list
-of attributes for Shibboleth SP attribute-map.xml
+of attributes for Shibboleth IdP attribute-filter.xml and Shibboleth SP
+attribute-map.xml
 '''
 
 import lxml.etree
 import sys
+
 
 def main():
     if len(sys.argv) < 2:
@@ -21,12 +23,28 @@ def main():
 
         attributes[attribute_id] = attribute_name
 
+    print_attribute_rules(attributes)
+    print()
+    print_attribute_map(attributes)
+
+
+def print_attribute_map(attributes):
     print('<Attributes xmlns="urn:mace:shibboleth:2.0:attribute-map" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">')
 
     for attribute_id in sorted(attributes):
         print('    <Attribute name="{}" id="{}"/>'.format(attributes[attribute_id], attribute_id))
 
     print('</Attributes>')
+
+
+def print_attribute_rules(attributes):
+    ATTRIBUTE_RULE_TEMPLATE = '''        <AttributeRule attributeID="{}">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>'''
+
+    for attribute_id in sorted(attributes):
+        print(ATTRIBUTE_RULE_TEMPLATE.format(attribute_id))
+
 
 if __name__ == '__main__':
     main()
