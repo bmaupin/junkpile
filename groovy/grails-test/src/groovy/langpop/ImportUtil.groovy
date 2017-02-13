@@ -70,12 +70,13 @@ public class ImportUtil {
             searchURL += '&access_token=' + githubAuthToken
         }
 
-        def conn = new URL(searchURL).openConnection()
         int apiCount = 0
+        URLConnection conn
         int totalCount
 
         while (true) {
             try {
+                conn = new URL(searchURL).openConnection()
                 totalCount = new groovy.json.JsonSlurper().parseText(conn.getURL().getText())['total_count']
                 break
 

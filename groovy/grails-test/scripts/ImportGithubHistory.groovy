@@ -22,6 +22,7 @@ langNames.each{ langName ->
 // This will hold the running total count for each language
 def totalCounts = [:]
 
+// TODO: make this a for loop
 while (searchDate <= lastDate) {
     langs.each{ lang ->
         // Be verbose in case we have to abort the script
@@ -46,5 +47,6 @@ while (searchDate <= lastDate) {
         ImportUtil.newCount(searchDate.clearTime(), totalCounts[lang.name], lang, ghSite)
     }
 
+    // TODO: searchDate++
     searchDate += 1
 }
