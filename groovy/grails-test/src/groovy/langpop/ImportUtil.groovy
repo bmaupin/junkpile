@@ -84,9 +84,15 @@ public class ImportUtil {
                 try {
                     if (conn.getResponseCode() == 403) {
                         log.warn 'Exceeded Github API request limit'
+                        log.debug "Max requests per minute: ${conn.getHeaderField('X-RateLimit-Limit')}"
+                        log.debug "Requests remaining: ${conn.getHeaderField('X-RateLimit-Remaining')}"
+                        log.debug "Rate reset time: ${new Date(Long.parseLong(conn.getHeaderField('X-RateLimit-Reset')) * 1000)}"
+
                         sleep(GITHUB_API_TIME_LIMIT)
+
                     } else if (conn.getResponseCode() == 422) {
-                        log.warn "Github API request empty for lang: ${langName}"
+                        log.warn "Github API request empty for lang: ${langName} (The language may have been renamed or removed)"
+
                         return 0
                     }
 
