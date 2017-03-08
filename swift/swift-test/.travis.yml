@@ -1,21 +1,16 @@
-# Travis CI doesn't support swift on Linux yet (https://github.com/travis-ci/travis-ci/issues/4053)
-# So we'll use this hack:
-# https://github.com/kylef/Curassow/blob/master/.travis.yml
-language: generic
-os:
-  - linux
-  - osx
-sudo: required
-dist: trusty
-# Swift 3 requires Xcode 8+ (https://swift.org/download/#requirements-for-tools)
-osx_image: xcode8
-env:
-  # Set swift version for swiftenv (https://github.com/kylef/swiftenv/blob/master/libexec/swiftenv-version-origin)
-  - SWIFT_VERSION=3.0.1
-install:
-  # Install swiftenv (https://github.com/kylef/swiftenv)
-  - eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/02090c7ede5a637b76e6df1710e83cd0bbe7dcdf/swiftenv-install.sh)"
+# Based on: https://github.com/IBM-Swift/Kitura/blob/master/.travis.yml
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: required
+    - os: osx
+      osx_image: xcode8.2
+      sudo: required
+
+before_install:
+  - git clone https://github.com/IBM-Swift/Package-Builder.git
+
 script:
-  - swift test
-after_success:
-  - bash <(curl -s https://codecov.io/bash) -J 'Epub'
+  - ./Package-Builder/build-package.sh -projectDir $TRAVIS_BUILD_DIR
