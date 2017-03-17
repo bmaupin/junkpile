@@ -76,19 +76,9 @@ def get_parent_names(connections, folders, parent_ids):
             parent_names[parent_name] = []
 
         for connection_id in parent_ids[folder_id]:
-            # Don't add duplicate hostnames, just add them to the first group they're in
-            if not is_in_parent_names(connections[connection_id], parent_names):
-                parent_names[parent_name].append(connections[connection_id])
+            parent_names[parent_name].append(connections[connection_id])
 
     return parent_names
-
-
-def is_in_parent_names(connection_name, parent_names):
-    for parent_name in parent_names:
-        if connection_name in parent_names[parent_name]:
-            return True
-
-    return False
 
 
 def write_ansible_inventory(parent_names):
