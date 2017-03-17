@@ -88,7 +88,8 @@ def write_ansible_inventory(parent_names):
 
             for connection_name in sorted(parent_names[folder_name]):
                 if connection_name != '':
-                    if not connection_name.endswith('mcgill.ca'):
+                    # Do DNS lookup if connection name isn't an FQDN
+                    if not re.search('[a-zA-Z0-9-]{1,63}\.[a-zA-Z]{2,}$', connection_name):
                         connection_name = socket.getfqdn(connection_name)
 
                     output_file.write('{}\n'.format(connection_name))
