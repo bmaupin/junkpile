@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -ne 2 ]; then
-    echo "Usage: `basename $0` input.[mp3/wav] output.[mp3/wav]"
+    echo "Usage: `basename $0` input.[mp3/ogg/wav] output.[mp3/ogg/wav]"
     exit 1
 fi
 
@@ -29,27 +29,27 @@ if [ "$inextension" == "wav" ]; then
     inwavpath="$infilepath"
     outwavpath="$outfilepath"
 
-elif [ "$inextension" == "mp3" ]; then
+elif [ "$inextension" == "mp3" ] || [ "$inextension" == "ogg" ]; then
     echo "Please wait..."
 
     inwavpath="${infilepath%.*}".wav
     outwavpath="${outfilepath%.*}".wav
 
-    # Convert mp3 to wav
+    # Convert mp3/ogg to wav
     ffmpeg -loglevel error -i "$infilepath" "$inwavpath"
 
 else
-    echo "Error: input file must be mp3 or wav"
+    echo "Error: input file must be mp3, ogg, or wav"
     exit 1
 fi
 
 /opt/Levelator-1.3.0-Python2.5/levelator "$inwavpath" "$outwavpath"
 
-if [ "$inextension" == "mp3" ]; then
+if [ "$inextension" == "mp3" ] || [ "$inextension" == "ogg" ]; then
     # Create a temp file
-    tempfile=`mktemp /tmp/XXXXXXXXXX.mp3`
+    tempfile=`mktemp /tmp/XXXXXXXXXX.$inextension`
 
-    # Convert wav to mp3
+    # Convert wav to mp3/ogg
     ffmpeg -loglevel error -y -i "$outwavpath" "$tempfile"
 
     # If the input file contains a video stream (album art, etc)
