@@ -11,6 +11,11 @@ matrix:
 
 before_install:
   - git clone https://github.com/IBM-Swift/Package-Builder.git
+  # Install minizip as dependency for PerfectZip
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget http://mirrors.kernel.org/ubuntu/pool/universe/m/minizip/libminizip-dev_1.1-8_amd64.deb; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget http://mirrors.kernel.org/ubuntu/pool/universe/m/minizip/libminizip1_1.1-8_amd64.deb; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo dpkg -i libminizip*; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install minizip; fi
 
 script:
   - ./Package-Builder/build-package.sh -projectDir $TRAVIS_BUILD_DIR
