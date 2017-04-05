@@ -4,9 +4,15 @@ import XCTest
 class EpubTests: XCTestCase {
     var epub: Epub!
     // var epubTitle = "My title"
+    var testEpubFilePath: URL!
 
     override func setUp() {
         super.setUp()
+
+        // TODO: Bundle.init(for: ) not yet implemented in Linux
+        //let bundle = Bundle(for: type(of: self))
+        let bundle = Bundle(path: FileManager.default.currentDirectoryPath + "/Tests/EpubTests")!
+        testEpubFilePath = bundle.url(forResource: "test", withExtension: "epub")!
 
         // epub = Epub(title: epubTitle)
     }
@@ -18,9 +24,6 @@ class EpubTests: XCTestCase {
     }
 
     func testEpubInitFromFile() {
-        // TODO: Bundle.init(for: ) not yet implemented in Linux
-        //let testEpubFilePath = Bundle(for: type(of: self)).url(forResource: "test", withExtension: "epub")!
-        let testEpubFilePath = Bundle(path: FileManager.default.currentDirectoryPath + "/Tests/EpubTests")!.url(forResource: "test", withExtension: "epub")!
         let _ = Epub(fromFile: testEpubFilePath)
     }
 
