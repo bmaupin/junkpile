@@ -8,9 +8,13 @@ class EpubTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
+        // print("self: " + String(describing: self))
+        // print("type(of: self): " + String(describing: type(of: self)))
+        // print("type(of: type(of: self)): " + String(describing: type(of: type(of: self))))
+
         // TODO: Bundle.init(for: ) not yet implemented in Linux
-        //let bundle = Bundle(for: type(of: self))
-        let bundle = Bundle(path: FileManager.default.currentDirectoryPath + "/Tests/EpubTests")!
+        let bundle = Bundle(for: type(of: self))
+        // let bundle = Bundle(path: FileManager.default.currentDirectoryPath + "/Tests/EpubTests")!
         testEpubFilePath = bundle.url(forResource: "test", withExtension: "epub")!
     }
 
@@ -32,3 +36,15 @@ class EpubTests: XCTestCase {
         ]
     }
 }
+
+#if os(Linux)
+extension Bundle {
+    convenience init(for aClass: AnyClass) {
+        if String(describing: aClass).hasSuffix("Tests") {
+            self.init(path: FileManager.default.currentDirectoryPath + "/Tests/" + String(describing: aClass))!
+        } else {
+            self.init(path: "")!
+        }
+    }
+}
+#endif
