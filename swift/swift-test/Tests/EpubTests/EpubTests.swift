@@ -2,37 +2,21 @@ import XCTest
 @testable import Epub
 
 class EpubTests: XCTestCase {
-    var epub: Epub!
-    var testEpubFileURL: URL!
-
-    override func setUp() {
-        super.setUp()
-
-        print("DEBUG: setUp")
-
-        // TODO: Bundle.init(for: ) not yet implemented in Linux
-        let bundle = Bundle(for: type(of: self))
-
-        print("DEBUG: bundle=" + String(describing: bundle))
-
-        // let bundle = Bundle(path: FileManager.default.currentDirectoryPath + "/Tests/EpubTests")!
-        testEpubFileURL = bundle.url(forResource: "test", withExtension: "epub")!
-
-        print("DEBUG: testEpubFileURL=" + String(describing: testEpubFileURL))
-    }
-
-    override func tearDown() {
-        // TODO: add cleanup code
-
-        super.tearDown()
-    }
+    let testEpubFileName = "swift.epub"
 
     func testEpubInitFromFile() {
-        print("DEBUG: testEpubInitFromFile()")
+        let bundle = Bundle(for: type(of: self))
 
-        let _ = Epub(fromFile: testEpubFileURL)
+        XCTAssertNotNil(bundle, "bundle is nil")
 
-        // TODO: test to make sure the epub's actually been successfully opened (get title, etc)
+        let testEpubFileURL = bundle.url(
+            forResource: testEpubFileName.components(
+                separatedBy: ".")[0],
+                withExtension: testEpubFileName.components(separatedBy: ".")[1])
+
+        XCTAssertNotNil(testEpubFileURL, "testEpubFileURL is nil")
+
+        let _ = Epub(fromFile: testEpubFileURL!)
     }
 
     static var allTests : [(String, (EpubTests) -> () throws -> Void)] {
@@ -42,6 +26,7 @@ class EpubTests: XCTestCase {
     }
 }
 
+// TODO: Bundle.init(for: ) not yet implemented in Linux
 #if os(Linux)
 extension Bundle {
     convenience init(for aClass: AnyClass) {
