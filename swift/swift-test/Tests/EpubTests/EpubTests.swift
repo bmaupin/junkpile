@@ -3,19 +3,22 @@ import XCTest
 
 class EpubTests: XCTestCase {
     var epub: Epub!
-    var testEpubFilePath: URL!
+    var testEpubFileURL: URL!
 
     override func setUp() {
         super.setUp()
 
-        // print("self: " + String(describing: self))
-        // print("type(of: self): " + String(describing: type(of: self)))
-        // print("type(of: type(of: self)): " + String(describing: type(of: type(of: self))))
+        print("DEBUG: setUp")
 
         // TODO: Bundle.init(for: ) not yet implemented in Linux
         let bundle = Bundle(for: type(of: self))
+
+        print("DEBUG: bundle=" + String(describing: bundle))
+
         // let bundle = Bundle(path: FileManager.default.currentDirectoryPath + "/Tests/EpubTests")!
-        testEpubFilePath = bundle.url(forResource: "test", withExtension: "epub")!
+        testEpubFileURL = bundle.url(forResource: "test", withExtension: "epub")!
+
+        print("DEBUG: testEpubFileURL=" + String(describing: testEpubFileURL))
     }
 
     override func tearDown() {
@@ -25,7 +28,9 @@ class EpubTests: XCTestCase {
     }
 
     func testEpubInitFromFile() {
-        let _ = Epub(fromFile: testEpubFilePath)
+        print("DEBUG: testEpubInitFromFile()")
+
+        let _ = Epub(fromFile: testEpubFileURL)
 
         // TODO: test to make sure the epub's actually been successfully opened (get title, etc)
     }
