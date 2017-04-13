@@ -19,7 +19,7 @@ before_install:
 
 before_script:
   # TODO: get more information about the build
-  - echo "TRAVIS_BUILD_DIR: $TRAVIS_BUILD_DIR"
+  - echo "$TRAVIS_BUILD_DIR"
   - find $TRAVIS_BUILD_DIR | egrep -v \.git
 
 script:
@@ -27,5 +27,5 @@ script:
 
 after_script:
   # TODO: get more information about the build
-  - echo "TRAVIS_BUILD_DIR: $TRAVIS_BUILD_DIR"
+  - echo "$TRAVIS_BUILD_DIR"
   - find $TRAVIS_BUILD_DIR | egrep -v \.git
