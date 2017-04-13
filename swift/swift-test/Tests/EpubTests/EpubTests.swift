@@ -2,7 +2,7 @@ import XCTest
 @testable import Epub
 
 class EpubTests: XCTestCase {
-    let testEpubFileName = "swift.epub"
+    let testEpubFileName = "test.epub"
 
     func testEpubInitFromFile() {
         let bundle = Bundle(for: type(of: self))
@@ -10,9 +10,8 @@ class EpubTests: XCTestCase {
         XCTAssertNotNil(bundle, "bundle is nil")
 
         let testEpubFileURL = bundle.url(
-            forResource: testEpubFileName.components(
-                separatedBy: ".")[0],
-                withExtension: testEpubFileName.components(separatedBy: ".")[1])
+            forResource: testEpubFileName.components(separatedBy: ".")[0],
+            withExtension: testEpubFileName.components(separatedBy: ".")[1])
 
         XCTAssertNotNil(testEpubFileURL, "testEpubFileURL is nil")
 
