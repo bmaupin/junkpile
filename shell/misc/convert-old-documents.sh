@@ -8,9 +8,11 @@ declare -A extensions
 
 extensions=(
     # MS Word document
-    ["doc"]="odt"
+    #["doc"]="odt"
     # MS Works database
     ["wdb"]="ods"
+    # MS Works spreadsheet
+    ["wks"]="ods"
     # MS Works document
     ["wps"]="odt"
     # MS Write document
