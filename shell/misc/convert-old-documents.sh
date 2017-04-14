@@ -19,19 +19,19 @@ extensions=(
     ["wri"]="odt"
 )
 
-for old_extension in "${!extensions[@]}"; do
-    for old_filepath in `find . | grep -i ".$old_extension$"`; do
+for old_lowercase_extension in "${!extensions[@]}"; do
+    find . | grep -i ".$old_lowercase_extension$" | while read old_filepath; do
         current_directory=`pwd`
-        file_directory=`dirname $old_filepath`
+        file_directory=`dirname "$old_filepath"`
         old_actual_extension="${old_filepath##*.}"
-        new_extension=${extensions[$old_extension]}
-        old_filename=`basename $old_filepath`
+        new_extension=${extensions[$old_lowercase_extension]}
+        old_filename=`basename "$old_filepath"`
         new_filename="${old_filename%.$old_actual_extension}.$new_extension"
 
         pushd "$file_directory" > /dev/null
 
         # Make sure the new file hasn't been created yet
-        if [ ! -f $new_filename ]; then
+        if [ ! -f "$new_filename" ]; then
             echo "Converting $current_directory/$file_directory/$old_filename to $new_filename"
 
             original_timestamp=`stat -c "%Y" "$old_filename"`
