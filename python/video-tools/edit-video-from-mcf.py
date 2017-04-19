@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 
+''' Edit videos based on MCF files (https://github.com/delight-im/MovieContentFilter)
+'''
+
 import datetime
 import os
 import subprocess
+import sys
 
 
 class VideoSegment():
@@ -47,12 +51,26 @@ def parse_mcf_file(mcf_filename):
     return segments_to_omit
 
 
+# Timestamp spec: https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API#Cue_timings
 def timestamp_to_timedelta(timestamp_string):
+    # hh:mm:ss.ttt
+    if timestamp_string.count(':') == 2:
+        hours, minutes, seconds_milliseconds = timestamp_string.split(':')
+    # mm:ss.ttt
+    elif timestamp_string.count(':') == 1:
+        hours = 0
+        minutes, seconds_milliseconds = timestamp_string.split(':')
+    else:
+        sys.exit('ERROR: invalid timestamp ({})\n'.format(timestamp_string))
+
+    seconds, milliseconds = seconds_milliseconds.split('.')
+
     return datetime.timedelta(
-        hours=int(timestamp_string[0:2]),
-        minutes=int(timestamp_string[3:5]),
-        seconds=int(timestamp_string[6:8]),
-        milliseconds=int(timestamp_string[9:12]))
+        hours=int(hours),
+        minutes=int(minutes),
+        seconds=int(seconds),
+        milliseconds=int(milliseconds)
+    )
 
 
 def cut_video(segments_to_omit, input_filename, output_filename):
@@ -88,6 +106,10 @@ def cut_segment(start, end, input_filename, segment_filename):
         segment_filename))
 
 
+def timedelta_to_timestamp(timedelta):
+    return str(timedelta)
+
+
 def run_command(command):
     print(command)
     p = subprocess.Popen(
@@ -103,10 +125,6 @@ def cut_last_segment(start, input_filename, segment_filename):
         input_filename,
         timedelta_to_timestamp(start),
         segment_filename))
-
-
-def timedelta_to_timestamp(timedelta):
-    return str(timedelta)
 
 
 if __name__ == '__main__':
