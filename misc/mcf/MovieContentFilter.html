@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!--
+ * MovieContentFilter (https://www.moviecontentfilter.com/)
+ * Copyright (c) delight.im (https://www.delight.im/)
+ * Licensed under the GNU AGPL v3 (https://www.gnu.org/licenses/agpl-3.0.txt)
+-->
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Watch movies with the freedom (not) to filter">
+		<link rel="icon" href="https://www.moviecontentfilter.com/img/logo-64.png?v=1">
+		<title>MovieContentFilter</title>
+		<link href="https://www.moviecontentfilter.com/css/bootstrap.min.css?v=3.3.7" rel="stylesheet">
+		<link href="https://www.moviecontentfilter.com/css/bootstrap-theme.min.css?v=3.3.7" rel="stylesheet">
+		<link href="https://www.moviecontentfilter.com/css/ie10-viewport-bug-workaround.min.css?v=1" rel="stylesheet">
+		<!--[if lt IE 9]>
+		<script src="https://www.moviecontentfilter.com/js/html5shiv.min.js?v=3.7.3"></script>
+		<script src="https://www.moviecontentfilter.com/js/respond.min.js?v=1.4.2"></script>
+		<![endif]-->
+				<link href="https://www.moviecontentfilter.com/css/custom.css?v=1" rel="stylesheet">
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="https://www.moviecontentfilter.com/">MovieContentFilter</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="https://www.moviecontentfilter.com/">Home</a></li>
+											</ul>
+											<form class="navbar-form navbar-right" action="https://www.moviecontentfilter.com/login" method="post">
+							<input type="hidden" name="continue" value="/specification">
+							<div class="form-group">
+								<input type="email" name="email" placeholder="Email" class="form-control">
+							</div>
+							<div class="form-group">
+								<input type="password" name="password" placeholder="Password" class="form-control">
+							</div>
+							<button type="submit" class="btn btn-primary">Sign in</button>
+						</form>
+									</div>
+			</div>
+		</nav>
+
+		<ol class="breadcrumb">
+	<li><a href="https://www.moviecontentfilter.com/">Home</a></li>
+	<li class="active">Specification</li>
+</ol>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header"><h1 class="text-center">Specification<br><small>Version 1.0.0</small></h1></div>
+			<p>The MCF format is a strict subset of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Video_Text_Tracks_Format">W3C WebVTT</a> format ("Draft Community Group Report, 17 February 2016").</p>
+			<p>Files with content in the MCF format are saved with the filename extension <code>.mcf</code> and must be encoded in UTF-8 (without BOM) exclusively.</p>
+			<p>The MIME type for files in the MCF format <em>should be</em> <code>text/mcf+vtt</code> but currently is <code>text/plain</code> for compatibility.</p>
+
+			<h2>MCF format</h2>
+			<ol>
+				<li>The string literals used in this specification are case-sensitive.</li>
+				<li>The WebVTT timestamps must always include hours.</li>
+				<li>The first line must consist of the string <code>WEBVTT</code>, followed by a single <code>U+0020 SPACE</code> character, the subset identifier <code>MovieContentFilter</code>, another single <code>U+0020 SPACE</code> character and the version identifier <code>1.0.0</code>. After that, the line must end with a WebVTT line terminator.</li>
+				<li>The second line must be a blank line ending with a WebVTT line terminator.</li>
+				<li>The third line must be the string <code>NOTE</code>. After that, the line must end with a WebVTT line terminator.</li>
+				<li>The fourth line must be the string <code>START</code>, a single <code>U+0020 SPACE</code> character and a WebVTT timestamp pointing to the exact start of the <em>actual</em> film material, which is <em>after</em> any opening title sequences, credits or company logos. After that, the line must end with a WebVTT line terminator.</li>
+				<li>The fifth line must be the string <code>END</code>, a single <code>U+0020 SPACE</code> character and a WebVTT timestamp pointing to the exact end of the <em>actual</em> film material, which is <em>before</em> any closing credits or company logos. After that, the line must end with a WebVTT line terminator.</li>
+				<li>The sixth line must be a blank line ending with a WebVTT line terminator.</li>
+				<li>WebVTT cue payloads must contain WebVTT cue texts only.</li>
+				<li>WebVTT cue texts must consist of one or more WebVTT cue text spans exclusively.</li>
+				<li>WebVTT cue text spans must consist of a <em>category</em>, a single <code>U+003D EQUALS SIGN</code> character and the <em>severity</em>. Optionally, after another single <code>U+003D EQUALS SIGN</code> character as the divider, a <em>channel</em> may be included. Optionally as well, after the character sequence <code>U+0020 SPACE</code>, <code>U+0023 NUMBER SIGN</code>, <code>U+0020 SPACE</code>, there may be a comment.
+					<ul>
+						<li>The <em>category</em> must be one of the strings from the "Categories" section below. The second-level entries listed in that section represent the valid values for this property.</li>
+						<li>The <em>severity</em> must be one of the strings from the "Severities" section below.</li>
+						<li>The optional <em>channel</em> describes what part of the source material is affected by the current entry. It must be one of the strings from the "Channels" section below.</li>
+						<li>The optional <em>comment</em> may contain arbitrary text. However, if it is present, it must neither be empty nor contain any line breaks or the character sequence <code>U+002D HYPHEN-MINUS</code>, <code>U+002D HYPHEN-MINUS</code>, <code>U+003E GREATER-THAN SIGN</code>.</li>
+					</ul>
+				</li>
+			</ol>
+
+			<h2>Categories</h2>
+			<ul>
+								<li>Commercial content
+					<ul>
+													<li><code>commercial</code> &rsaquo; Commercial content  (General)</li>
+													<li><code>advertBreak</code> &rsaquo; Advert break </li>
+													<li><code>consumerism</code> &rsaquo; Consumerism </li>
+													<li><code>productPlacement</code> &rsaquo; Product placement </li>
+											</ul>
+				</li>
+								<li>Discrimination
+					<ul>
+													<li><code>discrimination</code> &rsaquo; Discrimination  (General)</li>
+													<li><code>adultism</code> &rsaquo; Adultism </li>
+													<li><code>antisemitism</code> &rsaquo; Antisemitism </li>
+													<li><code>genderism</code> &rsaquo; Genderism </li>
+													<li><code>homophobia</code> &rsaquo; Homophobia </li>
+													<li><code>misandry</code> &rsaquo; Misandry </li>
+													<li><code>misogyny</code> &rsaquo; Misogyny </li>
+													<li><code>racism</code> &rsaquo; Racism </li>
+													<li><code>sexism</code> &rsaquo; Sexism </li>
+													<li><code>supremacism</code> &rsaquo; Supremacism </li>
+													<li><code>transphobia</code> &rsaquo; Transphobia </li>
+													<li><code>xenophobia</code> &rsaquo; Xenophobia </li>
+											</ul>
+				</li>
+								<li>Dispensable scenes
+					<ul>
+													<li><code>dispensable</code> &rsaquo; Dispensable scenes  (General)</li>
+													<li><code>idiocy</code> &rsaquo; Idiocy </li>
+													<li><code>tedious</code> &rsaquo; Tedious scene </li>
+											</ul>
+				</li>
+								<li>Drugs
+					<ul>
+													<li><code>drugs</code> &rsaquo; Drugs  (General)</li>
+													<li><code>alcohol</code> &rsaquo; Alcohol </li>
+													<li><code>antipsychotics</code> &rsaquo; Antipsychotics </li>
+													<li><code>cigarettes</code> &rsaquo; Cigarettes </li>
+													<li><code>depressants</code> &rsaquo; Depressants </li>
+													<li><code>gambling</code> &rsaquo; Gambling </li>
+													<li><code>hallucinogens</code> &rsaquo; Hallucinogens </li>
+													<li><code>stimulants</code> &rsaquo; Stimulants </li>
+											</ul>
+				</li>
+								<li>Fear
+					<ul>
+													<li><code>fear</code> &rsaquo; Fear  (General)</li>
+													<li><code>accident</code> &rsaquo; Accident </li>
+													<li><code>acrophobia</code> &rsaquo; Acrophobia </li>
+													<li><code>aliens</code> &rsaquo; Aliens </li>
+													<li><code>arachnophobia</code> &rsaquo; Arachnophobia </li>
+													<li><code>astraphobia</code> &rsaquo; Astraphobia </li>
+													<li><code>aviophobia</code> &rsaquo; Aviophobia </li>
+													<li><code>chemophobia</code> &rsaquo; Chemophobia </li>
+													<li><code>claustrophobia</code> &rsaquo; Claustrophobia </li>
+													<li><code>coulrophobia</code> &rsaquo; Coulrophobia </li>
+													<li><code>cynophobia</code> &rsaquo; Cynophobia </li>
+													<li><code>death</code> &rsaquo; Death </li>
+													<li><code>dentophobia</code> &rsaquo; Dentophobia </li>
+													<li><code>emetophobia</code> &rsaquo; Emetophobia </li>
+													<li><code>enochlophobia</code> &rsaquo; Enochlophobia </li>
+													<li><code>explosion</code> &rsaquo; Explosion </li>
+													<li><code>fire</code> &rsaquo; Fire </li>
+													<li><code>gerascophobia</code> &rsaquo; Gerascophobia </li>
+													<li><code>ghosts</code> &rsaquo; Ghosts </li>
+													<li><code>grave</code> &rsaquo; Grave </li>
+													<li><code>hemophobia</code> &rsaquo; Hemophobia </li>
+													<li><code>hylophobia</code> &rsaquo; Hylophobia </li>
+													<li><code>melissophobia</code> &rsaquo; Melissophobia </li>
+													<li><code>misophonia</code> &rsaquo; Misophonia </li>
+													<li><code>musophobia</code> &rsaquo; Musophobia </li>
+													<li><code>mysophobia</code> &rsaquo; Mysophobia </li>
+													<li><code>nosocomephobia</code> &rsaquo; Nosocomephobia </li>
+													<li><code>nyctophobia</code> &rsaquo; Nyctophobia </li>
+													<li><code>siderodromophobia</code> &rsaquo; Siderodromophobia </li>
+													<li><code>thalassophobia</code> &rsaquo; Thalassophobia </li>
+													<li><code>vampires</code> &rsaquo; Vampires </li>
+											</ul>
+				</li>
+								<li>Language
+					<ul>
+													<li><code>language</code> &rsaquo; Language  (General)</li>
+													<li><code>blasphemy</code> &rsaquo; Blasphemy </li>
+													<li><code>nameCalling</code> &rsaquo; Name-calling </li>
+													<li><code>sexualDialogue</code> &rsaquo; Sexual dialogue </li>
+													<li><code>swearing</code> &rsaquo; Swearing </li>
+													<li><code>vulgarity</code> &rsaquo; Vulgarity </li>
+											</ul>
+				</li>
+								<li>Nudity
+					<ul>
+													<li><code>nudity</code> &rsaquo; Nudity  (General)</li>
+													<li><code>bareButtocks</code> &rsaquo; Bare buttocks </li>
+													<li><code>exposedGenitalia</code> &rsaquo; Exposed genitalia </li>
+													<li><code>fullNudity</code> &rsaquo; Full nudity </li>
+													<li><code>toplessness</code> &rsaquo; Toplessness </li>
+											</ul>
+				</li>
+								<li>Sex
+					<ul>
+													<li><code>sex</code> &rsaquo; Sex  (General)</li>
+													<li><code>adultery</code> &rsaquo; Adultery </li>
+													<li><code>analSex</code> &rsaquo; Anal sex </li>
+													<li><code>coitus</code> &rsaquo; Coitus </li>
+													<li><code>kissing</code> &rsaquo; Kissing </li>
+													<li><code>masturbation</code> &rsaquo; Masturbation </li>
+													<li><code>objectification</code> &rsaquo; Objectification </li>
+													<li><code>oralSex</code> &rsaquo; Oral sex </li>
+													<li><code>premaritalSex</code> &rsaquo; Premarital sex </li>
+													<li><code>promiscuity</code> &rsaquo; Promiscuity </li>
+													<li><code>prostitution</code> &rsaquo; Prostitution </li>
+											</ul>
+				</li>
+								<li>Violence
+					<ul>
+													<li><code>violence</code> &rsaquo; Violence  (General)</li>
+													<li><code>choking</code> &rsaquo; Choking </li>
+													<li><code>crueltyToAnimals</code> &rsaquo; Cruelty to animals </li>
+													<li><code>culturalViolence</code> &rsaquo; Cultural violence </li>
+													<li><code>desecration</code> &rsaquo; Desecration </li>
+													<li><code>emotionalViolence</code> &rsaquo; Emotional violence </li>
+													<li><code>kicking</code> &rsaquo; Kicking </li>
+													<li><code>massacre</code> &rsaquo; Massacre </li>
+													<li><code>murder</code> &rsaquo; Murder </li>
+													<li><code>punching</code> &rsaquo; Punching </li>
+													<li><code>rape</code> &rsaquo; Rape </li>
+													<li><code>slapping</code> &rsaquo; Slapping </li>
+													<li><code>slavery</code> &rsaquo; Slavery </li>
+													<li><code>stabbing</code> &rsaquo; Stabbing </li>
+													<li><code>torture</code> &rsaquo; Torture </li>
+													<li><code>warfare</code> &rsaquo; Warfare </li>
+													<li><code>weapons</code> &rsaquo; Weapons </li>
+											</ul>
+				</li>
+							</ul>
+
+			<h2>Severities</h2>
+			<ul>
+									<li><code>low</code> &rsaquo; Low</li>
+									<li><code>medium</code> &rsaquo; Medium</li>
+									<li><code>high</code> &rsaquo; High</li>
+							</ul>
+
+			<h2>Channels</h2>
+			<ul>
+									<li><code>both</code> &rsaquo; Both video and audio (Default)</li>
+									<li><code>video</code> &rsaquo; Video only</li>
+									<li><code>audio</code> &rsaquo; Audio only</li>
+							</ul>
+
+			<h2>Example</h2>
+			<pre>WEBVTT MovieContentFilter 1.0.0
+
+NOTE
+START 00:00:04.020
+END 01:24:00.100
+
+00:00:06.075 --> 00:00:10.500
+violence=high
+
+00:06:14.000 --> 00:06:17.581
+gambling=medium # Some comment
+drugs=high=video
+
+00:58:59.118 --> 01:00:03.240
+sex=low=both # Another comment
+
+01:02:31.020 --> 01:02:49.800
+fear=low
+language=high=audio
+</pre>
+		</div>
+	</div>
+</div>
+		<div class="container">
+			<hr>
+			<footer>
+				<p class="text-center">Always free for personal use. Downloadable filters are licensed under the <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="Creative Commons Attribution-ShareAlike 4.0 International">CC BY-NC-SA 4.0</a> license.</p>
+				<p class="pull-left"><span class="text-muted">&copy; <a class="text-muted" href="https://www.delight.im/">delight.im</a></span></p>
+				<div class="pull-right">
+					<ul class="list-inline">
+						<li><a href="https://www.moviecontentfilter.com/specification">Specification</a></li>
+						<li><a href="https://github.com/delight-im/MovieContentFilter">Open Source</a></li>
+						<li><a rel="nofollow" href="https://www.delight.im/contact">Contact</a></li>
+					</ul>
+				</div>
+			</footer>
+		</div>
+		<script src="https://www.moviecontentfilter.com/js/jquery.min.js?v=1.12.4"></script>
+<script src="https://www.moviecontentfilter.com/js/bootstrap.min.js?v=3.3.7"></script>
+<script src="https://www.moviecontentfilter.com/js/ie10-viewport-bug-workaround.min.js?v=1"></script>
+		<script src="https://www.moviecontentfilter.com/js/custom.js?v=1"></script>
+	</body>
+</html>
