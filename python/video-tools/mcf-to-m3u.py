@@ -85,6 +85,7 @@ def get_segments_to_play(segments_to_omit):
             )
 
         else:
+            # TODO: this will only handle up to 2 back-to-back filters
             if skip_next_segment == True:
                 skip_next_segment = False
                 continue
@@ -92,19 +93,13 @@ def get_segments_to_play(segments_to_omit):
             else:
                 if i != len(segments_to_omit) - 1 and segments_to_omit[i].end == segments_to_omit[i + 1].start:
                     skip_next_segment = True
-                    segments_to_play.append(
-                        VideoSegment(
-                            segments_to_omit[i - 1].end,
-                            segments_to_omit[i + 1].start
-                        )
+
+                segments_to_play.append(
+                    VideoSegment(
+                        segments_to_omit[i - 1].end,
+                        segments_to_omit[i].start
                     )
-                else:
-                    segments_to_play.append(
-                        VideoSegment(
-                            segments_to_omit[i - 1].end,
-                            segments_to_omit[i].start
-                        )
-                    )
+                )
 
     segments_to_play.append(
         VideoSegment(
