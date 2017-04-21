@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-''' Edit videos based on MCF files (https://github.com/delight-im/MovieContentFilter)
+''' Edit videos based on MCF files (https://www.moviecontentfilter.com/specification)
 '''
 
 import datetime
@@ -25,7 +25,9 @@ def main():
 
     segments_to_omit = parse_mcf_file(mcf_filename)
 
-    cut_video(segments_to_omit, input_filename, output_filename)
+    segments_to_play = get_segments_to_play(segments_to_omit)
+
+    cut_video(segments_to_play, input_filename, output_filename)
 
     # TODO: join segments
 
@@ -73,29 +75,62 @@ def timestamp_to_timedelta(timestamp_string):
     )
 
 
-def cut_video(segments_to_omit, input_filename, output_filename):
-    for i in range(len(segments_to_omit)):
+def cut_video(segments_to_play, input_filename, output_filename):
+    for i, segment in enumerate(segments_to_play):
         segment_filename = '{}-{}{}'.format(
             os.path.splitext(output_filename)[0],
             i,
             os.path.splitext(output_filename)[1])
 
-        if i == 0:
-            cut_first_segment(segments_to_omit[i].start, input_filename, segment_filename)
+        if i != len(segments_to_play) - 1:
+            cut_segment(segment.start, segment.end, input_filename, segment_filename)
         else:
-            cut_segment(segments_to_omit[i - 1].end, segments_to_omit[i].start, input_filename, segment_filename)
-
-        segment_filename = '{}-{}{}'.format(
-            os.path.splitext(output_filename)[0],
-            len(segments_to_omit),
-            os.path.splitext(output_filename)[1])
-
-    cut_last_segment(segments_to_omit[-1].end, input_filename, segment_filename)
+            cut_last_segment(segment.start, input_filename, segment_filename)
 
 
-def cut_first_segment(end, input_filename, segment_filename):
-    start = datetime.timedelta(0)
-    cut_segment(start, end, input_filename, segment_filename)
+def get_segments_to_play(segments_to_omit):
+    segments_to_play = []
+    skip_next_segment = False
+
+    for i in range(len(segments_to_omit)):
+        if i == 0:
+            segments_to_play.append(
+                VideoSegment(
+                    datetime.timedelta(0),
+                    segments_to_omit[i].start
+                )
+            )
+
+        else:
+            if skip_next_segment == True:
+                skip_next_segment = False
+                continue
+
+            else:
+                if i != len(segments_to_omit) - 1 and segments_to_omit[i].end == segments_to_omit[i + 1].start:
+                    skip_next_segment = True
+                    segments_to_play.append(
+                        VideoSegment(
+                            segments_to_omit[i - 1].end,
+                            segments_to_omit[i + 1].start
+                        )
+                    )
+                else:
+                    segments_to_play.append(
+                        VideoSegment(
+                            segments_to_omit[i - 1].end,
+                            segments_to_omit[i].start
+                        )
+                    )
+
+    segments_to_play.append(
+        VideoSegment(
+            segments_to_omit[-1].end,
+            datetime.timedelta(0)
+            )
+        )
+
+    return segments_to_play
 
 
 def cut_segment(start, end, input_filename, segment_filename):
