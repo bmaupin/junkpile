@@ -102,6 +102,7 @@ def get_segments_to_play(segments_to_omit):
             )
 
         else:
+            # TODO: this will only handle up to 2 back-to-back filters
             if skip_next_segment == True:
                 skip_next_segment = False
                 continue
