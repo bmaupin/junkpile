@@ -2,37 +2,49 @@ import datetime
 import sys
 
 
-''' Simplistic library for manipulating MCF files (https://www.moviecontentfilter.com/specification)
+''' Simplistic module for manipulating MCF files (https://www.moviecontentfilter.com/specification)
 '''
 
 
 class McfSegment():
     def __init__(self, start, end, text):
-        self.start = start
-        self.end = end
+        if isinstance(start, str):
+            self.start = McfUtil.timestamp_to_timedelta(start)
+        elif isinstance(start, datetime.timedelta):
+            self.start = start
+        else:
+            sys.exit('ERROR: start timing is neither a string nor a datetime.timestamp')
+
+        if isinstance(end, str):
+            self.end = McfUtil.timestamp_to_timedelta(end)
+        elif isinstance(end, datetime.timedelta):
+            self.end = end
+        else:
+            sys.exit('ERROR: end timing is neither a string nor a datetime.timestamp')
+
         self.text = text
 
 
 class Mcf():
-    def __init__(self):
-        self.start = None
-        self.end = None
+    def __init__(self, start, end):
+        self.start = McfUtil.timestamp_to_timedelta(start)
+        self.end = McfUtil.timestamp_to_timedelta(end)
         self.segments = []
 
     @classmethod
     def fromfile(cls, filename):
-        mcf = cls()
-
         with open(filename) as file:
             for line in file:
                 if line.startswith('NOTE') or line.startswith('WEBVTT') or len(line.strip()) == 0:
                     continue
 
                 elif line.startswith('START'):
-                    mcf.start = Mcf.timestamp_to_timedelta(line.split()[1])
+                    mcf_start = line.split()[1]
 
                 elif line.startswith('END'):
-                    mcf.end = Mcf.timestamp_to_timedelta(line.split()[1])
+                    mcf_end = line.split()[1]
+
+                    mcf = cls(mcf_start, mcf_end)
 
                 elif line[0].isdigit():
                     segment_start_timestamp = line.strip().split()[0]
@@ -43,8 +55,8 @@ class Mcf():
 
                     mcf.segments.append(
                         McfSegment(
-                            Mcf.timestamp_to_timedelta(segment_start_timestamp),
-                            Mcf.timestamp_to_timedelta(segment_end_timestamp),
+                            segment_start_timestamp,
+                            segment_end_timestamp,
                             line.strip()
                         )
                     )
@@ -65,6 +77,7 @@ class Mcf():
                 file.write('{}\n'.format(segment.text))
 
 
+class McfUtil():
     @staticmethod
     # Timestamp spec: https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API#Cue_timings
     def timestamp_to_timedelta(timestamp_string):
@@ -86,7 +99,6 @@ class Mcf():
             seconds=int(seconds),
             milliseconds=int(milliseconds)
         )
-
 
     @staticmethod
     def timedelta_to_timestamp(timedelta):
