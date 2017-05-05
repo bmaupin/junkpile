@@ -6,13 +6,6 @@ import sys
 '''
 
 
-class McfSegment():
-    def __init__(self, start, end, text):
-        self.start = McfTiming(start)
-        self.end = McfTiming(end)
-        self.text = text
-
-
 class Mcf():
     def __init__(self, start, end):
         self.start = McfTiming(start)
@@ -64,6 +57,13 @@ class Mcf():
                 file.write('{}\n'.format(segment.text))
 
 
+class McfSegment():
+    def __init__(self, start, end, text):
+        self.start = McfTiming(start)
+        self.end = McfTiming(end)
+        self.text = text
+
+
 class McfTiming():
     def __init__(self, timestamp):
         if isinstance(timestamp, str):
@@ -87,8 +87,21 @@ class McfTiming():
     def __truediv__(self, other):
         return self.datetime / other.datetime
 
-    @staticmethod
+    # Output as hh:mm:ss.ttt
+    def __str__(self):
+        hours, remainder = divmod(self.datetime.total_seconds(), 3600)
+        minutes, seconds = divmod(remainder, 60)
+        microseconds = self.datetime.microseconds
+
+        return '{:02d}:{:02d}:{:02d}.{}'.format(
+            int(hours),
+            int(minutes),
+            int(seconds),
+            str('{:06d}'.format(self.datetime.microseconds))[0:3]
+        )
+
     # Timestamp spec: https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API#Cue_timings
+    @staticmethod
     def timestamp_to_timedelta(timestamp_string):
         # hh:mm:ss.ttt
         if timestamp_string.count(':') == 2:
@@ -107,16 +120,4 @@ class McfTiming():
             minutes=int(minutes),
             seconds=int(seconds),
             milliseconds=int(milliseconds)
-        )
-
-    def __str__(self):
-        hours, remainder = divmod(self.datetime.total_seconds(), 3600)
-        minutes, seconds = divmod(remainder, 60)
-        microseconds = self.datetime.microseconds
-
-        return '{:02d}:{:02d}:{:02d}.{}'.format(
-            int(hours),
-            int(minutes),
-            int(seconds),
-            str('{:06d}'.format(self.datetime.microseconds))[0:3]
         )
