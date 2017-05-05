@@ -8,27 +8,15 @@ import sys
 
 class McfSegment():
     def __init__(self, start, end, text):
-        if isinstance(start, str):
-            self.start = McfUtil.timestamp_to_timedelta(start)
-        elif isinstance(start, datetime.timedelta):
-            self.start = start
-        else:
-            sys.exit('ERROR: start timing is neither a string nor a datetime.timestamp')
-
-        if isinstance(end, str):
-            self.end = McfUtil.timestamp_to_timedelta(end)
-        elif isinstance(end, datetime.timedelta):
-            self.end = end
-        else:
-            sys.exit('ERROR: end timing is neither a string nor a datetime.timestamp')
-
+        self.start = McfTiming(start)
+        self.end = McfTiming(end)
         self.text = text
 
 
 class Mcf():
     def __init__(self, start, end):
-        self.start = McfUtil.timestamp_to_timedelta(start)
-        self.end = McfUtil.timestamp_to_timedelta(end)
+        self.start = McfTiming(start)
+        self.end = McfTiming(end)
         self.segments = []
 
     @classmethod
@@ -63,7 +51,6 @@ class Mcf():
 
         return mcf
 
-
     def write(self, filename):
         with open(filename, 'w') as file:
             file.write('WEBVTT MovieContentFilter 1.0.0\n\n')
@@ -77,7 +64,29 @@ class Mcf():
                 file.write('{}\n'.format(segment.text))
 
 
-class McfUtil():
+class McfTiming():
+    def __init__(self, timestamp):
+        if isinstance(timestamp, str):
+            self.datetime = McfTiming.timestamp_to_timedelta(timestamp)
+        elif isinstance(timestamp, datetime.timedelta):
+            self.datetime = timestamp
+        elif isinstance(timestamp, McfTiming):
+            self.datetime = timestamp.datetime
+        else:
+            sys.exit('ERROR: timing is neither a string nor a datetime.timestamp')
+
+    def __add__(self, other):
+        return McfTiming(self.datetime + other.datetime)
+
+    def __mul__(self, other):
+        return McfTiming(self.datetime * other)
+
+    def __sub__(self, other):
+        return McfTiming(self.datetime - other.datetime)
+
+    def __truediv__(self, other):
+        return self.datetime / other.datetime
+
     @staticmethod
     # Timestamp spec: https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API#Cue_timings
     def timestamp_to_timedelta(timestamp_string):
@@ -100,15 +109,14 @@ class McfUtil():
             milliseconds=int(milliseconds)
         )
 
-    @staticmethod
-    def timedelta_to_timestamp(timedelta):
-        hours, remainder = divmod(timedelta.total_seconds(), 3600)
+    def __str__(self):
+        hours, remainder = divmod(self.datetime.total_seconds(), 3600)
         minutes, seconds = divmod(remainder, 60)
-        microseconds = timedelta.microseconds
+        microseconds = self.datetime.microseconds
 
-        return '{:02d}:{:02d}:{:02d}:{}'.format(
+        return '{:02d}:{:02d}:{:02d}.{}'.format(
             int(hours),
             int(minutes),
             int(seconds),
-            str('{:06d}'.format(timedelta.microseconds))[0:3]
+            str('{:06d}'.format(self.datetime.microseconds))[0:3]
         )
