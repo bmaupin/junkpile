@@ -58,46 +58,55 @@ class Mcf():
 
 
 class McfSegment():
-    def __init__(self, start, end, text):
-        self.start = McfTiming(start)
-        self.end = McfTiming(end)
-        self.text = text
+    def __init__(self, *args):
+        self.start = McfTiming(args[0])
+        self.end = McfTiming(args[1])
+        if len(args) > 2:
+            self.text = args[2]
 
 
 class McfTiming():
     def __init__(self, timestamp):
         if isinstance(timestamp, str):
-            self.datetime = McfTiming.timestamp_to_timedelta(timestamp)
+            self.timedelta = McfTiming.timestamp_to_timedelta(timestamp)
         elif isinstance(timestamp, datetime.timedelta):
-            self.datetime = timestamp
+            self.timedelta = timestamp
         elif isinstance(timestamp, McfTiming):
-            self.datetime = timestamp.datetime
+            self.timedelta = timestamp.timedelta
         else:
             sys.exit('ERROR: timing is neither a string nor a datetime.timestamp')
 
+    @property
+    def microseconds(self):
+        return self.timedelta.microseconds
+
+    @property
+    def seconds(self):
+        return self.timedelta.seconds
+
     def __add__(self, other):
-        return McfTiming(self.datetime + other.datetime)
+        return McfTiming(self.timedelta + other.timedelta)
 
     def __mul__(self, other):
-        return McfTiming(self.datetime * other)
+        return McfTiming(self.timedelta * other)
 
     def __sub__(self, other):
-        return McfTiming(self.datetime - other.datetime)
+        return McfTiming(self.timedelta - other.timedelta)
 
     def __truediv__(self, other):
-        return self.datetime / other.datetime
+        return self.timedelta / other.timedelta
 
     # Output as hh:mm:ss.ttt
     def __str__(self):
-        hours, remainder = divmod(self.datetime.total_seconds(), 3600)
+        hours, remainder = divmod(self.timedelta.total_seconds(), 3600)
         minutes, seconds = divmod(remainder, 60)
-        microseconds = self.datetime.microseconds
+        microseconds = self.timedelta.microseconds
 
         return '{:02d}:{:02d}:{:02d}.{}'.format(
             int(hours),
             int(minutes),
             int(seconds),
-            str('{:06d}'.format(self.datetime.microseconds))[0:3]
+            str('{:06d}'.format(self.timedelta.microseconds))[0:3]
         )
 
     # Timestamp spec: https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API#Cue_timings

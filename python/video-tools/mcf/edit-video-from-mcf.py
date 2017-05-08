@@ -3,16 +3,11 @@
 ''' Edit videos based on MCF files (https://www.moviecontentfilter.com/specification)
 '''
 
-import datetime
 import os
 import subprocess
 import sys
 
-
-class VideoSegment():
-    def __init__(self, start, end):
-        self.start = start
-        self.end = end
+import mcf
 
 
 def main():
@@ -23,56 +18,13 @@ def main():
     input_filename = sys.argv[2]
     output_filename = sys.argv[3]
 
-    segments_to_omit = parse_mcf_file(mcf_filename)
+    segments_to_omit = mcf.Mcf.fromfile(mcf_filename).segments
 
     segments_to_play = get_segments_to_play(segments_to_omit)
 
     cut_video(segments_to_play, input_filename, output_filename)
 
     # TODO: join segments
-
-
-def parse_mcf_file(mcf_filename):
-    segments_to_omit = []
-
-    with open(mcf_filename, 'r') as mcf_file:
-        for line in mcf_file:
-            if len(line) == 0:
-                continue
-
-            if line[0].isdigit():
-                cut_start_timestamp, cut_end_timestamp = line.strip().split(' --> ')
-
-                segments_to_omit.append(
-                    VideoSegment(
-                        timestamp_to_timedelta(cut_start_timestamp),
-                        timestamp_to_timedelta(cut_end_timestamp)
-                    )
-                )
-
-    return segments_to_omit
-
-
-# Timestamp spec: https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API#Cue_timings
-def timestamp_to_timedelta(timestamp_string):
-    # hh:mm:ss.ttt
-    if timestamp_string.count(':') == 2:
-        hours, minutes, seconds_milliseconds = timestamp_string.split(':')
-    # mm:ss.ttt
-    elif timestamp_string.count(':') == 1:
-        hours = 0
-        minutes, seconds_milliseconds = timestamp_string.split(':')
-    else:
-        sys.exit('ERROR: invalid timestamp ({})\n'.format(timestamp_string))
-
-    seconds, milliseconds = seconds_milliseconds.split('.')
-
-    return datetime.timedelta(
-        hours=int(hours),
-        minutes=int(minutes),
-        seconds=int(seconds),
-        milliseconds=int(milliseconds)
-    )
 
 
 def cut_video(segments_to_play, input_filename, output_filename):
@@ -95,8 +47,8 @@ def get_segments_to_play(segments_to_omit):
     for i in range(len(segments_to_omit)):
         if i == 0:
             segments_to_play.append(
-                VideoSegment(
-                    datetime.timedelta(0),
+                mcf.McfSegment(
+                    mcf.McfTiming('00:00:00.000'),
                     segments_to_omit[i].start
                 )
             )
@@ -112,16 +64,16 @@ def get_segments_to_play(segments_to_omit):
                     skip_next_segment = True
 
                 segments_to_play.append(
-                    VideoSegment(
+                    mcf.McfSegment(
                         segments_to_omit[i - 1].end,
                         segments_to_omit[i].start
                     )
                 )
 
     segments_to_play.append(
-        VideoSegment(
+        mcf.McfSegment(
             segments_to_omit[-1].end,
-            datetime.timedelta(0)
+            mcf.McfTiming('00:00:00.000')
             )
         )
 
@@ -131,13 +83,9 @@ def get_segments_to_play(segments_to_omit):
 def cut_segment(start, end, input_filename, segment_filename):
     run_command('ffmpeg -i {} -ss {} -t {} -c:v libx264 -q:v 1 -c:a copy -c:s copy {}'.format(
         input_filename,
-        timedelta_to_timestamp(start),
-        timedelta_to_timestamp(end - start),
+        start,
+        end - start,
         segment_filename))
-
-
-def timedelta_to_timestamp(timedelta):
-    return str(timedelta)
 
 
 def run_command(command):
@@ -153,7 +101,7 @@ def run_command(command):
 def cut_last_segment(start, input_filename, segment_filename):
     run_command('ffmpeg -i {} -ss {} -c:v libx264 -q:v 1 -c:a copy -c:s copy {}'.format(
         input_filename,
-        timedelta_to_timestamp(start),
+        start,
         segment_filename))
 
 
