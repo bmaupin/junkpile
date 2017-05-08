@@ -1,14 +1,14 @@
 WEBVTT MovieContentFilter 1.0.0
 
 NOTE
-START 00:02:05.709 # First frame where building from title is out of the picture
-END 01:41:15.735
+START 00:02:30.417 # First frame where building from title is out of the picture
+END 01:41:34.542
 
-NOTE Les.Aventures.Extraordinaires.D.Adele.Blanc.Sec.2010.FRENCH.BRRip.x264.AC3-FUNKY.mkv
+NOTE The Extraordinary Adventures Of Adele Blanc-Sec 2010 720p BRRip x264 (mkv) [stb.rg].mkv
 NOTE http://www.imdb.com/title/tt1179025/
 
-00:07:43.850 --> 00:08:55.775
+00:08:08.208 --> 00:08:55.042
 sex=low
 
-00:58:58.000 --> 01:02:05.025
+01:00:35.833 --> 01:02:26.166
 nudity=medium
