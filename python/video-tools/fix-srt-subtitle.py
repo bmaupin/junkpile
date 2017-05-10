@@ -1,39 +1,24 @@
 #!/usr/bin/env python
 
+import argparse
 import datetime
-import optparse
 import sys
 
 
 def main():
-    parser, infile_name, outfile_name = parse_options()
+    args = parse_arguments()
 
-    srt = Srt.fromfile(infile_name)
-    print(len(srt.subtitles))
-    srt.write(outfile_name)
+    srt = Srt.fromfile(args.infile_name)
+    srt.write(args.outfile_name)
 
 
-def parse_options():
-    ''' set up and parse command line arguments
-    '''
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('infile_name', metavar='INPUT_FILE')
+    parser.add_argument('outfile_name', metavar='INPUT_FILE')
 
-    # define a custom usage message
-    usage = ('usage: %prog INPUT_FILE OUTPUT_FILE [options]\n'
-    '\tWhere INPUT_FILE = path to SRT input file\n'
-    '\tand OUTPUT_FILE = path to SRT output file')
-
-    parser = optparse.OptionParser(usage=usage)
-
-    # parse the arguments
-    (options, args) = parser.parse_args()
-
-    if len(args) < 2:
-        parser.print_help()
-        sys.exit('Error: INPUT_FILE and OUTPUT_FILE are required')
-    infile_name = args[0]
-    outfile_name = args[1]
-
-    return parser, infile_name, outfile_name
+    args = parser.parse_args()
+    return args
 
 
 class Srt():
