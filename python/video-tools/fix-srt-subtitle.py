@@ -54,6 +54,9 @@ class Srt():
         for line in file:
             line = line.strip()
 
+            # Remove Windows BOM :/
+            line = line.replace('\ufeff', '')
+
             if prev_line == '':
                 srt_subtitle = SrtSubtitle(
                     subtitle_start,
