@@ -88,7 +88,21 @@ class Srt():
 
         file.close()
 
+        srt.__remove_opensubtitles_ads()
+
         return srt
+
+
+    def __remove_opensubtitles_ads(self):
+        for text_line in self.subtitles[0].text:
+            if text_line.lower().find('opensubtitles') != -1:
+                del self.subtitles[0]
+                break
+
+        for text_line in self.subtitles[-1].text:
+            if text_line.lower().find('opensubtitles') != -1:
+                del self.subtitles[-1]
+                break
 
 
     def write(self, filename):
