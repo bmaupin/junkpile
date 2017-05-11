@@ -102,21 +102,21 @@ class Srt():
 
 class SrtSubtitle:
     def __init__(self, start, end, text):
-        self.start = SrtTiming(start)
-        self.end = SrtTiming(end)
+        self.start = SrtTimecode(start)
+        self.end = SrtTimecode(end)
         self.text = text
 
 
-class SrtTiming():
-    def __init__(self, timestamp):
-        if isinstance(timestamp, str):
-            self.timedelta = SrtTiming.timestamp_to_timedelta(timestamp)
-        elif isinstance(timestamp, datetime.timedelta):
-            self.timedelta = timestamp
-        elif isinstance(timestamp, SrtTiming):
-            self.timedelta = timestamp.timedelta
+class SrtTimecode():
+    def __init__(self, timecode):
+        if isinstance(timecode, str):
+            self.timedelta = SrtTimecode.timecode_to_timedelta(timecode)
+        elif isinstance(timecode, datetime.timedelta):
+            self.timedelta = timecode
+        elif isinstance(timecode, SrtTimecode):
+            self.timedelta = timecode.timedelta
         else:
-            sys.exit('ERROR: timing is neither a string nor a datetime.timestamp nor an SrtTiming')
+            sys.exit('ERROR: timecode is neither a string nor a datetime.timedelta nor an SrtTimecode')
 
     @property
     def microseconds(self):
@@ -127,13 +127,13 @@ class SrtTiming():
         return self.timedelta.seconds
 
     def __add__(self, other):
-        return SrtTiming(self.timedelta + other.timedelta)
+        return SrtTimecode(self.timedelta + other.timedelta)
 
     def __mul__(self, other):
-        return SrtTiming(self.timedelta * other)
+        return SrtTimecode(self.timedelta * other)
 
     def __sub__(self, other):
-        return SrtTiming(self.timedelta - other.timedelta)
+        return SrtTimecode(self.timedelta - other.timedelta)
 
     def __truediv__(self, other):
         return self.timedelta / other.timedelta
@@ -153,12 +153,12 @@ class SrtTiming():
 
     # Timestamp spec: https://en.wikipedia.org/wiki/SubRip#SubRip_text_file_format
     @staticmethod
-    def timestamp_to_timedelta(timestamp_string):
+    def timecode_to_timedelta(timecode_string):
         # hh:mm:ss,ttt
-        if timestamp_string.count(':') == 2:
-            hours, minutes, seconds_milliseconds = timestamp_string.split(':')
+        if timecode_string.count(':') == 2:
+            hours, minutes, seconds_milliseconds = timecode_string.split(':')
         else:
-            sys.exit('ERROR: invalid timestamp ({})\n'.format(timestamp_string))
+            sys.exit('ERROR: invalid timecode ({})\n'.format(timecode_string))
 
         seconds, milliseconds = seconds_milliseconds.split(',')
 
