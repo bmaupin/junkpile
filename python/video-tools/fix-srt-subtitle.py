@@ -9,6 +9,10 @@ def main():
     args = parse_arguments()
 
     srt = Srt.fromfile(args.infile_name)
+
+    if args.adjust == True:
+        adjust_timecodes(srt)
+
     srt.write(args.outfile_name)
 
 
@@ -17,8 +21,32 @@ def parse_arguments():
     parser.add_argument('infile_name', metavar='INPUT_FILE')
     parser.add_argument('outfile_name', metavar='INPUT_FILE')
 
+    parser.add_argument('-a', '--adjust', action='store_true', help='Adjust subtitle timecodes')
+
     args = parser.parse_args()
     return args
+
+
+def adjust_timecodes(srt):
+    choice = input('Do you wish to manually specify the old subtitle timecodes? (y/n) ')
+
+    if choice.lower() == 'y':
+        old_start_timecode_first_subtitle = input('Please enter old start timecode of first spoken subtitle: ')
+    else:
+        old_start_timecode_first_subtitle = srt.subtitles[0].start
+    new_start_timecode_first_subtitle = input('Please enter new start timecode of first subtitle: ')
+
+    if choice.lower() == 'y':
+        old_start_timecode_last_subtitle = input('Please enter old start timecode of last spoken subtitle: ')
+    else:
+        old_start_timecode_last_subtitle = srt.subtitles[-1].start
+    new_start_timecode_last_subtitle = input('Please enter new start timecode of last subtitle: ')
+
+    srt.adjust_timecodes(
+        old_start_timecode_first_subtitle,
+        old_start_timecode_last_subtitle,
+        new_start_timecode_first_subtitle,
+        new_start_timecode_last_subtitle)
 
 
 class Srt():
@@ -88,6 +116,51 @@ class Srt():
             if text_line.lower().find('opensubtitles') != -1:
                 del self.subtitles[-1]
                 break
+
+
+    def adjust_timecodes(
+            self,
+            old_start_timecode_first_subtitle,
+            old_start_timecode_last_subtitle,
+            new_start_timecode_first_subtitle,
+            new_start_timecode_last_subtitle):
+
+        for subtitle in self.subtitles:
+            subtitle.start = self.__adjust_timecode(
+                old_start_timecode_first_subtitle,
+                old_start_timecode_last_subtitle,
+                new_start_timecode_first_subtitle,
+                new_start_timecode_last_subtitle,
+                subtitle.start)
+            subtitle.end = self.__adjust_timecode(
+                old_start_timecode_first_subtitle,
+                old_start_timecode_last_subtitle,
+                new_start_timecode_first_subtitle,
+                new_start_timecode_last_subtitle,
+                subtitle.end)
+
+
+    def __adjust_timecode(
+            self,
+            old_start_timecode_first_subtitle,
+            old_start_timecode_last_subtitle,
+            new_start_timecode_first_subtitle,
+            new_start_timecode_last_subtitle,
+            old_subtitle_timecode):
+
+        old_start_timecode_first_subtitle = SrtTimecode(old_start_timecode_first_subtitle)
+        old_start_timecode_last_subtitle = SrtTimecode(old_start_timecode_last_subtitle)
+        new_start_timecode_first_subtitle = SrtTimecode(new_start_timecode_first_subtitle)
+        new_start_timecode_last_subtitle = SrtTimecode(new_start_timecode_last_subtitle)
+
+        old_adjusted_subtitle_timecode = old_subtitle_timecode - old_start_timecode_first_subtitle
+        old_duration = old_start_timecode_last_subtitle - old_start_timecode_first_subtitle
+        new_duration = new_start_timecode_last_subtitle - new_start_timecode_first_subtitle
+
+        new_adjusted_subtitle_timecode = old_adjusted_subtitle_timecode * (new_duration / old_duration)
+        new_subtitle_timecode = new_adjusted_subtitle_timecode + new_start_timecode_first_subtitle
+
+        return new_subtitle_timecode
 
 
     def write(self, filename):
