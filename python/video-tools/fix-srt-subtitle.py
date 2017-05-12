@@ -70,7 +70,7 @@ class Srt():
             # Remove Windows BOM :/
             line = line.replace('\ufeff', '')
 
-            if prev_line == '':
+            if prev_line == '' and subtitle_text != []:
                 srt_subtitle = SrtSubtitle(
                     subtitle_start,
                     subtitle_end,
@@ -86,7 +86,7 @@ class Srt():
                 pass
             elif prev_line != None and prev_line.isdigit():
                 subtitle_start, subtitle_end = line.split(' --> ')
-            else:
+            elif line != '...':
                 subtitle_text.append(line)
 
             prev_line = line
