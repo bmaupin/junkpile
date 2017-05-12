@@ -170,7 +170,8 @@ class Srt():
                 file.write('{}\n'.format(subtitle_index + 1))
                 file.write('{} --> {}\n'.format(subtitle.start, subtitle.end))
                 file.write('{}\n'.format('\n'.join(subtitle.text)))
-                file.write('\n')
+                if subtitle_index != len(self.subtitles) - 1:
+                    file.write('\n')
 
 
 class SrtSubtitle:
