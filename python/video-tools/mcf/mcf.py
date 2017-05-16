@@ -87,6 +87,9 @@ class McfTiming():
     def __add__(self, other):
         return McfTiming(self.timedelta + other.timedelta)
 
+    def __eq__(self, other):
+        return self.timedelta == other
+
     def __mul__(self, other):
         return McfTiming(self.timedelta * other)
 
