@@ -3,28 +3,33 @@
 ''' Edit videos based on MCF files (https://www.moviecontentfilter.com/specification)
 '''
 
+import argparse
 import os
 import subprocess
-import sys
 
 import mcf
 
 
 def main():
-    if len(sys.argv) < 4:
-        sys.exit('USAGE: %s /path/to/filter.mcf /path/to/input-video /path/to/output-video' % (sys.argv[0]))
+    args = parse_arguments()
 
-    mcf_filename = sys.argv[1]
-    input_filename = sys.argv[2]
-    output_filename = sys.argv[3]
-
-    segments_to_omit = mcf.Mcf.fromfile(mcf_filename).segments
+    segments_to_omit = mcf.Mcf.fromfile(args.mcf_filename).segments
 
     segments_to_play = get_segments_to_play(segments_to_omit)
 
-    cut_video(segments_to_play, input_filename, output_filename)
+    cut_video(segments_to_play, args.input_filename, args.output_filename)
 
     # TODO: join segments
+
+
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('mcf_filename', metavar='/path/to/filter.mcf')
+    parser.add_argument('input_filename', metavar='/path/to/input-video')
+    parser.add_argument('output_filename', metavar='/path/to/output-video')
+
+    args = parser.parse_args()
+    return args
 
 
 def cut_video(segments_to_play, input_filename, output_filename):
