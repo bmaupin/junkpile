@@ -47,38 +47,27 @@ def cut_video(segments_to_play, input_filename, output_filename):
 
 def get_segments_to_play(segments_to_omit):
     segments_to_play = []
-    skip_next_segment = False
-
-    for i in range(len(segments_to_omit)):
-        if i == 0:
-            segments_to_play.append(
-                mcf.McfSegment(
-                    mcf.McfTiming('00:00:00.000'),
-                    segments_to_omit[i].start
-                )
-            )
-
-        else:
-            # TODO: this will only handle up to 2 back-to-back filters
-            if skip_next_segment == True:
-                skip_next_segment = False
-                continue
-
-            else:
-                if i != len(segments_to_omit) - 1 and segments_to_omit[i].end == segments_to_omit[i + 1].start:
-                    skip_next_segment = True
-
-                segments_to_play.append(
-                    mcf.McfSegment(
-                        segments_to_omit[i - 1].end,
-                        segments_to_omit[i].start
-                    )
-                )
 
     segments_to_play.append(
         mcf.McfSegment(
-            segments_to_omit[-1].end,
-            mcf.McfTiming('00:00:00.000')
+            mcf.McfTiming('00:00:00.000'),
+            segments_to_omit[0].start
+        )
+    )
+
+    for i in range(len(segments_to_omit)):
+        if i == len(segments_to_omit) - 1:
+            segment_end = mcf.McfTiming('00:00:00.000')
+        else:
+            if segments_to_omit[i].end == segments_to_omit[i + 1].start:
+                continue
+
+            segment_end = segments_to_omit[i + 1].start
+
+        segments_to_play.append(
+            mcf.McfSegment(
+                segments_to_omit[i].end,
+                segment_end
             )
         )
 
