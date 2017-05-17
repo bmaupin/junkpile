@@ -4,10 +4,15 @@
 '''
 
 import argparse
+import datetime
 import os
 import subprocess
 
 import mcf
+
+
+# Amount of time to add on either end of preview cuts
+PREVIEW_LENGTH_IN_SECONDS = 5
 
 
 def main():
@@ -15,7 +20,7 @@ def main():
 
     segments_to_omit = mcf.Mcf.fromfile(args.mcf_filename).segments
 
-    segments_to_play = get_segments_to_play(segments_to_omit)
+    segments_to_play = get_segments_to_play(segments_to_omit, args.preview)
 
     cut_video(segments_to_play, args.input_filename, args.output_filename)
 
@@ -27,6 +32,8 @@ def parse_arguments():
     parser.add_argument('mcf_filename', metavar='/path/to/filter.mcf')
     parser.add_argument('input_filename', metavar='/path/to/input-video')
     parser.add_argument('output_filename', metavar='/path/to/output-video')
+
+    parser.add_argument('-p', '--preview', action='store_true', help='Create a preview of cuts to be made')
 
     args = parser.parse_args()
     return args
@@ -42,7 +49,40 @@ def cut_video(segments_to_play, input_filename, output_filename):
         cut_segment(segment.start, segment.end, input_filename, segment_filename)
 
 
-def get_segments_to_play(segments_to_omit):
+def get_segments_to_play(segments_to_omit, preview):
+    if preview == True:
+        return get_preview_segments_to_play(segments_to_omit)
+    else:
+        return get_normal_segments_to_play(segments_to_omit)
+
+
+def get_preview_segments_to_play(segments_to_omit):
+    segments_to_play = []
+
+    # TODO: This won't handle if segments are less than PREVIEW_LENGTH_IN_SECONDS apart
+    for i, segment_to_omit in enumerate(segments_to_omit):
+        # Skip back-to-back segments
+        if i != len(segments_to_omit) - 1 and segments_to_omit[i].end == segments_to_omit[i + 1].start:
+            continue
+
+        segments_to_play.append(
+            mcf.McfSegment(
+                segment_to_omit.start - mcf.McfTiming(datetime.timedelta(seconds=PREVIEW_LENGTH_IN_SECONDS)),
+                segment_to_omit.start
+            )
+        )
+
+        segments_to_play.append(
+            mcf.McfSegment(
+                segment_to_omit.end,
+                segment_to_omit.end + mcf.McfTiming(datetime.timedelta(seconds=PREVIEW_LENGTH_IN_SECONDS))
+            )
+        )
+
+    return segments_to_play
+
+
+def get_normal_segments_to_play(segments_to_omit):
     segments_to_play = []
 
     segments_to_play.append(
