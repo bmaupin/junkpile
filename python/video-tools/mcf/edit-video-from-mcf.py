@@ -39,10 +39,7 @@ def cut_video(segments_to_play, input_filename, output_filename):
             i,
             os.path.splitext(output_filename)[1])
 
-        if i != len(segments_to_play) - 1:
-            cut_segment(segment.start, segment.end, input_filename, segment_filename)
-        else:
-            cut_last_segment(segment.start, input_filename, segment_filename)
+        cut_segment(segment.start, segment.end, input_filename, segment_filename)
 
 
 def get_segments_to_play(segments_to_omit):
@@ -75,10 +72,15 @@ def get_segments_to_play(segments_to_omit):
 
 
 def cut_segment(start, end, input_filename, segment_filename):
-    run_command('ffmpeg -i "{}" -ss {} -t {} -c:v libx264 -c:a copy -c:s copy "{}"'.format(
+    if end == mcf.McfTiming('00:00:00.000'):
+        duration = ''
+    else:
+        duration = ' -t {} '.format(end - start)
+
+    run_command('ffmpeg -i "{}" -ss {} {} -c:v libx264 -c:a copy -c:s copy "{}"'.format(
         input_filename,
         start,
-        end - start,
+        duration,
         segment_filename))
 
 
@@ -90,13 +92,6 @@ def run_command(command):
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT)
     output = p.communicate()[0]
-
-
-def cut_last_segment(start, input_filename, segment_filename):
-    run_command('ffmpeg -i "{}" -ss {} -c:v libx264 -c:a copy -c:s copy "{}"'.format(
-        input_filename,
-        start,
-        segment_filename))
 
 
 if __name__ == '__main__':
