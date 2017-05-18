@@ -7,6 +7,7 @@ import argparse
 import datetime
 import os
 import subprocess
+import tempfile
 
 import mcf
 
@@ -23,9 +24,9 @@ def main():
 
     segments_to_play = get_segments_to_play(segments_to_omit, args.preview)
 
-    cut_video(segments_to_play, args.input_filename, args.output_filename, args.fade, args.preview)
+    segment_filenames = cut_video(segments_to_play, args.input_filename, args.output_filename, args.fade, args.preview)
 
-    # TODO: join segments
+    join_segments(segment_filenames, args.output_filename)
 
 
 def parse_arguments():
@@ -42,11 +43,14 @@ def parse_arguments():
 
 
 def cut_video(segments_to_play, input_filename, output_filename, fade, preview):
+    segment_filenames = []
+
     for i, segment in enumerate(segments_to_play):
         segment_filename = '{}-{}{}'.format(
             os.path.splitext(output_filename)[0],
             i,
             os.path.splitext(output_filename)[1])
+        segment_filenames.append(segment_filename)
 
         if fade == True:
             fade_in = False
@@ -67,6 +71,8 @@ def cut_video(segments_to_play, input_filename, output_filename, fade, preview):
             cut_segment(segment.start, segment.end, input_filename, segment_filename, fade_in, fade_out)
         else:
             cut_segment(segment.start, segment.end, input_filename, segment_filename)
+
+    return segment_filenames
 
 
 def is_even(integer):
@@ -179,6 +185,26 @@ def run_command(command):
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT)
     output = p.communicate()[0]
+
+
+def join_segments(segment_filenames, output_filename):
+    parts_file_path = create_parts_file(segment_filenames)
+
+    run_command('ffmpeg -f concat -safe 0 -i "{}" -c copy "{}"'.format(parts_file_path, output_filename))
+
+    os.remove(parts_file_path)
+
+
+def create_parts_file(segment_filenames):
+    parts_file_handle, parts_file_path = tempfile.mkstemp()
+
+    with open(parts_file_path, 'w') as parts_file:
+        for segment_filename in segment_filenames:
+            parts_file.write("file '{}'\n".format(segment_filename))
+
+    os.close(parts_file_handle)
+
+    return parts_file_path
 
 
 if __name__ == '__main__':
