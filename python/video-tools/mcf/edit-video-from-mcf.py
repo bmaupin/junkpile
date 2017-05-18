@@ -11,8 +11,9 @@ import subprocess
 import mcf
 
 
+FADE_DURATION_IN_SECONDS = 3
 # Amount of time to add on either end of preview cuts
-PREVIEW_LENGTH_IN_SECONDS = 5
+PREVIEW_SEGMENT_DURATION_IN_SECONDS = 5
 
 
 def main():
@@ -22,7 +23,7 @@ def main():
 
     segments_to_play = get_segments_to_play(segments_to_omit, args.preview)
 
-    cut_video(segments_to_play, args.input_filename, args.output_filename)
+    cut_video(segments_to_play, args.input_filename, args.output_filename, args.fade, args.preview)
 
     # TODO: join segments
 
@@ -33,20 +34,43 @@ def parse_arguments():
     parser.add_argument('input_filename', metavar='/path/to/input-video')
     parser.add_argument('output_filename', metavar='/path/to/output-video')
 
+    parser.add_argument('-f', '--fade', action='store_true', help='Fade audio in/out where cuts are made')
     parser.add_argument('-p', '--preview', action='store_true', help='Create a preview of cuts to be made')
 
     args = parser.parse_args()
     return args
 
 
-def cut_video(segments_to_play, input_filename, output_filename):
+def cut_video(segments_to_play, input_filename, output_filename, fade, preview):
     for i, segment in enumerate(segments_to_play):
         segment_filename = '{}-{}{}'.format(
             os.path.splitext(output_filename)[0],
             i,
             os.path.splitext(output_filename)[1])
 
-        cut_segment(segment.start, segment.end, input_filename, segment_filename)
+        if fade == True:
+            fade_in = False
+            fade_out = False
+
+            if preview == True:
+                if is_even(i):
+                    fade_out = True
+                else:
+                    fade_in = True
+
+            else:
+                if segment.start != mcf.McfTiming('00:00:00.000'):
+                    fade_in = True
+                if segment.end != mcf.McfTiming('00:00:00.000'):
+                    fade_out = True
+
+            cut_segment(segment.start, segment.end, input_filename, segment_filename, fade_in, fade_out)
+        else:
+            cut_segment(segment.start, segment.end, input_filename, segment_filename)
+
+
+def is_even(integer):
+    return integer % 2 == 0
 
 
 def get_segments_to_play(segments_to_omit, preview):
@@ -59,7 +83,7 @@ def get_segments_to_play(segments_to_omit, preview):
 def get_preview_segments_to_play(segments_to_omit):
     segments_to_play = []
 
-    # TODO: This won't handle if segments are less than PREVIEW_LENGTH_IN_SECONDS apart
+    # TODO: This won't handle if segments are less than PREVIEW_SEGMENT_DURATION_IN_SECONDS apart
     for i, segment_to_omit in enumerate(segments_to_omit):
         # Skip back-to-back segments
         if i != len(segments_to_omit) - 1 and segments_to_omit[i].end == segments_to_omit[i + 1].start:
@@ -67,7 +91,7 @@ def get_preview_segments_to_play(segments_to_omit):
 
         segments_to_play.append(
             mcf.McfSegment(
-                segment_to_omit.start - mcf.McfTiming(datetime.timedelta(seconds=PREVIEW_LENGTH_IN_SECONDS)),
+                segment_to_omit.start - mcf.McfTiming(datetime.timedelta(seconds=PREVIEW_SEGMENT_DURATION_IN_SECONDS)),
                 segment_to_omit.start
             )
         )
@@ -75,7 +99,7 @@ def get_preview_segments_to_play(segments_to_omit):
         segments_to_play.append(
             mcf.McfSegment(
                 segment_to_omit.end,
-                segment_to_omit.end + mcf.McfTiming(datetime.timedelta(seconds=PREVIEW_LENGTH_IN_SECONDS))
+                segment_to_omit.end + mcf.McfTiming(datetime.timedelta(seconds=PREVIEW_SEGMENT_DURATION_IN_SECONDS))
             )
         )
 
@@ -111,17 +135,40 @@ def get_normal_segments_to_play(segments_to_omit):
     return segments_to_play
 
 
-def cut_segment(start, end, input_filename, segment_filename):
+def cut_segment(start, end, input_filename, segment_filename, fade_in=False, fade_out=False):
     if end == mcf.McfTiming('00:00:00.000'):
-        duration = ''
+        cut_duration = ''
     else:
-        duration = ' -t {} '.format(end - start)
+        cut_duration = ' -t {} '.format(end - start)
 
-    run_command('ffmpeg -i "{}" -ss {} {} -c:v libx264 -c:a copy -c:s copy "{}"'.format(
+    if fade_in == True and fade_out == True:
+        audio_parameter = (' -c:a aac -ac 2 -af "afade=t=in:curve=qua:st={}:d={},'
+            'afade=out:curve=cbr:st={}:d={}" -strict -2 '.format(
+                mcf_timing_to_afade_timestamp(start),
+                FADE_DURATION_IN_SECONDS,
+                mcf_timing_to_afade_timestamp(end - mcf.McfTiming(datetime.timedelta(seconds=FADE_DURATION_IN_SECONDS))),
+                FADE_DURATION_IN_SECONDS))
+    elif fade_in == True:
+        audio_parameter = ' -c:a aac -ac 2 -af "afade=t=in:curve=qua:st={}:d={}" -strict -2 '.format(
+            mcf_timing_to_afade_timestamp(start),
+            FADE_DURATION_IN_SECONDS)
+    elif fade_out == True:
+        audio_parameter = ' -c:a aac -ac 2 -af afade=out:curve=cbr:st={}:d={} -strict -2 '.format(
+            mcf_timing_to_afade_timestamp(end - mcf.McfTiming(datetime.timedelta(seconds=FADE_DURATION_IN_SECONDS))),
+            FADE_DURATION_IN_SECONDS)
+    else:
+        audio_parameter = ' -c:a copy '
+
+    run_command('ffmpeg -i "{}" -ss {} {} -c:v libx264 -c:s copy {} "{}"'.format(
         input_filename,
         start,
-        duration,
+        cut_duration,
+        audio_parameter,
         segment_filename))
+
+
+def mcf_timing_to_afade_timestamp(mcf_timing):
+    return str(mcf_timing.timedelta.total_seconds())
 
 
 def run_command(command):
