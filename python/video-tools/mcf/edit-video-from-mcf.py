@@ -165,7 +165,7 @@ def cut_segment(start, end, input_filename, segment_filename, fade_in=False, fad
     else:
         audio_parameter = ' -c:a copy '
 
-    run_command('ffmpeg -i "{}" -ss {} {} -c:v libx264 -c:s copy {} "{}"'.format(
+    run_command('ffmpeg -v quiet -stats -i "{}" -ss {} {} -c:v libx264 -c:s copy {} "{}"'.format(
         input_filename,
         start,
         cut_duration,
@@ -183,14 +183,19 @@ def run_command(command):
         command,
         shell=True,
         stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT)
-    output = p.communicate()[0]
+        stderr=subprocess.STDOUT,
+        universal_newlines=True)
+    for line in p.stdout:
+        if line.startswith('frame'):
+            line = '\r{}'.format(line.strip())
+        print(line, end='', flush=True)
+    print()
 
 
 def join_segments(segment_filenames, output_filename):
     parts_file_path = create_parts_file(segment_filenames)
 
-    run_command('ffmpeg -f concat -safe 0 -i "{}" -c copy "{}"'.format(parts_file_path, output_filename))
+    run_command('ffmpeg -v quiet -stats -f concat -safe 0 -i "{}" -c copy "{}"'.format(parts_file_path, output_filename))
 
     os.remove(parts_file_path)
 
