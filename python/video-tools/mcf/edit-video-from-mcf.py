@@ -92,22 +92,21 @@ def get_preview_segments_to_play(segments_to_omit):
     # TODO: This won't handle if segments are less than PREVIEW_SEGMENT_DURATION_IN_SECONDS apart
     for i, segment_to_omit in enumerate(segments_to_omit):
         # Skip back-to-back segments
-        if i != len(segments_to_omit) - 1 and segments_to_omit[i].end == segments_to_omit[i + 1].start:
-            continue
-
-        segments_to_play.append(
-            mcf.McfSegment(
-                segment_to_omit.start - mcf.McfTiming(datetime.timedelta(seconds=PREVIEW_SEGMENT_DURATION_IN_SECONDS)),
-                segment_to_omit.start
+        if i == 0 or segments_to_omit[i].start != segments_to_omit[i - 1].end:
+            segments_to_play.append(
+                mcf.McfSegment(
+                    segment_to_omit.start - mcf.McfTiming(datetime.timedelta(seconds=PREVIEW_SEGMENT_DURATION_IN_SECONDS)),
+                    segment_to_omit.start
+                )
             )
-        )
 
-        segments_to_play.append(
-            mcf.McfSegment(
-                segment_to_omit.end,
-                segment_to_omit.end + mcf.McfTiming(datetime.timedelta(seconds=PREVIEW_SEGMENT_DURATION_IN_SECONDS))
+        if i == len(segments_to_omit) - 1 or segments_to_omit[i].end != segments_to_omit[i + 1].start:
+            segments_to_play.append(
+                mcf.McfSegment(
+                    segment_to_omit.end,
+                    segment_to_omit.end + mcf.McfTiming(datetime.timedelta(seconds=PREVIEW_SEGMENT_DURATION_IN_SECONDS))
+                )
             )
-        )
 
     return segments_to_play
 
