@@ -18,8 +18,8 @@ def main():
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument('infile_name', metavar='INPUT_FILE')
-    parser.add_argument('outfile_name', metavar='INPUT_FILE')
+    parser.add_argument('infile_name', metavar='/path/to/input.srt')
+    parser.add_argument('outfile_name', metavar='/path/to/output.srt')
 
     parser.add_argument('-a', '--adjust', action='store_true', help='Adjust subtitle timecodes')
 
