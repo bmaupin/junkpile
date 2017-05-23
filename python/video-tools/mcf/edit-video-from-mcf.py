@@ -164,12 +164,13 @@ def cut_segment(start, end, input_filename, segment_filename, fade_in=False, fad
     else:
         audio_parameter = ' -c:a copy '
 
-    run_command('ffmpeg -v quiet -stats -i "{}" -ss {} {} -c:v libx264 {} -c:s copy "{}"'.format(
-        input_filename,
-        start,
-        cut_duration,
-        audio_parameter,
-        segment_filename))
+    run_command(
+        'ffmpeg -v quiet -stats -i "{}" -ss {} {} -map 0:v -c:v libx264 -map 0:a {} -map 0:s -c:s copy "{}"'.format(
+            input_filename,
+            start,
+            cut_duration,
+            audio_parameter,
+            segment_filename))
 
 
 def mcf_timing_to_afade_timestamp(mcf_timing):
