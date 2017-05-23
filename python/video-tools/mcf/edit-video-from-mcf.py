@@ -164,7 +164,7 @@ def cut_segment(start, end, input_filename, segment_filename, fade_in=False, fad
     else:
         audio_parameter = ' -c:a copy '
 
-    run_command('ffmpeg -v quiet -stats -i "{}" -ss {} {} -c:v libx264 -c:s copy {} "{}"'.format(
+    run_command('ffmpeg -v quiet -stats -i "{}" -ss {} {} -c:v libx264 {} -c:s copy "{}"'.format(
         input_filename,
         start,
         cut_duration,
