@@ -193,23 +193,25 @@ def run_command(command):
 
 
 def join_segments(segment_filenames, output_filename):
-    parts_file_path = create_parts_file(segment_filenames)
+    segments_file_path = create_segments_file(segment_filenames)
 
-    run_command('ffmpeg -v quiet -stats -f concat -safe 0 -i "{}" -map 0 -c copy "{}"'.format(parts_file_path, output_filename))
+    run_command('ffmpeg -v quiet -stats -f concat -safe 0 -i "{}" -map 0 -c copy "{}"'.format(
+        segments_file_path, output_filename))
 
-    os.remove(parts_file_path)
+    # TODO: remove segment files
+    os.remove(segments_file_path)
 
 
-def create_parts_file(segment_filenames):
-    parts_file_handle, parts_file_path = tempfile.mkstemp(dir=os.getcwd())
+def create_segments_file(segment_filenames):
+    segments_file_handle, segments_file_path = tempfile.mkstemp(dir=os.getcwd())
 
-    with open(parts_file_path, 'w') as parts_file:
+    with open(segments_file_path, 'w') as segments_file:
         for segment_filename in segment_filenames:
-            parts_file.write("file '{}'\n".format(segment_filename))
+            segments_file.write("file '{}'\n".format(segment_filename))
 
-    os.close(parts_file_handle)
+    os.close(segments_file_handle)
 
-    return parts_file_path
+    return segments_file_path
 
 
 if __name__ == '__main__':
