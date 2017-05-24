@@ -57,7 +57,7 @@ class Srt():
             file.read()
             file.seek(0)
         except UnicodeDecodeError:
-            file = open(filename, encoding='latin1')
+            file = open(filename, encoding='cp1252')
 
         srt = cls()
         srt.subtitles = []
