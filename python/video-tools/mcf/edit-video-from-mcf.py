@@ -195,7 +195,7 @@ def run_command(command):
 def join_segments(segment_filenames, output_filename):
     parts_file_path = create_parts_file(segment_filenames)
 
-    run_command('ffmpeg -v quiet -stats -f concat -safe 0 -i "{}" -c copy "{}"'.format(parts_file_path, output_filename))
+    run_command('ffmpeg -v quiet -stats -f concat -safe 0 -i "{}" -map 0 -c copy "{}"'.format(parts_file_path, output_filename))
 
     os.remove(parts_file_path)
 
