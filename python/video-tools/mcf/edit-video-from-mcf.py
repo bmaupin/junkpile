@@ -201,7 +201,7 @@ def join_segments(segment_filenames, output_filename):
 
 
 def create_parts_file(segment_filenames):
-    parts_file_handle, parts_file_path = tempfile.mkstemp()
+    parts_file_handle, parts_file_path = tempfile.mkstemp(dir=os.getcwd())
 
     with open(parts_file_path, 'w') as parts_file:
         for segment_filename in segment_filenames:
