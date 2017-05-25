@@ -106,6 +106,7 @@ def get_normal_segments_to_play(segments_to_omit):
 
 def edit_video(segments_to_play, input_filename, output_filename, fade, preview):
     segment_filenames = []
+    video_parameters = ''
 
     for i, segment in enumerate(segments_to_play):
         segment_filename = '{}-{}{}'.format(
@@ -114,10 +115,10 @@ def edit_video(segments_to_play, input_filename, output_filename, fade, preview)
             os.path.splitext(output_filename)[1])
         segment_filenames.append(segment_filename)
 
-        if fade == True:
-            fade_in = False
-            fade_out = False
+        fade_in = False
+        fade_out = False
 
+        if fade == True:
             if preview == True:
                 if is_even(i):
                     fade_out = True
@@ -130,9 +131,9 @@ def edit_video(segments_to_play, input_filename, output_filename, fade, preview)
                 if segment.end != mcf.McfTiming('00:00:00.000'):
                     fade_out = True
 
-            cut_segment(segment.start, segment.end, input_filename, segment_filename, fade_in, fade_out)
-        else:
-            cut_segment(segment.start, segment.end, input_filename, segment_filename)
+        video_parameters += get_segment_parameters(segment.start, segment.end, segment_filename, fade_in, fade_out)
+
+    run_command('ffmpeg -v quiet -stats -i "{}" {}'.format(input_filename, video_parameters))
 
     return segment_filenames
 
@@ -141,7 +142,7 @@ def is_even(integer):
     return integer % 2 == 0
 
 
-def cut_segment(start, end, input_filename, segment_filename, fade_in=False, fade_out=False):
+def get_segment_parameters(start, end, segment_filename, fade_in, fade_out):
     if end == mcf.McfTiming('00:00:00.000'):
         cut_duration = ''
     else:
@@ -165,13 +166,11 @@ def cut_segment(start, end, input_filename, segment_filename, fade_in=False, fad
     else:
         audio_parameter = ' -c:a copy '
 
-    run_command(
-        'ffmpeg -v quiet -stats -i "{}" -ss {} {} -map 0 -c:v libx264 {} -c:s copy "{}"'.format(
-            input_filename,
-            start,
-            cut_duration,
-            audio_parameter,
-            segment_filename))
+    return ' -ss {} {} -map 0 -c:v libx264 {} -c:s copy "{}" '.format(
+        start,
+        cut_duration,
+        audio_parameter,
+        segment_filename)
 
 
 def mcf_timing_to_afade_timestamp(mcf_timing):
