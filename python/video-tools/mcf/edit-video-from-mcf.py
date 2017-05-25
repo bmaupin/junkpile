@@ -12,7 +12,8 @@ import tempfile
 import mcf
 
 
-FADE_DURATION_IN_SECONDS = 3
+FADE_IN_DURATION_IN_SECONDS = 1
+FADE_OUT_DURATION_IN_SECONDS = 3
 # Amount of time to add on either end of preview cuts
 PREVIEW_SEGMENT_DURATION_IN_SECONDS = 5
 
@@ -150,17 +151,17 @@ def cut_segment(start, end, input_filename, segment_filename, fade_in=False, fad
         audio_parameter = (' -c:a aac -ac 2 -af "afade=t=in:curve=qua:st={}:d={},'
             'afade=out:curve=cbr:st={}:d={}" -strict -2 '.format(
                 mcf_timing_to_afade_timestamp(start),
-                FADE_DURATION_IN_SECONDS,
-                mcf_timing_to_afade_timestamp(end - mcf.McfTiming(datetime.timedelta(seconds=FADE_DURATION_IN_SECONDS))),
-                FADE_DURATION_IN_SECONDS))
+                FADE_IN_DURATION_IN_SECONDS,
+                mcf_timing_to_afade_timestamp(end - mcf.McfTiming(datetime.timedelta(seconds=FADE_OUT_DURATION_IN_SECONDS))),
+                FADE_OUT_DURATION_IN_SECONDS))
     elif fade_in == True:
         audio_parameter = ' -c:a aac -ac 2 -af "afade=t=in:curve=qua:st={}:d={}" -strict -2 '.format(
             mcf_timing_to_afade_timestamp(start),
-            FADE_DURATION_IN_SECONDS)
+            FADE_IN_DURATION_IN_SECONDS)
     elif fade_out == True:
         audio_parameter = ' -c:a aac -ac 2 -af afade=out:curve=cbr:st={}:d={} -strict -2 '.format(
-            mcf_timing_to_afade_timestamp(end - mcf.McfTiming(datetime.timedelta(seconds=FADE_DURATION_IN_SECONDS))),
-            FADE_DURATION_IN_SECONDS)
+            mcf_timing_to_afade_timestamp(end - mcf.McfTiming(datetime.timedelta(seconds=FADE_OUT_DURATION_IN_SECONDS))),
+            FADE_OUT_DURATION_IN_SECONDS)
     else:
         audio_parameter = ' -c:a copy '
 
@@ -179,17 +180,17 @@ def mcf_timing_to_afade_timestamp(mcf_timing):
 
 def run_command(command):
     print(command)
-    p = subprocess.Popen(
-        command,
-        shell=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        universal_newlines=True)
-    for line in p.stdout:
-        if line.startswith('frame'):
-            line = '\r{}'.format(line.strip())
-        print(line, end='', flush=True)
-    print()
+    # p = subprocess.Popen(
+    #     command,
+    #     shell=True,
+    #     stdout=subprocess.PIPE,
+    #     stderr=subprocess.STDOUT,
+    #     universal_newlines=True)
+    # for line in p.stdout:
+    #     if line.startswith('frame'):
+    #         line = '\r{}'.format(line.strip())
+    #     print(line, end='', flush=True)
+    # print()
 
 
 def join_segments(segment_filenames, output_filename):
