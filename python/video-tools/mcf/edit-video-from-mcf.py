@@ -25,7 +25,7 @@ def main():
 
     segments_to_play = get_segments_to_play(segments_to_omit, args.preview)
 
-    segment_filenames = cut_video(segments_to_play, args.input_filename, args.output_filename, args.fade, args.preview)
+    segment_filenames = edit_video(segments_to_play, args.input_filename, args.output_filename, args.fade, args.preview)
 
     join_segments(segment_filenames, args.output_filename)
 
@@ -41,43 +41,6 @@ def parse_arguments():
 
     args = parser.parse_args()
     return args
-
-
-def cut_video(segments_to_play, input_filename, output_filename, fade, preview):
-    segment_filenames = []
-
-    for i, segment in enumerate(segments_to_play):
-        segment_filename = '{}-{}{}'.format(
-            os.path.splitext(output_filename)[0],
-            i,
-            os.path.splitext(output_filename)[1])
-        segment_filenames.append(segment_filename)
-
-        if fade == True:
-            fade_in = False
-            fade_out = False
-
-            if preview == True:
-                if is_even(i):
-                    fade_out = True
-                else:
-                    fade_in = True
-
-            else:
-                if segment.start != mcf.McfTiming('00:00:00.000'):
-                    fade_in = True
-                if segment.end != mcf.McfTiming('00:00:00.000'):
-                    fade_out = True
-
-            cut_segment(segment.start, segment.end, input_filename, segment_filename, fade_in, fade_out)
-        else:
-            cut_segment(segment.start, segment.end, input_filename, segment_filename)
-
-    return segment_filenames
-
-
-def is_even(integer):
-    return integer % 2 == 0
 
 
 def get_segments_to_play(segments_to_omit, preview):
@@ -141,6 +104,43 @@ def get_normal_segments_to_play(segments_to_omit):
     return segments_to_play
 
 
+def edit_video(segments_to_play, input_filename, output_filename, fade, preview):
+    segment_filenames = []
+
+    for i, segment in enumerate(segments_to_play):
+        segment_filename = '{}-{}{}'.format(
+            os.path.splitext(output_filename)[0],
+            i,
+            os.path.splitext(output_filename)[1])
+        segment_filenames.append(segment_filename)
+
+        if fade == True:
+            fade_in = False
+            fade_out = False
+
+            if preview == True:
+                if is_even(i):
+                    fade_out = True
+                else:
+                    fade_in = True
+
+            else:
+                if segment.start != mcf.McfTiming('00:00:00.000'):
+                    fade_in = True
+                if segment.end != mcf.McfTiming('00:00:00.000'):
+                    fade_out = True
+
+            cut_segment(segment.start, segment.end, input_filename, segment_filename, fade_in, fade_out)
+        else:
+            cut_segment(segment.start, segment.end, input_filename, segment_filename)
+
+    return segment_filenames
+
+
+def is_even(integer):
+    return integer % 2 == 0
+
+
 def cut_segment(start, end, input_filename, segment_filename, fade_in=False, fade_out=False):
     if end == mcf.McfTiming('00:00:00.000'):
         cut_duration = ''
@@ -180,17 +180,17 @@ def mcf_timing_to_afade_timestamp(mcf_timing):
 
 def run_command(command):
     print(command)
-    # p = subprocess.Popen(
-    #     command,
-    #     shell=True,
-    #     stdout=subprocess.PIPE,
-    #     stderr=subprocess.STDOUT,
-    #     universal_newlines=True)
-    # for line in p.stdout:
-    #     if line.startswith('frame'):
-    #         line = '\r{}'.format(line.strip())
-    #     print(line, end='', flush=True)
-    # print()
+    p = subprocess.Popen(
+        command,
+        shell=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        universal_newlines=True)
+    for line in p.stdout:
+        if line.startswith('frame'):
+            line = '\r{}'.format(line.strip())
+        print(line, end='', flush=True)
+    print()
 
 
 def join_segments(segment_filenames, output_filename):
