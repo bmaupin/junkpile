@@ -207,11 +207,16 @@ def create_segments_file(segment_filenames):
 
     with open(segments_file_path, 'w') as segments_file:
         for segment_filename in segment_filenames:
-            segments_file.write("file '{}'\n".format(segment_filename))
+            segments_file.write("file '{}'\n".format(escape_single_quotes(segment_filename)))
 
     os.close(segments_file_handle)
 
     return segments_file_path
+
+
+def escape_single_quotes(string):
+    # https://superuser.com/a/787651/93066
+    return string.replace("'", "\'\\\'\'")
 
 
 if __name__ == '__main__':
