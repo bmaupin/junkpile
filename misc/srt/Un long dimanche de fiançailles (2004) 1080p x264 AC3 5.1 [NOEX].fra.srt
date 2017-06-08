@@ -572,7 +572,7 @@ Bordel de merde!
 
 127
 00:15:44,426 --> 00:15:46,573
-Ii fallait larguer ces types
+Il fallait larguer ces types
 en route,
 
 128
@@ -2613,7 +2613,7 @@ Je voudrais parler à Bastoche.
 
 579
 00:47:58,918 --> 00:48:04,043
-Bastoche? Ii est mort sur le front
+Bastoche? Il est mort sur le front
 de la somme. Vous saviez pas?
 
 580
@@ -4018,7 +4018,7 @@ Vous auriez vu sa tête!
 
 887
 01:17:12,797 --> 01:17:16,206
-Ii différenciait l'arabica
+Il différenciait l'arabica
 d'un remède pour les intestins.
 
 888
@@ -5142,7 +5142,7 @@ Pourquoi pas Poincaré?
 
 1139
 01:37:04,665 --> 01:37:06,159
-Ii a refusé de les gracier.
+Il a refusé de les gracier.
 
 1140
 01:37:07,626 --> 01:37:08,658
@@ -5150,7 +5150,7 @@ Vous savez pas?
 
 1141
 01:37:10,755 --> 01:37:13,751
-Ii les avait graciés.
+Il les avait graciés.
 Tous les cinq!
 
 1142
@@ -5484,7 +5484,7 @@ il faut s'attendre à tout avec lui."</i>
 
 1213
 01:42:30,197 --> 01:42:32,273
-<i>Ii vend son engrais trop cher...</i>
+<i>Il vend son engrais trop cher...</i>
 
 1214
 01:42:32,449 --> 01:42:34,857
@@ -6023,7 +6023,7 @@ plus rapide que la gazelle!
 
 1335
 01:59:08,754 --> 01:59:12,115
-<i>Ii est vivant, bien portant,
+<i>Il est vivant, bien portant,
 mais il a tout oublié.</i>
 
 1336
@@ -6050,7 +6050,7 @@ qui le suivent depuis '17</i>
 
 1341
 01:59:23,578 --> 01:59:27,706
-<i>Ii y a autant d'amnésies
+<i>Il y a autant d'amnésies
 que d'amnésiques.</i>
 
 1342
