@@ -15,6 +15,7 @@ class Mcf():
     @classmethod
     def fromfile(cls, filename):
         with open(filename) as file:
+            segment_text = ''
             for line in file:
                 if line.startswith('NOTE') or line.startswith('WEBVTT') or len(line.strip()) == 0:
                     continue
@@ -28,19 +29,31 @@ class Mcf():
                     mcf = cls(mcf_start, mcf_end)
 
                 elif line[0].isdigit():
+                    if segment_text != '':
+                        mcf.segments.append(
+                            McfSegment(
+                                segment_start_timestamp,
+                                segment_end_timestamp,
+                                segment_text.strip()
+                            )
+                        )
+                        segment_text = ''
+
                     segment_start_timestamp = line.strip().split()[0]
                     segment_end_timestamp = line.strip().split()[2]
 
                 else:
                     assert line.find('=') != -1
+                    segment_text += line
 
-                    mcf.segments.append(
-                        McfSegment(
-                            segment_start_timestamp,
-                            segment_end_timestamp,
-                            line.strip()
-                        )
-                    )
+            # Make sure the last segment gets added
+            mcf.segments.append(
+                McfSegment(
+                    segment_start_timestamp,
+                    segment_end_timestamp,
+                    segment_text.strip()
+                )
+            )
 
         return mcf
 
