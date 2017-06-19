@@ -9,6 +9,10 @@ class EpubTests: XCTestCase {
 
         XCTAssertNotNil(bundle, "bundle is nil")
 
+        // TODO: clean this up once we get test resources working in OS X
+        print("bundle.resourceURL: " + bundle.resourceURL!.absoluteString)
+        print("bundle.bundleURL: " + bundle.bundleURL.absoluteString)
+
         let testEpubFileURL = bundle.url(
             forResource: testEpubFileName.components(separatedBy: ".")[0],
             withExtension: testEpubFileName.components(separatedBy: ".")[1])
