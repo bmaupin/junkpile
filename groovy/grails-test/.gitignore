@@ -1,18 +1,30 @@
-*.iws
-*Db.properties
-*Db.script
-.DS_Store
-.settings
-stacktrace.log
+# Eclipse files
+.classpath
+.project
 
-/*.log
-/*.zip
-/*DB.*
-/.link_to_grails_plugins/
-/cobertura.ser
+# H2 database files
+/*Db.*
+
+# IntelliJ files
+*.iws
 /out/
-/plugin.xml
-/target-eclipse/
-/target/
-/web-app/WEB-INF/classes
+
+# Logs
+stacktrace.log
+/*.log
+
+# Older plugin install locations
 /web-app/plugins
+
+# OS files
+.DS_Store
+
+# Plugin release files
+/*.zip
+/plugin.xml
+
+# Temporary build files
+/target/
+
+# Web application files
+/web-app/WEB-INF/classes
