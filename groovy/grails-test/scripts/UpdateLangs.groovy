@@ -130,6 +130,9 @@ def soSite = Site.findByName(ImportUtil.STACKOVERFLOW_SITE_NAME)
 
 STACKOVERFLOW_ALT_NAMES.each { langName, langAltName ->
     def lang = Lang.findByName(langName)
+    if (lang == null) {
+        return
+    }
 
     def query = LangAltName.where {
         altName == langAltName && lang.id == lang.id && site.id == soSite.id
