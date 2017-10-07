@@ -16,5 +16,3 @@ stacktrace.log
 /target/
 /web-app/WEB-INF/classes
 /web-app/plugins
-
-grails-app/conf/DataSource.groovy
