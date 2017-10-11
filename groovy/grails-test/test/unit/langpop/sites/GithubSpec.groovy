@@ -3,22 +3,32 @@ package langpop.sites
 import spock.lang.Specification
 
 class GithubSpec extends Specification {
-    def gh = new langpop.sites.Github()
+    def github = new langpop.sites.Github()
 
-    void "test getScore for valid date"() {
+    void "Test getScore for valid date"() {
         given:
-        def score = gh.getScore("javascript", Date.parse('yyyy-MM-dd', '2017-10-01'))
+        def score = github.getScore('javascript', Date.parse('yyyy-MM-dd', '2017-01-01'))
+        println score
 
         expect:
         score > 1000000
     }
 
     // TODO: implement this once we've defined behaviour for invalid dates
-    // void "test getScore for invalid date"() {
+    // void "Test getScore for invalid date"() {
     //     given:
-    //     def score = gh.getScore("javascript", Date.parse('yyyy-MM-dd', '2007-10-01'))
+    //     def score = github.getScore('javascript', Date.parse('yyyy-MM-dd', '2007-01-01'))
 
     //     expect:
-    //     score > 1
+    //     score == 0
+    // }
+
+    // TODO: implement this once we've defined behaviour for invalid languages
+    // void "Test getScore for invalid language"() {
+    //     given:
+    //     def score = github.getScore('notalanguage', Date.parse('yyyy-MM-dd', '2007-01-01'))
+
+    //     expect:
+    //     score == 0
     // }
 }

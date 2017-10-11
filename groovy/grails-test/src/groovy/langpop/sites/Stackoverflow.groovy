@@ -5,7 +5,9 @@ import org.apache.log4j.Logger
 
 class Stackoverflow implements CodingSite {
     private static final int API_SLEEP_TIME = 60000
-    private static final String API_URL = 'https://api.stackexchange.com/2.2/search/advanced?todate=%s&site=stackoverflow&tagged=%s&filter=total'
+    // Uses a custom filter that only returns quota_remaining and total
+    // (https://api.stackexchange.com/docs/create-filter#unsafe=false&filter=!GeF-5sUcKK53)&run=true)
+    private static final String API_URL = 'https://api.stackexchange.com/2.2/search?todate=%s&site=stackoverflow&tagged=%s&filter=!GeF-5sUcKK53)'
     // Try this many times on API failures before giving up
     private static final int MAX_API_TRIES = 20
     static final String OLDEST_DATE = '2008-07-31'
@@ -18,12 +20,7 @@ class Stackoverflow implements CodingSite {
         def url = String.format(API_URL, encodeDate(dateCreated), encodeLangName(langName))
         def result = getResult(url)
 
-        // There's no reason the data we're requesting shouldn't fit in one page of results
-        if (result['has_more'] == true) {
-            log.error 'Exceeded number of results per single StackExchange API call'
-        }
-
-        log.debug "StackOverflow API daily quota remaining: ${result['quota_remaining']}"
+        log.debug "StackOverflow API daily quota remaining: ${result.quota_remaining}"
 
         if (result.containsKey('total')) {
             return result.total

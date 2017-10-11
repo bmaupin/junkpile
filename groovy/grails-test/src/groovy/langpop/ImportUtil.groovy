@@ -125,6 +125,7 @@ public class ImportUtil {
         return Lang.list().collect { getStackoverflowLangName(it) }
     }
 
+    // TODO: this should probably be moved to the domain
     // Adds a new count to the database
     static void newCount(Date date, int count, Lang lang, Site site) {
         // Don't waste DB space by adding a count of 0
