@@ -10,6 +10,8 @@ abstract class CodingSite {
 
     abstract Integer getScore(String langName, Date date)
 
+    abstract Map<String, Integer> getScores(ArrayList<String> langNames, Date date)
+
     abstract void setApiKey(String apiKey)
 
     protected boolean isDateValid(Date date) {

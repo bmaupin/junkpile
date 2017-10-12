@@ -32,6 +32,14 @@ class Stackoverflow extends CodingSite {
     }
 
     @Override
+    Map<String, Integer> getScores(ArrayList<String> langNames, Date date) {
+        return langNames.collectEntries { langName ->
+            [(langName): getScore(langName, date)]
+        }
+    }
+
+    // TODO: add functionality to make use of the API key
+    @Override
     void setApiKey(String apiKey) {
         this.apiKey = apiKey
     }

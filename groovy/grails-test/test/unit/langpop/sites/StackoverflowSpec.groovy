@@ -17,12 +17,17 @@ class StackoverflowSpec extends Specification {
 
         then:"Null is returned"
             score == null
+    }
 
-        // TODO: implement this once we've defined behaviour for invalid languages
-        // when:"An invalid language is provided"
-        //     score = stackoverflow.getScore('notalanguage', Date.parse('yyyy-MM-dd', '2017-01-01'))
+    void "Test getScores"() {
+        given:
+            def scores = stackoverflow.getScores(['javascript', 'java', 'python'],
+                Date.parse('yyyy-MM-dd', '2017-01-01'))
 
-        // then:"Null is returned"
-        //     score == null
+        expect:
+            scores.size() == 3
+            scores.javascript > 1000000
+            scores.java > 1000000
+            scores.python > 500000
     }
 }
