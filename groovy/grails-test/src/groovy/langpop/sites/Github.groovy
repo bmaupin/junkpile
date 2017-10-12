@@ -1,16 +1,10 @@
 package langpop.sites
 
 class Github extends CodingSite {
-    // TODO: handle API limitations in instance
-    // Maximum number of requests that can be made within the API_TIME_LIMIT
-    private static final int API_REQ_LIMIT = 10
-    // Time limit in milliseconds
-    private static final int API_TIME_LIMIT = 60000
-    private static final String API_URL = 'https://api.github.com/search/repositories?q=language:%s+created:<=%s'
-    // Try this many times on API failures before giving up
-    private static final int MAX_API_TRIES = 20
     // This is the date of the oldest data in github
     private static final String OLDEST_DATE = '2007-10-29'
+
+    private String apiKey
 
     @Override
     Date getOldestDate() {
@@ -23,52 +17,43 @@ class Github extends CodingSite {
             return null
         }
 
-        def searchURL = String.format(API_URL, encodeLangName(langName), encodeDate(date))
-
-        // TODO: have the api token as part of the instance?
-        def githubAuthToken = System.getenv('GITHUB_AUTH_TOKEN')
-        if (githubAuthToken != null) {
-            searchURL += '&access_token=' + githubAuthToken
+        // API key can't be null for the GraphQL API (https://platform.github.community/t/anonymous-access/2093)
+        if (apiKey == null) {
+            throw new Exception('apiKey cannot be null')
         }
 
-        int apiCount = 0
-        URLConnection conn
-        int score
+        def result = getResult(langName, date)
 
-        while (true) {
-            try {
-                conn = new URL(searchURL).openConnection()
-                score = new groovy.json.JsonSlurper().parseText(conn.getURL().getText())['total_count']
-                break
+        return result.data.search.repositoryCount
+    }
 
-            } catch (java.io.IOException e) {
-                try {
-                    if (conn.getResponseCode() == 403) {
-                        log.warn 'Exceeded Github API request limit'
-                        log.debug "Max requests per minute: ${conn.getHeaderField('X-RateLimit-Limit')}"
-                        log.debug "Requests remaining: ${conn.getHeaderField('X-RateLimit-Remaining')}"
-                        log.debug "Rate reset time: ${new Date(Long.parseLong(conn.getHeaderField('X-RateLimit-Reset')) * 1000)}"
+    @Override
+    void setApiKey(String apiKey) {
+        this.apiKey = apiKey
+    }
 
-                        sleep(API_TIME_LIMIT)
+    private Object getResult(String langName, Date date) {
+        final String API_QUERY = '{"query": "{ search(query: \\"language:%s created:<%s\\", type: REPOSITORY) \
+            { repositoryCount }}"}'
+        final String API_URL = 'https://api.github.com/graphql'
 
-                    // TODO: this never actually occurs for the way we're presently using the API
-                    } else if (conn.getResponseCode() == 422) {
-                        log.warn "Github API request empty for lang: ${langName} (The language may have been renamed or removed)"
+        // Derived from https://stackoverflow.com/a/42664926/399105
+        def conn = new URL(API_URL).openConnection()
+        def postData = String.format(API_QUERY, encodeLangName(langName), encodeDate(date))
 
-                        return 0
-                    }
+        conn.setRequestProperty ('Authorization', "bearer ${apiKey}");
+        conn.setRequestMethod('POST')
+        conn.setDoOutput(true)
+        conn.getOutputStream().write(postData.getBytes('UTF-8'))
 
-                } catch (java.net.ConnectException | java.net.UnknownHostException e2) {
-                    if (++apiCount == MAX_API_TRIES) {
-                        throw e2
-                    }
-                    log.warn e2
-                    sleep(API_TIME_LIMIT)
-                }
-            }
+        def responseCode = conn.getResponseCode()
+        if (responseCode.equals(200)) {
+            def jsonResponse = conn.getInputStream().getText()
+            return new groovy.json.JsonSlurper().parseText(jsonResponse)
+
+        } else {
+            log.error "Github API response code: ${responseCode}, language: ${langName}, date: ${date}"
         }
-
-        return score
     }
 
     private static String encodeDate(Date date) {

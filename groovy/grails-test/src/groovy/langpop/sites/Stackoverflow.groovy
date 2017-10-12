@@ -1,6 +1,7 @@
 package langpop.sites
 
 class Stackoverflow extends CodingSite {
+    // TODO: handle API limitations in instance
     private static final int API_SLEEP_TIME = 60000
     // Uses a custom filter that only returns quota_remaining and total
     // (https://api.stackexchange.com/docs/create-filter#unsafe=false&filter=!GeF-5sUcKK53)&run=true)
@@ -8,6 +9,8 @@ class Stackoverflow extends CodingSite {
     // Try this many times on API failures before giving up
     private static final int MAX_API_TRIES = 20
     private static final String OLDEST_DATE = '2008-07-31'
+
+    private String apiKey
 
     @Override
     Date getOldestDate() {
@@ -26,6 +29,11 @@ class Stackoverflow extends CodingSite {
         log.debug "StackOverflow API daily quota remaining: ${result.quota_remaining}"
 
         return result.total
+    }
+
+    @Override
+    void setApiKey(String apiKey) {
+        this.apiKey = apiKey
     }
 
     private static String encodeDate(Date date) {
