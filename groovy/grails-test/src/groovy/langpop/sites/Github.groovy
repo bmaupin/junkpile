@@ -1,9 +1,6 @@
 package langpop.sites
 
-import grails.util.Metadata
-import org.apache.log4j.Logger
-
-class Github implements CodingSite {
+class Github extends CodingSite {
     // TODO: handle API limitations in instance
     // Maximum number of requests that can be made within the API_TIME_LIMIT
     private static final int API_REQ_LIMIT = 10
@@ -13,14 +10,20 @@ class Github implements CodingSite {
     // Try this many times on API failures before giving up
     private static final int MAX_API_TRIES = 20
     // This is the date of the oldest data in github
-    static final String OLDEST_DATE = '2007-10-29'
+    private static final String OLDEST_DATE = '2007-10-29'
 
-    private static Logger log = Logger.getLogger(Metadata.current.getApplicationName())
+    @Override
+    Date getOldestDate() {
+        return Date.parse('yyyy-MM-dd', OLDEST_DATE)
+    }
 
-    Integer getScore(String langName, Date dateCreated) {
-        // TODO: handle if the date is < OLDEST_DATE. throw an error? return null? return 0?
+    @Override
+    Integer getScore(String langName, Date date) {
+        if (!isDateValid(date)) {
+            return null
+        }
 
-        def searchURL = String.format(API_URL, encodeLangName(langName), encodeDate(dateCreated))
+        def searchURL = String.format(API_URL, encodeLangName(langName), encodeDate(date))
 
         // TODO: have the api token as part of the instance?
         def githubAuthToken = System.getenv('GITHUB_AUTH_TOKEN')

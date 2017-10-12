@@ -5,29 +5,24 @@ import spock.lang.Specification
 class StackoverflowSpec extends Specification {
     def stackoverflow = new langpop.sites.Stackoverflow()
 
-    void "Test getScore for valid date"() {
-        given:
-        def score = stackoverflow.getScore('javascript', Date.parse('yyyy-MM-dd', '2017-01-01'))
+    void "Test getScore"() {
+        when:"A valid date is provided"
+            def score = stackoverflow.getScore('javascript', Date.parse('yyyy-MM-dd', '2017-01-01'))
 
-        expect:
-        score > 1000000
+        then:"A valid score is returned"
+            score > 1000000
+
+        when:"An invalid date is provided"
+            score = stackoverflow.getScore('javascript', Date.parse('yyyy-MM-dd', '2007-01-01'))
+
+        then:"Null is returned"
+            score == null
+
+        // TODO: implement this once we've defined behaviour for invalid languages
+        // when:"An invalid language is provided"
+        //     score = stackoverflow.getScore('notalanguage', Date.parse('yyyy-MM-dd', '2017-01-01'))
+
+        // then:"Null is returned"
+        //     score == null
     }
-
-    // TODO: implement this once we've defined behaviour for invalid dates
-    // void "Test getScore for invalid date"() {
-    //     given:
-    //     def score = stackoverflow.getScore('javascript', Date.parse('yyyy-MM-dd', '2007-01-01'))
-
-    //     expect:
-    //     score == 0
-    // }
-
-    // TODO: implement this once we've defined behaviour for invalid languages
-    // void "Test getScore for invalid language"() {
-    //     given:
-    //     def score = github.getScore('notalanguage', Date.parse('yyyy-MM-dd', '2007-01-01'))
-
-    //     expect:
-    //     score == 0
-    // }
 }
