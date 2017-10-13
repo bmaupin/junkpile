@@ -26,6 +26,7 @@ class CountService {
         'QML',
         'SQL',
         'TeX',
+        'Vim script',
         'VimL',
         'XML',
         'XSLT',

@@ -50,6 +50,7 @@ final Map STACKOVERFLOW_ALT_NAMES = [
     'SQLPL': 'db2',
     'Standard ML': 'sml',
     'SystemVerilog': 'system-verilog',
+    'Vim script': 'vim',
     'VimL': 'vim',
     'Visual Basic': 'vb.net',
     'Web Ontology Language': 'owl',
