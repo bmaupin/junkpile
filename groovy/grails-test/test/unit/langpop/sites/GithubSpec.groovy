@@ -25,4 +25,16 @@ class GithubSpec extends Specification {
         then:"Null is returned"
             score == null
     }
+
+    void "Test getScores"() {
+        given:
+            def scores = github.getScores(['javascript', 'java', 'python'],
+                Date.parse('yyyy-MM-dd', '2017-01-01'))
+
+        expect:
+            scores.size() == 3
+            scores.javascript > 2000000
+            scores.java > 2000000
+            scores.python > 1000000
+    }
 }
