@@ -8,6 +8,7 @@ class Stackoverflow extends CodingSite {
     private static final String API_URL = 'https://api.stackexchange.com/2.2/search?todate=%s&site=stackoverflow&tagged=%s&filter=!GeF-5sUcKK53)'
     // Try this many times on API failures before giving up
     private static final int MAX_API_TRIES = 20
+    // This is the date of the oldest data in stackoverflow
     private static final String OLDEST_DATE = '2008-07-31'
 
     private String apiKey

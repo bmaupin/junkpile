@@ -13,18 +13,7 @@ class Github extends CodingSite {
 
     @Override
     Integer getScore(String langName, Date date) {
-        if (!isDateValid(date)) {
-            return null
-        }
-
-        // API key can't be null for the GraphQL API (https://platform.github.community/t/anonymous-access/2093)
-        if (apiKey == null) {
-            throw new Exception('apiKey cannot be null')
-        }
-
-        def result = getResult(langName, date)
-
-        return result.data.search.repositoryCount
+        return getScores([langName], date)[langName]
     }
 
     @Override
@@ -35,6 +24,7 @@ class Github extends CodingSite {
             }
         }
 
+        // API key can't be null for the GraphQL API (https://platform.github.community/t/anonymous-access/2093)
         if (apiKey == null) {
             throw new Exception('apiKey cannot be null')
         }
@@ -51,21 +41,9 @@ class Github extends CodingSite {
         this.apiKey = apiKey
     }
 
-    private Object getResult(String langName, Date date) {
-        def postData = encodePostData(langName, date)
-        return callApi(postData)
-    }
-
     private Object getResult(ArrayList<String> langNames, Date date) {
         def postData = encodePostData(langNames, date)
         return callApi(postData)
-    }
-
-    private String encodePostData(String langName, Date date) {
-        final String API_QUERY = '{"query": "{ search(query: \\"language:%s created:<%s\\", type: REPOSITORY) \
-            { repositoryCount }}"}'
-
-        return String.format(API_QUERY, encodeLangName(langName), encodeDate(date))
     }
 
     private String encodePostData(ArrayList<String> langNames, Date date) {
