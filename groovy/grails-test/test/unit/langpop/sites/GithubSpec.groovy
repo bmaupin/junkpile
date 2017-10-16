@@ -27,14 +27,24 @@ class GithubSpec extends Specification {
     }
 
     void "Test getScores"() {
-        given:
+        when:"A valid date is provided"
             def scores = github.getScores(['javascript', 'java', 'python'],
                 Date.parse('yyyy-MM-dd', '2017-01-01'))
 
-        expect:
+        then:"Valid scores are returned"
             scores.size() == 3
-            scores.javascript > 2000000
-            scores.java > 2000000
-            scores.python > 1000000
+            scores.javascript > 1000000
+            scores.java > 1000000
+            scores.python > 500000
+
+        when:"An invalid date is provided"
+            scores = github.getScores(['javascript', 'java', 'python'],
+                Date.parse('yyyy-MM-dd', '2007-01-01'))
+
+        then:"Null scores are returned"
+            scores.size() == 3
+            scores.javascript == null
+            scores.java == null
+            scores.python == null
     }
 }

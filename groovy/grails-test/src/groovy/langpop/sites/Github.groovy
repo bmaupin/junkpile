@@ -30,7 +30,9 @@ class Github extends CodingSite {
     @Override
     Map<String, Integer> getScores(ArrayList<String> langNames, Date date) {
         if (!isDateValid(date)) {
-            return null
+            return langNames.collectEntries { langName ->
+                [(langName): null]
+            }
         }
 
         if (apiKey == null) {
