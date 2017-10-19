@@ -13,3 +13,7 @@ Merge KML files based on this post: http://www.gps-data-team.com/pda-gps-navigat
 Ex:
 
     python3 merge-kml-files.py 11-01-2014\ 15-22.kml 11-01-2014\ 18-56.kml 12-01-2014\ 8-54.kml 12-01-2014\ 9-21.kml > mytrip.kml
+    
+To combine all kml files in the current directory (probably won't work if they contain spaces):
+
+    python3 merge-kml-files.py $(find *.kml -printf '%f ') > output.kml
