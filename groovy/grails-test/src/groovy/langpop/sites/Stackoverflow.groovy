@@ -1,6 +1,8 @@
 package langpop.sites
 
 class Stackoverflow extends CodingSite {
+    static final String SITE_NAME = 'stackoverflow'
+
     // TODO: handle API limitations in instance
     private static final int API_SLEEP_TIME = 60000
     // Uses a custom filter that only returns quota_remaining and total
@@ -27,7 +29,7 @@ class Stackoverflow extends CodingSite {
         def url = String.format(API_URL, encodeDate(date), encodeLangName(langName))
         def result = getResult(url)
 
-        log.debug "StackOverflow API daily quota remaining: ${result.quota_remaining}"
+        log.debug("StackOverflow API daily quota remaining: ${result.quota_remaining}")
 
         return result.total
     }
@@ -68,7 +70,7 @@ class Stackoverflow extends CodingSite {
                 if (++apiCount == MAX_API_TRIES) {
                     throw e
                 }
-                log.warn e
+                log.warn(e)
                 sleep(API_SLEEP_TIME)
             }
         }

@@ -7,10 +7,6 @@ import org.apache.log4j.Logger
 
 @Field final String STACKOVERFLOW_BASE_URL = 'https://api.stackexchange.com/2.2/tags/%s/info?site=stackoverflow'
 final int STACKOVERFLOW_BATCH_API_LIMIT = 20
-final String[] SITES = [
-    ImportUtil.GITHUB_SITE_NAME,
-    ImportUtil.STACKOVERFLOW_SITE_NAME,
-]
 
 final Map STACKOVERFLOW_ALT_NAMES = [
     'Ant Build System': 'ant',
@@ -59,7 +55,7 @@ final Map STACKOVERFLOW_ALT_NAMES = [
 
 @Field Logger log = Logger.getLogger(Metadata.current.getApplicationName())
 
-
+// TODO: Use langpop.sites.Stackoverflow class instead
 Map<Lang, Integer> getStackoverflowTagCount(ArrayList<Lang> langs) {
     def conn =  String.format(STACKOVERFLOW_BASE_URL, java.net.URLEncoder.encode((langs.collect{ return ImportUtil.getStackoverflowLangName(it) }.join(';')), 'UTF-8')).toURL().openConnection()
     BufferedReader reader
@@ -110,14 +106,8 @@ Map<Lang, Integer> getStackoverflowTagCount(ArrayList<Lang> langs) {
     return soTagCount
 }
 
-// Populate the sites table
-SITES.each {
-    if (!Site.findByName(it)) {
-        new Site(name: it).save()
-    }
-}
 
-
+// TODO: Move this to BootStrap.groovy
 // Populate the lang table
 ImportUtil.getGithubLangNames().each {
     if (!Lang.findByName(it)) {
@@ -126,6 +116,7 @@ ImportUtil.getGithubLangNames().each {
 }
 
 
+// TODO: Move this to BootStrap.groovy
 // Populate the LangAltName table
 def soSite = Site.findByName(ImportUtil.STACKOVERFLOW_SITE_NAME)
 

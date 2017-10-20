@@ -1,6 +1,8 @@
 package langpop.sites
 
 class Github extends CodingSite {
+    static final String SITE_NAME = 'github'
+
     // This is the date of the oldest data in github
     private static final String OLDEST_DATE = '2007-10-29'
 
@@ -83,7 +85,7 @@ class Github extends CodingSite {
             return new groovy.json.JsonSlurper().parseText(jsonResponse)
 
         } else {
-            log.error "Github API response code: ${responseCode}, language: ${langName}, date: ${date}"
+            log.error("Github API response code: ${responseCode}, language: ${langName}, date: ${date}")
         }
     }
 }
