@@ -9,4 +9,9 @@ class Score {
 
     static constraints = {
     }
+
+    public void setDate(Date date) {
+        // Remove the time component since we only want the date
+        this.date = date.clearTime()
+    }
 }
