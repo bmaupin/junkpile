@@ -1,10 +1,9 @@
 package langpop.sites
 
 class Github extends CodingSite {
-    static final String SITE_NAME = 'github'
-
     // This is the date of the oldest data in github
-    private static final String OLDEST_DATE = '2007-10-29'
+    static final String OLDEST_DATE = '2007-10-29'
+    static final String SITE_NAME = 'github'
 
     private String apiKey
 
@@ -20,12 +19,6 @@ class Github extends CodingSite {
 
     @Override
     Map<String, Integer> getScores(ArrayList<String> langNames, Date date) {
-        if (!isDateValid(date)) {
-            return langNames.collectEntries { langName ->
-                [(langName): null]
-            }
-        }
-
         // API key can't be null for the GraphQL API (https://platform.github.community/t/anonymous-access/2093)
         if (apiKey == null) {
             throw new Exception('apiKey cannot be null')

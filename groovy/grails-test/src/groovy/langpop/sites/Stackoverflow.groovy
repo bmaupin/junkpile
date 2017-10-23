@@ -1,6 +1,8 @@
 package langpop.sites
 
 class Stackoverflow extends CodingSite {
+    // This is the date of the oldest data in stackoverflow
+    static final String OLDEST_DATE = '2008-07-31'
     static final String SITE_NAME = 'stackoverflow'
 
     // TODO: handle API limitations in instance
@@ -10,8 +12,6 @@ class Stackoverflow extends CodingSite {
     private static final String API_URL = 'https://api.stackexchange.com/2.2/search?todate=%s&site=stackoverflow&tagged=%s&filter=!GeF-5sUcKK53)'
     // Try this many times on API failures before giving up
     private static final int MAX_API_TRIES = 20
-    // This is the date of the oldest data in stackoverflow
-    private static final String OLDEST_DATE = '2008-07-31'
 
     private String apiKey
 
@@ -22,10 +22,6 @@ class Stackoverflow extends CodingSite {
 
     @Override
     Integer getScore(String langName, Date date) {
-        if (!isDateValid(date)) {
-            return null
-        }
-
         def url = String.format(API_URL, encodeDate(date), encodeLangName(langName))
         def result = getResult(url)
 
