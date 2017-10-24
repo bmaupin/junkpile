@@ -5,11 +5,14 @@ class Stackoverflow extends CodingSite {
     static final String OLDEST_DATE = '2008-07-31'
     static final String SITE_NAME = 'stackoverflow'
 
-    // TODO: handle API limitations in instance
+    /* TODO: handle API limitations in instance (https://stackapps.com/a/3057/41977)
+     *  - Don't make more than 30 requests/second
+     *  - Handle backoff field
+     */
     private static final int API_SLEEP_TIME = 60000
-    // Uses a custom filter that only returns quota_remaining and total
-    // (https://api.stackexchange.com/docs/create-filter#unsafe=false&filter=!GeF-5sUcKK53)&run=true)
-    private static final String API_URL = 'https://api.stackexchange.com/2.2/search?todate=%s&site=stackoverflow&tagged=%s&filter=!GeF-5sUcKK53)'
+    // Uses a custom filter that only returns backoff, quota_remaining, and total
+    // (https://api.stackexchange.com/docs/create-filter#unsafe=false&filter=!.UE8F0bVg4M-_Ii4&run=true)
+    private static final String API_URL = 'https://api.stackexchange.com/2.2/search?todate=%s&site=stackoverflow&tagged=%s&filter=!.UE8F0bVg4M-_Ii4'
     // Try this many times on API failures before giving up
     private static final int MAX_API_TRIES = 20
 
