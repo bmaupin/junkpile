@@ -40,7 +40,6 @@ class Stackoverflow extends CodingSite {
         }
     }
 
-    // TODO: add functionality to make use of the API key
     @Override
     void setApiKey(String apiKey) {
         this.apiKey = apiKey
@@ -56,7 +55,8 @@ class Stackoverflow extends CodingSite {
         return java.net.URLEncoder.encode(langName.toLowerCase().replaceAll(' ', '-'))
     }
 
-    private static Object getResult(String url) {
+    private Object getResult(String url) {
+        url = addApiKey(url)
         def conn = url.toURL().openConnection()
 
         BufferedReader reader
@@ -81,5 +81,14 @@ class Stackoverflow extends CodingSite {
         }
 
         return new groovy.json.JsonSlurper().parseText(sb.toString())
+    }
+
+    private String addApiKey(String url) {
+        final String KEY_PARAMETER = '&key='
+        if (apiKey != null) {
+            url = "${url}${KEY_PARAMETER}${apiKey}"
+        }
+
+        return url
     }
 }
