@@ -18,7 +18,10 @@ hibernate {
 environments {
     development {
         dataSource {
+            // Use update instead of create-drop to avoid excessive API requests to repopulate the data
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+            // https://spring.io/blog/2010/07/28/gorm-gotchas-part-3/
+            logSql = true
             url = "jdbc:h2:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
         }
     }

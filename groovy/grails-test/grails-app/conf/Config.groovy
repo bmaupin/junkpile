@@ -88,6 +88,8 @@ grails.hibernate.osiv.readonly = false
 environments {
     development {
         grails.logging.jul.usebridge = true
+        // Recommended as per https://www.infoq.com/articles/grails-best-practices
+        grails.gorm.failOnError = true
     }
     production {
         grails.logging.jul.usebridge = false
