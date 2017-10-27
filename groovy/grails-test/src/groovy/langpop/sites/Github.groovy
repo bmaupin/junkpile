@@ -7,6 +7,19 @@ class Github extends CodingSite {
 
     private String apiKey
 
+    static List<String> getLangNames() {
+        final String GITHUB_LANGUAGES_URL = 'https://github.com/search/advanced'
+
+        // Use a TagSoup parser because of malformed XML
+        def parser = new XmlSlurper(new org.ccil.cowan.tagsoup.Parser())
+        def doc = parser.parse(GITHUB_LANGUAGES_URL)
+        // Get the select element with id search_language
+        def select = doc.depthFirst().find { it.name() == 'select' && it.@id == 'search_language' }
+
+        // Return the text of each option sub-element in a list
+        return select.optgroup.option.collect { it.text() }
+    }
+
     @Override
     Date getOldestDate() {
         return Date.parse('yyyy-MM-dd', OLDEST_DATE)

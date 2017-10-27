@@ -40,19 +40,6 @@ public class ImportUtil {
         }
     }
 
-    static List<String> getGithubLangNames() {
-        def githubLanguagesUrl = "https://github.com/search/advanced"
-
-        // Use a TagSoup parser because of malformed XML
-        def parser = new XmlSlurper(new org.ccil.cowan.tagsoup.Parser())
-        def doc = parser.parse(githubLanguagesUrl)
-        // Get the select element with id search_language
-        def select = doc.depthFirst().find { it.name() == 'select' && it.@id == 'search_language' }
-
-        // Return the text of each option sub-element in a list
-        return select.optgroup.option.collect { it.text() }
-    }
-
     static Integer getGithubRepoCount(String langName) {
         return getGithubRepoCount(langName, null)
     }

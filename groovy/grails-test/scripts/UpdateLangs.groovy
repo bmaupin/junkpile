@@ -108,15 +108,6 @@ Map<Lang, Integer> getStackoverflowTagCount(ArrayList<Lang> langs) {
 
 
 // TODO: Move this to BootStrap.groovy
-// Populate the lang table
-ImportUtil.getGithubLangNames().each {
-    if (!Lang.findByName(it)) {
-        new Lang(name: it).save()
-    }
-}
-
-
-// TODO: Move this to BootStrap.groovy
 // Populate the LangAltName table
 def soSite = Site.findByName(ImportUtil.STACKOVERFLOW_SITE_NAME)
 
