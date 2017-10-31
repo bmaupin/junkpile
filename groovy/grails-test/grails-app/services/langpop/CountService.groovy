@@ -6,30 +6,128 @@ class CountService {
     static final langId = 'langId'
     static final sumCount = 'sumCount'
 
-    // My arbitrary list of non-languages
+    // TODO: put this into a data file?
+    /* My arbitrary list of non-languages
+     * - Markup/data formats (HTML, JSON, XML, YAML, etc)
+     * - Languages for build tools (Ant, CMake, etc)
+     * - Languages that aren't general purpose (Bluespec, ChucK, Clarion, etc)
+     * - Metalanguages (ABNF, EBNF, etc)
+     * - File types (Adobe Font Metrics, C-ObjDump, etc)
+     * - Templating formats (Closure Templates, EJS, Java Server Pages, etc)
+     */
     def nonLangs = [
+        'ABNF',
+        'Adobe Font Metrics',
+        'Alloy',
+        'Alpine Abuild',
+        'Ant Build System',
+        'ANTLR',
+        'ApacheConf',
+        'API Blueprint',
         'AppleScript',
-        'ASP',
+        'Apollo Guidance Computer',
         'Arduino',
+        'AsciiDoc',
+        'ASN.1',
+        'ASP',
+        'Augeas',
+        'AutoHotkey',
+        'AutoIt',
         'Batchfile',
+        'Bison',
+        'BitBake',
+        'Blade',
+        'Bluespec',
+        'Brightscript',
+        'Bro',
+        'C-ObjDump',
+        'C2hs Haskell',
+        'Cap\'n Proto',
+        'CartoCSS',
+        'ChucK',
+        'Cirru',
+        'Clarion',
+        'Click',
+        'CLIPS',
+        'Closure Templates',
         'CMake',
+        'ColdFusion CFC',
+        'COLLADA',
+        'Coq',
+        'Cpp-ObjDump',
+        'Creole',
+        'CSON',
+        'Csound',
+        'Csound Document',
+        'Csound Score',
         'CSS',
+        'CSV',
         'Cuda',
+        'Cycript',
+        'Cython',
+        'D-ObjDump',
+        'Darcs Patch',
+        'DataWeave',
+        'desktop',
+        'Diff',
+        'DIGITAL Command Language',
+        'DM',
+        'DNS Zone',
+        'Dockerfile',
+        'Dogescript',
+        'DTrace',
+        'Eagle',
+        'Easybuild',
+        'EBNF',
+        'Ecere Projects',
+        // 'ECL', // ??
+        'ECLiPSe', // http://eclipseclp.org/
+        'edn',
+        'EJS',
+        'Emacs Lisp',
+        'Filebench WML',
+        'Filterscript', // https://en.wikipedia.org/wiki/RenderScript, .fs
+        'fish', // https://esolangs.org/wiki/Fish
+        'FLUX', // Reshade .fx file?
+        'Formatted', // https://github.com/github/linguist/tree/master/samples/Formatted
+        'FreeMarker',
+        'G-code',
+        'Game Maker Language',
+        'GAMS', // https://en.wikipedia.org/wiki/General_Algebraic_Modeling_System
+        'GAP', // https://en.wikipedia.org/wiki/GAP_(computer_algebra_system)
+        'GCC Machine Description',
+        'GDB', // https://en.wikipedia.org/wiki/GNU_Debugger
+        'GDScript', // https://en.wikipedia.org/wiki/Godot_(game_engine)
+        'Genshi', // https://en.wikipedia.org/wiki/Genshi_(templating_language)
+        'Gentoo Ebuild',
+        'Gentoo Eclass',
+        'Gerber Image', // https://en.wikipedia.org/wiki/Gerber_format
+        'Gettext Catalog',
+        'Gherkin', // https://en.wikipedia.org/wiki/Cucumber_(software)
+        'GLSL', // https://en.wikipedia.org/wiki/OpenGL_Shading_Language
+        'Glyph', // Pointwise's scripting language, .glf
+        'GN', // Generate Ninja, https://chromium.googlesource.com/chromium/src/tools/gn/+/HEAD/docs/language.md, .gn
+        'Gnuplot',
         'HTML',
         'HTTP',
+        'Java Server Pages',
         'JSON',
         'Makefile',
+        'Markdown',
         'Max',
         'Nginx',
+        'ObjDump',
         'Processing',
         'Puppet',
         'QML',
+        'RenderScript',
         'SQL',
         'TeX',
         'Vim script',
         'VimL',
         'XML',
         'XSLT',
+        'YAML',
     ]
 
     Map<Lang, Integer> getTopLangCountsOld(int numLangs, Date queryDate) {
