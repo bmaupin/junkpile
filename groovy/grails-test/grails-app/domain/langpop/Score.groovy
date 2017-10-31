@@ -8,9 +8,11 @@ class Score {
                         site: Site]
 
     static constraints = {
+        // Only allow one score per date, lang, site
+        date(unique: ['lang', 'site'])
     }
 
-    public void setDate(Date date) {
+    void setDate(Date date) {
         // Remove the time component since we only want the date
         this.date = date.clearTime()
     }
