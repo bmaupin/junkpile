@@ -117,5 +117,10 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 
-    debug 'langpop'
+    environments {
+        development {
+            // The default log level is error
+            debug  'langpop'
+        }
+    }
 }
