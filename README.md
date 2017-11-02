@@ -1,4 +1,6 @@
-# junkpile
-Where everything else goes
+[![forthebadge](http://forthebadge.com/images/badges/uses-badges.svg)](http://forthebadge.com)
+[![forthebadge](http://forthebadge.com/images/badges/compatibility-ie-6.svg)](http://forthebadge.com)
+[![forthebadge](http://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)](http://forthebadge.com)
+---
 
-:warning: **Warning**: some of this code is quite old and most of it is very ugly.
+[Everyone should have a junk repo.](https://github.com/voltagex/junkcode)
