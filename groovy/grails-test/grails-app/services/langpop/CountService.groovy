@@ -10,7 +10,7 @@ class CountService {
     /* My arbitrary list of non-languages
      * - Markup/data formats (HTML, JSON, XML, YAML, etc)
      * - Languages for build tools (Ant, CMake, etc)
-     * - Languages that aren't general purpose (Bluespec, ChucK, Clarion, etc)
+     * - Special-purpose languages/DSLs (Bluespec, ChucK, Clarion, Matlab, SAS, etc)
      * - Metalanguages (ABNF, EBNF, etc)
      * - File types (Adobe Font Metrics, C-ObjDump, etc)
      * - Templating formats (Closure Templates, EJS, Java Server Pages, etc)
@@ -243,12 +243,75 @@ class CountService {
         'Pure Data', // https://en.wikipedia.org/wiki/Pure_Data
         'Python console',
         'Python traceback',
+        'QMake',
         'QML',
+        'Ragel',
+        'RAML',
+        'Rascal', // RascalMPL
+        'Raw token data',
+        'RDoc', // https://en.wikipedia.org/wiki/RDoc
+        'Redcode', // https://esolangs.org/wiki/Redcode
+        'Regular Expression',
+        'Ren\'Py',
         'RenderScript',
+        'reStructuredText',
+        'RHTML',
+        'RMarkdown',
+        'RobotFramework',
+        'Roff',
+        'RPM Spec',
+        'RUNOFF',
+        'Sage', // https://en.wikipedia.org/wiki/SageMath
+        'SAS',
+        'Sass',
+        'Scaml', // Scala Markup Language
+        'Scilab',
+        'SCSS',
+        'ShaderLab', // Shading Language used in Unity
+        'ShellSession',
+        'Slim', // Ruby templating language (http://slim-lang.com/)
+        'Smali', // Disassembled Dalvik bytecode
+        'Smarty', // PHP templating language (https://www.smarty.net)
+        'SMT', // SMT-LIB (http://smtlib.cs.uiowa.edu/)
+        'SourcePawn', // https://wiki.alliedmods.net/Introduction_to_sourcepawn
+        'SPARQL',
+        'Spline Font Database', // https://en.wikipedia.org/wiki/FontForge
+        'SQF', // Used for ArmA video games (https://community.bistudio.com/wiki/SQF_syntax)
         'SQL',
+        'SQLPL',
+        'SRecode Template', // http://cedet.sourceforge.net/srecode.shtml
+        'Stan', // https://en.wikipedia.org/wiki/Stan_(software)
+        'Stata', // https://en.wikipedia.org/wiki/Stata
+        'STON', // Smalltalk Object Notation (https://github.com/svenvc/ston)
+        'Stylus',
+        'Sublime Text Config',
+        'SubRip Text',
+        'SuperCollider', // https://en.wikipedia.org/wiki/SuperCollider
+        'SVG',
+        'SystemVerilog',
+        'Tcsh',
         'TeX',
+        'Text', // Plain text
+        'Textile', // https://en.wikipedia.org/wiki/Textile_(markup_language)
+        'Thrift', // https://en.wikipedia.org/wiki/Apache_Thrift
+        'TI Program', // https://en.wikipedia.org/wiki/TI-BASIC ??
+        'TLA', // https://en.wikipedia.org/wiki/TLA%2B
+        'TOML', // https://en.wikipedia.org/wiki/TOML
+        'Turtle', // https://en.wikipedia.org/wiki/Turtle_(syntax)
+        'Twig', // PHP template language (https://en.wikipedia.org/wiki/Twig_(template_engine))
+        'TXL', // https://en.wikipedia.org/wiki/TXL_(programming_language)
+        'Type Language', // https://core.telegram.org/mtproto/TL
+        'Unified Parallel C',
+        'Unity3D Asset',
+        'Unix Assembly',
+        'Uno', // https://www.fusetools.com/docs/uno/uno-lang
+        'UnrealScript',
+        'VCL', // Varnish Configuration Language (https://varnish-cache.org/docs/trunk/users-guide/vcl.html)
+        'Verilog',
+        'VHDL',
         'Vim script',
         'VimL',
+        'Vue', // Vue template file (https://en.wikipedia.org/wiki/Vue.js)
         'XML',
         'XSLT',
         'YAML',
