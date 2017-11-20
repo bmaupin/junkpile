@@ -179,7 +179,7 @@ class CountService {
         'Mask', // https://github.com/atmajs/MaskJS
         'Maven POM',
         'Max', // https://en.wikipedia.org/wiki/Max_(software)
-        'MAXScript', // MAXScript is the built-in scripting language for Autodesk ® 3ds Max ® and Autodesk ® 3ds Max ® Design. (http://docs.autodesk.com/3DSMAX/14/ENU/MAXScript%20Help%202012/)
+        'MAXScript', // Scripting language for Autodesk 3ds Max and Autodesk 3ds Max Design (http://docs.autodesk.com/3DSMAX/14/ENU/MAXScript%20Help%202012/)
         'MediaWiki',
         'Meson', // http://mesonbuild.com
         'Metal', // This is just C with the Metal API (https://developer.apple.com/metal/)
@@ -250,6 +250,7 @@ class CountService {
         'Rascal', // RascalMPL
         'Raw token data',
         'RDoc', // https://en.wikipedia.org/wiki/RDoc
+        'REALbasic', // https://en.wikipedia.org/wiki/Xojo
         'Redcode', // https://esolangs.org/wiki/Redcode
         'Regular Expression',
         'Ren\'Py',
@@ -312,9 +313,29 @@ class CountService {
         'Vim script',
         'VimL',
         'Vue', // Vue template file (https://en.wikipedia.org/wiki/Vue.js)
+        'Wavefront Material', // https://en.wikipedia.org/wiki/Wavefront_.obj_file#Material_template_library
+        'Wavefront Object', // https://en.wikipedia.org/wiki/Wavefront_.obj_file
+        'wdl', // Workflow Description Language (https://software.broadinstitute.org/wdl/)
+        'Web Ontology Language', // https://en.wikipedia.org/wiki/Web_Ontology_Language
+        'WebAssembly',
+        'WebIDL', // https://en.wikipedia.org/wiki/Web_IDL
+        'World of Warcraft Addon Data',
+        'xBase',
+        'XC', // Specific to XCore processors (https://en.wikipedia.org/wiki/XC_(programming_language))
+        'XCompose', // X Window System Compose Key file (https://en.wikipedia.org/wiki/Compose_key#X_Window_System, .XCompose)
         'XML',
+        'Xojo',
+        'XPages', // https://en.wikipedia.org/wiki/XPages
+        'XPM', // https://en.wikipedia.org/wiki/X_PixMap
+        'XProc', // https://en.wikipedia.org/wiki/XProc
+        'XQuery', // https://en.wikipedia.org/wiki/XQuery
+        'XS', // https://en.wikipedia.org/wiki/XS_(Perl)
         'XSLT',
+        'Yacc',
         'YAML',
+        'YANG', // https://en.wikipedia.org/wiki/YANG
+        'Zephir', // DSL for PHP extensions (https://zephir-lang.com/)
+        'Zimpl', // http://zimpl.zib.de/
     ]
 
     Map<Lang, Integer> getTopLangCountsOld(int numLangs, Date queryDate) {
