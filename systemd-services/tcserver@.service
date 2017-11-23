@@ -1,0 +1,28 @@
+[Unit]
+Description=tc Server instance (%i)
+After=network.target
+
+[Service]
+Type=forking
+
+# This is necessary instead of calling the instance's tcruntime-ctl.sh script because "the first argument of the command
+# line (i.e. the program to execute) may not include specifiers"
+# (https://www.freedesktop.org/software/systemd/man/systemd.service.html#Command%20lines)
+WorkingDirectory=/var/opt/pivotal/pivotal-tc-server-standard
+ExecStart=/opt/pivotal/pivotal-tc-server-standard/tcruntime-ctl.sh %i start
+ExecStop=/opt/pivotal/pivotal-tc-server-standard/tcruntime-ctl.sh %i stop
+
+User=tcserver
+Group=pivotal
+
+# Don't kill any processes; the command in ExecStop will take care of stopping the service
+# (https://www.freedesktop.org/software/systemd/man/systemd.kill.html#KillMode=)
+KillMode=none
+
+# Code 1 is given if the instance is stopped using the instance's tcruntime-ctl.sh script
+# Code 143 is given if the instance is stopped using systemd
+# (https://www.freedesktop.org/software/systemd/man/systemd.service.html#SuccessExitStatus=)
+SuccessExitStatus=1 143
+
+[Install]
+WantedBy=multi-user.target

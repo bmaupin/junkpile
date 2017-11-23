@@ -1,0 +1,19 @@
+[Unit]
+Description=Artifactory
+After=network.target
+
+[Service]
+Type=forking
+
+ExecStart=/opt/artifactory/bin/artifactory.sh start
+ExecStop=/opt/artifactory/bin/artifactory.sh stop
+
+User=artifactory
+Group=artifactory
+
+# Don't kill any processes; the command in ExecStop will take care of stopping the service
+# (https://www.freedesktop.org/software/systemd/man/systemd.kill.html#KillMode=)
+KillMode=none
+
+[Install]
+WantedBy=multi-user.target
