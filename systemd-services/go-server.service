@@ -1,0 +1,14 @@
+[Unit]
+Description=GoCD Server
+After=network.target
+
+[Service]
+Type=simple
+
+ExecStart=/opt/go-server/server.sh
+
+User=go
+Group=go
+
+[Install]
+WantedBy=multi-user.target
