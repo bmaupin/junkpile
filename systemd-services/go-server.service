@@ -3,12 +3,23 @@ Description=GoCD Server
 After=network.target
 
 [Service]
-Type=simple
+Type=forking
 
+# Run as a daemon. Among other things this ensures creation of the PID file for compatibility with the stop script (stop-server.sh)
+Environment=DAEMON=Y
+
+# This is needed because the start script tries to write to a local log file (go-server.out.log)
+WorkingDirectory=/opt/go-server
 ExecStart=/opt/go-server/server.sh
 
 User=go
 Group=go
+
+PIDFile=/opt/go-server/go-server.pid
+
+# Code 143 is given when the process is killed
+# (https://www.freedesktop.org/software/systemd/man/systemd.service.html#SuccessExitStatus=)
+SuccessExitStatus=143
 
 [Install]
 WantedBy=multi-user.target
