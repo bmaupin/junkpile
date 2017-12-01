@@ -17,20 +17,27 @@ class CountService {
      * - Esoteric programming languages (Brainfuck, Dogescript, LOLCODE, etc)
      */
     def nonLangs = [
+        '1C Enterprise', // https://en.wikipedia.org/wiki/1C_Company
+        'ABAP',
         'ABNF',
         'Adobe Font Metrics',
+        'AGS Script', // https://en.wikipedia.org/wiki/Adventure_Game_Studio
         'Alloy',
         'Alpine Abuild',
+        'AMPL', // https://en.wikipedia.org/wiki/AMPL
+        'AngelScript',
         'Ant Build System',
         'ANTLR',
         'ApacheConf',
+        'Apex', // https://en.wikipedia.org/wiki/Salesforce.com#Apex
         'API Blueprint',
-        'AppleScript',
         'Apollo Guidance Computer',
+        'AppleScript',
         'Arduino',
         'AsciiDoc',
         'ASN.1',
         'ASP',
+        'AspectJ',
         'Augeas',
         'AutoHotkey',
         'AutoIt',
@@ -39,6 +46,8 @@ class CountService {
         'Bison',
         'BitBake',
         'Blade',
+        'BlitzBasic',
+        'BlitzMax',
         'Bluespec',
         'Brainfuck',
         'Brightscript',
@@ -56,7 +65,7 @@ class CountService {
         'CMake',
         'ColdFusion CFC',
         'COLLADA',
-        'Coq',
+        'Cool', // https://en.wikipedia.org/wiki/Cool_(programming_language)
         'Cpp-ObjDump',
         'Creole',
         'CSON',
@@ -66,6 +75,7 @@ class CountService {
         'CSS',
         'CSV',
         'Cuda',
+        'CWeb', // https://en.wikipedia.org/wiki/CWEB
         'Cycript',
         'Cython',
         'D-ObjDump',
@@ -177,6 +187,7 @@ class CountService {
         'Markdown',
         'Marko', // https://markojs.com/
         'Mask', // https://github.com/atmajs/MaskJS
+        'Matlab',
         'Maven POM',
         'Max', // https://en.wikipedia.org/wiki/Max_(software)
         'MAXScript', // Scripting language for Autodesk 3ds Max and Autodesk 3ds Max Design (http://docs.autodesk.com/3DSMAX/14/ENU/MAXScript%20Help%202012/)
