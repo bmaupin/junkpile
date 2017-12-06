@@ -1,4 +1,1 @@
-[![forthebadge](http://forthebadge.com/images/badges/as-seen-on-tv.svg)](http://forthebadge.com)
-[![forthebadge](http://forthebadge.com/images/badges/built-by-neckbeards.svg)](http://forthebadge.com)
-[![forthebadge](http://forthebadge.com/images/badges/contains-technical-debt.svg)](http://forthebadge.com)
----
+This is an abandoned rewrite of an unfinished application that's currently being [rewritten using Loopback](https://github.com/bmaupin/loopback-test). You've been warned.
