@@ -65,3 +65,13 @@ UnpinFromStart("Photos")
 UnpinFromStart("Skype")
 UnpinFromStart("Weather")
 UnpinFromStart("Xbox")
+
+# Source: https://stackoverflow.com/a/22819650/399105
+# License: cc by-sa 3.0 with attribution
+function AdjustVisualEffectsForBestPerformance {
+    Push-Location
+    Set-Location HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\
+    New-ItemProperty . VisualFxSetting -Value 2 -ErrorAction SilentlyContinue
+    Pop-Location
+}
+AdjustVisualEffectsForBestPerformance
