@@ -8,9 +8,9 @@
 
 # Source: https://gallery.technet.microsoft.com/scriptcenter/How-to-disable-Cortana-on-b44924a4
 # License: TechNet terms of use (https://gallery.technet.microsoft.com/scriptcenter/site/How-to-disable-Cortana-on-b44924a4/eulapartial?licenseType=TechNet)
-Function DisableCortana {
+function DisableCortana {
     $path = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search"    
-    IF (!(Test-Path -Path $path)) { 
+    if (!(Test-Path -Path $path)) { 
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows" -Name "Windows Search"
     } 
     Set-ItemProperty -Path $path -Name "AllowCortana" -Value 0 
@@ -30,3 +30,15 @@ function ShowFileExtensions {
     Stop-Process -name explorer
 }
 ShowFileExtensions
+
+# Source: https://stackoverflow.com/a/45152368/399105
+# License: cc by-sa 3.0 with attribution
+function UnpinFromTaskbar($appname) {
+    ((New-Object -Com Shell.Application).NameSpace('shell:::{4234d49b-0245-4df3-b780-3893943456e1}').Items() | 
+    ?{$_.Name -eq $appname}).Verbs() | 
+    ?{$_.Name.replace('&','') -match 'Unpin from taskbar'} | 
+    %{$_.DoIt(); $exec = $true}
+}
+UnpinFromTaskbar("Mail")
+UnpinFromTaskbar("Microsoft Edge")
+UnpinFromTaskbar("Microsoft Store")
