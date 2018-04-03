@@ -14,8 +14,6 @@ function DisableCortana {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows" -Name "Windows Search"
     }
     Set-ItemProperty -Path $path -Name "AllowCortana" -Value 0
-    # Restart Explorer to change it immediately
-    Stop-Process -name explorer
 }
 DisableCortana
 
@@ -26,8 +24,6 @@ function ShowFileExtensions {
     Set-Location HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
     Set-ItemProperty . HideFileExt "0"
     Pop-Location
-    # Restart Explorer to change it immediately
-    Stop-Process -name explorer
 }
 ShowFileExtensions
 
@@ -75,3 +71,9 @@ function AdjustVisualEffectsForBestPerformance {
     Pop-Location
 }
 AdjustVisualEffectsForBestPerformance
+
+# Restart Explorer to make changes (Cortana, file extensions) take effect immediately
+function RestartExplorer {
+    Stop-Process -name explorer
+}
+RestartExplorer
