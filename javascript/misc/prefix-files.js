@@ -8,12 +8,12 @@ const PREFIX_LENGTH = 3;
 
 function main() {
   let filenames = getFilesInCurrentDirectory();
-  let shuffledFilenames = shuffleArray(filenames);
+  filenames = shuffleArray(filenames);
   let prefixLength = getPrefixLength(filenames.length);
 
   for (let i = 0; i < filenames.length; i++) {
     let oldFilename = filenames[i];
-    let prefix = String(shuffledFilenames.indexOf(oldFilename) + 1).padStart(prefixLength, '0');
+    let prefix = String(filenames.indexOf(oldFilename) + 1).padStart(prefixLength, '0');
     let newFilename = `${prefix} - ${oldFilename}`;
 
     console.log(`Renaming ${oldFilename} to ${newFilename}`);
