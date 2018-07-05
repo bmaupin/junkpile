@@ -1,0 +1,14 @@
+{
+  "name": "convert-wiki-to-markdown",
+  "version": "0.0.1",
+  "description": "",
+  "main": "convert-wiki-to-markdown.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "jsdom": "^11.11.0"
+  }
+}
