@@ -5,9 +5,6 @@ const jsdom = require('jsdom');
 const {JSDOM} = jsdom;
 const {URL} = require('url');
 
-// TODO: remove this
-const util = require('util');
-
 // const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/clamav';
 const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/cups';
 // const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/firefox';
@@ -30,35 +27,12 @@ async function main() {
   let markdown = convertPageTitle(pageTitle);
   markdown = convertElement(contentElement, markdown);
 
-  // markdown = cleanupMarkdown(markdown);
-
   console.log(markdown);
-
-
-  // contentElement.
 }
 
 function convertPageTitle(title) {
   return `---\ntitle: ${title}\n---\n\n`;
 }
-
-// function convertContent(contentElement) {
-//   // console.log(contentElement.innerHTML);
-
-//   let markdown = '';
-
-//   for (let i = 0; i < contentElement.children.length; i++) {
-//     let childElement = contentElement.children[i];
-
-//     markdown += convertElement(childElement, markdown);
-
-//     // if (childElement.hasChildNodes()) {
-//     //   markdown += convertContent(childElement);
-//     // }
-//   }
-
-//   return markdown;
-// }
 
 function convertElement(htmlElement, markdown) {
   if (htmlElement.nodeType === 3) {
@@ -211,18 +185,6 @@ function getListItemDepth(htmlElement) {
     return 0;
   }
 }
-
-// function getImmediateChildText(htmlElement) {
-//   // This should handle divs that only contain text
-//   if (htmlElement.hasChildNodes()) {
-//     for (let i = 0; i < htmlElement.childNodes.length; i++) {
-//       if (htmlElement.childNodes[i].nodeType === 3 && typeof(htmlElement.childNodes[i].textContent) !== 'undefined') {
-//         return `${htmlElement.childNodes[i].textContent}`;
-//       }
-//     }
-//   }
-//   return '';
-// }
 
 function unhandledHtmlElement(htmlElement) {
   console.error(`WARNING: HTML element not handled: ${htmlElement.outerHTML}`);
