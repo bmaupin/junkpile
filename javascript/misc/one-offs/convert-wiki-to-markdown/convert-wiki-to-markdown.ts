@@ -1,13 +1,18 @@
 'use strict';
 
-const https = require('https');
-const jsdom = require('jsdom');
-const {JSDOM} = jsdom;
-const {URL} = require('url');
+import https = require('https');
+import { JSDOM } from 'jsdom';
+import { URL } from 'url';
 
 // const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/clamav';
 const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/cups';
 // const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/firefox';
+
+declare global {
+  interface String {
+    replaceAll(search: string, replacement: string): string;
+  }
+}
 
 async function main() {
   let dom = await JSDOM.fromURL(WIKI_URL);
