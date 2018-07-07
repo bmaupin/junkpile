@@ -8,8 +8,8 @@ const {URL} = require('url');
 // TODO: remove this
 const util = require('util');
 
-const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/clamav';
-// const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/cups';
+// const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/clamav';
+const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/cups';
 // const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/firefox';
 
 async function main() {
@@ -27,8 +27,8 @@ async function main() {
 
   let contentElement = contentParentElements[0].children[0];
 
-  let markdown = '';
-  markdown = convertPageTitle(pageTitle) + convertElement(contentElement, markdown);
+  let markdown = convertPageTitle(pageTitle);
+  markdown = convertElement(contentElement, markdown);
 
   // markdown = cleanupMarkdown(markdown);
 
@@ -66,31 +66,47 @@ function convertElement(htmlElement, markdown) {
   } else {
     switch(htmlElement.tagName) {
       case 'B':
-        markdown += `#### `;
+        if (!markdown.endsWith('## ')) {
+          markdown += `#### `;
+        }
         break;
 
       case 'CODE':
         if (markdown.endsWith('\n```')) {
           markdown = markdown.slice(0, -4);
+        } else if (markdown.endsWith('\n```\n')) {
+          markdown = markdown.slice(0, -5);
         } else {
           markdown += `\`\`\`\n`;
         }
         break;
 
+      case 'FONT':
+        // console.log(`FONT: ${htmlElement.getAttribute('size')}`);
+        if (htmlElement.getAttribute('size') === '5') {
+          if (markdown.endsWith('#### ')) {
+            markdown = markdown.slice(0, -5);
+          }
+          markdown += `## `;
+        }
+        break;
+
       case 'I':
-        if (htmlElement.parentNode.tagName !== 'CODE' && htmlElement.firstChild.tagName !== 'CODE') {
-          markdown += `*${htmlElement.textContent}*`;
+        // if (htmlElement.parentNode.tagName !== 'CODE' && htmlElement.firstChild.tagName !== 'CODE') {
+        if (htmlElement.firstChild.nodeType === 3) {
+          markdown += '*';
           break;
         }
         unhandledHtmlElement(htmlElement);
+        // markdown += '*';
         break;
 
       case 'LI':
-        if (htmlElement.parentNode.tagName === 'UL') {
-          markdown += `\n- ${getImmediateChildText(htmlElement)}`;
+        if (htmlElement.parentNode.tagName === 'OL') {
+          markdown += getListItemPadding(htmlElement, markdown) + '1. ';
           break;
-        } else if (htmlElement.parentNode.tagName === 'OL') {
-          markdown += `\n1. ${getImmediateChildText(htmlElement)}`;
+        } else if (htmlElement.parentNode.tagName === 'UL') {
+          markdown += getListItemPadding(htmlElement, markdown) + '- ';
           break;
         }
         unhandledHtmlElement(htmlElement);
@@ -100,25 +116,22 @@ function convertElement(htmlElement, markdown) {
         if (htmlElement.getAttribute('style').includes('font-family:monospace')) {
           if (markdown.endsWith('\n```')) {
             markdown = markdown.slice(0, -4);
+          } else if (markdown.endsWith('\n```\n')) {
+            markdown = markdown.slice(0, -5);
           } else {
             markdown += `\`\`\`\n`;
           }
           break;
         }
-        unhandledHtmlElement(htmlElement);
+        // unhandledHtmlElement(htmlElement);
         break;
 
+      case 'DIV':
       case 'OL':
       case 'UL':
-        if (htmlElement.parentNode.tagName === 'OL' || htmlElement.parentNode.tagName === 'UL') {
-          markdown += '    ';
-          break;
-        } else {
-          markdown += '';
-          break;
+        if (!markdown.endsWith('\n')) {
+          markdown += '\n';
         }
-
-      case 'DIV':
         break;
 
       case 'BR':
@@ -140,11 +153,25 @@ function convertElement(htmlElement, markdown) {
       markdown += `\n\`\`\``;
       break;
 
+    case 'I':
+      // Only italicize text nodes for simplicity
+      if (htmlElement.firstChild.nodeType === 3) {
+        // If there's a newline before the end italic, swap them
+        if (markdown.endsWith('\n\n')) {
+          markdown = markdown.slice(0, -2) + '*' + '\n\n';
+        } else if (markdown.endsWith('\n')) {
+          markdown = markdown.slice(0, -1) + '*' + '\n';
+        } else {
+          markdown += '*';
+        }
+      }
+      break;
+
     case 'SPAN':
       if (htmlElement.getAttribute('style').includes('font-family:monospace')) {
         markdown += `\n\`\`\``;
-        break;
       }
+      break;
   }
 
   return markdown;
@@ -157,9 +184,32 @@ function convertChildElements(htmlElement, markdown) {
     markdown = convertElement(childElement, markdown);
   }
 
-  // console.log(markdown);
-
   return markdown;
+}
+
+function getListItemPadding(htmlElement, markdown) {
+  // Safeguard to make sure we don't add padding in the middle of a line
+  if (markdown.endsWith('\n')) {
+    // Subtract 1 because we don't want to indent the top level
+    let indentDepth = getListItemDepth(htmlElement) - 1;
+
+    // A negative indentDepth will cause .repeat to throw an error
+    if (indentDepth > 0) {
+      return '    '.repeat(indentDepth);
+    }
+  }
+
+  return '';
+}
+
+function getListItemDepth(htmlElement) {
+  if (typeof(htmlElement.parentNode) !== 'undefined' && typeof(htmlElement.parentNode.tagName) !== 'undefined' &&
+    (htmlElement.parentNode.tagName === 'LI' || htmlElement.parentNode.tagName === 'OL' ||
+    htmlElement.parentNode.tagName === 'UL')) {
+    return getListItemDepth(htmlElement.parentNode) + 1;
+  } else {
+    return 0;
+  }
 }
 
 // function getImmediateChildText(htmlElement) {
