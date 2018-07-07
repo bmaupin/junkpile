@@ -8,8 +8,9 @@ const {URL} = require('url');
 // TODO: remove this
 const util = require('util');
 
-// const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/clamav';
-const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/cups';
+const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/clamav';
+// const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/cups';
+// const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/firefox';
 
 async function main() {
   let dom = await JSDOM.fromURL(WIKI_URL);
@@ -26,9 +27,10 @@ async function main() {
 
   let contentElement = contentParentElements[0].children[0];
 
-  let markdown = convertPageTitle(pageTitle) + convertContent(contentElement);
+  let markdown = '';
+  markdown = convertPageTitle(pageTitle) + convertElement(contentElement, markdown);
 
-  markdown = cleanupMarkdown(markdown);
+  // markdown = cleanupMarkdown(markdown);
 
   console.log(markdown);
 
@@ -37,62 +39,144 @@ async function main() {
 }
 
 function convertPageTitle(title) {
-  return `---\ntitle: ${title}\n---\n`;
+  return `---\ntitle: ${title}\n---\n\n`;
 }
 
-function convertContent(contentElement) {
-  // console.log(contentElement.innerHTML);
+// function convertContent(contentElement) {
+//   // console.log(contentElement.innerHTML);
 
-  let markdown = '';
+//   let markdown = '';
 
-  for (let i = 0; i < contentElement.childNodes.length; i++) {
-    let childElement = contentElement.childNodes[i];
+//   for (let i = 0; i < contentElement.children.length; i++) {
+//     let childElement = contentElement.children[i];
 
-    markdown += convertElement(childElement);
+//     markdown += convertElement(childElement, markdown);
 
-    if (childElement.hasChildNodes()) {
-      markdown += convertContent(childElement);
+//     // if (childElement.hasChildNodes()) {
+//     //   markdown += convertContent(childElement);
+//     // }
+//   }
+
+//   return markdown;
+// }
+
+function convertElement(htmlElement, markdown) {
+  if (htmlElement.nodeType === 3) {
+    markdown += htmlElement.textContent;
+  } else {
+    switch(htmlElement.tagName) {
+      case 'B':
+        markdown += `#### `;
+        break;
+
+      case 'CODE':
+        if (markdown.endsWith('\n```')) {
+          markdown = markdown.slice(0, -4);
+        } else {
+          markdown += `\`\`\`\n`;
+        }
+        break;
+
+      case 'I':
+        if (htmlElement.parentNode.tagName !== 'CODE' && htmlElement.firstChild.tagName !== 'CODE') {
+          markdown += `*${htmlElement.textContent}*`;
+          break;
+        }
+        unhandledHtmlElement(htmlElement);
+        break;
+
+      case 'LI':
+        if (htmlElement.parentNode.tagName === 'UL') {
+          markdown += `\n- ${getImmediateChildText(htmlElement)}`;
+          break;
+        } else if (htmlElement.parentNode.tagName === 'OL') {
+          markdown += `\n1. ${getImmediateChildText(htmlElement)}`;
+          break;
+        }
+        unhandledHtmlElement(htmlElement);
+        break;
+
+      case 'SPAN':
+        if (htmlElement.getAttribute('style').includes('font-family:monospace')) {
+          if (markdown.endsWith('\n```')) {
+            markdown = markdown.slice(0, -4);
+          } else {
+            markdown += `\`\`\`\n`;
+          }
+          break;
+        }
+        unhandledHtmlElement(htmlElement);
+        break;
+
+      case 'OL':
+      case 'UL':
+        if (htmlElement.parentNode.tagName === 'OL' || htmlElement.parentNode.tagName === 'UL') {
+          markdown += '    ';
+          break;
+        } else {
+          markdown += '';
+          break;
+        }
+
+      case 'DIV':
+        break;
+
+      case 'BR':
+        markdown += '\n';
+        break;
+
+      default:
+        unhandledHtmlElement(htmlElement);
+        break;
     }
+  }
+
+  if (htmlElement.hasChildNodes()) {
+    markdown = convertChildElements(htmlElement, markdown);
+  }
+
+  switch(htmlElement.tagName) {
+    case 'CODE':
+      markdown += `\n\`\`\``;
+      break;
+
+    case 'SPAN':
+      if (htmlElement.getAttribute('style').includes('font-family:monospace')) {
+        markdown += `\n\`\`\``;
+        break;
+      }
   }
 
   return markdown;
 }
 
-function convertElement(htmlElement) {
-  switch(htmlElement.tagName) {
-    case 'B':
-      return `\n\n#### ${htmlElement.textContent}\n`;
+function convertChildElements(htmlElement, markdown) {
+  for (let i = 0; i < htmlElement.childNodes.length; i++) {
+    let childElement = htmlElement.childNodes[i];
 
-    case 'CODE':
-      return `\`\`\`\n${htmlElement.textContent}\n\`\`\`\n`;
-
-    case 'BR':
-      return '';
-
-    case 'LI':
-      if (htmlElement.parentNode.tagName === 'UL') {
-        return '- ';
-      }
-
-    case 'SPAN':
-      if (htmlElement.getAttribute('style').includes('font-family:monospace')) {
-        return `\`\`\`\n${htmlElement.textContent}\n\`\`\`\n`;
-      } else {
-        return `${htmlElement.textContent}\n`;
-      }
-
-    case 'DIV':
-      // This should handle divs that only contain text
-      if (htmlElement.children.length === 0 && htmlElement.childNodes.length !== 0) {
-        return `${htmlElement.textContent}\n`;
-      } else {
-        return '';
-      }
-
-    default:
-      console.error(`WARNING: HTML element not handled: ${htmlElement.outerHTML}`);
-      return '';
+    markdown = convertElement(childElement, markdown);
   }
+
+  // console.log(markdown);
+
+  return markdown;
+}
+
+// function getImmediateChildText(htmlElement) {
+//   // This should handle divs that only contain text
+//   if (htmlElement.hasChildNodes()) {
+//     for (let i = 0; i < htmlElement.childNodes.length; i++) {
+//       if (htmlElement.childNodes[i].nodeType === 3 && typeof(htmlElement.childNodes[i].textContent) !== 'undefined') {
+//         return `${htmlElement.childNodes[i].textContent}`;
+//       }
+//     }
+//   }
+//   return '';
+// }
+
+function unhandledHtmlElement(htmlElement) {
+  console.error(`WARNING: HTML element not handled: ${htmlElement.outerHTML}`);
+  return '';
 }
 
 function cleanupMarkdown(markdown) {
@@ -133,5 +217,10 @@ String.prototype.replaceAll = function(search, replacement) {
 //     request.end();
 //   });
 // }
+
+// https://stackoverflow.com/a/43994999/399105
+process.on('unhandledRejection', (reason, p) => {
+  console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+});
 
 main();
