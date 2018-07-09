@@ -2,12 +2,13 @@
 
 import GoogleSitesConverter from './GoogleSitesConverter';
 
-// const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/clamav';
-const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/cups';
+const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/clamav';
+// const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/cups';
 // const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/firefox';
 
 async function main() {
-  let markdown = await GoogleSitesConverter.convertSite(WIKI_URL);
+  let markdown = await GoogleSitesConverter.convertFromUrl(WIKI_URL);
+  // let markdown = await GoogleSitesConverter.convertFromFile('./__tests__/resources/clamav.html');
   console.log(markdown);
 }
 
