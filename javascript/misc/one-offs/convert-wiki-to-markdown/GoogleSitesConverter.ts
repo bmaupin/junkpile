@@ -14,9 +14,17 @@ String.prototype.replaceAll = function(search, replacement) {
 };
 
 export default class GoogleSitesConverter {
-  static async convertSite(url) {
-    let dom = await JSDOM.fromURL(url);
+  static async convertFromFile(file) {
+    let dom = await JSDOM.fromFile(file);
+    return GoogleSitesConverter._convertSite(dom);
+  }
 
+  static async convertFromUrl(url) {
+    let dom = await JSDOM.fromURL(url);
+    return GoogleSitesConverter._convertSite(dom);
+  }
+
+  static _convertSite(dom) {
     let pageTitle = dom.window.document.getElementById('sites-page-title').textContent;
 
     let contentParentElements = dom.window.document.getElementsByClassName('sites-layout-tile sites-tile-name-content-1');
