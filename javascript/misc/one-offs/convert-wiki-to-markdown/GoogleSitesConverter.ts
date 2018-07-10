@@ -1,6 +1,4 @@
-import https = require('https');
 import { JSDOM } from 'jsdom';
-import { URL } from 'url';
 
 declare global {
   interface String {
@@ -8,23 +6,23 @@ declare global {
   }
 }
 
-String.prototype.replaceAll = function(search, replacement) {
+String.prototype.replaceAll = function(search: string, replacement: string): string {
   var target = this;
   return target.split(search).join(replacement);
 };
 
 export default class GoogleSitesConverter {
-  static async convertFromFile(file) {
+  static async convertFromFile(file: string): Promise<string> {
     let dom = await JSDOM.fromFile(file);
-    return GoogleSitesConverter._convertSite(dom);
+    return GoogleSitesConverter.convertSite(dom);
   }
 
-  static async convertFromUrl(url) {
+  static async convertFromUrl(url: string): Promise<string> {
     let dom = await JSDOM.fromURL(url);
-    return GoogleSitesConverter._convertSite(dom);
+    return GoogleSitesConverter.convertSite(dom);
   }
 
-  static _convertSite(dom) {
+  private static convertSite(dom: JSDOM): string {
     let pageTitle = dom.window.document.getElementById('sites-page-title').textContent;
 
     let contentParentElements = dom.window.document.getElementsByClassName('sites-layout-tile sites-tile-name-content-1');
@@ -35,19 +33,19 @@ export default class GoogleSitesConverter {
       throw new Error('More than one content element found');
     }
 
-    let contentElement = contentParentElements[0].children[0];
+    let contentElement = contentParentElements[0].children[0] as HTMLElement;
 
-    let markdown = GoogleSitesConverter._convertPageTitle(pageTitle);
-    markdown = GoogleSitesConverter._convertElement(contentElement, markdown);
+    let markdown = GoogleSitesConverter.convertPageTitle(pageTitle);
+    markdown = GoogleSitesConverter.convertElement(contentElement, markdown);
 
     return markdown;
   }
 
-  static _convertPageTitle(title) {
+  private static convertPageTitle(title: string): string {
     return `---\ntitle: ${title}\n---\n\n`;
   }
 
-  static _convertElement(htmlElement, markdown) {
+  private static convertElement(htmlElement: HTMLElement, markdown: string): string {
     if (htmlElement.nodeType === 3) {
       markdown += htmlElement.textContent;
     } else {
@@ -84,19 +82,21 @@ export default class GoogleSitesConverter {
             markdown += '*';
             break;
           }
-          GoogleSitesConverter._unhandledHtmlElement(htmlElement);
+          GoogleSitesConverter.unhandledHtmlElement(htmlElement);
           // markdown += '*';
           break;
 
         case 'LI':
-          if (htmlElement.parentNode.tagName === 'OL') {
-            markdown += GoogleSitesConverter._getListItemPadding(htmlElement, markdown) + '1. ';
+          let parentNode = htmlElement as HTMLElement;
+
+          if (parentNode.tagName === 'OL') {
+            markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '1. ';
             break;
-          } else if (htmlElement.parentNode.tagName === 'UL') {
-            markdown += GoogleSitesConverter._getListItemPadding(htmlElement, markdown) + '- ';
+          } else if (parentNode.tagName === 'UL') {
+            markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '- ';
             break;
           }
-          GoogleSitesConverter._unhandledHtmlElement(htmlElement);
+          GoogleSitesConverter.unhandledHtmlElement(htmlElement);
           break;
 
         case 'SPAN':
@@ -126,13 +126,13 @@ export default class GoogleSitesConverter {
           break;
 
         default:
-          GoogleSitesConverter._unhandledHtmlElement(htmlElement);
+          GoogleSitesConverter.unhandledHtmlElement(htmlElement);
           break;
       }
     }
 
     if (htmlElement.hasChildNodes()) {
-      markdown = GoogleSitesConverter._convertChildElements(htmlElement, markdown);
+      markdown = GoogleSitesConverter.convertChildElements(htmlElement, markdown);
     }
 
     switch(htmlElement.tagName) {
@@ -164,21 +164,21 @@ export default class GoogleSitesConverter {
     return markdown;
   }
 
-  static _convertChildElements(htmlElement, markdown) {
+  private static convertChildElements(htmlElement: HTMLElement, markdown: string): string {
     for (let i = 0; i < htmlElement.childNodes.length; i++) {
-      let childElement = htmlElement.childNodes[i];
+      let childElement = htmlElement.childNodes[i] as HTMLElement;
 
-      markdown = GoogleSitesConverter._convertElement(childElement, markdown);
+      markdown = GoogleSitesConverter.convertElement(childElement, markdown);
     }
 
     return markdown;
   }
 
-  static _getListItemPadding(htmlElement, markdown) {
+  private static getListItemPadding(htmlElement: HTMLElement, markdown: string): string {
     // Safeguard to make sure we don't add padding in the middle of a line
     if (markdown.endsWith('\n')) {
       // Subtract 1 because we don't want to indent the top level
-      let indentDepth = GoogleSitesConverter._getListItemDepth(htmlElement) - 1;
+      let indentDepth = GoogleSitesConverter.getListItemDepth(htmlElement) - 1;
 
       // A negative indentDepth will cause .repeat to throw an error
       if (indentDepth > 0) {
@@ -189,18 +189,19 @@ export default class GoogleSitesConverter {
     return '';
   }
 
-  static _getListItemDepth(htmlElement) {
-    if (typeof(htmlElement.parentNode) !== 'undefined' && typeof(htmlElement.parentNode.tagName) !== 'undefined' &&
-      (htmlElement.parentNode.tagName === 'LI' || htmlElement.parentNode.tagName === 'OL' ||
-      htmlElement.parentNode.tagName === 'UL')) {
-      return GoogleSitesConverter._getListItemDepth(htmlElement.parentNode) + 1;
+  private static getListItemDepth(htmlElement: HTMLElement): number {
+    let parentNode = htmlElement as HTMLElement;
+
+    if (typeof parentNode !== 'undefined' && parentNode.hasOwnProperty('tagName') &&
+      (parentNode.tagName === 'LI' || parentNode.tagName === 'OL' ||
+      parentNode.tagName === 'UL')) {
+      return GoogleSitesConverter.getListItemDepth(parentNode) + 1;
     } else {
       return 0;
     }
   }
 
-  static _unhandledHtmlElement(htmlElement) {
-    console.error(`WARNING: HTML element not handled: ${htmlElement.outerHTML}`);
-    return '';
+  private static unhandledHtmlElement(htmlElement: Element): void {
+    console.log(`WARNING: HTML element not handled: ${htmlElement.outerHTML}`);
   }
 }
