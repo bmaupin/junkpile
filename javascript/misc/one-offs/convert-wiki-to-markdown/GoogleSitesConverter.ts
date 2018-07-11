@@ -87,7 +87,7 @@ export default class GoogleSitesConverter {
           break;
 
         case 'LI':
-          let parentNode = htmlElement as HTMLElement;
+          let parentNode = htmlElement.parentNode as HTMLElement;
 
           if (parentNode.tagName === 'OL') {
             markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '1. ';
@@ -190,9 +190,9 @@ export default class GoogleSitesConverter {
   }
 
   private static getListItemDepth(htmlElement: HTMLElement): number {
-    let parentNode = htmlElement as HTMLElement;
+    let parentNode = htmlElement.parentNode as HTMLElement;
 
-    if (typeof parentNode !== 'undefined' && parentNode.hasOwnProperty('tagName') &&
+    if (typeof parentNode !== 'undefined' && typeof parentNode.tagName !== 'undefined' &&
       (parentNode.tagName === 'LI' || parentNode.tagName === 'OL' ||
       parentNode.tagName === 'UL')) {
       return GoogleSitesConverter.getListItemDepth(parentNode) + 1;
