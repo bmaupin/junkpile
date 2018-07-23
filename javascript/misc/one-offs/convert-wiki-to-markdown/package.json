@@ -21,6 +21,9 @@
     "jest": "^23.3.0",
     "ts-jest": "^23.0.0"
   },
+  "engines": {
+     "node": ">=8"
+  },
   "jest": {
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
