@@ -38,6 +38,10 @@ export default class GoogleSitesConverter {
     let markdown = GoogleSitesConverter.convertPageTitle(pageTitle);
     markdown = GoogleSitesConverter.convertElement(contentElement, markdown);
 
+    if (!markdown.endsWith('\n')) {
+      markdown += '\n';
+    }
+
     return markdown;
   }
 
@@ -47,7 +51,7 @@ export default class GoogleSitesConverter {
 
   private static convertElement(htmlElement: HTMLElement, markdown: string): string {
     if (htmlElement.nodeType === 3) {
-      markdown += htmlElement.textContent;
+      markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + htmlElement.textContent;
     } else {
       switch(htmlElement.tagName) {
         case 'B':
@@ -106,11 +110,11 @@ export default class GoogleSitesConverter {
             } else if (markdown.endsWith('\n```\n')) {
               markdown = markdown.slice(0, -5);
             } else {
-              markdown += `\`\`\`\n`;
+              markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + `\`\`\`\n`;
             }
-            break;
+          } else {
+            markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown);
           }
-          // unhandledHtmlElement(htmlElement);
           break;
 
         case 'DIV':
@@ -137,7 +141,7 @@ export default class GoogleSitesConverter {
 
     switch(htmlElement.tagName) {
       case 'CODE':
-        markdown += `\n\`\`\``;
+        markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + `\n\`\`\``;
         break;
 
       case 'I':
@@ -156,7 +160,7 @@ export default class GoogleSitesConverter {
 
       case 'SPAN':
         if (htmlElement.getAttribute('style').includes('font-family:monospace')) {
-          markdown += `\n\`\`\``;
+          markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + `\n\`\`\``;
         }
         break;
     }
@@ -192,10 +196,12 @@ export default class GoogleSitesConverter {
   private static getListItemDepth(htmlElement: HTMLElement): number {
     let parentNode = htmlElement.parentNode as HTMLElement;
 
-    if (typeof parentNode !== 'undefined' && typeof parentNode.tagName !== 'undefined' &&
+    if (typeof parentNode !== 'undefined' && parentNode !== null && typeof parentNode.tagName !== 'undefined' &&
       (parentNode.tagName === 'LI' || parentNode.tagName === 'OL' ||
       parentNode.tagName === 'UL')) {
       return GoogleSitesConverter.getListItemDepth(parentNode) + 1;
+    } else if (typeof parentNode !== 'undefined' && parentNode !== null) {
+      return GoogleSitesConverter.getListItemDepth(parentNode);
     } else {
       return 0;
     }
