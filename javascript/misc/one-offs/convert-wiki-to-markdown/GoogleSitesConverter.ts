@@ -54,6 +54,10 @@ export default class GoogleSitesConverter {
       markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + htmlElement.textContent;
     } else {
       switch(htmlElement.tagName) {
+        case 'A':
+          markdown += '[';
+          break;
+
         case 'B':
           if (!markdown.endsWith('## ')) {
             markdown += `#### `;
@@ -140,6 +144,10 @@ export default class GoogleSitesConverter {
     }
 
     switch(htmlElement.tagName) {
+      case 'A':
+        markdown += `](${htmlElement.getAttribute('href')})`;
+        break;
+
       case 'CODE':
         markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + `\n\`\`\``;
         break;
