@@ -70,7 +70,7 @@ export default class GoogleSitesConverter {
           } else if (markdown.endsWith('\n```\n')) {
             markdown = markdown.slice(0, -5);
           } else {
-            markdown += `\`\`\`\n`;
+            markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```\n';
           }
           break;
 
@@ -114,7 +114,7 @@ export default class GoogleSitesConverter {
             } else if (markdown.endsWith('\n```\n')) {
               markdown = markdown.slice(0, -5);
             } else {
-              markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + `\`\`\`\n`;
+              markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```\n';
             }
           } else {
             markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown);
@@ -149,7 +149,7 @@ export default class GoogleSitesConverter {
         break;
 
       case 'CODE':
-        markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + `\n\`\`\``;
+        markdown += '\n' + GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```';
         break;
 
       case 'I':
@@ -168,7 +168,7 @@ export default class GoogleSitesConverter {
 
       case 'SPAN':
         if (htmlElement.getAttribute('style').includes('font-family:monospace')) {
-          markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + `\n\`\`\``;
+          markdown += '\n' + GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```';
         }
         break;
     }
