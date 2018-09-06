@@ -57,7 +57,14 @@ export default class GoogleSitesConverter {
 
   private static convertElement(htmlElement: HTMLElement, markdown: string): string {
     if (htmlElement.nodeType === 3) {
-      markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + htmlElement.textContent;
+      const textContent = GoogleSitesConverter.replaceUnwantedCharacters(htmlElement.textContent);
+
+      if ((htmlElement.parentNode.tagName === 'CODE' && htmlElement.parentNode.parentNode.tagName === 'I') ||
+        (htmlElement.parentNode.tagName === 'I' && htmlElement.parentNode.parentNode.tagName === 'CODE')) {
+        markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + textContent.toUpperCase();
+    } else {
+        markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + textContent;
+      }
     } else {
       switch(htmlElement.tagName) {
         case 'A':
@@ -71,6 +78,7 @@ export default class GoogleSitesConverter {
           break;
 
         case 'CODE':
+          // TODO: put this into a method so we can edit it in one place
           if (markdown.endsWith('\n```')) {
             markdown = markdown.slice(0, -4);
           } else if (markdown.endsWith('\n```\n')) {
@@ -81,7 +89,6 @@ export default class GoogleSitesConverter {
           break;
 
         case 'FONT':
-          // console.log(`FONT: ${htmlElement.getAttribute('size')}`);
           if (htmlElement.getAttribute('size') === '5') {
             if (markdown.endsWith('#### ')) {
               markdown = markdown.slice(0, -5);
@@ -91,8 +98,7 @@ export default class GoogleSitesConverter {
           break;
 
         case 'I':
-          // if (htmlElement.parentNode.tagName !== 'CODE' && htmlElement.firstChild.tagName !== 'CODE') {
-          if (htmlElement.firstChild.nodeType === 3) {
+          if (htmlElement.firstChild.nodeType === 3 && htmlElement.parentNode.tagName !== 'CODE') {
             markdown += '*';
             break;
           }
@@ -155,12 +161,15 @@ export default class GoogleSitesConverter {
         break;
 
       case 'CODE':
-        markdown += '\n' + GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```';
+        // TODO: put this into a method so we can edit it in one place
+        // The newline must be added before calling getListItemPadding. Yes, this is terrible and brittle.
+        markdown += '\n';
+        markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```';
         break;
 
       case 'I':
         // Only italicize text nodes for simplicity
-        if (htmlElement.firstChild.nodeType === 3) {
+        if (htmlElement.firstChild.nodeType === 3 && htmlElement.parentNode.tagName !== 'CODE') {
           // If there's a newline before the end italic, swap them
           if (markdown.endsWith('\n\n')) {
             markdown = markdown.slice(0, -2) + '*' + '\n\n';
@@ -174,12 +183,19 @@ export default class GoogleSitesConverter {
 
       case 'SPAN':
         if (htmlElement.attributes.hasOwnProperty('style') && htmlElement.getAttribute('style').includes('font-family:monospace')) {
-          markdown += '\n' + GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```';
+          // The newline must be added before calling getListItemPadding. Yes, this is terrible and brittle.
+          markdown += '\n';
+          markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```';
         }
         break;
     }
 
     return markdown;
+  }
+
+  private static lastLineContainsNonWhitespace(string: string): boolean {
+    let lastNewlineIndex = string.lastIndexOf('\n');
+    return /\S/.test(string.slice(lastNewlineIndex + 1));
   }
 
   private static convertChildElements(htmlElement: HTMLElement, markdown: string): string {
@@ -223,5 +239,23 @@ export default class GoogleSitesConverter {
 
   private static unhandledHtmlElement(htmlElement: Element): void {
     console.log(`WARNING: HTML element not handled: ${htmlElement.outerHTML}`);
+  }
+
+  private static replaceUnwantedCharacters(stringWithoutReplacements: string): string {
+    let stringWithReplacements = stringWithoutReplacements;
+    let charsToReplace = {
+      // Zero-width space
+      '\u200b': '',
+      // Non-breaking space
+      '\u00a0': ' ',
+    };
+
+    for (let charToReplace in charsToReplace) {
+      // http://stackoverflow.com/a/1144788/399105
+      let regex = new RegExp(charToReplace, 'g');
+      stringWithReplacements = stringWithReplacements.replace(regex, charsToReplace[charToReplace]);
+    }
+
+    return stringWithReplacements;
   }
 }
