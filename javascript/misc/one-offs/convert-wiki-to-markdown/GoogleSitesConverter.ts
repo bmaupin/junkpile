@@ -12,17 +12,23 @@ String.prototype.replaceAll = function(search: string, replacement: string): str
 };
 
 export default class GoogleSitesConverter {
-  static async convertFromFile(file: string): Promise<string> {
-    let dom = await JSDOM.fromFile(file);
-    return GoogleSitesConverter.convertSite(dom);
+  static convertElementsFromString(htmlString: string): string {
+    htmlString = `<span>${htmlString}</span>`;
+    const htmlElement = JSDOM.fragment(htmlString).firstChild;
+    return GoogleSitesConverter.convertElement(htmlElement, '');
   }
 
-  static async convertFromUrl(url: string): Promise<string> {
+  static async convertPageFromFile(filename: string): Promise<string> {
+    let dom = await JSDOM.fromFile(filename);
+    return GoogleSitesConverter.convertPage(dom);
+  }
+
+  static async convertPageFromUrl(url: string): Promise<string> {
     let dom = await JSDOM.fromURL(url);
-    return GoogleSitesConverter.convertSite(dom);
+    return GoogleSitesConverter.convertPage(dom);
   }
 
-  private static convertSite(dom: JSDOM): string {
+  private static convertPage(dom: JSDOM): string {
     let pageTitle = dom.window.document.getElementById('sites-page-title').textContent;
 
     let contentParentElements = dom.window.document.getElementsByClassName('sites-layout-tile sites-tile-name-content-1');
@@ -108,7 +114,7 @@ export default class GoogleSitesConverter {
           break;
 
         case 'SPAN':
-          if (htmlElement.getAttribute('style').includes('font-family:monospace')) {
+          if (htmlElement.attributes.hasOwnProperty('style') && htmlElement.getAttribute('style').includes('font-family:monospace')) {
             if (markdown.endsWith('\n```')) {
               markdown = markdown.slice(0, -4);
             } else if (markdown.endsWith('\n```\n')) {
@@ -167,7 +173,7 @@ export default class GoogleSitesConverter {
         break;
 
       case 'SPAN':
-        if (htmlElement.getAttribute('style').includes('font-family:monospace')) {
+        if (htmlElement.attributes.hasOwnProperty('style') && htmlElement.getAttribute('style').includes('font-family:monospace')) {
           markdown += '\n' + GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```';
         }
         break;
