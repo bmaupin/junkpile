@@ -78,14 +78,7 @@ export default class GoogleSitesConverter {
           break;
 
         case 'CODE':
-          // TODO: put this into a method so we can edit it in one place
-          if (markdown.endsWith('\n```')) {
-            markdown = markdown.slice(0, -4);
-          } else if (markdown.endsWith('\n```\n')) {
-            markdown = markdown.slice(0, -5);
-          } else {
-            markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```\n';
-          }
+          markdown = GoogleSitesConverter.addMarkdownPrefixForCode(htmlElement, markdown);
           break;
 
         case 'FONT':
@@ -121,13 +114,7 @@ export default class GoogleSitesConverter {
 
         case 'SPAN':
           if (htmlElement.attributes.hasOwnProperty('style') && htmlElement.getAttribute('style').includes('font-family:monospace')) {
-            if (markdown.endsWith('\n```')) {
-              markdown = markdown.slice(0, -4);
-            } else if (markdown.endsWith('\n```\n')) {
-              markdown = markdown.slice(0, -5);
-            } else {
-              markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```\n';
-            }
+            markdown = GoogleSitesConverter.addMarkdownPrefixForCode(htmlElement, markdown);
           } else {
             markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown);
           }
@@ -161,10 +148,7 @@ export default class GoogleSitesConverter {
         break;
 
       case 'CODE':
-        // TODO: put this into a method so we can edit it in one place
-        // The newline must be added before calling getListItemPadding. Yes, this is terrible and brittle.
-        markdown += '\n';
-        markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```';
+        markdown = GoogleSitesConverter.addMarkdownSuffixForCode(htmlElement, markdown);
         break;
 
       case 'I':
@@ -183,9 +167,7 @@ export default class GoogleSitesConverter {
 
       case 'SPAN':
         if (htmlElement.attributes.hasOwnProperty('style') && htmlElement.getAttribute('style').includes('font-family:monospace')) {
-          // The newline must be added before calling getListItemPadding. Yes, this is terrible and brittle.
-          markdown += '\n';
-          markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```';
+          markdown = GoogleSitesConverter.addMarkdownSuffixForCode(htmlElement, markdown);
         }
         break;
     }
@@ -235,6 +217,26 @@ export default class GoogleSitesConverter {
     } else {
       return 0;
     }
+  }
+
+  private static addMarkdownPrefixForCode(htmlElement: HTMLElement, markdown: string): markdown {
+    if (markdown.endsWith('\n```')) {
+      markdown = markdown.slice(0, -4);
+    } else if (markdown.endsWith('\n```\n')) {
+      markdown = markdown.slice(0, -5);
+    } else {
+      markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```\n';
+    }
+
+    return markdown;
+  }
+
+  private static addMarkdownSuffixForCode(htmlElement: HTMLElement, markdown: string): markdown {
+    // The newline must be added before calling getListItemPadding. Yes, this is terrible and brittle. But at least it's isolated.
+    markdown += '\n';
+    markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```';
+
+    return markdown;
   }
 
   private static unhandledHtmlElement(htmlElement: Element): void {
