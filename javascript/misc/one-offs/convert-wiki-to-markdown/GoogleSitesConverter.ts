@@ -14,7 +14,7 @@ String.prototype.replaceAll = function(search: string, replacement: string): str
 export default class GoogleSitesConverter {
   static convertElementsFromString(htmlString: string): string {
     htmlString = `<span>${htmlString}</span>`;
-    const htmlElement = JSDOM.fragment(htmlString).firstChild;
+    const htmlElement = JSDOM.fragment(htmlString).firstChild as HTMLElement;
     return GoogleSitesConverter.convertElement(htmlElement, '');
   }
 
@@ -56,13 +56,16 @@ export default class GoogleSitesConverter {
   }
 
   private static convertElement(htmlElement: HTMLElement, markdown: string): string {
+    const parentNode = htmlElement.parentNode as HTMLElement;
+    const grandparentNode = parentNode.parentNode as HTMLElement;
+
     if (htmlElement.nodeType === 3) {
       const textContent = GoogleSitesConverter.replaceUnwantedCharacters(htmlElement.textContent);
 
-      if ((htmlElement.parentNode.tagName === 'CODE' && htmlElement.parentNode.parentNode.tagName === 'I') ||
-        (htmlElement.parentNode.tagName === 'I' && htmlElement.parentNode.parentNode.tagName === 'CODE')) {
+      if ((parentNode.tagName === 'CODE' && grandparentNode.tagName === 'I') ||
+        (parentNode.tagName === 'I' && grandparentNode.tagName === 'CODE')) {
         markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + textContent.toUpperCase();
-    } else {
+      } else {
         markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + textContent;
       }
     } else {
@@ -91,7 +94,7 @@ export default class GoogleSitesConverter {
           break;
 
         case 'I':
-          if (htmlElement.firstChild.nodeType === 3 && htmlElement.parentNode.tagName !== 'CODE') {
+          if (htmlElement.firstChild.nodeType === 3 && parentNode.tagName !== 'CODE') {
             markdown += '*';
             break;
           }
@@ -100,8 +103,9 @@ export default class GoogleSitesConverter {
           break;
 
         case 'LI':
-          let parentNode = htmlElement.parentNode as HTMLElement;
-
+          if (!markdown.endsWith('\n')) {
+            markdown += '\n';
+          }
           if (parentNode.tagName === 'OL') {
             markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '1. ';
             break;
@@ -153,7 +157,7 @@ export default class GoogleSitesConverter {
 
       case 'I':
         // Only italicize text nodes for simplicity
-        if (htmlElement.firstChild.nodeType === 3 && htmlElement.parentNode.tagName !== 'CODE') {
+        if (htmlElement.firstChild.nodeType === 3 && parentNode.tagName !== 'CODE') {
           // If there's a newline before the end italic, swap them
           if (markdown.endsWith('\n\n')) {
             markdown = markdown.slice(0, -2) + '*' + '\n\n';
@@ -173,11 +177,6 @@ export default class GoogleSitesConverter {
     }
 
     return markdown;
-  }
-
-  private static lastLineContainsNonWhitespace(string: string): boolean {
-    let lastNewlineIndex = string.lastIndexOf('\n');
-    return /\S/.test(string.slice(lastNewlineIndex + 1));
   }
 
   private static convertChildElements(htmlElement: HTMLElement, markdown: string): string {
@@ -219,11 +218,27 @@ export default class GoogleSitesConverter {
     }
   }
 
-  private static addMarkdownPrefixForCode(htmlElement: HTMLElement, markdown: string): markdown {
-    if (markdown.endsWith('\n```')) {
-      markdown = markdown.slice(0, -4);
-    } else if (markdown.endsWith('\n```\n')) {
-      markdown = markdown.slice(0, -5);
+  private static addMarkdownPrefixForCode(htmlElement: HTMLElement, markdown: string): string {
+    // TODO: this needs to be improved to make all tests pass and be simpler if possible
+    // markdown = markdown.replace(/\n *$/, '\n');
+
+    if (/\s*?```\s*?$/.test(markdown)) {
+      // markdown = markdown.trim();
+      // if (markdown.endsWith('```')) {
+      //   markdown = markdown.slice(0, -3);
+      // }
+      // if (markdown.endsWith('\n')) {
+      //   markdown = markdown.slice(0, -1);
+      // }
+
+      markdown = markdown.replace(/( *?)\n *?```( *?)\n?$/, '$1$2');
+
+      // markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```\n';
+
+    // if (markdown.endsWith('\n```')) {
+    //   markdown = markdown.slice(0, -4);
+    // } else if (markdown.endsWith('\n```\n')) {
+    //   markdown = markdown.slice(0, -5);
     } else {
       markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```\n';
     }
@@ -231,7 +246,7 @@ export default class GoogleSitesConverter {
     return markdown;
   }
 
-  private static addMarkdownSuffixForCode(htmlElement: HTMLElement, markdown: string): markdown {
+  private static addMarkdownSuffixForCode(htmlElement: HTMLElement, markdown: string): string {
     // The newline must be added before calling getListItemPadding. Yes, this is terrible and brittle. But at least it's isolated.
     markdown += '\n';
     markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```';

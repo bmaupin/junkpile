@@ -1,14 +1,6 @@
 import fs from 'fs';
 import GoogleSitesConverter from '../GoogleSitesConverter';
 
-// test('Convert title', () => {
-//   const htmlString = '<span id="sites-page-title" dir="ltr" tabindex="-1" style="outline: none">ClamAV</span>';
-//   const expectedMarkdown = '---\ntitle: ClamAV\n---';
-//   const convertedMarkdown = GoogleSitesConverter.convertFromString(htmlString);
-
-//   expect(convertedMarkdown).toBe(expectedMarkdown);
-// });
-
 test('Convert bold element', () => {
   const htmlString = '<b>Install clamav</b>';
   const expectedMarkdown = '#### Install clamav';
@@ -36,6 +28,14 @@ test('Convert code in span element', () => {
 test('Convert back-to-back code elements', () => {
   const htmlString = '<code>mkdir $HOME/Desktop/infected; sudo clamscan -r --bell -i --move=$HOME/Desktop/infected --exclude-dir=$HOME/Desktop/infected / &amp;&gt; </code><code>$HOME/Desktop/infected</code><code>/scan.txt</code>';
   const expectedMarkdown = '```\nmkdir $HOME/Desktop/infected; sudo clamscan -r --bell -i --move=$HOME/Desktop/infected --exclude-dir=$HOME/Desktop/infected / &> $HOME/Desktop/infected/scan.txt\n```';
+  const convertedMarkdown = GoogleSitesConverter.convertElementsFromString(htmlString);
+
+  expect(convertedMarkdown).toBe(expectedMarkdown);
+});
+
+test('Convert back-to-back code elements, take 2', () => {
+  const htmlString = '<div><code>dig SRV _kerberos._udp.example.com</code></div><div><span style="line-height:1.6;font-size:10pt"><code>dig SRV _kpasswd._tcp.example.com</code></span></div><div><div><code>dig SRV _kpasswd._udp.example.com</code></div>';
+  const expectedMarkdown = '```\ndig SRV _kerberos._udp.example.com\ndig SRV _kpasswd._tcp.example.com\ndig SRV _kpasswd._udp.example.com\n```';
   const convertedMarkdown = GoogleSitesConverter.convertElementsFromString(htmlString);
 
   expect(convertedMarkdown).toBe(expectedMarkdown);
@@ -81,7 +81,21 @@ test('Convert multiple code in italics elements', () => {
   expect(convertedMarkdown).toBe(expectedMarkdown);
 });
 
+test('Convert indented code', () => {
+  const htmlString = '<ul><li><span style="line-height:1.6;font-size:10pt;background-color:transparent">RHEL 5:<br /></span><span style="line-height:1.6;font-size:10pt;background-color:transparent"><code>lp -d <i>printer_name</i> /usr/share/cups/data/testprint.ps</code><br /><br /></span></li></ul>';
+  const expectedMarkdown = '\n- RHEL 5:\n    ```\n    lp -d PRINTER_NAME /usr/share/cups/data/testprint.ps\n    ```\n\n';
+  const convertedMarkdown = GoogleSitesConverter.convertElementsFromString(htmlString);
 
+  expect(convertedMarkdown).toBe(expectedMarkdown);
+});
+
+test('Convert indented code with italics', () => {
+  const htmlString = '<ul><li>create the principal for the machine/service<br /><code>ank [-policy </code><i><code>policy_name</code></i><code>] -randkey host/</code><i><code>FQDN</code></i></li></ul>';
+  const expectedMarkdown = '\n- create the principal for the machine/service\n    ```\n    ank [-policy POLICY_NAME] -randkey host/FQDN\n    ```';
+  const convertedMarkdown = GoogleSitesConverter.convertElementsFromString(htmlString);
+
+  expect(convertedMarkdown).toBe(expectedMarkdown);
+});
 
 // test('Convert page with code', async () => {
 //   let markdownFromFile = fs.readFileSync('./__tests__/resources/clamav.md').toString('utf8');
