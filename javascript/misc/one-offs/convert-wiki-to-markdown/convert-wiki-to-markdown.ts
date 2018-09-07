@@ -8,8 +8,8 @@ import GoogleSitesConverter from './GoogleSitesConverter';
 const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/programming/tools/meld';
 
 async function main(): Promise<void> {
-  let markdown = await GoogleSitesConverter.convertFromUrl(WIKI_URL);
-  // let markdown = await GoogleSitesConverter.convertFromFile('./__tests__/resources/clamav.html');
+  let markdown = await GoogleSitesConverter.convertPageFromUrl(WIKI_URL);
+  // let markdown = await GoogleSitesConverter.convertPageFromFile('./__tests__/resources/clamav.html');
   console.log(markdown);
 }
 
