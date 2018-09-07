@@ -133,7 +133,9 @@ export default class GoogleSitesConverter {
           break;
 
         case 'BR':
-          markdown += '\n';
+          if (parentNode.tagName !== 'CODE') {
+            markdown += '\n';
+          }
           break;
 
         default:
@@ -219,31 +221,23 @@ export default class GoogleSitesConverter {
   }
 
   private static addMarkdownPrefixForCode(htmlElement: HTMLElement, markdown: string): string {
-    // TODO: this needs to be improved to make all tests pass and be simpler if possible
-    // markdown = markdown.replace(/\n *$/, '\n');
-
-    if (/\s*?```\s*?$/.test(markdown)) {
-      // markdown = markdown.trim();
-      // if (markdown.endsWith('```')) {
-      //   markdown = markdown.slice(0, -3);
-      // }
-      // if (markdown.endsWith('\n')) {
-      //   markdown = markdown.slice(0, -1);
-      // }
-
-      markdown = markdown.replace(/( *?)\n *?```( *?)\n?$/, '$1$2');
-
-      // markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```\n';
-
-    // if (markdown.endsWith('\n```')) {
-    //   markdown = markdown.slice(0, -4);
-    // } else if (markdown.endsWith('\n```\n')) {
-    //   markdown = markdown.slice(0, -5);
+    if (GoogleSitesConverter.endsWithCodeElement(markdown)) {
+      markdown = GoogleSitesConverter.removeMarkdownSuffixForCode(markdown);
     } else {
       markdown += GoogleSitesConverter.getListItemPadding(htmlElement, markdown) + '```\n';
     }
 
     return markdown;
+  }
+
+  private static endsWithCodeElement(markdown: string): boolean {
+    // Whitespace may have been added after the code suffix
+    return /```\s*?$/.test(markdown);
+  }
+
+  private static removeMarkdownSuffixForCode(markdown: string): string {
+    // Remove only the code suffix and whitespace that was added as part of it, preserving any other whitespace
+    return markdown.replace(/\n *?```(\s*?)$/, '$1');
   }
 
   private static addMarkdownSuffixForCode(htmlElement: HTMLElement, markdown: string): string {

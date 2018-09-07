@@ -6,14 +6,12 @@ title: CUPS
 
 #### Print from the command line
 ```
-lp -d printer_name
-``` ```
-filename
+lp -d PRINTER_NAME FILENAME
 ```
 
 Or:
 ```
-command | lp -d printer_name
+COMMAND | lp -d PRINTER_NAME
 ```
 
 
@@ -31,7 +29,7 @@ lpstat -p -d
 
 #### Cancel print job
 ```
-cancel job_name
+cancel JOB_NAME
 ```
 
 Ex:
@@ -41,7 +39,7 @@ cancel hp_8150-97
 
 Or:
 ```
-lprm job_id_number
+lprm JOB_ID_NUMBER
 ```
 
 Ex:
@@ -53,29 +51,28 @@ lprm 97
 #### Print a test page
 - RHEL 5:
     ```
-    lp -d *printer_name* /usr/share/cups/data/testprint.ps
+    lp -d PRINTER_NAME /usr/share/cups/data/testprint.ps
     ```
 
 - RHEL 6/Ubuntu 14.04:
     ```
-    lp -d *printer_name* /usr/share/cups/data/testprint
+    lp -d PRINTER_NAME /usr/share/cups/data/testprint
     ```
 
 
 #### Add a printer
 ```
-sudo /usr/sbin/lpadmin -p printer_name -D printer_description -L printer_location -E -v device_uri -P path_to_ppd
-
+sudo /usr/sbin/lpadmin -p PRINTER_NAME -D PRINTER_DESCRIPTION -L PRINTER_LOCATION -E -v DEVICE_URI -P PATH_TO_PPD
 ```
 
 
 #### Remove a printer
 ```
-sudo /usr/sbin/lpadmin -x printer_name
+sudo /usr/sbin/lpadmin -x PRINTER_NAME
 ```
 
 
 #### Set a printer as default
 ```
-sudo /usr/sbin/lpadmin -d printer_name
+sudo /usr/sbin/lpadmin -d PRINTER_NAME
 ```

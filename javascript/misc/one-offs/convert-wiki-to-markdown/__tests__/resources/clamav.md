@@ -29,5 +29,5 @@ sudo freshclam
 
 #### Scan system
 ```
-mkdir $HOME/Desktop/infected; sudo clamscan -r --bell -i --move=$HOME/Desktop/infected --exclude-dir=$HOME/Desktop/infected / &> $HOME/Desktop/infected/scan.txt
+mkdir $HOME/Desktop/infected; sudo clamscan -r --bell -i --move=$HOME/Desktop/infected --exclude-dir=$HOME/Desktop/infected / &> $HOME/Desktop/infected/scan.txt
 ```

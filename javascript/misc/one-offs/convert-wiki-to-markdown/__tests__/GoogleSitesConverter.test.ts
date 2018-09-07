@@ -35,7 +35,7 @@ test('Convert back-to-back code elements', () => {
 
 test('Convert back-to-back code elements, take 2', () => {
   const htmlString = '<div><code>dig SRV _kerberos._udp.example.com</code></div><div><span style="line-height:1.6;font-size:10pt"><code>dig SRV _kpasswd._tcp.example.com</code></span></div><div><div><code>dig SRV _kpasswd._udp.example.com</code></div>';
-  const expectedMarkdown = '```\ndig SRV _kerberos._udp.example.com\ndig SRV _kpasswd._tcp.example.com\ndig SRV _kpasswd._udp.example.com\n```';
+  const expectedMarkdown = '\n```\ndig SRV _kerberos._udp.example.com\ndig SRV _kpasswd._tcp.example.com\ndig SRV _kpasswd._udp.example.com\n```';
   const convertedMarkdown = GoogleSitesConverter.convertElementsFromString(htmlString);
 
   expect(convertedMarkdown).toBe(expectedMarkdown);
@@ -97,14 +97,14 @@ test('Convert indented code with italics', () => {
   expect(convertedMarkdown).toBe(expectedMarkdown);
 });
 
-// test('Convert page with code', async () => {
-//   let markdownFromFile = fs.readFileSync('./__tests__/resources/clamav.md').toString('utf8');
-//   let convertedMarkdown = await GoogleSitesConverter.convertPageFromFile('./__tests__/resources/clamav.html');
-//   expect(convertedMarkdown).toBe(markdownFromFile);
-// });
+test('Convert page with code', async () => {
+  let markdownFromFile = fs.readFileSync('./__tests__/resources/clamav.md').toString('utf8');
+  let convertedMarkdown = await GoogleSitesConverter.convertPageFromFile('./__tests__/resources/clamav.html');
+  expect(convertedMarkdown).toBe(markdownFromFile);
+});
 
-// test('Convert page with code in a list', async () => {
-//   let markdownFromFile = fs.readFileSync('./__tests__/resources/cups.md').toString('utf8');
-//   let convertedMarkdown = await GoogleSitesConverter.convertPageFromFile('./__tests__/resources/cups.html');
-//   expect(convertedMarkdown).toBe(markdownFromFile);
-// });
+test('Convert page with code in a list', async () => {
+  let markdownFromFile = fs.readFileSync('./__tests__/resources/cups.md').toString('utf8');
+  let convertedMarkdown = await GoogleSitesConverter.convertPageFromFile('./__tests__/resources/cups.html');
+  expect(convertedMarkdown).toBe(markdownFromFile);
+});
