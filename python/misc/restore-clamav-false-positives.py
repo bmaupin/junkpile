@@ -2,13 +2,14 @@
 
 '''
 Generates commands that can be used to restore false positives moved by clamav (e.g. https://lists.gt.net/clamav/users/73374)
-
-Usage:
-cat clamav-output.txt | python restore-clamav-false-positives.py
 '''
 
 import sys
 
+if sys.stdin.isatty():
+    sys.exit('Usage: cat clamav-output.txt | python restore-clamav-false-positives.py')
+
+print('# Enter these commands to restore false positives:')
 print('sudo -v')
 
 for line in sys.stdin:
