@@ -22,7 +22,7 @@
     "ts-jest": "^23.0.0"
   },
   "engines": {
-     "node": ">=8"
+    "node": ">=8"
   },
   "jest": {
     "transform": {
