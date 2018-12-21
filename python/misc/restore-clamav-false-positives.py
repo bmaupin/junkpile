@@ -14,7 +14,11 @@ print('sudo -v')
 
 for line in sys.stdin:
     if line.find('moved to') != -1:
-        source, ignore, ignore, destination = line.strip().split()
+        source, destination = line.split('moved to')
+        source = source.strip()
+        # Drop the colon
         source = source[:-1]
+        destination = destination.strip()
+        # Drop the beginning and end single quotes
         destination = destination[1:-1]
         print('sudo mv {} {}'.format(destination, source))
