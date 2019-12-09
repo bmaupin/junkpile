@@ -42,10 +42,14 @@ UnpinFromTaskbar("Microsoft Store")
 # Source: https://superuser.com/q/1191143/93066
 # License: cc by-sa 3.0 with attribution
 function UnpinFromStart($appname) {
-    ((New-Object -Com Shell.Application).NameSpace("shell:::{4234d49b-0245-4df3-b780-3893943456e1}").Items() |
-    ?{$_.Name -eq $appname}).Verbs() |
-    ?{$_.Name.replace("&", "") -match "Unpin from Start"} |
-    %{$_.DoIt(); $exec = $true}
+    try {
+        ((New-Object -Com Shell.Application).NameSpace("shell:::{4234d49b-0245-4df3-b780-3893943456e1}").Items() |
+        ?{$_.Name -eq $appname}).Verbs() |
+        ?{$_.Name.replace("&", "") -match "Unpin from Start"} |
+        %{$_.DoIt(); $exec = $true}
+    } catch {
+        Write-Host "Warning: failed to unpin $appname; it may not exist"
+    }
 }
 UnpinFromStart("Calendar")
 UnpinFromStart("Groove Music")
