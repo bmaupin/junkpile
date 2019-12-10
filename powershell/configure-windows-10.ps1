@@ -17,6 +17,16 @@ function DisableCortana {
 }
 DisableCortana
 
+# Source: https://social.technet.microsoft.com/Forums/ie/en-US/af677b8e-f30d-4fbc-a3b7-cd70c001c89f/windows-10-remove-cortanasearch-box-from-task-bar-via-gpo-for-osd?forum=win10itprosetup
+function RemoveCortanaSearch {
+    $path = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search"
+    if (!(Test-Path -Path $path)) {
+        New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion" -Name "Search"
+    }
+    Set-ItemProperty -Path $path -Name "SearchboxTaskbarMode" -Value 0
+}
+RemoveCortanaSearch
+
 # Source: https://superuser.com/a/896408/93066
 # License: cc by-sa 3.0 with attribution
 function ShowFileExtensions {
