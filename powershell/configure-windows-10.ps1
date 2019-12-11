@@ -6,6 +6,14 @@
 # 3. Run the file
 # ./configure-windows-10.ps1
 
+# Source: https://stackoverflow.com/a/21362870/399105
+# License: cc by-sa 3.0 with attribution
+Function SetVolumeTo0 {
+    $wshShell = new-object -com wscript.shell
+    1..50 | % {$wshShell.SendKeys([char]174)}
+}
+SetVolumeTo0
+
 # Source: https://gallery.technet.microsoft.com/scriptcenter/How-to-disable-Cortana-on-b44924a4
 # License: TechNet terms of use (https://gallery.technet.microsoft.com/scriptcenter/site/How-to-disable-Cortana-on-b44924a4/eulapartial?licenseType=TechNet)
 function DisableCortana {
