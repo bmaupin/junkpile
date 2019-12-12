@@ -12,6 +12,7 @@ Function SetVolumeTo0 {
     $wshShell = new-object -com wscript.shell
     1..50 | % {$wshShell.SendKeys([char]174)}
 }
+Write-Host "Setting volume to 0"
 SetVolumeTo0
 
 # Source: https://gallery.technet.microsoft.com/scriptcenter/How-to-disable-Cortana-on-b44924a4
@@ -23,6 +24,7 @@ function DisableCortana {
     }
     Set-ItemProperty -Path $path -Name "AllowCortana" -Value 0
 }
+Write-Host "Disabling Cortana"
 DisableCortana
 
 # Source: https://social.technet.microsoft.com/Forums/ie/en-US/af677b8e-f30d-4fbc-a3b7-cd70c001c89f/windows-10-remove-cortanasearch-box-from-task-bar-via-gpo-for-osd?forum=win10itprosetup
@@ -33,6 +35,7 @@ function RemoveCortanaSearch {
     }
     Set-ItemProperty -Path $path -Name "SearchboxTaskbarMode" -Value 0
 }
+Write-Host "Removing Cortana search from taskbar"
 RemoveCortanaSearch
 
 # Source: https://superuser.com/a/896408/93066
@@ -43,6 +46,7 @@ function ShowFileExtensions {
     Set-ItemProperty . HideFileExt "0"
     Pop-Location
 }
+Write-Host "Show file extensions"
 ShowFileExtensions
 
 # Source: https://stackoverflow.com/a/45152368/399105
@@ -53,6 +57,7 @@ function UnpinFromTaskbar($appname) {
     ?{$_.Name.replace("&", "") -match "Unpin from taskbar"} |
     %{$_.DoIt(); $exec = $true}
 }
+Write-Host "Removing unwanted icons from taskbar"
 UnpinFromTaskbar("Mail")
 UnpinFromTaskbar("Microsoft Edge")
 UnpinFromTaskbar("Microsoft Store")
@@ -69,6 +74,7 @@ function UnpinFromStart($appname) {
         Write-Host "Warning: failed to unpin $appname; it may not exist"
     }
 }
+Write-Host "Unpinning unwanted items from start menu"
 UnpinFromStart("Calendar")
 UnpinFromStart("Groove Music")
 UnpinFromStart("Mail")
@@ -92,10 +98,12 @@ function AdjustVisualEffectsForBestPerformance {
     New-ItemProperty . VisualFxSetting -Value 2 -ErrorAction SilentlyContinue
     Pop-Location
 }
+Write-Host "Adjust visual effects for best performance"
 AdjustVisualEffectsForBestPerformance
 
 # Restart Explorer to make changes (Cortana, file extensions) take effect immediately
 function RestartExplorer {
     Stop-Process -name explorer
 }
+Write-Host "Restart explorer so changes take effect immediately"
 RestartExplorer
