@@ -249,7 +249,7 @@ export default class GoogleSitesConverter {
   }
 
   private static unhandledHtmlElement(htmlElement: Element): void {
-    console.log(`WARNING: HTML element not handled: ${htmlElement.outerHTML}`);
+    console.error(`WARNING: HTML element not handled: ${htmlElement.outerHTML}`);
   }
 
   private static replaceUnwantedCharacters(stringWithoutReplacements: string): string {
