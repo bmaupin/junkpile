@@ -1,13 +1,11 @@
 Small script to convert my old wiki at https://sites.google.com/site/bmaupinwiki/ to markdown for importing into my new wiki at https://bmaupin.github.io/wiki/
 
-Usage:
+#### Usage
 
-1. Edit convert-wiki-to-markdown.ts
-    1. Change `WIKI_URL` to the URL to convert
-1. Run this script
+Run `npm start` to get usage
 
-    ```
-    npm start --silent > /path/to/wiki/applications/misc/libreoffice.md
-    ```
+#### Example
 
-    Note: `--silent` is used to suppress superfluous output from being added to the output file
+```
+npm start https://sites.google.com/site/bmaupinwiki/home/applications/misc/clamav > /path/to/wiki/applications/misc/clamav.md
+```
