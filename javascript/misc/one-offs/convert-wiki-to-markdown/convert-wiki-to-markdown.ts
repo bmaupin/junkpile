@@ -2,13 +2,14 @@
 
 import GoogleSitesConverter from './GoogleSitesConverter';
 
-// const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/clamav';
-// const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/cups';
-// const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/applications/misc/firefox';
-const WIKI_URL = 'https://sites.google.com/site/bmaupinwiki/home/programming/tools/meld';
-
 async function main(): Promise<void> {
-  let markdown = await GoogleSitesConverter.convertPageFromUrl(WIKI_URL);
+  if (process.argv.length < 3) {
+    console.log('Usage: npm start URL');
+    process.exit();
+  }
+
+  let url = process.argv[2];
+  let markdown = await GoogleSitesConverter.convertPageFromUrl(url);
   // let markdown = await GoogleSitesConverter.convertPageFromFile('./__tests__/resources/clamav.html');
   console.log(markdown);
 }
