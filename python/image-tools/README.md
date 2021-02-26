@@ -1,3 +1,6 @@
+⚠ It's probably better to use exiftool when possible: https://bmaupin.github.io/wiki/applications/multimedia/organizing-files.html
+
+
 - remove-all-exif-data.py
   - Remove all EXIF data from a jpeg image file
   - Prerequisites:
