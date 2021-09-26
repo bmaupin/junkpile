@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/bmaupin/swift-test.svg?branch=master)](https://travis-ci.org/bmaupin/swift-test) [![Coverage Status](https://codecov.io/gh/bmaupin/swift-test/branch/master/graphs/badge.svg)](https://codecov.io/gh/bmaupin/swift-test/branch/master)
