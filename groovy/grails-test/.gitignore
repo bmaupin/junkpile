@@ -1,0 +1,30 @@
+# Eclipse files
+.classpath
+.project
+
+# H2 database files
+/*Db.*
+
+# IntelliJ files
+*.iws
+/out/
+
+# Logs
+stacktrace.log
+/*.log
+
+# Older plugin install locations
+/web-app/plugins
+
+# OS files
+.DS_Store
+
+# Plugin release files
+/*.zip
+/plugin.xml
+
+# Temporary build files
+/target/
+
+# Web application files
+/web-app/WEB-INF/classes
