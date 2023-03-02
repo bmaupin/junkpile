@@ -5,6 +5,18 @@ Edit videos based on MCF files (https://www.moviecontentfilter.com/specification
 
 - Run it to see usage and parameters
 - Recommendation: run once with --preview first
+
+Troubleshooting:
+
+Make sure none of the destination files (including intermediate files) exist as the script
+will silently hang if this happens. If you don't see any CPU activity, press Enter in the
+terminal while the script is running and it may refresh the output.
+
+If the video/audio skips at a cut, make sure you cut at a scene change. If you cut in the
+middle of a scene, the key frame will be missing and the cuts will be janky.
+
+You can run with --no-cleanup to view the intermediate video files and make sure the cuts
+are where you expect them to be.
 '''
 
 import argparse
@@ -31,7 +43,7 @@ def main():
 
     segment_filenames = edit_video(segments_to_play, args.input_filename, args.output_filename, args.fade, args.preview)
 
-    join_segments(segment_filenames, args.output_filename)
+    join_segments(segment_filenames, args.output_filename, args.cleanup)
 
 
 def parse_arguments():
@@ -40,11 +52,12 @@ def parse_arguments():
     parser.add_argument('input_filename', metavar='/path/to/input-video')
     parser.add_argument('output_filename', metavar='/path/to/output-video')
 
-    # Enable fade by default
-    parser.add_argument('-f', '--no-fade', action='store_true', help="Don't fade audio in/out where cuts are made")
+    parser.add_argument('--no-cleanup', action='store_true', help="Don't clean up intermediary video files")
+    parser.add_argument('--no-fade', action='store_true', help="Don't fade audio in/out where cuts are made")
     parser.add_argument('-p', '--preview', action='store_true', help='Create a preview of cuts to be made')
 
     args = parser.parse_args()
+    args.cleanup = not args.no_cleanup
     args.fade = not args.no_fade
     return args
 
@@ -198,14 +211,16 @@ def run_command(command):
     print()
 
 
-def join_segments(segment_filenames, output_filename):
+def join_segments(segment_filenames, output_filename, cleanup):
     segments_file_path = create_segments_file(segment_filenames)
 
     run_command('ffmpeg -v quiet -stats -f concat -safe 0 -i "{}" -map 0 -c copy "{}"'.format(
         segments_file_path, output_filename))
 
-    # TODO: remove segment files
-    os.remove(segments_file_path)
+    if cleanup:
+        os.remove(segments_file_path)
+        for segment_filename in segment_filenames:
+            os.remove(segment_filename)
 
 
 def create_segments_file(segment_filenames):
