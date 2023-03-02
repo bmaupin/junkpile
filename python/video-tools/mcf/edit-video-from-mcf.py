@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 
-''' Edit videos based on MCF files (https://www.moviecontentfilter.com/specification)
+'''
+Edit videos based on MCF files (https://www.moviecontentfilter.com/specification)
+
+- Run it to see usage and parameters
+- Recommendation: run once with --preview first
 '''
 
 import argparse
@@ -36,10 +40,12 @@ def parse_arguments():
     parser.add_argument('input_filename', metavar='/path/to/input-video')
     parser.add_argument('output_filename', metavar='/path/to/output-video')
 
-    parser.add_argument('-f', '--fade', action='store_true', help='Fade audio in/out where cuts are made')
+    # Enable fade by default
+    parser.add_argument('-f', '--no-fade', action='store_true', help="Don't fade audio in/out where cuts are made")
     parser.add_argument('-p', '--preview', action='store_true', help='Create a preview of cuts to be made')
 
     args = parser.parse_args()
+    args.fade = not args.no_fade
     return args
 
 
