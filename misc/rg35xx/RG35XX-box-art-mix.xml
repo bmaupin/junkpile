@@ -1,0 +1,9 @@
+<ImageComposition xsi:noNamespaceSchemaLocation="https://www.skraper.net/ImageComposition.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Information ShortName="1 Images Mix [Box][4-3]" LongName="1 Image Mix" Description="2DBox" Author="Author" />
+  <Viewport Color="#00FFFFFF" Width="1280" Height="960" />
+  <Drawings>
+    <Item Type="Box2DFront">
+      <Display X="22%" Y="50%" Transparency="1" Width="40%" Height="60%" KeepRatio="true" Anchor="VCenterHCenter" />
+    </Item>
+  </Drawings>
+</ImageComposition>
