@@ -1,31 +1,1564 @@
 <rss version="2.0" xmlns:itunes="https://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:media="https://search.yahoo.com/mrss/">
 	<channel>
-		<title>PolyCast and ModCast classic</title>
-		<itunes:subtitle>The official podcast of Apolyton Civilization Site</itunes:subtitle>
-		<description>Classic episodes of PolyCast and ModCast up to the release of Civ 6</description>
-		<itunes:keywords>Civilization, Civ, Civ1, Civ2, Civ3, Civ4, Civ5, Warlords, Beyond the Sword, Sid Meier, GalCiv, Turn-Based Strategy</itunes:keywords>
-		<itunes:author>Apolyton CS (https://apolyton.net)</itunes:author>
+		<title>PolyCast</title>
+		<itunes:subtitle>A Civilization Podcast Focused on Game Strategy</itunes:subtitle>
+		<description>PolyCast is made up of a bi-weekly, monthly, two bi-monthly and a recurring Civilization podcast. PolyCast with co-hosts CanusAlbinus, Makahlua, TheMeInTeam and MegaBearsFan cover game strategy. Entertaining and informing Civ.</description>
+		<itunes:keywords>Sid Meier, Sid Meier's Civilization, Civilization VII, Civilization VI: Leader Pass, Civilization VI: New Frontiers Pass, Civilization VI: Gathering Storm, Civilization VI: Rise and Fall, Civilization VI, Civilization: Beyond Earth - Rising Tide, Civilization: Beyond Earth, Civilization V: Brave New World, Civilization V: Gods and Kings, Civilization VI, Civilization, Civ, Civ4, Civ5, Civ6, Civ7, CivRev, Warlords, Beyond the Sword, Sid Meier, GalCiv, Turn-Based Strategy, PolyCast, ModCast, RevCast, SCivCast, TurnCast, Firaxis, 2K</itunes:keywords>
+		<itunes:author>The PolyCast.Net</itunes:author>
 		<itunes:owner>
-			<itunes:name>Dan Quick</itunes:name>
-			<itunes:email>dquick@superaje.com (Dan Quick)</itunes:email>
+			<itunes:name>CanusAlbinus</itunes:name>
+			<itunes:email>canusalbinus@gmail.com (CanusAlbinus)</itunes:email>
 		</itunes:owner>
 		<managingEditor>thepolycast@gmail.com (PolyCast Team)</managingEditor>
-		<webMaster>dquick@superaje.com (Dan Quick)</webMaster>
+		<webMaster>canusalbinus@gmail.com (CanusAlbinus)</webMaster>
 		<link>https://thepolycast.net/</link>
-		<itunes:image href="https://polycast.civfanatics.com/images/polycast_classic.jpg" />
+		<itunes:image href="https://polycast.civfanatics.com/images/polycast_logo300.jpg" />
 		<image>
-			<url>https://polycast.civfanatics.com/images/polycast_classic.jpg</url>
+			<url>https://polycast.civfanatics.com/images/polycast_logo140.jpg</url>
 			<title>PolyCast</title>
-			<link>https://thepolycast.net</link>
+			<link>https://thepolycast.net/</link>
 			<width>144</width>
-			<height>82</height>
+			<height>91</height>
 			<description>PolyCast</description>
 		</image>
-		<itunes:category text="Games &amp; Hobbies" />
+		<itunes:category text="Leisure" />
+		<itunes:category text="Video Games" />
 		<language>en-us</language>
-		<copyright>Copyright 2006-2017 Apolyton Civilization Site</copyright>
+		<copyright>Copyright 2006-2024 ThePolyCast.Net</copyright>
 		<itunes:explicit>no</itunes:explicit>
-		<pubDate>Wed, 16 Nov 2016 16:11:25 -0500</pubDate>
+		<pubDate>Mon, 30 Sep 2024 06:00:00 -0400</pubDate>
+
+
+		<item>
+			<title>PolyCast 440: PAX and Direct</title>
+			<description>The fourteenth episode of season 18 of the PolyCast. Topics include the Nintendo Direct Trailer for Civ VII, the PAX West Developer Panel, Announcements for upcoming streams and events, the Denuvo Controversy, and the potential for Villainous AI Leaders.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>55:08</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Mon, 30 Sep 2024 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode440.mp3" length="44924307" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season18/episode440.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 439: Something to Believe In - Part 2</title>
+			<description>The thirteenth episode of season 18 of the PolyCast. Topics include the second half of our coverage of the gameplay reveal of Civilization VII, including its Civilizations, Cities, Army Commanders, Units, and Terrain.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:00:52</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Wed, 4 Sep 2024 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode439.mp3" length="53118077" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season18/episode439.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 438: Something to Believe In - Part 1</title>
+			<description>The twelfth episode of season 18 of the PolyCast. Topics include the death of the 2K Launcher, the August Challengle of the Month, Rotating Redux, and the gameplay reveal of Civilization VII, including its Ages, Crises, Leaders, Civics, Civic and Tech Trees, Governments, and Diplomacy Mechanics.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:04:42</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Thu, 29 Aug 2024 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode438.mp3" length="57229551" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season18/episode438.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 437: Starting to Get Rolling</title>
+			<description>The eleventh episode of season 18 of the PolyCast. Topics include the upcoming August 20th Gameplay Reveal of Civilization VII, Firaxis's Study the Past videos, the July Challenge of the Month, Live Yongle Reaction, AI Naval strategy, One Unit-per-tile vs. Stacks of Doom in Civ7, suggested Civ7 Unique Units.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:01:08</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 17 Aug 2024 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode437.mp3" length="51642549" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season18/episode437.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 436: They Say Strategy is Dying</title>
+			<description>The tenth episode of season 18 of the PolyCast. Topics include Firaxis's Study the Past videos, Old World's new Behind the Throne DLC, a study gamers about interest in strategy games, the June Challenge of the Month, Terra Incognita, and things we don't want to see in Civilization VII.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:25:03</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Thu, 8 Aug 2024 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode436.mp3" length="69611403" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season18/episode436.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 435: So It Shall Be</title>
+			<description>The ninth episode episode of season 18 of the PolyCast. Topics include the Announcement of Civilization VII, Sales, Release Date Speculation, and the May Challenge of the Month, Reach for the Heavens.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:00:29</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Wed, 31 Jul 2024 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode435.mp3" length="52284364" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season18/episode435.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 434: Zip! Give It To Me!</title>
+			<description>The eighth episode episode of season 18 of the PolyCast. Topics include the release of Alpha Centauri on Steam, May's Chellenge of the Month, Reach for the Heavens, progressively decreasing game speed in Civs 4, 5, 6, and 7, our favorite policy cards, and little things from older games we want to see in Civilization VII.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:15:29</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Thu, 18 Jul 2024 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode434.mp3" length="64530181" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season18/episode434.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 433: Fringe Theories</title>
+			<description>The seventh episode episode of season 18 of the PolyCast. Topics include the 25th Anniversary of Call to Power, whether Real Life is actually a 4X simulator, the most important Quality of Life mods for CIvilization VI, Movement Rules from Civ5 and Civ6 compared, and little things from older games we want to see in Civilization VII.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:07:09</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Wed, 10 Jul 2024 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode433.mp3" length="57979063" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season18/episode433.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 432: The Relation is Tangential</title>
+			<description>The sixth episode episode of season 18 of the PolyCast. Topics include some feedback from Episode 428, the March Challenge of the Month, the Ides of March, and the April Challege of the Month, Three Stars Each, Civilization VI as experienced by the first Neurolink Patient, Firaxis's 2024 April Fools Day Joke, the release of Millennia, and many tangents.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:11:57</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Wed, 8 May 2024 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode432.mp3" length="63113787" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season18/episode432.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 431: Daylight Savings</title>
+			<description>The fifth episode episode of season 18 of the PolyCast. Topics include the March Challenge of the Month, the Ides of March, some information about the Civilization Mobile Game, Millennia's release date and a Developer Diary about Ages, Large-Language Model Simulations tending toward violence, Civ4 Nationality vs. Civ6 Loyalty, and group victories., the 25th Anniversary of Alpha Centauri's Release, and where and when to build Government Plazas.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:08:25</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 23 Mar 2024 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode431.mp3" length="69291795" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season18/episode431.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 430: Historical Anecdotes</title>
+			<description>The fourth episode episode of season 18 of the PolyCast. Topics include the February Challenge of the Month, the Head of Cyrus, our experiences with the Millennia Demo, the 25th Anniversary of Alpha Centauri's Release, and where and when to build Government Plazas.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:05:13</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tue, 27 Feb 2024 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode430.mp3" length="63746092" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season18/episode430.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 429: The Show Where We Talk about Millennia</title>
+			<description>The third episode episode of season 18 of the PolyCast. Topics include Humankind's George Sand Update, further discussion of the Robot Revolution Challenge of the Month, the Millennia Demo Announcement and Experiences, and two Millennia Developer Diaries.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:01:48</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tue, 20 Feb 2024 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode429.mp3" length="59705085" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season18/episode429.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 428: Freedom?</title>
+			<description>The second episode episode of season 18 of the PolyCast. Topics include an Ara: History Untold Game Overview and Developer Diary, the January Challenge of the Month, Robot Revolution, a paper about Freedom as a concept in the Civilization Games, and games to try when you need a break from Civilization.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:13:46</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tue, 13 Feb 2024 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode428.mp3" length="95068858" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season18/episode428.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 427: First SMAC of the Year</title>
+			<description>The first episode of season 18 of the PolyCast. Topics include the Civilization VI Symphony in Korea, the December 2023 Challenge of the Month, the Seven Seas, an Alpha Centauri open source remake project, Alpha Centauri as a self-healing tool, and the best wonders in Civilization VI.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:00:42</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tue, 6 Feb 2024 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode427.mp3" length="52550432" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season18/episode427.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 419: News, News, and More News</title>
+			<description>The sixth episode of season 17 of the PolyCast. Topics include the Rulers of England Developer Livestream, Civilization VI's addition to xBox Game Pass, Firaxis's April Fools joke, Christopher Tin at the Classic FM Hall of Fame, the patch notes for April 2023's Patch, and Atari's reaquiring of MicroProse and Infograms.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>59:49</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 5 Aug 2023 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season17/episode419.mp3" length="47575413" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season17/episode419.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 418: We Really Said Something!</title>
+			<description>The fifth episode of season 17 of the PolyCast. Topics include the Great Builder Pack's release, the Rulers of England Pack preview, another discussion on whether Civilzation is a history simulator or a board game, the Korean playerbase's reaction to Sejong, and which leaders need a nerf according to GameRant.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:27:50</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 12 Jul 2023 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season17/episode418.mp3" length="71672107" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season17/episode418.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 417: Strategy Game Nostalgia</title>
+			<description>The fourth episode of season 17 of The PolyCast. Topics include the Firaxis Studio News, the Soft Announcement of CivilizatioN VII, the Civ VI Rulers of the Sahara Developer Stream and Release Notes, and a List of the 50 Favorite Strategy Games of All Time.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:56:14</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 11 Jun 2023 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season17/episode417.mp3" length="55508530" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season17/episode417.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 416: Let Us Trade Maps!</title>
+			<description>The third episode of season 17 of The PolyCast. Topics include the Civ VI Rulers of the Sahara, Sequels in Strategy Gaming, Modern Forts, Diplomacy Improvement Ideas, Situational Units, and yet more complaints about the 2K Launcher.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:02:15</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Thu, 1 Jun 2023 06:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season17/episode416.mp3" length="61377773" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season17/episode416.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 415: We Lost the Game</title>
+			<description>The second episode of season 17 of The PolyCast. Topics include the Civ VI Rulers of China, Aspyr Delays, Alpha Centauri, Spiffing Brit vs. God, Gamebreaking Leaders, and National Park borders.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:07:00</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Wed, 24 May 2023 12:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season17/episode415.mp3" length="66211059" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season17/episode415.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 414: Nerve Staplers are NOT Still in Vogue</title>
+			<description>The first episode of season 17 of The PolyCast. Topics include the Civ VI Leader Pass 3, Alpha Centauri, FreeCol, Score Victory, Additional Victories, and Negative Civ Traits.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:02:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Fri, 19 May 2023 00:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season17/episode414.mp3" length="59655888" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season17/episode414.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 413: Christmas Special</title>
+			<description>The eighteenth episode of season 16 of The PolyCast. Topics include the Civ VI Leader Pass, the Civ Give 2022, Ara, Master of Magic, and an Ed Beach interview.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:14:47</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 29 April 2023 00:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode413.mp3" length="75943853" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode413.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 412: When We Thought It Was Over</title>
+			<description>The seventeenth episode of season 16 of The PolyCast. Topics include the Civ VI Leader Pass, Julius Caesar, Developer Livestreams, Together We Rule, and a tweet by Soren Johnson.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:47:25</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Mon, 6 February 2023 00:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode412.mp3" length="39632102" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode412.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 411: We Left the Ladder In, Right?</title>
+			<description>The sixteenth episode of season 16 of The PolyCast. Topics include Solium Innfernum, Alpha Centauri, Potential New DLC, Great People, and Warrior Monks.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:55:13</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Wed, 1 February 2023 00:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode413.mp3" length="52883680" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode411.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 410: Geese Are Nasty, Nasty Birds</title>
+			<description>The fifteenth episode of season 16 of The PolyCast. Topics include The Lost Birds, GDC, Railroads, Nomadic Civilizations, Barbarians, and More Birds.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:00:19</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Wed, 7 December 2022 00:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode410.mp3" length="60203008" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode410.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 409: Submitted for Peer Review?</title>
+			<description>The fourteenth episode of season 16 of The PolyCast. Topics include Tortoises, Patch Notes, Merchandise, Hacking at 2K, Managerial Skills, Queen Elizabeth II, and Day of Defeat.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:55:07</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 12 November 2022 12:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode409.mp3" length="62234100" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode409.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 408: Why Do Anything When You Can Pillage?</title>
+			<description>The thirteenth episode of season 16 of The PolyCast. Topics include Spinoff Ideas, <em>Together We Rule</em>, and CivMD's Guide to Domination Victory.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:59:26</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 22 October 2022 12:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode408.mp3" length="58286632" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode408.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 407: They Deleted Our Topic!</title>
+			<description>The twelfth episode of season 16 of The PolyCast. Topics include Flooding, UnCiv, Revolt Time, Civilizations, Policy Cards, Religious Options, and Deleted Topics.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:47:48</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Fri, 9 September 2022 12:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode407.mp3" length="49434754" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode407.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 406: It's A Lot Better Than Watergate</title>
+			<description>The eleven episode of season 16 of The PolyCast. Topics include Beyond Earth 2 rumors, xBox Patches, Civs 1 and 2 on GOG, Flooding, and Basil II.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:09:57</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Mon, 5 September 2022 12:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode406.mp3" length="69748675" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode406.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 405: Unless You Count the Launcher</title>
+			<description>The ten episode of season 16 of The PolyCast. Topics include time zones, the Lost Birds, Boring Endgames, and Breaking the Game.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:51:04</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Fri, 2 September 2022 12:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode405.mp3" length="50643616" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode405.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 404: Podcast Not Found</title>
+			<description>The ninth episode of season 16 of The PolyCast. Topics include a new baby, FreeCiv, Monetization, Five-Second Turn Timers, and Soren Johnson's Old World.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:04:28</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Mon, 29 August 2022 12:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode404.mp3" length="75279639" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode404.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 403: 100 Turns to the Next District</title>
+			<description>The eighth episode of season 16 of The PolyCast. Topics include Industry Mergers, Ara: History Untold, Production in Civ 6, Requests for Civ 7, and Random Thoughts on Hearts of Iron VI.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:26:29</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Fri, 26 August 2022 12:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode403.mp3" length="114390282" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode403.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 402: Straight Into The Salt</title>
+			<description>The seventh episode of season 16 of The PolyCast. Topics include Old World on Steam, the Loss of Community Members, Interactivity with Civ VI, Single Player Hotseat, Defensive Civs, and Distinctive Sounds.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:04:37</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Mon, 22 August 2022 12:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode402.mp3" length="85072525" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode402.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 401: No Independent Texas, Please</title>
+			<description>The sixth episode of season 16 of The PolyCast. Topics include Civilization in the Strong Museum, Great Scientists, Over Randomization, AI's, and Unlikely New Civilizations.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:09:02</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Fri, 19 August 2022 12:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode401.mp3" length="88534295" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode401.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 400: All's Fair in Love and Civilization</title>
+			<description>The fifth episode of season 16 of The PolyCast. Topics include our 400th episode, diplomacy in Civ III, and whether or not Civ IV, Civ V, and Civ: BE are worth playing in 2022.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:16:24</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Mon, 15 August 2022 12:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode400.mp3" length="71794723" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode400.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 399: We Play Other Games, Too</title>
+			<description>The fourth episode of season 16 of The PolyCast. Topics include always online vulnerablility, merits of Civ 4 and Civ 5, and strategic resources.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:15:04</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Fri, 12 August 2022 12:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode399.mp3" length="84682149" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode399.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 398: Scouts Don't Count as Military</title>
+			<description>The third episode of season 16 of The PolyCast. Topics include 2K Launcher updates, the Steam Deck, "New Ways" to Play, Multiplayer, and the Top 10 Bad Ideas in Civilization VI.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:09:09</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Mon, 8 August 2022 12:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode398.mp3" length="85058997" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode398.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 397: We Had to Walk Uphill Both Ways</title>
+			<description>The second episode of season 16 of The PolyCast. Topics include Illicit Modder Bans, Developer Retrospectives, the Top 10 Good Ideas in Civ 6, and Listener Feedback.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:09:09</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Fri, 5 August 2022 12:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode397.mp3" length="90931021" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode397.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast 396: Objective Performance Metrics for Civilization at School</title>
+			<description>The first episode of season 16 of The PolyCast. Topics include Anton Strenger, Lingering Questions, Civ in the Classroom, Agendas, and Tiered Buildings.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:03:45</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Mon, 1 August 2022 13:00:00 -0000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season16/episode396.mp3" length="83529591" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season16/episode396.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 395: Nobody Wants Your Stupid Launcher</title>
+			<description>The twentieth episode of season 15 of The PolyCast. Topics include the Stupid Launchers, TheCivGive2021, a Top 10 List, Mod Availablitiy, and Dams in Civ 6.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:54:55</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tue, 28 December 2021 00:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode395.mp3" length="70177166" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode395.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 394: Eisenhower</title>
+			<description>The nineteenth episode of season 15 of The PolyCast. Topics include the Score Victory, History Respawned, the Faith Economy, and American Options for Civ 7.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:54:40</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 20 November 2021 00:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode394.mp3" length="90751106" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode394.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 393: Of Portugal and Feitorias</title>
+			<description>The eighteenth episode of season 15 of The PolyCast. Topics include the 2018 GDC Talk on Civ 1, the Opening Gambit, a Difficulty Poll, and a Portugal Strategy Guide.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:53:56</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 30 October 2021 00:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode393.mp3" length="42857389" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode393.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 392: The Good Old Days</title>
+			<description>The seventeenth episode of season 15 of The PolyCast. Topics include the 30 Year Anniversary Video, a New Yorker Review of Sid Meier's Memoir, Unpopular Opinions , and a Civilization 2 retrospective.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:56:20</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 16 October 2021 00:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode392.mp3" length="55323733" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode392.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 391: Civilization Adjacent Titles</title>
+			<description>The sixteenth episode of season 15 of The PolyCast. Topics include the New Frontier Pass for iOS, True Co-op Discussions, Leader Rankings, and a Civilization 1 retrospective.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:49:49</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 25 September 2021 00:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode391.mp3" length="83959298" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode391.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 390: Civ Turns "The Big 3-0"</title>
+			<description>The fifteenth episode of season 15 of The PolyCast. Sid Meier's Civilization celebrates the 30th anniversary of its original release this month, and we talk about the history of the game and its future.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:07:48</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tues, 7 September 2021 00:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode390.mp3" length="65095775" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode390.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 389: How Far Will Humankind Push Civ?</title>
+			<description>The fourteenth episode of season 15 of The PolyCast. Guest host TheChrisD and MegaBearsFan give their impressions of the recently-released Civ-competitor Humankind, and we all discuss the news of Firaxis searching for a new narrative lead for an un-announced historic strategy game.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:11:37</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tues, 24 August 2021 23:30:00 -05000</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode389.mp3" length="68765049" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode389.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 388: Romans are the Yankees of Civilization</title>
+			<description>The thirteenth episode of season 15 of The PolyCast. Will we be playing Civ VI on the Steam Deck? How does epic speed change how we play the game?</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:55:33</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 8 August 2021 21:15:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode388.mp3" length="67033006" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode388.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 387: If We Haven't Said So Already, A.I. Is Hard</title>
+			<description>The twelfth episode of season 15 of The PolyCast. There are still lingering issues with Civ VI that we hope Firaxis will address.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:09:49</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 25 July 2021 16:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode387.mp3" length="67033006" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode387.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 386: Machine Learning</title>
+			<description>The eleventh episode of season 15 of The PolyCast. We discuss the possibility (and hopes) of new-fangled machine learning algorithms being applied to the development of Civ VII, and perceived imbalances of Tanks in Civ VI's April patch.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:15:38</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 27 June 2021 19:30:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode386.mp3" length="72623214" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode386.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 385: Perverse Incentives</title>
+			<description>The tenth episode of season 15 of The PolyCast. The release of Civ VI Anthology is one more hint that Firaxis is done with Civ V, and we discuss more about how it matches up against Civ V, and how it performs as a "history simulator".</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:10:39</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 13 June 2021 17:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode385.mp3" length="67824210" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode385.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 384: No Firaxis, thank YOU!</title>
+			<description>The ningth episode of season 15 of The PolyCast. Firaxis is rumored to have several new games in development, as they also thank the Civ community for playing Civ VI.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:08:50</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tues, 1 June 2021 23:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode384.mp3" length="66082577" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode384.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 383: Cats Need Petting Too!</title>
+			<description>The eigth episode of season 15 of The PolyCast. We talk about the full patch list for the New Frontiers April patch, along with an undocumented new feature.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:07:03</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Mon, 3 May 2021 23:30:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode383.mp3" length="64840823" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode383.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 382: Trebuchets And Foolish April Launchers</title>
+			<description>The seventh episode of season 15 of The PolyCast. The final announced New Frontiers update is coming, and we discuss what will be in it.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:20:49</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Fri, 23 April 2021 10:15:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode382.mp3" length="77582740" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode382.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 381: More Nau Now!</title>
+			<description>The sixth episode of season 15 of The PolyCast. The new Portugal pack was released for the New Frontiers DLC Pass, and we discuss the changes introduced.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:00:57</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Wed, 7 April 2021 14:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode381.mp3" length="58522523" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode381.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 380: Marshes, Marshes, Marshes... And More Zombies!</title>
+			<description>The fifth episode of season 15 of The PolyCast. We discuss the preview of the March 2021 update for the New Frontiers patch, including the new Portugal civilization. We also review more detailed strategies for Lady Six Sky of the Maya.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:13:37</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 21 Mar 2021 23:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode380.mp3" length="70652147" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode380.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 379: Everybody In The Pool</title>
+			<description>The fourth episode of season 15 of The PolyCast. We discuss the recently-released New Frontiers update for February, including the barbarians clans mode, and speculating on the future of Civ VI.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:05:46</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 7 Mar 2021 21:30:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode379.mp3" length="63150175" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode379.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 378: Power Creep</title>
+			<description>The third episode of season 15 of The PolyCast. We discuss the recently-released New Frontiers update for January, and information regarding the upcoming February and April patches, including barbarian city states and the possibility that A.I.s might finally start using air units! There were some technical issues for this recording that affected sound quality and volume. I tried my best to level everything, but it only helped so much. I apologize for the poor quality.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:18:48</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 21 Feb 2021 17:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode378.mp3" length="75658429" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode378.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 377: Good Morning, Vietnam!</title>
+			<description>The second episode of season 15 of The PolyCast. We discuss the previews of the new Vietnam civilization and corporations game mode.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:14:07</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tues, 26 Jan 2021 22:15:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode377.mp3" length="64348465" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode377.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 376: A Hill To Die On?</title>
+			<description>The first episode of season 15 of The PolyCast. Co-hosts discuss whether pillaging should have a downside, and our thoughts on recent balance changes.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:08:26</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tues, 12 Jan 2021 21:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season15/episode376.mp3" length="71428270" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season15/episode376.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 375: We're Already Checked-Out For the Holidays</title>
+			<description>The twenty-fifth and final episode of Season 14 of The PolyCast. We preview the upcoming December 2020 New Frontiers update, as well as tips regarding Heroes, opinions of the game's art style, and tips for conquering another continent.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:11:17</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Mon, 13 December 2020 00:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode375.mp3" length="68444067" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode375.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 374: It's Not Balanced, and That's OK</title>
+			<description>The twenty-fourth episode of Season 14 of The PolyCast. We cover impressions, tips, and tricks for the new Babylon civilization, and discuss whether balance is really necessary in Civilization.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:49:44</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Mon, 30 November 2020 23:49:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode374.mp3" length="47754241" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode374.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 373: Eureka!</title>
+			<description>The twenty-second episode of Season 14 of The PolyCast. We discuss the upcoming November 2020 New Frontiers patch, including the addition of the new Babylon civilization.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:30:11</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tues, 17 November 2020 16:30:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode373.mp3" length="86582623" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode373.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 372: Patches and Peeves</title>
+			<description>The twenty-first episode of Season 14 of The PolyCast. We discuss the October 2020 New Frontiers patch, a possible leak of the next DLC courtesy of Nintendo, and exploits in the Pirats scenario.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:05:24</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 1 November 2020 18:30:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode372.mp3" length="62784875" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode372.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 371: Hitting OP DLC with the Nerf bat</title>
+			<description>The twentieth episode of Season 14 of The PolyCast. We preview the October 2020 New Frontiers patch, and discuss how OP Byzantium and Gran Columbia are, and how to maybe nerf them.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:03:00</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tues, 20 October 2020 17:30:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode371.mp3" length="60509102" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode371.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 370: Surround and Pound</title>
+			<description>The nineteenth episode of Season 14 of The PolyCast. Dicussing early impressions of the new Gaul civilization and Statue of Zeus wonder.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:53:07</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 4 October 2020 15:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode370.mp3" length="98147984" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode370.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 369: Tangents as big as Texas</title>
+			<description>The eighteenth episode of Season 14 of The PolyCast. Firaxis releases details of the September 2020 New Frontiers DLC pass content, and Sid Meier releases a memoir.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:32:43</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 20 September 2020 15:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode369.mp3" length="89021433" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode369.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 368: Parallel Universe where Firaxis Controls Everything</title>
+			<description>The seventeenth episode of Season 14 of The PolyCast. Firaxis announces an August update with a new technology and civic shuffle game option.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:10:54</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 21 August 2020 16:30:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode368.mp3" length="75347478" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode368.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 367: Another Perfectly-Balanced Podcast With No Exploits</title>
+			<description>The sixteenth episode of Season 14 of The PolyCast. More thoughts on the season pass model for Civ VI, and whether we're ready for Civ VII. Also Spiffing Brit once again finds a way to break the game by winning a diplomatic victory without ever founding a single city.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:45:36</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 9 August 2020 17:30:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode367.mp3" length="75347478" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode367.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 366: Super Secret Vampires.</title>
+			<description>The fiftheenth episode of Season 14 of The PolyCast. We discuss the new Ethiopia patch and its Secret Societies game mode, as well as civ parity and urban defenses.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:18:29</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 26 July 2020 15:30:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode366.mp3" length="75347478" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode366.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 365: Pathfinding Woes</title>
+			<description>The fourteenth episode of Season 14 of The PolyCast. Ethiopia was announced as the next Frontier Pass DLC, and we discuss issues with unit pathfinding.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:03:07</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 12 July 2020 17:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode365.mp3" length="60593095" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode365.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 364: No Game Is Complete without Zombies</title>
+			<description>The thirteenth episode of Season 14 of The PolyCast. Discussing June 2020 updates for Civ VI.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:55:48</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 28 June 2020 19:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode364.mp3" length="61271862" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode364.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 363: No Room for Gandhi</title>
+			<description>The twelfth episode of Season 14 of The PolyCast. We talk about the depictions of Gandhi in video games, and forum topics about alliances and the Lahore city state.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:03:49</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 14 June 2020 15:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode363.mp3" length="61271862" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode363.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 362: Good Luck Against Gran Colombia</title>
+			<description>The eleventh episode of Season 14 of The PolyCast. Discussing Simon Bolivar of Gran Colombia from the New Frontiers DLC Pass, as well as other early impressions from the rest of the DLC.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:29:08</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Mon, 1 June 2020 17:30:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode362.mp3" length="85581321" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode362.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 361: New Frontiers</title>
+			<description>The tenth episode of Season 14 of The PolyCast. Discussing the New Frontiers DLC Pass announcement, Maya civilization first look, and other speculation.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:13:20</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 17 May 2020 19:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode361.mp3" length="70411074" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode361.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 360: Just don't play half the game</title>
+			<description>The ninth episode of Season 14 of The PolyCast. Discussing feedback from last episode, as well as talking about the relative balance of starting positions and the use of exploits (and what defines an exploit).</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:29:35</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 10 May 2020 21:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode360.mp3" length="86015581" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode360.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 359: Speculation &amp; Brainstorming</title>
+			<description>The eigth episode of Season 14 of The PolyCast. TheMeInTeam shares his top 3 best and worst things about Civ VI, and we all share our thoughts and ideas regarding speculated DLC and/or expansions to the game.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:43:01</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 26 April 2020 19:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode359.mp3" length="98907532" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode359.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 358: We Do Actually Like This Game, I Promise</title>
+			<description>The seventh episode of Season 14 of The PolyCast. We discuss the top 3 worst and best things about Civ VI, as voted on the Civfanatics forums. Then we share our own worst and favorite things about the game.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:19:48</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 12 April 2020 19:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode358.mp3" length="64933776" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode358.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 356: Working as Intended</title>
+			<description>The fifth episode of Season 14 of The PolyCast. This episode is a continuation of Episode 351 and is dedicated to using governors (an expansion-specific mechanic) and arguably the most important thing: how to win the game.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:48:03</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tues, 25 Mar 2020 00:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode356.mp3" length="84554395" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode356.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 355: Expansion Primer</title>
+			<description>The Fourth episode of Season 14 of The PolyCast. This episode is a continuation of Episode 351 and is dedicated to beginners tips for new features added by the two expansions.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:28:04</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Thu, 20 Mar 2020 23:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode355.mp3" length="84554395" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode355.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 354: The Third Primer</title>
+			<description>The Third episode of Season 14 of The PolyCast. This episode is a continuation of Episode 351 and is dedicated to beginners tips for the mid-game. Topics include Spies, Naval Units, and Air Forces.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:28:04</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Thu, 27 Feb 2020 20:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode354.mp3" length="84554395" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode354.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 353: Back to Console School</title>
+			<description>The Second episode of Season 14 of The PolyCast. This episode is a continuation of Episode 351 and is dedicated to beginners tips for the mid-game. Topics include Districts, Tech and Civics Trees, Wars, Loyalty, Grievances, and Warmonger Penalties.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:33:56</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Thu, 13 Feb 2020 20:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode353.mp3" length="90183147" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode353.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 352: The Road Goes Ever On</title>
+			<description>The First episode of Season 14 of The PolyCast. Topics incude the Twelve Days of Civmas, Favorite Civs, Relics, Getting Better, and Start Location Analysis.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:00:42</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Wed, 5 Feb 2020 18:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season14/episode352.mp3" length="41403413" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season14/episode352.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 351: Console School</title>
+			<description>The Twenty-Third and Final episode of Season 13 of The PolyCast. This Episode is dedicated to basic game tips and strategies and is intended for the new players of Civilization VI joining the community from the newly released console games.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:04:44</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Wed, 21 Jan 2020 09:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode351.mp3" length="54377386" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode351.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 350: Adding It All Together</title>
+			<description>The Twenty-Second episode of Season 13 of The PolyCast. Discussions include Console Releases, Catherine de Medici, the Dificulty of Civilization VI, ScoredCompetition Issues, and the Diplomatic Victory Elimination Thread</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>52:56</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 15 Dec 2019 18:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode350.mp3" length="43626650" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode350.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 349: Unfashionably Late</title>
+			<description>The Twenty-First episode of Season 13 of The PolyCast. Discussions include Common AI Opponents, Civ V vs Civ VI, Unique Units, and Thermonuclear Weapons</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:05:16</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Fri, 29 Nov 2019 18:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode349.mp3" length="46919263" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode349.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 348: Skeleton Crew Edition</title>
+			<description>The twentieth episode of Season 13 of The PolyCast. Discussions include BBC Radio 3, New American Civilization and Alternate Leader Polls, and Per City Penalty Suggestions.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:09:18</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 10 Nov 2019 18:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode348.mp3" length="60690772" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode348.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 347: When Consoles Attack</title>
+			<description>The nineteenth episode of Season 13 of The PolyCast. Discussions include the Civilization VI on PlayStation 4 and Xbox One, an Interview of Sid Meier, Competent AIs, African Civilizations, and the Unique Infrastructure Elimination Thread.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:01:57</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Wed, 23 Oct 2019 18:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode347.mp3" length="50995801" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode347.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 346: Civilization VI - Fortnite Edition</title>
+			<description>The eighteenth episode of Season 13 of The PolyCast. Discussions include the September 2019 Update Patch Notes, the Red Death Game Mode, Anti-Cavalry Units, and Least Favorite Neighbors.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:14:07</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Wed, 25 Sep 2019 18:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode346.mp3" length="61696758" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode346.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 345: Endless Human</title>
+			<description>The seventeenth episode of Season 13 of The PolyCast. Discussions include the September 2019 Update, Southeast Asian Civilizations, the announcement of Humankind, District Discounts, and Civilzation Unique Abilities.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:26:46</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tue, 10 Sep 2019 18:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode345.mp3" length="71068010" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode345.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 344: Just Shut Up and Go With It</title>
+			<description>The sixteenth episode of Season 13 of The PolyCast. Discussions include the Future of PolyCast, Articles about Maps, Peace Accords, and Upcoming PAX Panels, Unique Unit Ranking, Alpha Centauri, and a Survey from 2K.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:42:46</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tue, 27 Aug 2019 18:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode344.mp3" length="84688645" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode344.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 343: District Ten</title>
+			<description>The fifteenth episode of Season 13 of The PolyCast. Discussions include Rise and Fall on iOS, District Repair Costs, the Best City-States, and the aggressiveness of Free Cities.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>54:30</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 17 Aug 2019 18:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode343.mp3" length="42680494" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode343.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 342: She Likes Big Walls and She Cannot Lie</title>
+			<description>The fourteenth episode of Season 13 of The PolyCast. Discussions include a review of the June Patch, developer insights into the game, and city siege questions.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>60:00</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 20 Jul 2019 18:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode342.mp3" length="48894547" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode342.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 341: Patch Notes Mania</title>
+			<description>The thirteenth episode of Season 13 of The PolyCast. Discussions include the June 2019 Civilization VI patch notes and its undocumented changes.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>59:23</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 6 Jul 2019 18:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode341.mp3" length="41890614" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode341.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 340: The Troll Patch</title>
+			<description>The twelfth episode of Season 13 of The PolyCast. Discussions include the June 2019 Civilization VI patch, a Joke Expansion Change List, the Difficulty Jump between King and Emperor Levels, and the Paradox/Sims DLC Model.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>60:42</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 22 Jun 2019 18:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode340.mp3" length="46343015" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode340.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 339: First Party Content</title>
+			<description>The eleventh episode of Season 13 of The PolyCast. Discussions include Take Two's Financial Health, a Five-Year Civ 5 Game, Save Game Returning Rates, Pantheon Viability, and Early District Rushing.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>60:00</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 8 Jun 2019 18:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode339.mp3" length="42803151" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode339.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 338: Are Disasters Awful</title>
+			<description>The tenth episode of Season 13 of The PolyCast. Discussions include Switch Sales, In-game Tension, Aid Requests, Disasters, National Wonders, and Start Bias.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>59:06</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 25 May 2019 18:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode338.mp3" length="42241151" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode338.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 337: Speaking of the Desert</title>
+			<description>The ninth episode of Season 13 of The PolyCast. Discussions include the new World Builder, Questions of the Difficulty of Civilization VI, Judging the Quality of Victory, and the top ten Civiliztions for Science Victory.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>61:39</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 11 May 2019 18:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode337.mp3" length="48033803" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode337.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 336: Flashbacks of Stacks of Doom</title>
+			<description>The eighth episode of Season 13 of The PolyCast. Discussions include the Great Works and Trade Hotfix, Broken Barbarian Raids, Movement Speed for Railroads, AI Air Power and Hwacha Usage, Civilization Delegation Gifts, Storm Graphics Complaints, and Trolling with Valletta.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>60:00</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 20 Apr 2019 16:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode336.mp3" length="37562608" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode336.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 335: Antartic Late Summer Edition</title>
+			<description>The Seventh episode of Season 13 of The PolyCast. Discussions include the Newly Released Antarctic Late Summer Patch, Steam-Switch Cross Platform Saves, Balance Discussions, Fisheries, and Coastal Cities. </description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>60:00</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 13 Apr 2019 19:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode335.mp3" length="45846671" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode335.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 334: Features Deferred</title>
+			<description>The Sixth episode of season 13 of The PolyCast. Discussions include 2K's EULA, City Wall Strength Features Neglected, Features for Civilization IV, Science Victory, Settler Strategy, and Unit Upgrade Paths</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>60:00</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 30 Mar 2019 22:00:00 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode334.mp3" length="40524872" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode334.mp3</guid>
+		</item>
+		<item>
+			<title>ModCast #82: We've Come Full Circle</title>
+			<description>The crew along with guest co-hosts JNR13 and thecrazyscotsman discuss the Mappa Mundi and Anno Domini mods for Civilization VI.</description>
+			<itunes:author>The PolyCast (https://thepolycast.net)</itunes:author>
+			<itunes:duration>35:53</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 24 Mar 2019 18:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/modcast/season11/episode82.mp3" length="19825734" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/modcast/season11/episode82.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 333: BugFest</title>
+			<description>The Fifth episode of season 13 of The PolyCast. Discussions include Balance, CO2 Production, Kamikaze Apostles, Steam Review Bombing, Grievances, Rockbands, and the Nature of Big Ben.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>60:44</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 16 Mar 2019 18:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode333.mp3" length="45150059" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode333.mp3</guid>
+		</item>
+		<item>
+			<title>ModCast #81: He Will Have to Edit That Out</title>
+			<description>The crew along with guest co-hosts JNR13 and thecrazyscotsman discuss the new features of Civilization VI: Gathering Storm, including the mod manager, the jersey system, and the modifier attachment system. Mods examined include Apostles vs. Rock Bands, Balanced Climate Change, and Renewable Energy reworks.</description>
+			<itunes:author>The PolyCast (https://thepolycast.net)</itunes:author>
+			<itunes:duration>01:01:46</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tue, 12 Mar 2019 14:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/modcast/season11/episode81.mp3" length="38062427" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/modcast/season11/episode81.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 332: The Pounds of Drummaker</title>
+			<description>The fourth episode of season 13 of The PolyCast. Discussions include Civilization VI's newly released expansion pack, Gathering Storm.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>01:06:03</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 02 Mar 2019 18:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode332.mp3" length="42562496" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode332.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 331: The Penultimate Week</title>
+			<description>The third episode of season 13 of The PolyCast. Discussions include the Phoenica, Eleanor of Aquitaine, and Civilization VI's new features.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:57:51</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 16 Feb 2019 12:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode331.mp3" length="36940584" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode331.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 330: Dannisaries</title>
+			<description>The second episode of season 13 of The PolyCast. Discussions include the new Swedish and Ottoman Civilizations.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:59:19</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 3 Feb 2019 12:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode330.mp3" length="50580902" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode330.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 329: Beginning with the Mali</title>
+			<description>The first episode of season 13 of The PolyCast. Discussions include the Mali and Civ 5 staff news.</description>
+			<itunes:author>thepolycast@gmail.com</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 20 Jan 2019 12:00:00 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season13/episode329.mp3" length="47958391" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season13/episode329.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Christmas Special 2018: We Four Gamers Gather Once More</title>
+			<description>In 'Segment #1' (03m20s) one, two, three questions directed at one panelist from 'sadsquid'. In 'Segment #2' (03m20s), direct to any-and-all panelists are two interrelated questions concerning Civilization VI. In 'Segment #3' (12m57s) it's the first knowings of the Maori, coming to CivVI as part of its Gathering Storm expansion pack. Next in 'Segment #4' (20m07s) one, two, three and four questions for one panelist in particular from 'Morningcalm'. In 'Segment #5' (23m51s), the environmental effects that Gathering Storm is to bring to Civilization VI bookends a connection to the return of the World Congress. In 'Segment #6' (33m28s) one, two, three, four listeners have their questions for a specific panelist answered. Next in 'Segment #7' (40m00s) on the revelation that Canada will be a civ in Civilization for the first time via CivVI expansion Gathering Storm is taken in. Then in 'Segment #8' (44m53s), what to make of what is already known about scored competitions within the up-and-returning-for-CivVI World Congress.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:56:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Mon, 24 Dec 2018 12:37:09 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/christmas2018.mp3" length="54719173" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/christmas2018.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 328: Not Just a Lame Clip Show XXX</title>
+			<description>Under 'Miscellaneous' (00m37s), what to make of a Civilization survey emailed to some players by publisher 2K Games (recorded for Episode 313). Then in the 'Research Lab' (40m43s), analyzing the fifth, and final, set of suggestions for Civilization VI gameplay post-Rise and Fall expansion release as empty entities (recorded for Episode 314).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>01:18:16</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 23 Dec 2018 12:45:44 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode328.mp3" length="75146510" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode328.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 327: End of an Era</title>
+			<description>Eighteen guests join the regular panelists to discuss not only their first impressions of Civilization VI expansion pack Gathering Storm following its public announcement, but also to say farewell to the show's co-founder and lead panelist. In order of appearance: 'Drusain' and 'WarningU2' (01m28s); 'Eag' and 'AlphaShard' (16m12s); 'kalleina' and 'bcaiko' (21m29s); 'Thalassicus', 'SupremacyKing2' and 'SeelingCat' (35m35s), 'Darsnan' (45m08s), 'stormtrooper412' and 'MikeDoubleU' (51m49s), 'The Buzzing' and Jonah Falcon (63m12s), 'Rubin' (72m26s) and 'NewEarthRelic', 'Alexander' and 'Cartimandua' (81m42s). Then it's 'Messages' (98m10s) with pre-recorded messages from eight other past recurring guests (98m10s) and in the 'Closing' (107m41s), the four regular panelists share their thoughts on 'Transition 2019'.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>02:12:49</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Wed, 13 Dec 2018 22:11:53 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode327.mp3" length="132585805" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode327.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 326: Not Just a Lame Clip Show XXIX</title>
+			<description>In the 'Senate' (00m37s), focusing on Civilization VI gameplay through a multiplayer lens on Government types (recorded for Episode 314). In the 'Research Lab' (31m41s), breaking down to sum up a consideration to have Districts constructed as empty entities (recorded for Episode 323). Then in the 'Theatre' (55m02s), an account of an ongoing game involving early war, a mountain pass and a contemplative outcome (recorded for Episode 325).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 02 Dec 2018 20:35:18 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode326.mp3" length="57596822" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode326.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 325: Constituent Parts</title>
+			<description>In the 'Senate' (01m57s), what is the first district you construct in a Civilization VI city you've just conquered... and are keeping, of course. In the 'Research Lab' (08m15s), from a general to an in-depth suggestion to reimagine, then reimplement, Barbarian mechanics in the Civ series. Under the 'Open Mic' (27m08s), responding to critical and not-so-critical comments from the Civilization community on Episode 323. Then in 'Forum Talk' (33m13s), much to consider with respect to what difficulty level means for CivVI and the series beyond (recorded for Episode 322).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 25 Nov 2018 20:49:36 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode325.mp3" length="57599340" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode325.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 324: Not Just a Lame Clip Show XXIII</title>
+			<description>Under 'Miscellaneous' (00m37s), instead of asking how to improve Civilization's Artificial Intelligence (AI) for better gameplay, how the game can be changed to better play around the AI (recorded for Episode 308). Then in 'Forum Talk' (41m19s), reconfiguring your CivVI capital city's Palace, and your civilization's Government Plaza district, to make for more nuanced than passive approaches (recorded for Episode 322).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 18 Nov 2018 11:40:52 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode324.mp3" length="57598912" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode324.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 323: Find That Sweet Spot</title>
+			<description>In 'Forum Talk' (02m18s), putting together the pieces of trade routes and understanding the continued exclusion of Markets and Lighthouses creating one if the other already exists in a city (05m19s) preceed a construct for an eighth Governor (14m47s), all in Civilization VI. In the 'Research Lab' (21m55s), what to make of disguising one's units as belonging to that of another CivVI player, a proposal to improve leader Agendas (27m18s; recorded for Episode 322) and the if, and how, to implement the concept of a Central Bank for a given civilization (33m20s). Under the 'Open Mic' (45m15s), community and subsequent panel follow-up input from Episode 322 on how resource copy counting for improving one's empire in Civilization VI could take lead from Civilization: Beyond Earth. Then in the 'Time Machine' (48m53s), shining the spotlight back on Civilization III as it passes seventeen years since release.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 11 Nov 2018 16:59:04 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode323.mp3" length="57597240" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode323.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Transition 2019 Announcement</title>
+			<description>Effective January 1, 2019, ownership of PolyCast and its four sibling shows is transferring from Daniel 'DanQ' Quick to 'CanusAlbinus'. Listen for further details.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:04:27</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Wed, 07 Nov 2018 20:42:54 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/transition2019_announcement.mp3" length="4258961" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/transition2019_announcement.mp3</guid>
+		</item>
+		<item>
+			<title>ModCast #80: Shake Things Up a Little Bit</title>
+			<description>Under the 'Modding Spotlight' (00m35s), checking back in with the show's guest with what what he's been up to over the past half-year in Civilization VI modding. In the 'Artist Sketchpad' (20m15s), adding Great Athletes to the game (recorded for Episode 72), mixing and matching Japanese Medieval unit art models (23m52s; recorded for Episode 73) and on Armenia and Malaysia for CivVI (27m57s; recorded for Episode 78). In the 'Cartography Room' (31m24s), the 'Better Great Person Screen' for Civilization VI is examined, and a Reverse Island Plates map script for the game is considered (35m08s). In 'Code Corner' (39m26s), four CivVI modding works share the limelight: 'Chrisy15's Civilizations and Leaders', Gedemo's historical and fantastical City States including but not limited to 'Pompeii', 'Camelot' and 'Arkaim' and a Chinese-language based effort to pick a second leader mid-game. Then under 'Miscellaneous' (57m41s), putting forth the idea of having a Civilization VI religion that is based on two or more Pantheons.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>01:12:18</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 04 Nov 2018 16:48:20 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/modcast/season10/episode80.mp3" length="69417544" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/modcast/season10/episode80.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 322: The Dulcet Tones</title>
+			<description>In 'Forum Talk' (03m53s), differing takes on the challenge of not having strategic resources in Civilization VI, how to redress the current status of the game's Battering Ram unit (15m53s) and quantifying one's choice of civilizations by quality of being 'go to' (25m12s; recorded for Episode 319). Then in the 'Theatre' (45m51s), setting the stage for future exploits, Amani the Governor for Loyalty pressure and an Artificial Intelligence taking to the skies.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 28 Oct 2018 17:53:30 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode322.mp3" length="57599748" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode322.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 321: Not Just a Lame Clip Show XXVII</title>
+			<description>In 'Forum Talk' (00m37s), a comprehensive consideration of a proposal for new Victory Conditions in the Civilization series (recorded for Episode 307) leads a call for custom civilizations in VI (37m35s; recorded for Episode 310). Then under 'Miscellaneous' (42m40s), on a Civilization board game that plays first like a board game, then like Civ: A New Dawn (recorded for Episode 303).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 21 Oct 2018 21:47:05 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode321.mp3" length="57596822" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode321.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 320: Random Other Stuff</title>
+			<description>In 'Forum Talk' (02m34s), taking in the suggestion that only building Warriors is the way to go at the outset of a Civilization VI game, responding to the assertion that Appeal is 'irrelevant' (11m03s) and pushing back on how Unique Improvements are destroyed upon capture (17m20s); then, proposing a meshing of Era Score, Alliances and shared victories (24m33s; recorded for Episode 308) and dozens of pages and tens of thousands of pageviews later: 'all quiet' on the Civ front... or is it? (28m30s) In the 'Theatre' (30m21s), past peaceful expansion for present conquest and declaring war on one's self in an Emergency clash? Under the 'Open Mic' (41m50s), asks 'ethassry' during a live recording of the show: '[do] you guys mind[,] and [I] think [I] heard before you do[,] if there was even more micro/speed required in Civ to be a good player' (recorded for Episode 319). Then in the 'News' (46m00s), first the iPad, and now the iPhone: Civilization VI arrives on the cellular mobile platform.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 14 Oct 2018 15:44:50 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode320.mp3" length="57598076" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode320.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 319: What the Heck</title>
+			<description>Under the 'Open Mic' (03m52s), feedback on show content, and a particular regular co-host, in response to the show's three-hundred-and-eighteenth episode. In 'Forum Talk' (12m32s), a call for Civilization VI Dark Ages that meaningful, measured impact on game outcomes and how the use of a Great Felon Great Person pool, or equivalent mechanism, could make managing growing and disperate populations impactful (26m37s). Then in the 'Research Lab' (39m21s), incorporating regions into Civ could make for an improved capacity of gameplay choices (recorded for Episode 306).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 30 Sep 2018 20:39:51 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode319.mp3" length="57598076" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode319.mp3</guid>
+		</item>
+		<item>
+			<title>ModCast #79: Ball of Twine and Duct Tape</title>
+			<description>Under 'Miscellaneous' (02m19s), the state of modding with Civilization VI post Rise and Fall expansion pack as compared to CivV and its first expansion, Gods and Kings preceeds thanks and wishes for CivVI modding editing tools (11m38s). Next under the 'Modding Spotlight' (16m37s), evolution and reflections on 'Religion Expanded', 'Ancient Egyptian Pantheons' and 'Vibrant Waters' amongst others for Civilization VI. Then in the 'Cartography Room' (26m39s), works of Natural Wonders, notably 'Sukritact's Great Blue Hole' and 'Terra Mirabilis' by Deliverator and Chimpan'G, highlights what it brings to CivVI and what there isn't for CivV, followed by the constitution of 'Sukritact's Vercingetorix (Gaul)' civilization (36m07s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:46:47</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 23 Sep 2018 16:30:53 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/modcast/season10/episode79.mp3" length="43348594" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/modcast/season10/episode79.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 318: The Point of No Return</title>
+			<description>In the 'News' (01m34s), soon to play on the Nintendo Switch is Civilization VI, though the announcement appears to have been premature. In 'Forum Talk' (08m47s), using the Shift-and-Enter key combination to bank CivVI production, science and culture is questioned for strategy and suitability; then, the purpose and process of the various district projects in the game (18m04s) and what effects to give to Future Technology and Civics (24m06s). Next in the 'Senate' (34m36s), in light of the Loyalty mechanic used in the Rise and Fall expansion pack for Civilization VI, what is the present status of an Archer rush. Then under 'Miscellaneous' (45m21s), a call that more games like CivVI are 'need'ed on the iPad.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 16 Sep 2018 15:05:43 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode318.mp3" length="57597240" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode318.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 317: The Letters 'F' and 'O'</title>
+			<description>In 'Forum Talk' (02m35s), wondering why Irrigation technology in Civilization VI is an underwhelming dead-end, one's typical ratio of Barracks to Stables in Encampment districts (10m03s), identifying the shortcomings of the game's map and whether to bring back Corporations, Vassal States -- if so, how -- while adding the idea of Trade Nodes in the process (29m21s; recorded for Episode 310). In the 'Theatre' (43m53s), a religious strategy for CivVI Poland is first up, followed by revising a strategy for the game full-stop stemming from a difference in combat mechanics found in Civilization V (45m39s). Then under 'Miscellaneous' (49m02s), a notable eight jobs now available at Civ developer Firaxis Games seem to jive with its owner, publisher 2K Games, looking to add a new series to its property's gaming line-up (53m27s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 02 Sep 2018 21:44:31 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode317.mp3" length="57596822" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode317.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 316: Not Just a Lame Clip Show XXVI</title>
+			<description>In the 'Research Lab' (00m37s), pushing for a 'Cultural Revolution' mechanic (recorded for Episode 291) and branching out the Envoy system present in Civilization VI (16m59s). In 'Forum Talk' (29m42s), which CivVI City States conveys the best bonus for its Suzerain (recorded for Episode 302). Next under 'Miscellaneous' (36m35s), how trading weapons could be done in the context of Civ (recorded for Episode 310). Then under the 'Open Mic' (48m35s), the 2017 Show Feedback Survey results are in, leading to more expected than unexpected input (recorded for Episode 298).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 26 Aug 2018 21:23:57 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode316.mp3" length="57597658" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode316.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 315: Not Just a Lame Clip Show XXV</title>
+			<description>In the 'Research Lab' (00m37s), pushing for a 'Cultural Revolution' mechanic (recorded for Episode 291) and branching out the Envoy system present in Civilization VI (16m59s). In 'Forum Talk' (29m42s), which CivVI City States conveys the best bonus for its Suzerain (recorded for Episode 302). Next under 'Miscellaneous' (36m35s), how trading weapons could be done in the context of Civ (recorded for Episode 310). Then under the 'Open Mic' (48m35s), the 2017 Show Feedback Survey results are in, leading to more expected than unexpected input (recorded for Episode 298).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tue, 31 Jul 2018 00:04:18 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode315.mp3" length="57595150" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode315.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 314: Details to Follow</title>
+			<description>In the 'News' (01m35s), the newest patch for Civilization VI gets more attention for what is removes than what it brings. In the 'Senate' (11m45s), the placing of districts in multiplay gaming is brought to the forefront through prioritization. Next in 'Forum Talk' (26m07s), what taking away from CivVI Era Score could confer (recorded for Episode 306). Then in the 'Research Lab' (36m22s), how Government mechanics could be restructured in Civilization VI in the title's post-Rise and Fall period.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tue, 31 Jul 2018 00:04:17 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode314.mp3" length="57599330" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode314.mp3</guid>
+		</item>
+		<item>
+			<title>ModCast #78: By Chance or By Design</title>
+			<description>In the 'Cartography Room' (01m18s), the 'City States Expanded' Civilization VI MOD by CIVITAS is first on the docket followed by the 'Kushan Empire' by Foulweather and a 'Satrap District' for the Persians by p0kiehl (20m42s; recorded for Episode 76). In the 'Code Corner' (24m50s), making a mark for 'Harder Loyalty and Emergencies' by Tiramisu is followed by 'Real Natural Disasters' by Infixo (28m45s). Under the 'Modding Spotlight' (32m48s), the criteria for a civilization to be considered for inclusion in 'Anno Domini' by regular co-host Rob (R8XFT) (recorded for Episode 76). Then under 'Miscellaneous' (36m28s), the differences and similarities in modding for different versions of Civilization.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:46:47</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 29 Jul 2018 13:27:23 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/modcast/season10/episode78.mp3" length="34412208" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/modcast/season10/episode78.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 313: Appreciate the Gumption</title>
+			<description>In the 'Senate' (03m03s), the 'Governors', 'Espionage' and 'Units' in the second look of multiplay for Civilization VI. Then in 'Forum Talk' (30m56s), a change to Catapult unit classification towards improving the Artifical Intelligence's efforts to capture cities, a hypothetical approach to not chop wood makes way for practical measures to lessen its overabundance, leaving tribal villages untouched (48m53s; recorded for Episode 305) and delaying era progress (54m54s; recorded for Episode 306).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 22 Jul 2018 23:31:06 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode313.mp3" length="57597658" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode313.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 312: Not Just a Lame Clip Show XXIV</title>
+			<description>In the 'Research Lab' (02m05s), the first in a two-part look at a series of suggestions on what should come Civilization VI's way on the heels of its Rise and Fall expansion: Resources and Energy, Envoys and Diplomacy and City Works.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 15 Jul 2018 16:46:51 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode312.mp3" length="57595150" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode312.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 311: Compound Interest</title>
+			<description>In the 'Research Lab' (02m05s), the first in a two-part look at a series of suggestions on what should come Civilization VI's way on the heels of its Rise and Fall expansion: Resources and Energy, Envoys and Diplomacy and City Works.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 08 Jul 2018 16:49:36 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode311.mp3" length="57596822" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode311.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 310: Pothole Repair Season</title>
+			<description>In 'Forum Talk' (03m48s), evaluating the frontloading of tasks Civilization VI imposes on the player, the usefulness of government Legacy Policy Cards (15m44s), what the priorities for the game's next patch should be (31m13s) and from the methodology to the madness surrounding the game's inclusion of analytics software (42m30s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 24 Jun 2018 16:24:08 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode310.mp3" length="57597658" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode310.mp3</guid>
+		</item>
+		<item>
+			<title>ModCast #77: Really Latch On</title>
+			<description>In the 'Artist Sketchpad' (00m28s), a runthrough of new civilizations for Civilization VI: 'CIVITAS Normandy' by Chimpan'G, 'Merrick's Palmyra' by Merrick and 'Sengoku Monogatari' by Homusubi. In 'Code Corner' (07m07s), the appeal of 'Renaming Cities' by CeilingCat (recorded for Episode 73), the usefulness of 'Better Reports' (10m56s; recorded for Episode 76) and the allure of 'Starting Free Cities' by HandyVac (13m24s; recorded for Episode 76). Under the 'Modding Spotlight' (16m16s), Vicevirtuoso on his anime works in Civilization VI to date. Then under 'Miscellaneous' (25m47s), what Civilization V MOD the panelists would like to see brought into VI.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:35:50</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 17 Jun 2018 19:59:53 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/modcast/season10/episode77.mp3" length="34412208" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/modcast/season10/episode77.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 309: Stepping Stones</title>
+			<description>In 'Forum Talk' (03m48s), questioning the likability of Eureaks and Inspirations in Civilization VI, why the game is at first but soon not about the map (16m20s) and whether to retire the notion of 'Tall vs. Wide' in favour of 'Peace vs. War' (28m38s). Then in the 'Research Lab' (40m03s), whether on should be able to mediate a settlement in CivVI and, if so, under what conditions and how.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 10 Jun 2018 22:39:38 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode309.mp3" length="57597658" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode309.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 308: Managing Expectations</title>
+			<description>In the 'News' (01m47s), following the most lead time between announcement and release in recent Civilization series history, the Spring 2018 patch for the game's sixth iteration has arrived with many an addition, balancing, bug fixing and more. In 'Forum Talk' (31m02s), pushing for late-game science yields from ice tiles leads to an off-shoot conversation about conceptualizing the game map as a sphere and the impact it would have on city placement and unit pathing (34m06s). Then under 'Miscellaneous' (45m32s), Civilization VI developer is looking for an 'Online Services Engineer': part of future Civ development or not?</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 27 May 2018 00:51:16 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode308.mp3" length="57598076" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode308.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 307: If The Tire Iron Dictates It</title>
+			<description>In 'Forum Talk' (01m53s), tackling the question of whether or not coastal cities are 'less defensable' in Civilization VI is followed by whether Military Emergencies should reveal their target upfront (11m13s), dealing with a cyclical Loyalty loop (19m18s), not caring about things that others do (26m02s; recorded for Episode 302), how the game is faring a year-and-a-half after its release (36m07s) and how the Downloadable Content (DLC) model for releasing new game content may be 'hurting' Civ developer Firaxis Games and its parent publisher 2K Games (44m10s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 13 May 2018 02:01:32 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode307.mp3" length="57595986" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode307.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 306: Up To Interpretation</title>
+			<description>In the 'News' (02m34s), the 'Spring 2018 Developer Update' for Civilization: Rise and Fall arrived, but not the patch it highlights... not yet. Under the 'Open Mic' (26m25s), for all the conversation about one topic on Episode 305, the bit on another is what takes centre stage. Then in 'Forum Talk' (33m03s), getting to the bottom of inconsistent, even conflicting, trading practices by CivVI: RandF's Artificial Intelligence (AI) and dealing with getting war declared on you by an ally (44m26s) lead, understanding joint attacks from AI for divergent or even no discernable reason follows (46m59s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 29 Apr 2018 18:16:47 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode306.mp3" length="57597420" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode306.mp3</guid>
+		</item>
+		<item>
+			<title>ModCast #76: Fall Into Place</title>
+			<description>In the 'Modder's Spotlight' (06m15s), the three regular panelists present give updates on their latest Civilization VI-based projects: first, 'Neirai' followed by LeeS (13m18s), then 'Rob (R8XFT)' (26m02s). Then under 'Miscellaneous' (33m03s), what things each panelist would like to have to help them modify CivVI.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:47:19</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 22 Apr 2018 09:26:03 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/modcast/season10/episode76.mp3" length="38916972" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/modcast/season10/episode76.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 305: Civ Fanatics Are People Too</title>
+			<description>In 'Forum Talk' (03m52s), would giving Civilization VI coast tiles an extra hammer of production be a sufficient improvement, should giving Fort improvements Loyalty pressure improve their standing in the game's Rise and Fall expansion, should railroads be included in this series' latest title (18m13s), could improving gameplay come about with a return of water transport units (25m03s) and the case for having barbarians act as people too (30m54s). Under 'Miscellaneous' (38m23s), what lessons business can learn from Civ, whether or not a pillaging action be required to clear air units from an Aerodrome district (43m48s; recorded for Episode 285) and yearning for the game's Build Queue feature to return (46m00s). Then in the 'Theatre' (49m06s), perseverance through tundra and taking over the world from the Gaelic isle are tales followed by a Civilization IV: Colonization account of hidden nationalities (51m23s; recorded for Episode 295).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 15 Apr 2018 12:48:03 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode305.mp3" length="57597240" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode305.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 304: Not Just a Lame Clip Show XXIII</title>
+			<description>In 'Forum Talk' (00m37s), being able to remove Districts in Civilization VI is followed closely behind by a call to rethink them altogether (06m33s; recorded for Episode 283); then, whether it it worthwhile to acquire any of the game's World Wonders (11m59s; recorded for Episode 290) is just ahead of those introduced in its Rise and Fall expansion pack alongside its Natural cousins (31m12s; recorded for Episode 301).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 08 Apr 2018 21:13:56 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode304.mp3" length="57598494" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode304.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 303: Intrinsic Motivation</title>
+			<description>In the 'News' (02m50s), Mac and Linux Civilization VI players get surprised surprised with the release of the game's Rise and Fall expansion pack the month after their Windows brethren, but there's a catch; then, a typo invoking an English language idiom leads to 'messing' with the 'priorities' of the game's Artificial Intelligence... but to what end? Under the 'Open Mic' (19m03s), two-time guest co-host Brandon 'bcaiko' Keith Hallmark calls, and messages, the show's panel for their take on his disappointment that is the base game of CivVI and whether or not its RandF expansion pack could compel him to return to the title. Then under 'Miscellaneous' (41m05s), in February, Civilization VI: Rise and Fall Senior Producer Andrew Frederiksen and Lead Designer Anton Strenger chart the course of its development from earliest prototype to commercial release.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 01 Apr 2018 13:16:34 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode303.mp3" length="57597076" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode303.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 302: Always Improving</title>
+			<description>In the 'News' (01m17s), all about the March 2018 Update for Civilization VI: Rise and Fall is followed by an addendum, requesting a change with respect to hex options when occupied by an enemy unit (17m07s). In the 'Senate' (20m27s), the 'good', 'bad and the ugly' of CivVI Governors introduced in the game's first expansion pack are rated through their abilities, absolute and relative to each other. Then in 'Forum Talk' (43m56s), individually limited, collectively extensive: a call for the most pressing Civilization VI: Rise and Fall gameplay changes needed presently.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 18 Mar 2018 16:58:05 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode302.mp3" length="57597658" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode302.mp3</guid>
+		</item>
+		<item>
+			<title>ModCast #75: A Bit More Fluid</title>
+			<description>Under the 'Modder's Spotlight' (02m00s), profiling the works of the show's guest with emphasis on City State Packs and the Kingdom of Jerusalem, all for Civilization VI, as well as modder's past record and future aspirations within the gaming community. Under 'Miscellaneous' (26m28s), how an honest, yet substantial, mistake led to accustations of racism leveed against a CivV/VI modding group and their response to it. Then in the 'Mailbag' (30m41s), a comment, with embedded request, in response to Episode 73 leads to an examination of the poster's own works for Civilization VI.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:47:19</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 11 Mar 2018 09:49:44 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/modcast/season10/episode75.mp3" length="43805423" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/modcast/season10/episode75.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 301: Quality Side Eye</title>
+			<description>In 'Forum Talk' (01m50s), completing the 'first looks' of new civilizations in Civilization VI: Rise and Fall leads to first the Mapuche and then the Incia (06m52s, plus at 12m33s from Episode 299); then, a rundown of the new tile improvements the expansion brings about followed by finding connections between previously released civs and the new or revised game mechanics (20m33s), taking temperature on Free City aggression (24m23s), the Artificial Intelligence's (AI) lust for capturing City States (33m18s), running down Era Point possibilities and taking issue with the choices the game's AI makes (48m49s; recorded for Episode 283).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 04 Mar 2018 16:41:53 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode301.mp3" length="57598494" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode301.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 300: This. Is. POLYCAST!</title>
+			<description>'Maki, Phil and Dan' (03m46s): the regular panelists present discuss what they're most liking, most disliking and next step for play in Civilization VI: Rise and Fall. 'CanusAlbinus' and 'Ubermarklar' (08m01s): from one who has, and one who has not, yet played said CivVI expansion pack is a breakdown of their first takes. 'AlphaShard' and 'stormtrooper412' (13m08s): first impressions of Civilization VI: Rise and Fall from the next pair of recurring guests. 'Monthar' (24m46s): pros, cons and looking ahead from the first of two guest co-hosts from the show's most previous episode. 'Drusain' (30m29s): pros, cons and looking ahead from the second of two guest co-hosts from the show's most previous episode. 'Jonah Falcon and Martin Alvito' (36m22s): highs, lows and in-betweens lead to varying conversation points including an argument for gamer generational differences to explain varying views. 'Cartimandua' and 'Kingmaker' (50m22s): a former regular co-host and her husband, himself a recurring guest, talk about their shared first experiences with Civilization VI: Rise and Fall. 'MikeDoubleU' and 'ZTZaorish' (64m57s): again, a pair of panelists where one has yet to play and who has played CivVI's expansion pack with their first opinions. 'SemperFi2382' (74m44s): the final recurring guest talks about how he and his significant other have been making the most of their first CivVI: RaF play. Then in 'News' (82m08s), the day before Civilization VI: Rise and Fall's release, its base game was updated leading to conversation here of noteworthy changes.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>01:36:47</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tue, 20 Feb 2018 20:56:11 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode300.mp3" length="92929420" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode300.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 299: It's Not All Roses and Unicorns</title>
+			<description>In the 'News' (03m05s), an in-depth overview and consideration of the various Civilization VI: Rise and Fall features, starting with Loyalty and Empire Management followed by Governors (11m23s), then Alliances (35m38s), the Emergencies (46m46s) and then the combination of Eras with Dedications and Historic Timeline (57m08s); then, shining the spotlight on Scotland to be included as an official civilization for the first time in the series (65m03s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>01:19:17</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Mon, 05 Feb 2018 21:34:02 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode299.mp3" length="76114504" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode299.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 298: Get Learned</title>
+			<description>In the 'News' (03m03s), the first expansion pack for Civilization VI, Rise and Fall, was announced in late 2017; since then, most of its civilizations have been previewed publicly and is the source of focus here: returning Korea, The Netherlands, Mongolia, new leadered India, and newcomers Cree and Georgia; then, controversry emerges first given the choice of Korean leader and representation of the Cree (40m38s). Then under the 'Open Mic' (50m24s), taking in feedback received for the show's 2017 Christmas Special from within the Civ community.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Tue, 23 Jan 2018 14:31:55 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode298.mp3" length="57597658" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode298.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 297: Not Just a Lame Clip Show XXII</title>
+			<description>Under 'Miscellaneous (Part 1 of 2)' (00m37s), Civilization VI joins Endless Legend and Europa Universalis IV in their respective designers discussing "creating illusion" in the strategy computer gaming genre (recorded for Episode 283). In the 'Research Lab' (17m20s), finding a place for CivIV's cottage system in VI (recorded for Episode 288) is followed by the idea for Border Expansion Points (25m42s; recorded for Episode 289). Then under 'Miscellaneous (Part 2 of 2)' (32m14s), how the Civilization series tops a list for games schools should let students play (recorded for Episode 290) makes way for an argument as to what CivVI could "learn from" the Call to Power series (38m24s; recorded for Episode 292) and on the history of the Civ series in general, speaking to the developer of each iteration (49m23s; recorded for Episode 295).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 14 Jan 2018 10:48:33 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season12/episode297.mp3" length="28800688" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season12/episode297.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 296: Not Just a Lame Clip Show XXI</title>
+			<description>Under 'Miscellaneous' (00m37s), fully articulating Isabella in a Civilization V spoof video (recorded for Episode 252) while CivIV tops list of video game songs with lyrics (03m11s; recorded for Episode 254); then, developer notes on the creation of CivVI (05m35s; recorded for Episode 279), extended conversation on unit healing (13m21s; recorded for Episode 283) and (16m12s; recorded for Episode 286). In 'Forum Talk' (20m17s), promising not move, not move and broken promises (recorded for Episode 284). Under the 'Open Mic' (23m46s), responding to feedback on Episode 284 (recorded for Episode 285) followed by more of the same for Episode 288 (26m04s; recorded for Episode 289) as well as Episode 289 (43m28s; recorded for Episode 290). Then in the 'Theatre' (49m58s), a most memorable moment in Civ gaming, from Civilization IV: Colonization as recalled years later (recorded for Episode 295).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 31 Dec 2017 00:05:18 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode296.mp3" length="28800688" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode296.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Christmas Special 2017: Girls Playing Civ Three</title>
+			<description>In the first segment (04m30s), running through all that is known following the announcement of the first Civilization VI expansion pack, Rise and Fall. Then in the second segment (36m51s), responding to questions provided in advance of, and during, the livestream recording of this production.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 24 Dec 2017 12:55:09 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/christmas2017.mp3" length="30417389" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/christmas2017.mp3</guid>
+		</item>
+		<item>
+			<title>ModCast #74: So Much Perfect</title>
+			<description>Under the 'Modder's Spotlight' (02m00s), profiling the works of the show's guest with emphasis on City State Packs and the Kingdom of Jerusalem, all for Civilization VI, as well as modder's past record and future aspirations within the gaming community. Under 'Miscellaneous' (26m28s), how an honest, yet substantial, mistake led to accustations of racism leveed against a CivV/VI modding group and their response to it. Then in the 'Mailbag' (30m41s), a comment, with embedded request, in response to Episode 73 leads to an examination of the poster's own works for Civilization VI.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:47:19</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 16 Dec 2017 09:24:01 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/modcast/season9/episode74.mp3" length="22715620" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/modcast/season9/episode74.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 295: Intersection of Mechanics</title>
+			<description>Under the 'Open Mic' (02m22s), listener feedback on one topic in particular from Episode 294 prompts further, extended dialogue. In the 'Senate' (15m42s), breaking down passive and, in particular, active means of spreading religion in Civilization VI. In the 'Research Lab' (24m52s), what starts as an examination of the suggestion to add Great Athletes to CivVI morphs into something with a different focus, on a greater scale. Next in 'Forum Talk' (32m39s), greater than, less than and equal to: evaluating trade yields in Civilization VI. Then in the 'News' (37m49s), the availability of the board game Civilization: A New Dawn is fuelled by both a first review and comparison to its immediate predecessor in the space.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 02 Dec 2017 13:35:44 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode295.mp3" length="28800688" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode295.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 294: Recurring Consumer Activation</title>
+			<description>In the 'Senate' (01m38s), the 'As and Against' series for Civilization VI civilizations return to highlight both Indonesia and the Khmer (07m41s); then, how the War Weariness mechanic works in (13m09s) and whether or not to harvest or chop in the game (25m37s). Then under 'Forum Talk' (31m31s), first the preview to (recorded for Episode 293), and then the actual, interview with CivVI Lead Designer Ed Beach on what's next for the title (35m43s) followed by unearthening undocumented changes from its Fall 2017 patch (39m12s), why the Domination Victory, well, dominates in multiplayer play (43m12s) and the notion of 'recurring consumer spending' in eyed by Civilization VI publisher Take-Two Interactive garners some reaction (48m53s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 18 Nov 2017 18:15:04 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode294.mp3" length="28800688" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode294.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 293: Play Out in Practice</title>
+			<description>In the 'News' (01m35s), the Fall 2017 patch, and new Downloadable Content (DLC), has arrived for Civilization VI. Under the 'Open Mic' (27m26s), the second installment in an effort to fulfill a listener request for coverage as part of the 2016 Christmas Special through a Civ community forum thread on the very topic of re-designing CivVI's base civilization set.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 05 Nov 2017 14:29:06 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode293.mp3" length="28800688" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode293.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 292: Something Different</title>
+			<description>In 'Forum Talk' (02m31s), for better, worse or somewhere in-between, analyzing the preview of Civilization VI's Fall 2017 patch and new Downloadable Content (DLC). Then under the 'Open Mic' (07m34s), towards making the wait worth it, a listener request for coverage as part of the 2016 Christmas Special begins to be realized thanks in no small part to a recent community forum thread on the very topic of re-designing CivVI's base civilization set.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 22 Oct 2017 16:10:58 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode292.mp3" length="28800479" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode292.mp3</guid>
+		</item>
 		<item>
 			<title>ModCast #73: Knock It Out of the Park</title>
 			<description>Under the 'Modder's Spotlight' (00m32s), recent Civilization VI works by the show's returning guest: the Swahili, prompting consideration of heavily faovuring coastal starts for a civilization, custom leaders of Siam and Ethiopia, and at length enter the Policy Manager modification. In the 'Mailbag' (23m15s), responding to feedback first from Episode 71 and then, more substantively and in turn substantially, from Episode 72. Then in 'Code Corner' (26m01s), the Application Program Interface (API) for CivVI is compared to Civilization V with focus on the former's modifier system versus programming language Lua in the latter, and Lua's presence otherwise in VI.</description>
@@ -35,6 +1568,186 @@
 			<pubDate>Sun, 15 Oct 2017 15:28:26 -0400</pubDate>
 			<enclosure url="https://polycast.civfanatics.com/modcast/season9/episode73.mp3" length="17198768" type="audio/mpeg" />
 			<guid>https://polycast.civfanatics.com/modcast/season9/episode73.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 291: Learn to Share</title>
+			<description>In 'Forum Talk' (01m41s), means for canceling deals upon war declaration, the point to friendship (16m13s), getting rid of Settler capture (22m16s) and -- also in Civilization VI -- the best uses of gold income (31m29s). Under the 'Open Mic' (42m07s), in response to parts of Episode 290. Then in the 'Research Lab' (47m40s), expanding a civilization's borderthrough a points system (recorded for Episode 289).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Mon, 09 Oct 2017 21:18:06 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode291.mp3" length="28799434" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode291.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 290: Milk in the Fridge</title>
+			<description>In 'Forum Talk' (01m18s) the show's most extenstive, and contested, Great Person runthrough for Civilization VI is its last, that for Great Scientists; then, towards a growing consensus on if -- and how -- a civilization receiving a trade route should benefit from its existence (21m45s) and starting from mid-to-late game 'drag' in CivVI could be addressed in it and going forward in the series (30m20s). Then in 'News' (46m46s), a new Civilization series board game, 'A New Dawn', is announced (recorded for Episode 288), followed by CivVI's 'Summer 2017' patch coming first to Mac, then on Linux, though most attention is paid to what is still left to be delivered (51m39s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 23 Sep 2017 16:19:18 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode290.mp3" length="28800061" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode290.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 289: A Thesis, Be Warned</title>
+			<description>In 'Forum Talk' (01m18s), what is the 'strategic value' to naval melee units, making tall empires 'valid again' (07m16s) and stop requiring units that require resources (25m13s) are followed by rating Great Engineers (35m05s), Great Generals (39m11s) and Great Merchants (44m56) -- all in Civilization VI. Then in the 'Research Lab' (50m17s), a call to add a Casus Belli (CB) for 'War on Terror' in CivVI leads to a greater examination of the CB system in the game itself.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sun, 10 Sep 2017 14:36:52 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode289.mp3" length="28800270" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode289.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 288: A Lot of Clicks</title>
+			<description>In the 'Senate' (01m56s) necessity, avoidance or somewhere in between for early war engagement in Civilization VI and on squeezing the Artifical Intelligence (AI) for every last gain in trade negotations (10m49s). In 'Forum Talk' (15m13s), a call to rate CivVI pantheons inspires the start of doing the same for Great People, starting with Admirals (25m55s) then Artists (32m09s). Next, in the 'Research Lab' (34m05s) reworking Civilization VI diplomacy that incorporates a return to the World Congress mechanic and the notion that some Policy Cards should be restricted by government (42m04s). Then uner the 'Open Mic' (51m51s), reactions to community feedback for Episode 286 and Episode 287 moreso.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 26 Aug 2017 00:35:09 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode288.mp3" length="28802151" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode288.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 287: New and Current</title>
+			<description>In the 'News' (02m48s), saying hello to the newest Civilization VI civilization, Nubia accompanies the 'Summer 2017 Update' to the game with changes undocumented (10m54s) as well as documented (16m27s). Then in the 'Senate' (41m41s), with just a bit left to discuss with respect to Nubia, attention turns to Persia (44m37s) and Poland as civilizations in CivVI.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 12 Aug 2017 00:04:36 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode287.mp3" length="28802151" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode287.mp3</guid>
+		</item>
+		<item>
+			<title>ModCast #72: Where the Buffalo Roam</title>
+			<description>Under 'Miscellaneous' (02m24s), an update on the status of the Civilization VI modding community, and the ups and downs of transitioning to modding it from V (10m42s). Then in 'Code Corner' (19m54s), the significance of CivVI Agendas and Projects for modding and tools modders wish were available to smooth implementation headaches (28m11s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:41:07</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 05 Aug 2017 14:07:50 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/modcast/season9/episode72.mp3" length="19745184" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/modcast/season9/episode72.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 286: Extra Balanced</title>
+			<description>In the 'Senate' (02m24s), speeding through Civilization series newcomer with Smeria in its sixth iteration, picking fights as Australia (11m52s) and always warring as Macedon (20m18s). Under 'Miscellaneous' (24m45s), reactions to the then-announcement that Australia was to be the next civilization added to CivVI's line-up, and a first for the series (recorded for Episode 276). Then in 'Forum Talk' (38m19s) if, then when, to stop taking cities in Civilization VI followed by the need, then composition, of an occupation force in conquered cities (41m59s; recorded for Episode 284), if then when to settle 'large swaths' of tundra terrain (47m47s) and replacing surplus farms or not (50m20s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 29 Jul 2017 17:10:52 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode286.mp3" length="28800688" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode286.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 285: Work That In</title>
+			<description>In the 'Senate' (01m09s), the strengths of Rome, the hits and misses of Russia (10m18s) and the variability of Spain (18m00s) in Civilization VI playing as, and against, each. Then under 'Forum Talk' (24m08s) what to do about CivVI's Artificial Intelligence (AI) in air combat and mixing agreement, disagreement and compromise with respect to ten things to bring back to the series from its past (29m10s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 15 Jul 2017 12:36:43 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode285.mp3" length="28799434" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode285.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 284: The Salt Would Be Real</title>
+			<description>In the 'Senate' (02m14s) strategies playing as, and against, the Civilization VI civilizations of Kongo, Japan (15m28s) and Norway (21m02s). Then in 'Forum Talk' (25m56s), how to expand the naval line in CivVI, improving the game's religion mechanic (31m09s), tackling the Artificial Intelligence (AI) combat bonus on Deity (40m39s) and replacing the current replacement mechanic when loosing out on a Wonder of the World (51m18s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 01 Jul 2017 12:41:20 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode284.mp3" length="28799643" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode284.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 283: Organically Sourced Empires</title>
+			<description>In 'Forum Talk' (02m23s), adding new districts to the mix in Civilization VI garners some attention. Under 'Miscellaneous' (17m40s), from perennial frustrations with the Civ series to suggestions to address them much is considered. Then in the 'News' (55m10s), expressing dissatisfaction with the ongoing lack of cross-platform Civilization VI multiplay leads to an unexpected reference to the release timeline of the game's next Downloadable Content (DLC).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 17 Jun 2017 11:58:05 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode283.mp3" length="28799643" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode283.mp3</guid>
+		</item>
+		<item>
+			<title>ModCast #71: Faucet's On</title>
+			<description>Under 'Miscellaneous' (00m33s), considerations in designing Civilization VI religions (recorded for Episode 69), designing generally in CivVI as well as its two immediate predecessors (05m29s) and contemplating future works loops back greatly on religious considerations (14m05s; recorded for Episode 70).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:27:02</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 10 Jun 2017 16:54:21 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/modcast/season9/episode71.mp3" length="12978634" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/modcast/season9/episode71.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 282: Riveting Gameplay</title>
+			<description>Under the 'Open Mic' (02m59s), constructive criticism on the show's most previous episode leads to engagement on-air as well in a community forum. In the 'Senate' (09m43s) a handful of Civilization VI civilizations are each a handful in their own right: France, Germany (15m53s), Greece (25m17s), India (33m00s) and series newcomer Scythia (40m44s). Then under 'Miscellaneous' (47m23s), CivV given a nod as the third most 'replayable' video game (recorded for Episode 264), the series itself ranking second for 'inside jokes' in video games (50m26s; recorded for Episode 264) and that moment of realization when CivVI's narrator learns his character did not survive the game's trailer (53m05s; recorded for Episode 273).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 03 Jun 2017 15:20:35 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode282.mp3" length="28800061" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode282.mp3</guid>
+		</item>
+		<item>
+			<title>ModCast #70: Seeing What There Is To See</title>
+			<description>Under the 'Modding Spotlight' (03m10s), all eyes and ears on the work of 'Deliberator' for Civilization VI, and how the works came to be. Under 'Miscellaneous' (17m38s) the good, bad and ugly elements that make up the present state of CivVI modding. Then under 'Code Corner' (28m10s), for modders and players alike, 'Buildings Are Fun' looks to setup buildings with specific construction requirements that also makes use of 'Dummy Buildings Systems'.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:40:29</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 27 May 2017 16:57:13 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/modcast/season9/episode70.mp3" length="24219229" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/modcast/season9/episode70.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 281: Shouting Into the Void</title>
+			<description>In the 'News' (02m04s), an up-and-coming announcement for Civilization VI is generally, seemingly unexpectedly, met with a positive reception from the community... and some expected divergent, widespread speculation. In the 'Senate' (11m09s) the second trio of 'As and Against' CivVI civilization rundowns: China, Egypt (17m19s) and England (24m58s). As for 'Miscellaneous' (31m55s), steps forward and steps still to take as the first Civilization VI eSports tournament undertaking is examined following its conclusion. Then under the 'Open Mic' (47m54s), drawing the line between too much and not enough (constructive) criticism for CivVI following a suggestion that the show doesn't have enough, and answering an email asking about 'which civs and playstyle are best for each play speed' in the game (51m41s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 20 May 2017 09:53:52 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode281.mp3" length="28799852" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode281.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 280: One Way or Another</title>
+			<description>Under the 'Open Mic' (01m32s), responding to pieces of feedback for Episode 279; then, in response to an email about what franchise and developer may challenge Civilization by Firaxis Games (04m49s; recorded for Episode 275). In the 'Senate' (16m47s) the first of three playing 'As and Against' of CivVI civilizations: America, Arabia (25m36s) and Brazil (33m17s). In 'Forum Talk' (38m53s), what is up with spies getting killed in Civilization VI and whether a more interesting line of inquiry lies within. Then under 'Miscellaneous' (45m00s), passing judgment on CivV's World Congress mechanic (recorded for Episode 266), a fictional account of a 'great war' (48m12s; recorded for Episode 267) and the game now the third most profitable PC exclusive gaming title in history (51m17s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 05 May 2017 14:07:31 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode280.mp3" length="28800270" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode280.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 279: Feel That Impetus</title>
+			<description>In the 'Senate' (01m12s), in Civilization VI prioritizing what building to construct, when and in respect to city order followed by taking what unit promotions and when (22m46s). Under the 'Open Mic' (31m35s), responding to a CivVI unit upkeep question asked during the livestream of Episode 276 and on show criticism, complementing and what to make of the game's Harbour district in response to Episode 278 (35m33s). Then under 'Miscellaneous' (49m24s), the success of the Civilization franchise in 2016 on gaming platform Steam (recorded for Episode 272), invading/not invading peculiarity in CivV (51m18s; recorded for Episode 262), CivVI Builder adventures (53m04s; recorded for Episode 273) and game notification oddities (54m14s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 22 Apr 2017 14:44:26 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode279.mp3" length="28800270" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode279.mp3</guid>
+		</item>
+		<item>
+			<title>ModCast #69: Laying Foundations</title>
+			<description>Under 'Miscellaneous' (06m06s), experiencing making changes to Civilization VI with, and without, modding tools and then pondering changes to the game from a modder's perspective (18m23s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:40:29</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 15 Apr 2017 18:24:20 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/modcast/season9/episode69.mp3" length="19436940" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/modcast/season9/episode69.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 278: Go Deeper</title>
+			<description>In the 'News' (01m12s), talking up and down the 'Spring 2017' patch for Civilization VI accompanied by civilizations Macedon (28m53s) and Persia (37m30s). Then under 'Miscellaneous' (44m09s), recognizing Christopher Tin as the composer of CivVI's theme (recorded for Episode 267), taking in Scout behaviour (48m20s; recorded for Episode 276) and condensing a rundown of playing 'too much' Civilization VI (50m30s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 08 Apr 2017 15:58:43 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode278.mp3" length="28800479" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode278.mp3</guid>
 		</item>
 		<item>
 			<title>PolyCast April Fool's 2012</title>
@@ -47,6 +1760,56 @@
 			<guid>https://polycast.civfanatics.com/polycast/season6/aprilfools2012-episode144.mpg</guid>
 		</item>
 		<item>
+			<title>PolyCast Episode 277: Count on the Internet</title>
+			<description>In 'Forum Talk' (02m10s) mentioning 'unmentioned changes' in the 'Australian Summer 2017 Update' for Civilization VI and 'troll or serious': whether the game is gender biased (08m22s). In the 'Senate' (11m32s), a rundown of CivVI government types is followed by an in-depth examination of the related government policies (28m23s). Then in 'News' (53m33s), what Mac and Linux Civilization VI players can now enjoy and not with said game update coming their way, and what to be expected and not with the now-available CivVI demo (56m26s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 25 Mar 2017 13:30:19 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode277.mp3" length="28799434" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode277.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 276: Bells and Whistles</title>
+			<description>In the 'News' (01m47s) making waves is Australia, the newest civilization in Civilization VI and the related "Australian 2017 Summer Update" that patches the game (06m09s); then, being officially told that two more civs are coming for it and unofficially finding out what they are (21m31s). As 'Community Focus' (23m54s), the ins and outs of the Civ Battle Royale where Artificial Intelligence (AI) competition meets human ingenuity and cooperation in CivV. Under the 'Open Mic' (39m57s), whether or not it is worth the combat penalty to raze and resettle a conquered Civilization VI city (recorded for Episode 273). Then under 'Miscellaneous' (43m58s), adapting human history to CivVI gameplay is contested (recorded for Episode 274).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 11 Mar 2017 21:03:40 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode276.mp3" length="28799434" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode276.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 275: More Perfect</title>
+			<description>In the 'Senate' (01m44s), a complete and detailed account, and consideration, of Civilization VI's terrain improvements and resources is followed by an equally comprehensive rundown of its Wonders, World and Natural (23m15s). Then in 'News' (50m10s), the 'Explorer Pack - Signature Edition' for CivVI was released with limited availability, questionable quality and a peculiar piece of missing content.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 25 Feb 2017 15:24:19 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode275.mp3" length="28800061" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode275.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 274: It's All About the Technique</title>
+			<description>In the 'News' (01m13s), given the present state of Civilization VI's Aritifical Intelligence (AI), how can one enjoy its single player experience? Longtime show listener "slo" puts this to the panel in an email. In the 'Senate' (08m36s), in the strategy layer for CivVI tackling barbarians approaches, Great People management (19m25s), City States treatment (27m50s), consolidating and connecting the three (41m16s) and if, and when, to promote game units (47m57s; recorded for Episode 272). Then in the 'News' (50m11s), team multiplayer amongst the features being "worked on" for Civilization VI, according to developer Firaxis Games.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 11 Feb 2017 10:56:45 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode274.mp3" length="28799852" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode274.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 273: Moving Target</title>
+			<description>In the 'News' (02m57s), the confirmation announcement of Civliization VI to come to Linux and what's now aligned and still not following the release the 'Winter 2016' patch for the game on the Mac (06m26s). Then under the 'Open Mic' (08m36s), taking in more feedback from the show's 2016 Christmas Special, the gambit of comments in response to its Listener Feedback Survey for the same year (26m09s) and the first suggestion for the former not covered on it: the optium use of CivVI districts (39m46s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 28 Jan 2017 17:41:12 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode273.mp3" length="28799852" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode273.mp3</guid>
+		</item>
+		<item>
 			<title>ModCast #68: Put Together</title>
 			<description>In 'Topic #1' (00m52s), on pitfalls in the Religion and Tourism mechanics in Civilization V and towards tweaking the game's trade system User Interface (02m50s; recorded for Episode 48). In the 'Cartography Room' (05m28s), much quality to be found amongst a number of the game's user-created civilizations (recorded for Episode 50). In 'Code Corner (Part 1 of 2)' (08m11s), having City States in CivV produce Settlers for expansion (recorded for Episode 58). Under 'Miscellaneous (Part 1 of 2)' (13m30s, a then-update on Anno Domina for Civilization V (recorded for Episode 61). In 'Code Corner (Part 2 of 2)' (20m57s), varying coding practices in game modding. Under the 'Modding Spotlight' (25m49s), using an enhanced modding screen for CivV and an events generator (recorded for Episode 64). Then under 'Miscellaneous (Part 2 of 2)' (30m20s), the 'weirdest and worst' comments for Civilization V works in the Steam community, how the popularity of some has come to influence those creators' approach to modding (34m13s) and how the most spent time on mod came to be so consuming (37m25s; recorded for Episode 66).</description>
 			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
@@ -57,14 +1820,24 @@
 			<guid>https://polycast.civfanatics.com/modcast/season9/episode68.mp3</guid>
 		</item>
 		<item>
-			<title>PolyCast Evergreen, Season 10</title>
-			<description>Celebrating a decade of podcasting on PolyCast, a look-back at the show's ninth season: ten selected topics that most retain their relevance and ten moments that best represent delivery style. Hosted by PolyCast recurring guest 'CanusAlbinus' and co-creator Daniel 'DanQ' Quick.</description>
+			<title>PolyCast Episode 272: Choices Mattering More</title>
+			<description>In the 'News' (01m23s), attending to the 'Winter 2016 Update' for Civilization VI leads to analysis, opinion and recommendations that are not always congruent with each other; then, the Poland civilization and Viking scenario Downloadable Content (DLC) leads to a similar split. Then under the 'Open Mic' (31m36s), looping in feedback from the show's 2016 Christmas Special, its most previous episode (39m42s) and the first part look at the 2016 Listener Feedback Survey results (47m57s).</description>
 			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
-			<itunes:duration>02:07:38</itunes:duration>
+			<itunes:duration>00:59:59</itunes:duration>
 			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Sat, 31 Dec 2016 13:19:52 -0500</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season10/evergreen10.mp3" length="61272773" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season10/evergreen10.mp3</guid>
+			<pubDate>Sat, 14 Jan 2017 16:20:53 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season11/episode272.mp3" length="28799225" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season11/episode272.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Christmas Special 2016: We Wish You a Merry Civmas</title>
+			<description>Under 'Miscellaneous' (00m38s), original Civilization Co-Designer Bruce Shelley on board game influences for the title, followed by fellow Co-Designer Sid Meier on being the 'man who made a million empires' (05m15s) and offering 'insights' on the series to date (14m16s; recorded for Episode 250); then, critiquing the critic who claims CivilizationEdu is a 'bad idea' (21m21s; recorded for Episode 264) and lessons learned from the story of one game developer using the Civilization trademark (34m16s; recorded for Episode 270).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>01:24:40</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 24 Dec 2016 02:38:15 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/christmas2016.mp3" length="40648995" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/christmas2016.mp3</guid>
 		</item>
 		<item>
 			<title>PolyCast Episode 271: Not Just a Lame Clip Show XX</title>
@@ -77,24 +1850,84 @@
 			<guid>https://polycast.civfanatics.com/polycast/season10/episode271.mp3</guid>
 		</item>
 		<item>
-			<title>PolyCast Evergreen, Season 9</title>
-			<description>Celebrating a decade of podcasting on PolyCast, a look-back at the show's ninth season: ten selected topics that most retain their relevance and ten moments that best represent delivery style. Hosted by PolyCast co-creator Wouter 'Locutus' Snijders.</description>
+			<title>PolyCast Episode 270: A Step in the Direction</title>
+			<description>In the 'News (Part 1 of 3)' (02m17s), much to be said about the first Civilization VI patch that soon takes the form of a numbered list. Under 'Miscellaneous (Part 1 of 2)' (15m45s), the first side conversation to the release of said CivVI patch is one that sparks some considerable debate: preferring Settler to city capture. Back in 'News (Part 2 of 3)' (27m43s), returning to counting down the most significant changes of note brought about by Civilization VI's first patch. For 'Miscellaneous (Part 2 of 2)' (34m20s), the second CivVI patch side conversation brings some reflective consideration to bare: earning gold upon unit deletion. Then in 'News (Part 3 of 3)' (42m41s), the final dibs and drabs on the changes to Civilization VI courtesy its first patch is followed by a Deluxe Edition discount too good to be true while contemplating possible legal implications (49m36s).</description>
 			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
-			<itunes:duration>02:07:38</itunes:duration>
+			<itunes:duration>00:59:59</itunes:duration>
 			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Wed, 14 Sep 2016 19:47:10 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season9/evergreen9.mp3" length="61272773" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season9/evergreen9.mp3</guid>
+			<pubDate>Sat, 03 Dec 2016 13:24:07 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode270.mp3" length="28800668" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/episode270.mp3</guid>
 		</item>
 		<item>
-			<title>PolyCast Evergreen, Season 9</title>
-			<description>Celebrating a decade of podcasting on PolyCast, a look-back at the show's ninth season: ten selected topics that most retain their relevance and ten moments that best represent delivery style. Hosted by PolyCast co-creator Wouter 'Locutus' Snijders.</description>
+			<title>ModCast #67: Newborn Smell</title>
+			<description>As 'First Game Impressions' (01m58s), the release of Civilization VI brings about first impressions of the game itself. For 'First Modding Thoughts' (14m39s), the same release leads to first thoughts on the potential scope of the game's modding. Then under 'First Wants' (29m41s), modding and gameplay mesh in consideration of first wants for CivVI.</description>
 			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
-			<itunes:duration>02:07:38</itunes:duration>
+			<itunes:duration>00:48:00</itunes:duration>
 			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Wed, 14 Sep 2016 19:47:10 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season8/evergreen9.mp3" length="61272773" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season6/evergreen9.mp3</guid>
+			<pubDate>Sat, 25 Nov 2016 14:38:50 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/modcast/season8/episode67.mp3" length="23049570" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/modcast/season8/episode67.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 269: That's Our Number</title>
+			<description>In the 'News' (01m18s), the number of Civilization VI tops one million and the game's Mac port has arrived and on the Linux possibility (06m47s); then, CivVI entering the realm of eSports (10m53s) and game developer Firaxis Games plays multiplayer and shows off its Artificial Intelligence as it fights itself (27m02s). Then under 'Miscellaneous' (39m13s), Sid Meier is interviewed marking 25 years for the Civilization gaming franchise and listening to CivVI's all-but-complete soundtrack for free... legally (49m37s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 19 Nov 2016 14:37:55 -0500</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode269.mp3" length="28799434" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/episode269.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 268: Just Jump In</title>
+			<description>Celebrating the release of Civilization VI. Joining the regular panel: Jason 'MegaBearsFan' Grade and Scott 'AlphaShard' Dirk (07m38s); Josh 'zosh127' and 'ekat2468' (23m05s); Jon 'CanuckSoldier' Ryder, 'the man of doom' and Ernie 'DarkestOnion' (37m49s); Jonah Falcon and Sal 'Thorburne' Serio (51m33s); 'NewEarthRelic' and 'CanusAlbinus' (62m37s); and Brian 'Drusain' (71m06s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>01:25:05</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 05 Nov 2016 13:36:10 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode268.mp3" length="40842719" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/episode268.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 267: Nerd Out On Anything</title>
+			<description>In the 'News' (01m51s), the final two Civilization VI 'First Look' videos are released: first, Russia is profiled followed by the Gorgo treatment of Greece (10m25s); then, game developer Firaxis Games livestreams a game as the latter with varying degrees of success (14m34s) and what was revealed about Envoys and City States earlier (25m12s; recorded for Episode 265). Then under the 'Open Mic' (36m54s), a detailed, thought-provoking piece of electronic mail from Nick Parish outlines conflicting feelings for CivVI is discussed.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 22 Oct 2016 12:57:03 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode267.mp3" length="28799434" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/episode267.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 266: Explode with Information Overload</title>
+			<description>In the 'News' (01m57s) one, two, three 'First Look' videos for Civilization VI: first is Rome, second is Sumeria (11m22s) and third is Arabia (18m11s); then, some about combat and much about growth from the latest livestream on the game by developer Firaxis Games (25m22s). Then under 'Miscellaneous' (49m07s), the fifth Civ installment finds itself placed as a 'top' videogame that 'rewrote history', according to one media content producer.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 08 Oct 2016 16:23:37 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode266.mp3" length="28801703" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/episode266.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 265: Speaking Of</title>
+			<description>In the 'News' (02m21s), he not-necessarily-well-named Firaxis Games Megapanel held earlier this month at PAX West 2016 is reviewed, leading to the first of the next wave of Civilization VI reveals: 'First Look' Kongo garners attention (12m59s), as does fellow civilization newcomer Norway (22m34s); then, a Religion livestream reveals more on diplomacy (30m41s) and a third civ 'First Look' for Greece answers some questions and raises others (44m47s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 24 Sep 2016 13:14:06 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode265.mp3" length="28799434" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/episode265.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 264: Congratulations, Condolences and All the Rest</title>
+			<description>In the 'News' (02m15s), in the continuing lead-up to the anticipated release of Civilization IV are 'first looks' for Spain and then India (11m26s); relatedly, the 'Anniversary Edition' is announced with a proclaimed set volume availability (19m04s) and elsewise Civilization: Revolution finds itself now available for on the PC and taken off the Apple App Store (23m22s). Under 'Miscellaneous' (32m17s), a by-product of the Indian civilization announcement for CivVI is on the apparent return of War Weariness to the series in said title. Then in 'Forum Talk' (38m04s), the panel takes on the concern raised in response to Episode 263 that instantaneous improvement completion by Civilization VI Builders removes strategic choice offered by Workers, and Settlers before that, earlier in the series.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 10 Sep 2016 01:04:55 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode264.mp3" length="28799016" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/episode264.mp3</guid>
 		</item>
 		<item>
 			<title>ModCast #66: More or Less Accurate</title>
@@ -107,24 +1940,34 @@
 			<guid>https://polycast.civfanatics.com/modcast/season8/episode66.mp3</guid>
 		</item>
 		<item>
-			<title>PolyCast Evergreen, Season 8</title>
-			<description>Celebrating a decade of podcasting on PolyCast, a look-back at the show's eighth season: ten selected topics that most retain their relevance and ten moments that best represent delivery style. Hosted by PolyCast co-creator Wouter 'Locutus' Snijders.</description>
+			<title>PolyCast Episode 263: Come Back to That</title>
+			<description>In the 'News' (03m00s), the 'first look' at Germany in Civilization VI is revealed followed by a first chance for members of the public to play the game in Germany as part of Gamescom 2016 (08m07s); then, revealing more then intended by developer Firaxis Games during a livestream (13m02s), the 'first look' at the game's Scythia (28m03s) and a summary of unofficial CivVI gameplay videos (33m06s; recorded for Episode 262). Under 'Miscellaneous' (42m47s), priming Civilization VI on its 'biggest changes' (recorded for Episode 261) and quantifying changes in improvement changes between it and immediate predecessor CivV (46m12s; recorded for Episode 262). Then in 'Forum Talk' (50m13s), considering to what degree, if any, playing Civilization V will prepare gamers to play CivVI (recorded for Episode 261).</description>
 			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
-			<itunes:duration>01:52:25</itunes:duration>
+			<itunes:duration>00:59:59</itunes:duration>
 			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Wed, 24 Aug 2016 17:13:52 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season8/evergreen8.mp3" length="55127036" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season8/evergreen8.mp3</guid>
+			<pubDate>Sat, 27 Aug 2016 01:10:59 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode263.mp3" length="28800270" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/episode263.mp3</guid>
 		</item>
 		<item>
-			<title>PolyCast Evergreen, Season 7</title>
-			<description>Celebrating a decade of podcasting on PolyCast, a look-back at the show's seventh season: ten selected topics that most retain their relevance and ten moments that best represent delivery style. Hosted by PolyCast co-creator Wouter 'Locutus' Snijders.</description>
+			<title>PolyCast Episode 262: Variety of Threads</title>
+			<description>In the 'News' (01m35s), in Civilization VI what to expect from France and what is brought by Brazil (07m54s) is followed by the first livestream of the game by developer Firaxis Games (19m08s). Then in 'Forum Talk' (52m06s), a blog post by CivVI publisher 2K Games does not contain any new game information, but how it is presented prompts some written comments and panel reaction.</description>
 			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
-			<itunes:duration>01:52:25</itunes:duration>
+			<itunes:duration>00:59:59</itunes:duration>
 			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Wed, 27 Jul 2016 19:02:08 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season7/evergreen7.mp3" length="43681916" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season7/evergreen7.mp3</guid>
+			<pubDate>Sat, 13 Aug 2016 01:17:30 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode262.mp3" length="28337589" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/episode262.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 261: Delineate These Things</title>
+			<description>In the 'News' (01m17s), deduction and disagreement reign following an apparent reveal of leaders at launch in Civilization VI gives way to a "first look" at China (16m18s) and the Aztecs, including "early access" hullabaloo (25m22s); then, the reveal that CivIV theme composer Christopher Tin is to give VI the same treatment (40m18s) and taking in featurettes profiling the art and development of the game (42m54s). Then under 'Miscellaneous (51m31s), CivVI publisher 2K Games and graphics card manufacturer AMD announce DirectX 12 support for the game.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 30 Jul 2016 10:40:36 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode261.mp3" length="28799434" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/episode261.mp3</guid>
 		</item>
 		<item>
 			<title>PolyCast Episode 260: Not Just a Lame Clip Show XIX</title>
@@ -137,6 +1980,16 @@
 			<guid>https://polycast.civfanatics.com/polycast/season10/episode260.mp3</guid>
 		</item>
 		<item>
+			<title>PolyCast Episode 259: Rock, Paper, Scissors</title>
+			<description>In the 'News' (02m14s), three Civilization VI civs have been revealed or otherwise confirmed: England, Egypt (07m31s) and Japan (15m02s); then, all about the Builder unit (23m00s). Under the 'Open Mic' (29m39s), not one but two sources of feedback for Episode 258 are raised, replied to and expounded upon. In 'Forum Talk' (40m14s), too early in some respects and others not: laying a preliminary strategic framework for CivVI. Then under 'Miscellaneous' (52m21s), trying to come to grips with Science Victories in Civilization V leads to a group creating a video to humourously do just that.</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 16 Jul 2016 09:43:03 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode259.mp3" length="28800270" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/episode259.mp3</guid>
+		</item>
+		<item>
 			<title>ModCast #65: Consistency is Crucial</title>
 			<description>In the 'News' (03m54s), with the development and pending release of Civilization VI now known, laying the initial groundwork of understanding, speculation and expectation of what its modding support will encompass and community will realize. Then under 'Miscellaneous' (34m58s), what is up-and-coming for CivV mods from civilizations to units and events.</description>
 			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
@@ -147,14 +2000,34 @@
 			<guid>https://polycast.civfanatics.com/modcast/season8/episode65.mp3</guid>
 		</item>
 		<item>
-			<title>PolyCast Evergreen, Season 6</title>
-			<description>Celebrating a decade of podcasting on PolyCast, a look-back at the show's sixth season: ten selected topics that most retain their relevance and ten moments that best represent delivery style. Hosted by PolyCast co-creator Wouter 'Locutus' Snijders.</description>
+			<title>PolyCast Episode 258: Is It October Yet?</title>
+			<description>In the 'News' (01m29s), takeaways from the bite (or is that byte?) sized 'First Look: America' and 'Unstacking Cities' videos for Civilization VI are followed by the heftier 'Community QandA from E3 2016 (10m06s) and pulling back the curtain on the 'Walkthrough' video first shown at the event, with an emphasis on the subsequent 'Developer Commentary' on it afterwards (28m03s); then, revelation of CivilizationEDU being in development based off of CivV (45m00s). Then under the 'Open MIc' (54m36s), taking in a few pieces of feedback from Episode 257.</description>
 			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
-			<itunes:duration>01:52:25</itunes:duration>
+			<itunes:duration>00:59:59</itunes:duration>
 			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Wed, 15 Jun 2016 18:06:45 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season6/evergreen6.mp3" length="53963085" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season6/evergreen6.mp3</guid>
+			<pubDate>Sat, 02 Jul 2016 01:02:44 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode258.mp3" length="28800270" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/episode258.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 257: Now Streamlined</title>
+			<description>In the 'News' (03m21s), envoys and more on Civilization VI City States is followed by a panelist's first take on what has been revaled about the game (13m21s) and what to expect to come about from E3 2016 (27m47s). Under the 'Open Mic' (30m39s), bringing up feedback from Episode 256 is followed by the comparable same for Episode 254 (35m22s) and Episode 243 (41m05s; recorded for Episode 254). Then under 'Miscellaneous' (47m45s), laughing it up with "Dibs on the Ruins" (recorded for Episode 248), "We Love the King Day" (49m53s; recorded for Episode 251) and "CivV in a Nutshell (51m50s; recorded for Episode 253).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 18 Jun 2016 01:04:52 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode257.mp3" length="28799852" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/episode257.mp3</guid>
+		</item>
+		<item>
+			<title>PolyCast Episode 256: All About the Hype Train</title>
+			<description>Under the 'Open Mic' (04m16s), talking about the talking about of Episode 255 from community forums and on social media. Then in the 'News' (11m04s), Grazing at the buffet that is additional Civilization VI information: Resources, Agendas (00m51s), Diplomacy (16m48s), Natural Wonders (18m00s), Justified War (20m07s), War Weariness (26m52s), Great People (31m08s), Builders (35m06s), Governments (37m49s), Unit Movement (43m45s), City States (45m19s).</description>
+			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
+			<itunes:duration>00:59:59</itunes:duration>
+			<itunes:explicit>no</itunes:explicit>
+			<pubDate>Sat, 04 Jun 2016 01:25:33 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode256.mp3" length="28799852" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/episode256.mp3</guid>
 		</item>
 		<item>
 			<title>ModCast #64: Create Expectations</title>
@@ -167,14 +2040,14 @@
 			<guid>https://polycast.civfanatics.com/modcast/season8/episode64.mp3</guid>
 		</item>
 		<item>
-			<title>PolyCast Evergreen, Season 5</title>
-			<description>Celebrating a decade of podcasting on PolyCast, a look-back at the show's fifth season: ten selected topics that most retain their relevance and ten moments that best represent delivery style. Hosted by PolyCast co-creator Wouter 'Locutus' Snijders.</description>
+			<title>PolyCast Episode 255: That Much More Enticing</title>
+			<description>Anticipation and trepidation collide awash much speculation following the official announcement that Civilization VI is in development and is but months away from release; the extended coverage addresses Wonders, Diplomacy (07m46s), Research (16m00s), Units (22m29s), Victory Conditions (27m21s), Multiplayer (31m49s), Screenshot Analysis (35m54s) and Price Points (44m29s).</description>
 			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
-			<itunes:duration>02:06:05</itunes:duration>
+			<itunes:duration>00:59:59</itunes:duration>
 			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Wed, 25 May 2016 20:50:32 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season5/evergreen5.mp3" length="60522327" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season5/evergreen5.mp3</guid>
+			<pubDate>Sat, 21 May 2016 00:06:11 -0400</pubDate>
+			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode255.mp3" length="28800061" type="audio/mpeg" />
+			<guid>https://polycast.civfanatics.com/polycast/season10/episode255.mp3</guid>
 		</item>
 		<item>
 			<title>PolyCast Episode 254: Conversing Gracefully</title>
@@ -207,16 +2080,6 @@
 			<guid>https://polycast.civfanatics.com/polycast/season10/episode253.mp3</guid>
 		</item>
 		<item>
-			<title>PolyCast Evergreen, Season 4</title>
-			<description>Celebrating a decade of podcasting on PolyCast, a look-back at the show's fourth season: ten selected topics that most retain their relevance and ten moments that best represent delivery style. Hosted by PolyCast co-creator Wouter 'Locutus' Snijders.</description>
-			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
-			<itunes:duration>01:40:00</itunes:duration>
-			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Wed, 20 Apr 2016 18:04:13 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season4/evergreen4.mp3" length="48003823" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season4/evergreen4.mp3</guid>
-		</item>
-		<item>
 			<title>PolyCast Episode 252: Consistency Is Inconsistency</title>
 			<description>Under the 'Open Mic' (01m27s), recognizing and responding to not only feedback from Episode 251, but also from Episode 250 before that (07m41s). In 'Forum Talk' (13m23s), pursuing 'settlerless starts' in one extreme, and setting up a game to make a particular civilization 'overpowered' (20m32s), both in Civilization V. In the 'Time Machine' (33m15s), rewinding two decades and counting since the release of CivII. Then under 'Miscellaneous' (41m50s), trying to make sense of the list of nominees for 2015 gaming under consideration by an American museum.</description>
 			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
@@ -225,16 +2088,6 @@
 			<pubDate>Sat, 09 Apr 2016 17:23:49 -0400</pubDate>
 			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode252.mp3" length="28800061" type="audio/mpeg" />
 			<guid>https://polycast.civfanatics.com/polycast/season10/episode252.mp3</guid>
-		</item>
-		<item>
-			<title>PolyCast Evergreen, Season 3</title>
-			<description>Celebrating a decade of podcasting on PolyCast, a look-back at the show's third season: ten selected topics that most retain their relevance and ten moments that best represent delivery style. Hosted by PolyCast co-creator Wouter 'Locutus' Snijders.</description>
-			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
-			<itunes:duration>01:29:57</itunes:duration>
-			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Wed, 30 Mar 2016 19:50:32 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season3/evergreen3.mp3" length="43183709" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season3/evergreen3.mp3</guid>
 		</item>
 		<item>
 			<title>PolyCast Episode 251: Necessarily Arbitrary</title>
@@ -267,16 +2120,6 @@
 			<guid>https://polycast.civfanatics.com/polycast/season10/episode249.mp3</guid>
 		</item>
 		<item>
-			<title>PolyCast Evergreen, Season 2</title>
-			<description>Celebrating a decade of podcasting on PolyCast, a look-back at the show's second season: ten selected topics that most retain their relevance and ten moments that best represent delivery style. Hosted by PolyCast co-creator Wouter 'Locutus' Snijders.</description>
-			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
-			<itunes:duration>01:10:20</itunes:duration>
-			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Wed, 24 Feb 2016 18:11:56 -0500</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season2/evergreen2.mp3" length="33766252" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season2/evergreen2.mp3</guid>
-		</item>
-		<item>
 			<title>PolyCast Episode 248: Hug the Middle Ground</title>
 			<description>In the 'News' (01m38s), in follow-up from last episde, the release of Civilization Revolution 2 Plus in Europe and North America is delayed, again, which also describes the less than a week's lead time and no reason given. In the 'Senate' (05m56s), playing as, and against, Civilization V civilizations Rome, the Iroquois (18m58s) and Carthage (33m05s), two expansion packs and multiple patches later. Then under the 'Open Mic' (43m01s), as promised last episode concluding the highlights from both the PolyCast and TurnCast 2015 Listener Feedback Surveys.</description>
 			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
@@ -305,16 +2148,6 @@
 			<pubDate>Sat, 30 Jan 2016 10:51:33 -0500</pubDate>
 			<enclosure url="https://polycast.civfanatics.com/polycast/season10/episode247.mp3" length="28721152" type="audio/mpeg" />
 			<guid>https://polycast.civfanatics.com/polycast/season10/episode247.mp3</guid>
-		</item>
-		<item>
-			<title>PolyCast Evergreen, Season 1</title>
-			<description>Celebrating a decade of podcasting on PolyCast, a look-back at the show's first season: ten selected topics that most retain their relevance and ten moments that best represent delivery style. Hosted by PolyCast co-creator Wouter 'Locutus' Snijders.</description>
-			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
-			<itunes:duration>00:53:10</itunes:duration>
-			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Sat, 23 Jan 2016 14:57:30 -0500</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season1/evergreen1.mp3" length="25527023" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season1/evergreen1.mp3</guid>
 		</item>
 		<item>
 			<title>PolyCast Episode 246: Swip It Good</title>
@@ -385,16 +2218,6 @@
 			<pubDate>Sat, 05 Dec 2015 13:07:50 -0500</pubDate>
 			<enclosure url="https://polycast.civfanatics.com/polycast/season9/episode243.mp3" length="28799643" type="audio/mpeg" />
 			<guid>https://polycast.civfanatics.com/polycast/season9/episode243.mp3</guid>
-		</item>
-		<item>
-			<title>Support the PolyCast Patreon Campaign</title>
-			<description>PolyCast has been entertaining and informing the Civilization series of computer and video games since 2006. If you like what you hear, and are willing and able to show your appreciation financially, please consider becoming a supporter of PolyCast through Patreon: https://www.patreon.com/thepolycast</description>
-			<itunes:author>Civilized Communication (https://civcomm.net)</itunes:author>
-			<itunes:duration>00:04:59</itunes:duration>
-			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Tue, 01 Dec 2015 21:01:26 -0500</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/promo_patreon.mp3" length="993028" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/promo_patreon.mp3</guid>
 		</item>
 		<item>
 			<title>PolyCast #242: Should We Start?</title>

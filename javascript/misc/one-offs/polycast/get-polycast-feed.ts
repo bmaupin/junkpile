@@ -1,5 +1,5 @@
 /*
- * Fetch all old Polycast and Modcast feeds, merge them into one XML file
+ * Fetch all Polycast and Modcast feeds, merge them into one XML file
  *
  * To run:
  *
@@ -15,6 +15,8 @@ const dom = new JSDOM('');
 const DOMParser = dom.window.DOMParser;
 
 const feedUrls = [
+  // This URL is first as it serves as the base for the merged feed
+  'https://polycast.civfanatics.com/PolyCastOnly.xml',
   'https://polycast.civfanatics.com/polycast/season1.xml',
   'https://polycast.civfanatics.com/polycast/season2.xml',
   'https://polycast.civfanatics.com/polycast/season3.xml',
@@ -25,6 +27,7 @@ const feedUrls = [
   'https://polycast.civfanatics.com/polycast/season8.xml',
   'https://polycast.civfanatics.com/polycast/season9.xml',
   'https://polycast.civfanatics.com/polycast/season10.xml',
+  'https://polycast.civfanatics.com/polycast/season11.xml',
   'https://polycast.civfanatics.com/modcast/season1.xml',
   'https://polycast.civfanatics.com/modcast/season2.xml',
   'https://polycast.civfanatics.com/modcast/season3.xml',
@@ -34,39 +37,21 @@ const feedUrls = [
   'https://polycast.civfanatics.com/modcast/season7.xml',
   'https://polycast.civfanatics.com/modcast/season8.xml',
   'https://polycast.civfanatics.com/modcast/season9.xml',
+  'https://polycast.civfanatics.com/modcast/season10.xml',
+  'https://polycast.civfanatics.com/modcast/season11.xml',
 ];
 
-const episodeSubstringsToFilterOut = [
+const episodeSubstringsToFilterOut: string[] = [
+  'Evergreen',
   'PolyCast Bloopers',
   'PolyCast Cut!',
   'PolyCast Promo',
   'TurnCast',
 ];
 
-const episodesToFilterOut = [
-  'ModCast #67: Newborn Smell',
-  'ModCast #69: Laying Foundations',
-  'ModCast #70: Seeing What There Is To See',
-  "ModCast #71: Faucet's On",
-  'ModCast #72: Where the Buffalo Roam',
-  'ModCast #74: So Much Perfect',
+const episodesToFilterOut: string[] = [
   'PolyCast Play-by-Play #01: Unification',
-  'PolyCast Episode 255: That Much More Enticing',
-  'PolyCast Episode 256: All About the Hype Train',
-  'PolyCast Episode 257: Now Streamlined',
-  'PolyCast Episode 258: Is It October Yet?',
-  'PolyCast Episode 259: Rock, Paper, Scissors',
-  'PolyCast Episode 261: Delineate These Things',
-  'PolyCast Episode 262: Variety of Threads',
-  'PolyCast Episode 263: Come Back to That',
-  'PolyCast Episode 264: Congratulations, Condolences and All the Rest',
-  'PolyCast Episode 265: Speaking Of',
-  'PolyCast Episode 266: Explode with Information Overload',
-  'PolyCast Episode 267: Nerd Out On Anything',
-  'PolyCast Episode 268: Just Jump In',
-  "PolyCast Episode 269: That's Our Number",
-  'PolyCast Christmas Special 2016: We Wish You a Merry Civmas',
-  'PolyCast Episode 270: A Step in the Direction',
+  'Support the PolyCast Patreon Campaign',
 ];
 
 const EXTRA_PHP_TAGS = '";\n?>';
@@ -80,7 +65,7 @@ const main = async () => {
 const fetchAndParseFeed = async (url: string): Promise<Document> => {
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(`Response status: ${response.status}`);
+    throw new Error(`Response status: ${response.status} fetching URL ${url}`);
   }
 
   let feedData = await response.text();
@@ -110,22 +95,6 @@ async function mergeFeeds(parsedFeeds: Document[]): Promise<Document> {
     throw new Error('Base feed is missing a <channel> element.');
   }
 
-  baseChannel.querySelector('title')!.textContent = 'PolyCast and ModCast classic';
-  baseChannel.querySelector('description')!.textContent =
-    'Classic episodes of PolyCast and ModCast';
-  baseChannel
-    .getElementsByTagName('itunes:image')[0]
-    .setAttribute('href', 'https://polycast.civfanatics.com/images/polycast_logo300.jpg');
-  baseChannel.querySelector('pubDate')!.textContent = new Date().toUTCString();
-  const imageEl = Array.from(baseChannel.children).find((el) => el.tagName === 'image');
-  if (imageEl) {
-    imageEl.querySelector('url')!.textContent =
-      'https://polycast.civfanatics.com/images/polycast_logo140.jpg';
-    imageEl.querySelector('link')!.textContent = 'https://thepolycast.net/';
-    imageEl.querySelector('width')!.textContent = '144';
-    imageEl.querySelector('height')!.textContent = '91';
-  }
-
   // Track existing GUIDs to prevent duplicates
   const seenGuids = new Set<string>();
   const allItems: Element[] = [];
@@ -138,15 +107,15 @@ async function mergeFeeds(parsedFeeds: Document[]): Promise<Document> {
     for (const item of items) {
       const title = item.querySelector('title')?.textContent;
       if (title && episodesToFilterOut.includes(title)) {
+        console.log(`Filtered out episode: ${title}`);
         continue;
       }
 
       if (
         title &&
-        episodeSubstringsToFilterOut.some((substring) =>
-          title.includes(substring)
-        )
+        episodeSubstringsToFilterOut.some((substring) => title.includes(substring))
       ) {
+        console.log(`Filtered out episode: ${title}`);
         continue;
       }
 
@@ -183,7 +152,7 @@ async function mergeFeeds(parsedFeeds: Document[]): Promise<Document> {
 
 const writeFile = async (doc: Document): Promise<void> => {
   await fs.writeFile(
-    'polycast-classic.xml',
+    'polycast-modcast.xml',
     doc.documentElement.outerHTML.replaceAll('\n', '\r\n')
   );
 };
