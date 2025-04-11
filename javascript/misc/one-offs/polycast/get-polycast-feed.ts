@@ -1,5 +1,11 @@
-// To run this file:
-// npx tsx get-polycast-feed.ts
+/*
+ * Fetch all old Polycast and Modcast feeds, merge them into one XML file
+ *
+ * To run:
+ *
+ * node --experimental-strip-types get-polycast-feed.ts
+ *
+ */
 
 import fs from 'node:fs/promises';
 
@@ -102,6 +108,22 @@ async function mergeFeeds(parsedFeeds: Document[]): Promise<Document> {
   const baseChannel = baseFeed.querySelector('channel');
   if (!baseChannel) {
     throw new Error('Base feed is missing a <channel> element.');
+  }
+
+  baseChannel.querySelector('title')!.textContent = 'PolyCast and ModCast classic';
+  baseChannel.querySelector('description')!.textContent =
+    'Classic episodes of PolyCast and ModCast';
+  baseChannel
+    .getElementsByTagName('itunes:image')[0]
+    .setAttribute('href', 'https://polycast.civfanatics.com/images/polycast_logo300.jpg');
+  baseChannel.querySelector('pubDate')!.textContent = new Date().toUTCString();
+  const imageEl = Array.from(baseChannel.children).find((el) => el.tagName === 'image');
+  if (imageEl) {
+    imageEl.querySelector('url')!.textContent =
+      'https://polycast.civfanatics.com/images/polycast_logo140.jpg';
+    imageEl.querySelector('link')!.textContent = 'https://thepolycast.net/';
+    imageEl.querySelector('width')!.textContent = '144';
+    imageEl.querySelector('height')!.textContent = '91';
   }
 
   // Track existing GUIDs to prevent duplicates
