@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:itunes="https://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:media="https://search.yahoo.com/mrss/">
 	<channel>
-		<title>PolyCast</title>
+		<title>PolyCast and ModCast</title>
 		<itunes:subtitle>A Civilization Podcast Focused on Game Strategy</itunes:subtitle>
-		<description>PolyCast is made up of a bi-weekly, monthly, two bi-monthly and a recurring Civilization podcast. PolyCast with co-hosts CanusAlbinus, Makahlua, TheMeInTeam and MegaBearsFan cover game strategy. Entertaining and informing Civ.</description>
+		<description>PolyCast and ModCast up to but not including Civ 7</description>
 		<itunes:keywords>Sid Meier, Sid Meier's Civilization, Civilization VII, Civilization VI: Leader Pass, Civilization VI: New Frontiers Pass, Civilization VI: Gathering Storm, Civilization VI: Rise and Fall, Civilization VI, Civilization: Beyond Earth - Rising Tide, Civilization: Beyond Earth, Civilization V: Brave New World, Civilization V: Gods and Kings, Civilization VI, Civilization, Civ, Civ4, Civ5, Civ6, Civ7, CivRev, Warlords, Beyond the Sword, Sid Meier, GalCiv, Turn-Based Strategy, PolyCast, ModCast, RevCast, SCivCast, TurnCast, Firaxis, 2K</itunes:keywords>
 		<itunes:author>The PolyCast.Net</itunes:author>
 		<itunes:owner>
@@ -26,89 +26,7 @@
 		<language>en-us</language>
 		<copyright>Copyright 2006-2024 ThePolyCast.Net</copyright>
 		<itunes:explicit>no</itunes:explicit>
-		<pubDate>Mon, 30 Sep 2024 06:00:00 -0400</pubDate>
-
-
-		<item>
-			<title>PolyCast 440: PAX and Direct</title>
-			<description>The fourteenth episode of season 18 of the PolyCast. Topics include the Nintendo Direct Trailer for Civ VII, the PAX West Developer Panel, Announcements for upcoming streams and events, the Denuvo Controversy, and the potential for Villainous AI Leaders.</description>
-			<itunes:author>thepolycast@gmail.com</itunes:author>
-			<itunes:duration>55:08</itunes:duration>
-			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Mon, 30 Sep 2024 06:00:00 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode440.mp3" length="44924307" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season18/episode440.mp3</guid>
-		</item>
-		<item>
-			<title>PolyCast 439: Something to Believe In - Part 2</title>
-			<description>The thirteenth episode of season 18 of the PolyCast. Topics include the second half of our coverage of the gameplay reveal of Civilization VII, including its Civilizations, Cities, Army Commanders, Units, and Terrain.</description>
-			<itunes:author>thepolycast@gmail.com</itunes:author>
-			<itunes:duration>01:00:52</itunes:duration>
-			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Wed, 4 Sep 2024 06:00:00 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode439.mp3" length="53118077" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season18/episode439.mp3</guid>
-		</item>
-		<item>
-			<title>PolyCast 438: Something to Believe In - Part 1</title>
-			<description>The twelfth episode of season 18 of the PolyCast. Topics include the death of the 2K Launcher, the August Challengle of the Month, Rotating Redux, and the gameplay reveal of Civilization VII, including its Ages, Crises, Leaders, Civics, Civic and Tech Trees, Governments, and Diplomacy Mechanics.</description>
-			<itunes:author>thepolycast@gmail.com</itunes:author>
-			<itunes:duration>01:04:42</itunes:duration>
-			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Thu, 29 Aug 2024 06:00:00 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode438.mp3" length="57229551" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season18/episode438.mp3</guid>
-		</item>
-		<item>
-			<title>PolyCast 437: Starting to Get Rolling</title>
-			<description>The eleventh episode of season 18 of the PolyCast. Topics include the upcoming August 20th Gameplay Reveal of Civilization VII, Firaxis's Study the Past videos, the July Challenge of the Month, Live Yongle Reaction, AI Naval strategy, One Unit-per-tile vs. Stacks of Doom in Civ7, suggested Civ7 Unique Units.</description>
-			<itunes:author>thepolycast@gmail.com</itunes:author>
-			<itunes:duration>01:01:08</itunes:duration>
-			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Sat, 17 Aug 2024 06:00:00 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode437.mp3" length="51642549" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season18/episode437.mp3</guid>
-		</item>
-		<item>
-			<title>PolyCast 436: They Say Strategy is Dying</title>
-			<description>The tenth episode of season 18 of the PolyCast. Topics include Firaxis's Study the Past videos, Old World's new Behind the Throne DLC, a study gamers about interest in strategy games, the June Challenge of the Month, Terra Incognita, and things we don't want to see in Civilization VII.</description>
-			<itunes:author>thepolycast@gmail.com</itunes:author>
-			<itunes:duration>01:25:03</itunes:duration>
-			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Thu, 8 Aug 2024 06:00:00 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode436.mp3" length="69611403" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season18/episode436.mp3</guid>
-		</item>
-		<item>
-			<title>PolyCast 435: So It Shall Be</title>
-			<description>The ninth episode episode of season 18 of the PolyCast. Topics include the Announcement of Civilization VII, Sales, Release Date Speculation, and the May Challenge of the Month, Reach for the Heavens.</description>
-			<itunes:author>thepolycast@gmail.com</itunes:author>
-			<itunes:duration>01:00:29</itunes:duration>
-			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Wed, 31 Jul 2024 06:00:00 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode435.mp3" length="52284364" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season18/episode435.mp3</guid>
-		</item>
-		<item>
-			<title>PolyCast 434: Zip! Give It To Me!</title>
-			<description>The eighth episode episode of season 18 of the PolyCast. Topics include the release of Alpha Centauri on Steam, May's Chellenge of the Month, Reach for the Heavens, progressively decreasing game speed in Civs 4, 5, 6, and 7, our favorite policy cards, and little things from older games we want to see in Civilization VII.</description>
-			<itunes:author>thepolycast@gmail.com</itunes:author>
-			<itunes:duration>01:15:29</itunes:duration>
-			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Thu, 18 Jul 2024 06:00:00 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode434.mp3" length="64530181" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season18/episode434.mp3</guid>
-		</item>
-		<item>
-			<title>PolyCast 433: Fringe Theories</title>
-			<description>The seventh episode episode of season 18 of the PolyCast. Topics include the 25th Anniversary of Call to Power, whether Real Life is actually a 4X simulator, the most important Quality of Life mods for CIvilization VI, Movement Rules from Civ5 and Civ6 compared, and little things from older games we want to see in Civilization VII.</description>
-			<itunes:author>thepolycast@gmail.com</itunes:author>
-			<itunes:duration>01:07:09</itunes:duration>
-			<itunes:explicit>no</itunes:explicit>
-			<pubDate>Wed, 10 Jul 2024 06:00:00 -0400</pubDate>
-			<enclosure url="https://polycast.civfanatics.com/polycast/season18/episode433.mp3" length="57979063" type="audio/mpeg" />
-			<guid>https://polycast.civfanatics.com/polycast/season18/episode433.mp3</guid>
-		</item>
+		<pubDate>Fri, 11 Apr 2025 18:57:22 GMT</pubDate>
 		<item>
 			<title>PolyCast 432: The Relation is Tangential</title>
 			<description>The sixth episode episode of season 18 of the PolyCast. Topics include some feedback from Episode 428, the March Challenge of the Month, the Ides of March, and the April Challege of the Month, Three Stars Each, Civilization VI as experienced by the first Neurolink Patient, Firaxis's 2024 April Fools Day Joke, the release of Millennia, and many tangents.</description>

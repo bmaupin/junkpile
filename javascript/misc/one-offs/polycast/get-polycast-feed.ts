@@ -1,5 +1,5 @@
 /*
- * Fetch all Polycast and Modcast feeds, merge them into one XML file
+ * Fetch pre-Civ 7 Polycast and Modcast feeds, merge them into one XML file
  *
  * To run:
  *
@@ -50,6 +50,14 @@ const episodeSubstringsToFilterOut: string[] = [
 ];
 
 const episodesToFilterOut: string[] = [
+  'PolyCast 433: Fringe Theories',
+  'PolyCast 434: Zip! Give It To Me!',
+  'PolyCast 435: So It Shall Be',
+  'PolyCast 436: They Say Strategy is Dying',
+  'PolyCast 437: Starting to Get Rolling',
+  'PolyCast 438: Something to Believe In - Part 1',
+  'PolyCast 439: Something to Believe In - Part 2',
+  'PolyCast 440: PAX and Direct',
   'PolyCast Play-by-Play #01: Unification',
   'Support the PolyCast Patreon Campaign',
 ];
@@ -94,6 +102,12 @@ async function mergeFeeds(parsedFeeds: Document[]): Promise<Document> {
   if (!baseChannel) {
     throw new Error('Base feed is missing a <channel> element.');
   }
+
+  baseChannel.querySelector('pubDate')!.textContent = new Date().toUTCString();
+
+  baseChannel.querySelector('title')!.textContent = 'PolyCast and ModCast';
+  baseChannel.querySelector('description')!.textContent =
+    'PolyCast and ModCast up to but not including Civ 7';
 
   // Track existing GUIDs to prevent duplicates
   const seenGuids = new Set<string>();
