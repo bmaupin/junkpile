@@ -86,3 +86,4 @@ RestartExplorer
 # Window layout management
 # - Install https://learn.microsoft.com/en-us/windows/powertoys/fancyzones
 # - Hold Shift to snap window to grid
+# - Hold Shift+Ctrl to snap window to multiple grids
